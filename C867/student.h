@@ -22,8 +22,10 @@ class Student {
         int         age;
         int*        days_remaining;
     public:
+        // constructor / destructor
         Student(std::string, std::string, std::string, std::string, Degree, int, int*);
         ~Student();
+        // mutators / accessors
         std::string get_ID(void);
         void set_ID(std::string);
         std::string get_lname(void);
@@ -38,6 +40,9 @@ class Student {
         void set_age(int);
         int* get_days_rem(void);
         void set_days_rem(int*);
+        
+        virtual void print();
+        virtual Degree getDegreeProgram();
 };
 
 #endif /* student_h */
