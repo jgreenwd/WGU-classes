@@ -15,7 +15,7 @@ Student::Student(std::string ID,
                  std::string email,
                  Degree deg,
                  int Age,
-                 int days[])
+                 int* days)
 : student_ID(ID), first_name(fname), last_name(lname), email_addr(email), degree(deg), age(Age), days_remaining(days)
 {};
 
@@ -71,8 +71,8 @@ void Student::set_age(int Age) {
     age = Age;
 };
 
-int Student::get_days_rem() {
-    return *days_remaining;
+int* Student::get_days_rem() {
+    return days_remaining;
 };
 
 void Student::set_days_rem(int* days) {
