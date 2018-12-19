@@ -36,7 +36,7 @@ class Student {
         void set_Degree(Degree);
         int get_age(void);
         void set_age(int);
-        int get_days_rem(void);
+        int* get_days_rem(void);
         void set_days_rem(int*);
 };
 
