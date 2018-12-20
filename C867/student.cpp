@@ -79,3 +79,6 @@ void Student::set_days_rem(int* days) {
     *days_remaining = *days;
 };
 
+void Student::getDegreeProgram() {
+    std::cerr << "Error: Degree not available for base type" << std::endl;
+};
