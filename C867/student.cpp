@@ -14,45 +14,45 @@ Student::Student(std::string ID,
                  std::string lname,
                  std::string email,
                  Degree deg,
-                 int Age,
+                 int age,
                  int* days)
-: student_ID(ID), first_name(fname), last_name(lname), email_addr(email), degree(deg), age(Age), days_remaining(days)
+: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), degree_(deg), age_(age), number_of_days_(days)
 {};
 
 Student::~Student() {
     
 };
 
-std::string Student::get_ID() {
-    return student_ID;
+std::string Student::getStudentID() {
+    return student_ID_;
 };
 
-void Student::set_ID(std::string ID) {
-    student_ID = ID;
+void Student::setStudentID(std::string ID) {
+    student_ID_ = ID;
 };
 
-std::string Student::get_lname(){
-    return last_name;
+std::string Student::getLastName(){
+    return last_name_;
 };
 
-void Student::set_lname(std::string lname){
-    last_name = lname;
+void Student::setLastName(std::string lname){
+    last_name_ = lname;
 };
 
-std::string Student::get_fname() {
-    return first_name;
+std::string Student::getFirstName() {
+    return first_name_;
 };
 
-void Student::set_fname(std::string fname) {
-    first_name = fname;
+void Student::setFirstName(std::string fname) {
+    first_name_ = fname;
 };
 
-std::string Student::get_email() {
-    return email_addr;
+std::string Student::getEmailAddress() {
+    return email_address_;
 };
 
-void Student::set_email(std::string email) {
-    email_addr = email;
+void Student::setEmailAddress(std::string email) {
+    email_address_ = email;
 };
 
 void Student::getDegreeProgram() {
@@ -61,25 +61,29 @@ void Student::getDegreeProgram() {
 
 void Student::setDegreeProgram() {};
 
-int Student::get_age() {
-    return age;
+int Student::getAge() {
+    return age_;
 };
 
-void Student::set_age(int Age) {
-    age = Age;
+void Student::setAge(int age) {
+    age_ = age;
 };
 
-int* Student::get_days_rem() {
-    return days_remaining;
+int* Student::getNumberOfDays() {
+    return number_of_days_;
 };
 
-void Student::set_days_rem(int* days) {
-    *days_remaining = *days;
+void Student::setNumberOfDays(int* days) {
+    *number_of_days_ = *days;
 };
 
 void Student::print() {
-    std::cout << "ID: " << this->get_ID() << std::endl;
-    std::cout << "Name: " << this->get_lname() << ", " << this->get_fname() << std::endl;
-    std::cout << "Email: " << this->get_email() << std::endl;
-    std::cout << "Age: " << this->get_age() << std::endl;
+    std::cout << "ID: " << this->getStudentID() << std::endl;
+    std::cout << "Name: " << this->getLastName() << ", " << this->getFirstName() << std::endl;
+    std::cout << "Email: " << this->getEmailAddress() << std::endl;
+    std::cout << "Age: " << this->getAge() << std::endl;
+    int *arr = { this->getNumberOfDays() };
+    for (int i = 0; i<3;i++) {
+        std::cout << "Days remaining in class(" << i << "): " << arr[i] << std::endl;
+    }
 };
