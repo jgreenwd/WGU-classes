@@ -79,6 +79,13 @@ void Student::set_days_rem(int* days) {
     *days_remaining = *days;
 };
 
+void Student::print() {
+    std::cout << "ID: " << this->get_ID() << std::endl;
+    std::cout << "Name: " << this->get_lname() << ", " << this->get_fname() << std::endl;
+    std::cout << "Email: " << this->get_email() << std::endl;
+    std::cout << "Age: " << this->get_age() << std::endl;
+};
+
 void Student::getDegreeProgram() {
     std::cerr << "Error: Degree not available for base type" << std::endl;
 };
