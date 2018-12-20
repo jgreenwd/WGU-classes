@@ -14,32 +14,32 @@
 
 class Student {
     private:
-        std::string student_ID,
-                    first_name,
-                    last_name,
-                    email_addr;
-        Degree      degree;
-        int         age;
-        int*        days_remaining;
+        std::string student_ID_,
+                    first_name_,
+                    last_name_,
+                    email_address_;
+        Degree      degree_;
+        int         age_;
+        int*        number_of_days_;
     public:
 
         Student(std::string, std::string, std::string, std::string, Degree, int, int*);
         ~Student();
 
-        std::string get_ID(void);
-        void set_ID(std::string);
-        std::string get_lname(void);
-        void set_lname(std::string);
-        std::string get_fname(void);
-        void set_fname(std::string);
-        std::string get_email(void);
-        void set_email(std::string);
+        std::string getStudentID(void);
+        void setStudentID(std::string);
+        std::string getLastName(void);
+        void setLastName(std::string);
+        std::string getFirstName(void);
+        void setFirstName(std::string);
+        std::string getEmailAddress(void);
+        void setEmailAddress(std::string);
         virtual void getDegreeProgram();
         virtual void setDegreeProgram();
-        int get_age(void);
-        void set_age(int);
-        int* get_days_rem(void);
-        void set_days_rem(int*);
+        int getAge(void);
+        void setAge(int);
+        int* getNumberOfDays(void);
+        void setNumberOfDays(int*);
     
         virtual void print();
     
