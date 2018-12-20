@@ -34,15 +34,15 @@ class Student {
         void set_fname(std::string);
         std::string get_email(void);
         void set_email(std::string);
-        Degree get_Degree(void);
-        void set_Degree(Degree);
+        virtual void getDegreeProgram();
+        virtual void setDegreeProgram();
         int get_age(void);
         void set_age(int);
         int* get_days_rem(void);
         void set_days_rem(int*);
     
         virtual void print();
-        virtual void getDegreeProgram();
+    
 };
 
 #endif /* student_h */
