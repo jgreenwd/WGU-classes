@@ -40,9 +40,9 @@ class Student {
         void set_age(int);
         int* get_days_rem(void);
         void set_days_rem(int*);
-        
-        virtual void print();
-        virtual Degree getDegreeProgram();
+    
+//        virtual void print();
+        virtual void getDegreeProgram();
 };
 
 #endif /* student_h */
