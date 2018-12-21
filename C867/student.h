@@ -18,7 +18,7 @@ class Student {
                     first_name_,
                     last_name_,
                     email_address_;
-        Degree      degree_;
+        Degree      degree_program_;
         int         age_;
         int*        number_of_days_;
     public:
