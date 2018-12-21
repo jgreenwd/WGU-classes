@@ -6,9 +6,14 @@
 //  Copyright © 2018 Jeremy Greenwood. All rights reserved.
 //
 
-#ifndef networkStudent_hpp
-#define networkStudent_hpp
+#ifndef networkStudent_h
+#define networkStudent_h
 
-#include <stdio.h>
+#include "student.h"
 
-#endif /* networkStudent_hpp */
+class NetworkStudent : public Student {
+    
+};
+
+
+#endif /* networkStudent_h */
