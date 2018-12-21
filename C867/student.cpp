@@ -16,12 +16,10 @@ Student::Student(std::string ID,
                  Degree deg,
                  int age,
                  int* days)
-: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), degree_(deg), age_(age), number_of_days_(days)
-{};
+        : student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email),
+          degree_program_(deg), age_(age), number_of_days_(days) {};
 
-Student::~Student() {
-    
-};
+Student::~Student() {};
 
 std::string Student::getStudentID() {
     return student_ID_;
@@ -78,12 +76,7 @@ void Student::setNumberOfDays(int* days) {
 };
 
 void Student::print() {
-    std::cout << "ID: " << this->getStudentID() << std::endl;
-    std::cout << "Name: " << this->getLastName() << ", " << this->getFirstName() << std::endl;
-    std::cout << "Email: " << this->getEmailAddress() << std::endl;
-    std::cout << "Age: " << this->getAge() << std::endl;
-    int *arr = { this->getNumberOfDays() };
-    for (int i = 0; i<3;i++) {
-        std::cout << "Days remaining in class(" << i << "): " << arr[i] << std::endl;
-    }
+    std::cout << this->getStudentID() << "\t First Name: " << this->getFirstName() << "\t Last Name: " << this->getLastName();
+    std::cout << "\tAge: " << this->getAge() << "\t daysInCourse: " << this->getNumberOfDays();
+    std::cout << "\t Degree Program: " << "<degree program function>" << std::endl;
 };
