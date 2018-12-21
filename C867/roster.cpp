@@ -6,6 +6,8 @@
 //  Copyright © 2018 Jeremy Greenwood. All rights reserved.
 //
 #include <iostream>
+#include <vector>
+#include <regex>
 #include "degree.h"
 #include "roster.h"
 
@@ -22,36 +24,26 @@ int main() {
     std::cout << "C867 - Scripting and Programming - Applications" << std::endl;
     std::cout << "C++ - Student ID#: 000917613 - Jeremy Greenwood" << std::endl << std::endl;
     
-    //Student n(ID, fname, lname, email, degree, age, arr);
-    //n.print();
-    
     Roster classRoster;
+    std::vector<std::string> result;
     for(auto i: studentData) {
-        std::string studentID, firstName, lastName, emailAddress;
-        int age, daysInCourse1, daysInCourse2, daysInCourse3;
-        Degree degreeProgram;
-        
-        studentID = i.substr(0,i.find(','));
-        i.erase(0, studentID.size() + 1);
-        firstName = i.substr(0,i.find(','));
-        i.erase(0, firstName.size() + 1);
-        lastName = i.substr(0, i.find(','));
-        i.erase(0, lastName.size() + 1);
-        emailAddress = i.substr(0, i.find(','));
-        i.erase(0, emailAddress.size() + 1);
-        age = stoi(i.substr(0, i.find(',')));
-        i.erase(0, std::to_string(age).size() + 1);
-        daysInCourse1 = stoi(i.substr(0, i.find(',')));
-        i.erase(0, std::to_string(daysInCourse1).size() + 1);
-        daysInCourse2 = stoi(i.substr(0, i.find(',')));
-        i.erase(0, std::to_string(daysInCourse2).size() + 1);
-        daysInCourse3 = stoi(i.substr(0, i.find(',')));
-        i.erase(0, std::to_string(daysInCourse3).size() + 1);
-        
-        
-        std::cout << studentID << "\t" << firstName << "\t" << lastName << "\t\t" << age << "\t" << daysInCourse1 << "\t" << daysInCourse2 << "\t" << daysInCourse3 << "\t" << i << std::endl;
-        
+        try {
+            std::string temp;
+            std::regex entry("[^,]+");
+            std::sregex_iterator next(i.begin(), i.end(), entry), end;
+            while (next != end) {
+                std::smatch match = *next;
+                temp += match.str() + " ";
+                next++;
+            }
+            result.push_back(temp);
+        }
+        catch (...) {
+            std::cout << "Invalid REGEX" << std::endl;
+        }
     }
+    
+    for(int i = 0; i < result.size(); i++) std::cout << result.at(i) << std::endl;
    
     return 0;
 };
