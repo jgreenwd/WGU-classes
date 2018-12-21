@@ -6,9 +6,14 @@
 //  Copyright © 2018 Jeremy Greenwood. All rights reserved.
 //
 
-#ifndef softwareStudent_hpp
-#define softwareStudent_hpp
+#ifndef softwareStudent_h
+#define softwareStudent_h
 
-#include <stdio.h>
+#include "student.h"
 
-#endif /* softwareStudent_hpp */
+class SoftwareStudent : public Student {
+    
+};
+
+
+#endif /* softwareStudent_h */
