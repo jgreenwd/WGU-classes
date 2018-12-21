@@ -6,9 +6,13 @@
 //  Copyright © 2018 Jeremy Greenwood. All rights reserved.
 //
 
-#ifndef securityStudent_hpp
-#define securityStudent_hpp
+#ifndef securityStudent_h
+#define securityStudent_h
 
-#include <stdio.h>
+#include "student.h"
 
-#endif /* securityStudent_hpp */
+class SecurityStudent : public Student {
+    
+};
+
+#endif /* securityStudent_h */
