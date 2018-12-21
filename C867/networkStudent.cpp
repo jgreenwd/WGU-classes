@@ -6,4 +6,4 @@
 //  Copyright © 2018 Jeremy Greenwood. All rights reserved.
 //
 
-#include "networkStudent.hpp"
+#include "networkStudent.h"
