@@ -9,15 +9,10 @@
 #include "student.h"
 #include "degree.h"
 
-Student::Student(std::string ID,
-                 std::string fname,
-                 std::string lname,
-                 std::string email,
-                 Degree deg,
-                 int age,
-                 int* days)
-        : student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email),
-          degree_program_(deg), age_(age), number_of_days_(days) {};
+Student
+::Student(std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
+: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email),
+          age_(age), number_of_days_(days) {};
 
 Student::~Student() {};
 

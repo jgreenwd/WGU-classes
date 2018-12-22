@@ -7,3 +7,13 @@
 //
 
 #include "networkStudent.h"
+
+NetworkStudent
+::NetworkStudent( std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
+: Student(ID, fname, lname, email, age, days){};
+
+NetworkStudent::~NetworkStudent() {};
+
+Degree NetworkStudent::getDegreeType() {
+    return degree_;
+};

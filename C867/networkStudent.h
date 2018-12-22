@@ -12,8 +12,12 @@
 #include "student.h"
 
 class NetworkStudent : public Student {
-    
+    private:
+        Degree degree_ = NETWORK;
+    public:
+        NetworkStudent(std::string, std::string, std::string, std::string, int, int*);
+        virtual ~NetworkStudent();
+        virtual Degree getDegreeType();
 };
-
 
 #endif /* networkStudent_h */

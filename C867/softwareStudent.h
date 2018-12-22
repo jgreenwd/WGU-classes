@@ -12,8 +12,12 @@
 #include "student.h"
 
 class SoftwareStudent : public Student {
-    
+    private:
+        Degree degree_ = SOFTWARE;
+    public:
+        SoftwareStudent(std::string, std::string, std::string, std::string, int, int*);
+        virtual ~SoftwareStudent();
+        virtual Degree getDegreeType();
 };
-
 
 #endif /* softwareStudent_h */

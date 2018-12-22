@@ -7,3 +7,13 @@
 //
 
 #include "softwareStudent.h"
+
+SoftwareStudent
+::SoftwareStudent( std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
+: Student(ID, fname, lname, email, age, days){};
+
+SoftwareStudent::~SoftwareStudent() {};
+
+Degree SoftwareStudent::getDegreeType() {
+    return degree_;
+};

@@ -12,7 +12,12 @@
 #include "student.h"
 
 class SecurityStudent : public Student {
-    
+    private:
+        Degree degree_ = SECURITY;
+    public:
+        SecurityStudent(std::string, std::string, std::string, std::string, int, int*);
+        virtual ~SecurityStudent();
+        virtual Degree getDegreeType();
 };
 
 #endif /* securityStudent_h */

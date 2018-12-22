@@ -23,7 +23,7 @@ class Student {
         int*        number_of_days_;
     public:
 
-        Student(std::string, std::string, std::string, std::string, Degree, int, int*);
+        Student(std::string, std::string, std::string, std::string, int, int*);
         ~Student();
 
         std::string getStudentID(void);

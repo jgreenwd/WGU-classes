@@ -7,3 +7,13 @@
 //
 
 #include "securityStudent.h"
+
+SecurityStudent
+::SecurityStudent( std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
+: Student(ID, fname, lname, email, age, days){};
+
+SecurityStudent::~SecurityStudent() {};
+
+Degree SecurityStudent::getDegreeType() {
+    return degree_;
+};
