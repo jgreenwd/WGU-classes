@@ -10,6 +10,7 @@
 #define degree_h
 
 enum Degree {
+    ERROR = -1,
     SECURITY,
     NETWORK,
     SOFTWARE

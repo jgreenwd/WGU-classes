@@ -16,8 +16,9 @@ class NetworkStudent : public Student {
         Degree degree_ = NETWORK;
     public:
         NetworkStudent(std::string, std::string, std::string, std::string, int, int*);
-        virtual ~NetworkStudent();
-        virtual Degree getDegreeType();
+        ~NetworkStudent();
+        Degree getDegreeProgram() override;
+        void print() override;
 };
 
 #endif /* networkStudent_h */

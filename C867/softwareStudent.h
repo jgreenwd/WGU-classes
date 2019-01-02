@@ -16,8 +16,9 @@ class SoftwareStudent : public Student {
         Degree degree_ = SOFTWARE;
     public:
         SoftwareStudent(std::string, std::string, std::string, std::string, int, int*);
-        virtual ~SoftwareStudent();
-        virtual Degree getDegreeType();
+        ~SoftwareStudent();
+        Degree getDegreeProgram() override;
+        void print() override;
 };
 
 #endif /* softwareStudent_h */

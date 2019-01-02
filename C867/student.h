@@ -18,7 +18,6 @@ class Student {
                     first_name_,
                     last_name_,
                     email_address_;
-        Degree      degree_program_;
         int         age_;
         int*        number_of_days_;
     public:
@@ -27,22 +26,22 @@ class Student {
         ~Student();
 
         std::string getStudentID(void);
-        void setStudentID(std::string);
-        std::string getLastName(void);
-        void setLastName(std::string);
         std::string getFirstName(void);
-        void setFirstName(std::string);
+        std::string getLastName(void);
         std::string getEmailAddress(void);
-        void setEmailAddress(std::string);
-        virtual void getDegreeProgram();
-        virtual void setDegreeProgram();
         int getAge(void);
-        void setAge(int);
         int* getNumberOfDays(void);
+    
+        void setStudentID(std::string);
+        void setFirstName(std::string);
+        void setLastName(std::string);
+        void setEmailAddress(std::string);
+        void setAge(int);
         void setNumberOfDays(int*);
     
         virtual void print();
-    
+        virtual Degree getDegreeProgram();
+        virtual void setDegreeProgram();
 };
 
 #endif /* student_h */

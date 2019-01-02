@@ -22,17 +22,32 @@ const std::string studentData[] = {
     "A5,Jeremy,Greenwood,jgre369@wgu.edu,41,30,30,30,SOFTWARE"
 };
 
+int days1[3] {30,35,40},
+    days2[3] {50,30,40},
+    days3[3] {20,40,33},
+    days4[3] {50,58,40},
+    days5[3] {30,30,30};
+
 class Roster {
     private:
-        Student* classRosterArray[5];
+        int size_ = 5;
+        Student* classRosterArray[5] = {
+            new SecurityStudent("A1", "John", "Smith", "John1989@gmail.com", 20, days1),
+            new NetworkStudent("A2", "Suzan", "Erickson", "Erickson_1990@gmail.com", 19, days2),
+            new SoftwareStudent("A3", "Jack", "Napoli", "The_lawyer99@yahoo.com", 19, days3),
+            new SecurityStudent("A4", "Erin", "Black", "Erin.black@comcast.net", 22, days4),
+            new SoftwareStudent("A5", "Jeremy", "Greenwood", "jgre369@wgu.edu", 41, days5)
+        };
     public:
+        Roster();
+        ~Roster();
         void add(std::string, std::string, std::string, std::string,
                  int, int, int, int, Degree);
         void remove(std::string studentID);
         void printAll();
-        void printDaysInCourse(std::string studentID);
+        void printAverageDaysInCourse(std::string studentID);
         void printInvalidEmails();
-        void printByDegreeProgram(int degreeProgram);
+        void printByDegreeProgram(Degree degreeProgram);
 };
 
 #endif /* roster_h */

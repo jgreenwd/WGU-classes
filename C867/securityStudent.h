@@ -16,8 +16,9 @@ class SecurityStudent : public Student {
         Degree degree_ = SECURITY;
     public:
         SecurityStudent(std::string, std::string, std::string, std::string, int, int*);
-        virtual ~SecurityStudent();
-        virtual Degree getDegreeType();
+        ~SecurityStudent();
+        Degree getDegreeProgram() override;
+        void print() override;
 };
 
 #endif /* securityStudent_h */

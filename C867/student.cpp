@@ -48,11 +48,14 @@ void Student::setEmailAddress(std::string email) {
     email_address_ = email;
 };
 
-void Student::getDegreeProgram() {
-    std::cerr << "Error: Degree not available for base type" << std::endl;
+Degree Student::getDegreeProgram() {
+    std::cerr << "Error: Degree not available in base type" << std::endl;
+    return ERROR;
 };
 
-void Student::setDegreeProgram() {};
+void Student::setDegreeProgram() {
+    std::cerr << "Error: Degree not available in base type" << std::endl;
+};
 
 int Student::getAge() {
     return age_;
@@ -70,8 +73,4 @@ void Student::setNumberOfDays(int* days) {
     *number_of_days_ = *days;
 };
 
-void Student::print() {
-    std::cout << this->getStudentID() << "\t First Name: " << this->getFirstName() << "\t Last Name: " << this->getLastName();
-    std::cout << "\tAge: " << this->getAge() << "\t daysInCourse: " << this->getNumberOfDays();
-    std::cout << "\t Degree Program: " << "<degree program function>" << std::endl;
-};
+void Student::print() {};
