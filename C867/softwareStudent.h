@@ -11,6 +11,7 @@
 
 #include "student.h"
 
+/* -------- D.3 -------- */
 class SoftwareStudent : public Student {
     private:
         Degree degree_ = SOFTWARE;
