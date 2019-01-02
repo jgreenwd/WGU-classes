@@ -17,7 +17,11 @@ class SoftwareStudent : public Student {
         Degree degree_ = SOFTWARE;
     public:
         SoftwareStudent(std::string, std::string, std::string, std::string, int, int*);
+    
+        // redundant constructor to comply with D.2.c
+        SoftwareStudent(std::string, std::string, std::string, std::string, int, int*, Degree);
         ~SoftwareStudent();
+    
         Degree getDegreeProgram() override;
         void print() override;
 };

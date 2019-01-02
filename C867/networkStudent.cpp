@@ -12,6 +12,11 @@ NetworkStudent
 ::NetworkStudent( std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
 : Student(ID, fname, lname, email, age, days){};
 
+// redundant constructor to comply with D.2.c
+NetworkStudent
+::NetworkStudent( std::string ID, std::string fname, std::string lname, std::string email, int age, int* days, Degree degree)
+: Student(ID, fname, lname, email, age, days){};
+
 NetworkStudent::~NetworkStudent() {};
 
 Degree NetworkStudent::getDegreeProgram() {
