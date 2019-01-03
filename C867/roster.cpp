@@ -60,7 +60,8 @@ void Roster::printAverageDaysInCourse(std::string studentID) {
         for(auto i: classRosterArray) {
             if (studentID == i->getStudentID()) {
                 int avgDays = (i->getNumberOfDays()[0] + i->getNumberOfDays()[1] + i->getNumberOfDays()[2]) / 3;
-                std::cout << avgDays << std::endl;
+                i->print();
+                std::cout << "Average days in course: " << avgDays << std::endl;
             }
         }
     }
@@ -118,7 +119,7 @@ int main() {
     
     /* -------- F.2 -------- */
     Roster classRoster;
-    classRoster.printByDegreeProgram(NETWORK);
+    classRoster.printAverageDaysInCourse("A2");
     std::cout << std::endl;
     
     return 0;
