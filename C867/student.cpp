@@ -12,8 +12,7 @@
 /* -------- CONSTRUCTOR D.2.c -------- */
 Student
 ::Student(std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
-: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email),
-          age_(age), number_of_days_(days) {};
+: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), age_(age), number_of_days_(days) {};
 
 /* -------- DESTRUCTOR D.2.e -------- */
 Student::~Student() {};
@@ -21,15 +20,7 @@ Student::~Student() {};
 
 /* --------- ACCESSORS D.2.a -------- */
 std::string Student::getStudentID() {
-    std::string outStr = "";
-    try {
-        if (student_ID_ != "")
-            outStr = student_ID_;
-    }
-    catch(...) {
-        std::cerr << "failed to get Student ID" << std::endl;
-    }
-    return outStr;
+    return student_ID_;
 };
 
 std::string Student::getFirstName() {

@@ -50,6 +50,8 @@ class Roster {
     
         /* -------- E.3.f -------- */
         void printByDegreeProgram(const Degree);
+    
+        int size();
 };
 
 #endif /* roster_h */

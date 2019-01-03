@@ -41,9 +41,12 @@ void Roster::add(std::string studentID, std::string firstName, std::string lastN
 void Roster::remove(std::string studentID) {
     bool present = false;
     for(int i = 0; i < lastElementIndex_; i++) {
-        if (classRosterArray[i]->getStudentID() == studentID) {
-            present = true;
-            classRosterArray[i] = nullptr;
+        if (classRosterArray[i] != NULL) {
+            if (classRosterArray[i]->getStudentID() == studentID) {
+                present = true;
+                classRosterArray[i] = nullptr;
+                lastElementIndex_--;
+            }
         }
     }
     present ? std::cout << studentID << " removed" << std::endl : std::cout << studentID << " not found" << std::endl;
@@ -70,8 +73,7 @@ void Roster::printAverageDaysInCourse(std::string studentID) {
         for(auto i: classRosterArray) {
             if (studentID == i->getStudentID()) {
                 int avgDays = (i->getNumberOfDays()[0] + i->getNumberOfDays()[1] + i->getNumberOfDays()[2]) / 3;
-                i->print();
-                std::cout << "Average days in course: " << avgDays << std::endl;
+                std::cout << "Average days in course for student " << studentID << ": " << avgDays << std::endl;
             }
         }
     }
@@ -120,6 +122,9 @@ void Roster::printByDegreeProgram(Degree degreeProgram) {
     }
 };
 
+int Roster::size() {
+    return lastElementIndex_;
+}
 
 /* -------- F.x -------- */
 int main() {
@@ -135,7 +140,19 @@ int main() {
     classRoster.add("A4","Erin","Black","Erin.black@comcast.net",22,50,58,40,SECURITY);
     classRoster.add("A5","Jeremy","Greenwood","jgre369@wgu.edu",41,30,30,30,SOFTWARE);
     
+    /* -------- F.4 -------- */
+    classRoster.printAll();
     std::cout << std::endl;
+    classRoster.printInvalidEmails();
+    std::cout << std::endl;
+    for(int i = 0; i < classRoster.size(); i++) {
+        classRoster.printAverageDaysInCourse("A" + std::to_string(i+1));
+    }
+    std::cout << std::endl;
+    classRoster.printByDegreeProgram(SOFTWARE);
+    std::cout << std::endl;
+    classRoster.remove("A3");
+    classRoster.remove("A3");
     
     return 0;
 };
