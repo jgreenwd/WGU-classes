@@ -19,7 +19,7 @@ Roster::~Roster() {
     }
 };
 
-
+// TODO: something wrong with days[]
 /* -------- E.3.a -------- */
 void Roster::add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress,
                  int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
@@ -38,14 +38,25 @@ void Roster::add(std::string studentID, std::string firstName, std::string lastN
 
 
 /* -------- E.3.b -------- */
-void Roster::remove(std::string studentID) {};
+void Roster::remove(std::string studentID) {
+    bool present = false;
+    for(int i = 0; i < lastElementIndex_; i++) {
+        if (classRosterArray[i]->getStudentID() == studentID) {
+            present = true;
+            classRosterArray[i] = nullptr;
+        }
+    }
+    present ? std::cout << studentID << " removed" << std::endl : std::cout << studentID << " not found" << std::endl;
+};
 
 
 /* -------- E.3.c -------- */
 void Roster::printAll() {
     try {
-        for(auto i: classRosterArray)
-            i->print();
+        for(int i = 0; i < lastElementIndex_; i++) {
+            if (classRosterArray[i] != NULL)
+                classRosterArray[i]->print();
+        }
     }
     catch (...) {
         std::cerr << "unknown error in Roster.printAll()";
@@ -123,12 +134,6 @@ int main() {
     classRoster.add("A3","Jack","Napoli","The_lawyer99yahoo.com",19,20,40,33,SOFTWARE);
     classRoster.add("A4","Erin","Black","Erin.black@comcast.net",22,50,58,40,SECURITY);
     classRoster.add("A5","Jeremy","Greenwood","jgre369@wgu.edu",41,30,30,30,SOFTWARE);
-    
-    classRoster.printAll();
-    
-//    int nums[] {30,35,40};
-//    SecurityStudent student1("A1","John","Smith","John1989@gm ail.com",20,nums);
-//    student1.print();
     
     std::cout << std::endl;
     

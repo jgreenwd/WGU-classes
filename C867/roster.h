@@ -22,12 +22,6 @@ const std::string studentData[] = {
     "A5,Jeremy,Greenwood,jgre369@wgu.edu,41,30,30,30,SOFTWARE"
 };
 
-int days1[3] {30,35,40},
-    days2[3] {50,30,40},
-    days3[3] {20,40,33},
-    days4[3] {50,58,40},
-    days5[3] {30,30,30};
-
 class Roster {
     private:
         int lastElementIndex_ = 0;

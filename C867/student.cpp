@@ -21,7 +21,15 @@ Student::~Student() {};
 
 /* --------- ACCESSORS D.2.a -------- */
 std::string Student::getStudentID() {
-    return student_ID_;
+    std::string outStr = "";
+    try {
+        if (student_ID_ != "")
+            outStr = student_ID_;
+    }
+    catch(...) {
+        std::cerr << "failed to get Student ID" << std::endl;
+    }
+    return outStr;
 };
 
 std::string Student::getFirstName() {
