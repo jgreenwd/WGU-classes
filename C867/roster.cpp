@@ -19,6 +19,7 @@ Roster::~Roster() {
     }
 };
 
+
 /* -------- E.3.a -------- */
 void Roster::add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress,
                  int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
@@ -36,8 +37,10 @@ void Roster::add(std::string studentID, std::string firstName, std::string lastN
     size_++;
 };
 
+
 /* -------- E.3.b -------- */
 void Roster::remove(std::string studentID) {};
+
 
 /* -------- E.3.c -------- */
 void Roster::printAll() {
@@ -50,8 +53,23 @@ void Roster::printAll() {
     }
 };
 
+
 /* -------- E.3.d -------- */
-void Roster::printAverageDaysInCourse(std::string studentID) {};
+void Roster::printAverageDaysInCourse(std::string studentID) {
+    try {
+        for(auto i: classRosterArray) {
+            if (studentID == i->getStudentID()) {
+                int *days = i->getNumberOfDays();
+                int avgDays = (days[0] + days[1] + days[2]) / 3;
+                std::cout << avgDays << std::endl;
+            }
+        }
+    }
+    catch (...) {
+        std::cerr << "unknown error in Roster.printAverageDaysInCourse()";
+    }
+};
+
 
 /* -------- E.3.e -------- */
 void Roster::printInvalidEmails() {
@@ -77,8 +95,10 @@ void Roster::printInvalidEmails() {
     }
 };
 
+
 /* -------- E.3.f -------- */
 void Roster::printByDegreeProgram(Degree degreeProgram) {};
+
 
 /* -------- F.x -------- */
 int main() {
@@ -88,7 +108,7 @@ int main() {
     
     /* -------- F.2 -------- */
     Roster classRoster;
-    classRoster.printInvalidEmails();
+    classRoster.printAverageDaysInCourse("A1");
     
     return 0;
 };
