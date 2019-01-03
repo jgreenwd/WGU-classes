@@ -96,7 +96,18 @@ void Roster::printInvalidEmails() {
 
 
 /* -------- E.3.f -------- */
-void Roster::printByDegreeProgram(Degree degreeProgram) {};
+void Roster::printByDegreeProgram(Degree degreeProgram) {
+    try {
+        for(auto i: classRosterArray) {
+            Degree deg = i->getDegreeProgram();
+            if (deg == degreeProgram)
+                i->print();
+        }
+    }
+    catch (...) {
+        std::cerr << "unknown error in Roster.printByDegreeProgram()";
+    }
+};
 
 
 /* -------- F.x -------- */
@@ -107,7 +118,8 @@ int main() {
     
     /* -------- F.2 -------- */
     Roster classRoster;
-    classRoster.printAverageDaysInCourse("B1");
+    classRoster.printByDegreeProgram(NETWORK);
+    std::cout << std::endl;
     
     return 0;
 };
