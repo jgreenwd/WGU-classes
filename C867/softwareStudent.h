@@ -16,7 +16,7 @@ class SoftwareStudent : public Student {
     private:
         Degree degree_ = SOFTWARE;
     public:
-        SoftwareStudent(std::string, std::string, std::string, std::string, int, int*);
+        using Student::Student;
     
         // redundant constructor to comply with D.2.c
         SoftwareStudent(std::string, std::string, std::string, std::string, int, int*, Degree);

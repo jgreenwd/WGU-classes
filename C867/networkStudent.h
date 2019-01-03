@@ -16,7 +16,7 @@ class NetworkStudent : public Student {
     private:
         Degree degree_ = NETWORK;
     public:
-        NetworkStudent(std::string, std::string, std::string, std::string, int, int*);
+        using Student::Student;
     
         // redundant constructor to comply with D.2.c
         NetworkStudent(std::string, std::string, std::string, std::string, int, int*, Degree);

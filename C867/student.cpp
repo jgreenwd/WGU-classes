@@ -10,6 +10,8 @@
 #include "degree.h"
 
 /* -------- CONSTRUCTOR D.2.c -------- */
+Student::Student(){};
+
 Student
 ::Student(std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
 : student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), age_(age), number_of_days_(days) {};
@@ -40,7 +42,7 @@ int Student::getAge() {
 };
 
 // Return pointer to array[3] of number of days to complete each course
-const int* Student::getNumberOfDays() {
+int* Student::getNumberOfDays() {
     return number_of_days_;
 };
 

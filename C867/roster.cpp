@@ -14,9 +14,10 @@
 Roster::Roster() {};
 
 Roster::~Roster() {
-    for (auto i: classRosterArray) {
-        delete i;
-    }
+//    for(int i = lastElementIndex_; i > 0; --i) {
+//        delete classRosterArray[i];
+//        lastElementIndex_--;
+//    }
 };
 
 // TODO: something wrong with days[]
@@ -70,9 +71,9 @@ void Roster::printAll() {
 /* -------- E.3.d -------- */
 void Roster::printAverageDaysInCourse(std::string studentID) {
     try {
-        for(auto i: classRosterArray) {
-            if (studentID == i->getStudentID()) {
-                int avgDays = (i->getNumberOfDays()[0] + i->getNumberOfDays()[1] + i->getNumberOfDays()[2]) / 3;
+        for(int i = 0; i < lastElementIndex_; i++) {
+            if (studentID == classRosterArray[i]->getStudentID()) {
+                int avgDays = (classRosterArray[i]->getNumberOfDays()[0] + classRosterArray[i]->getNumberOfDays()[1] + classRosterArray[i]->getNumberOfDays()[2]) / 3;
                 std::cout << "Average days in course for student " << studentID << ": " << avgDays << std::endl;
             }
         }
@@ -87,8 +88,8 @@ void Roster::printAverageDaysInCourse(std::string studentID) {
 void Roster::printInvalidEmails() {
     try {
         bool allAddressesValid {true};
-        for(auto i: classRosterArray) {
-            std::string email = i->getEmailAddress();
+        for(int i = 0; i < lastElementIndex_; i++) {
+            std::string email = classRosterArray[i]->getEmailAddress();
             
             std::regex entry("\\w+@[a-zA-Z_]+\\.");
             std::smatch match;
@@ -111,10 +112,10 @@ void Roster::printInvalidEmails() {
 /* -------- E.3.f -------- */
 void Roster::printByDegreeProgram(Degree degreeProgram) {
     try {
-        for(auto i: classRosterArray) {
-            Degree deg = i->getDegreeProgram();
+        for(int i = 0; i < lastElementIndex_; i++) {
+            Degree deg = classRosterArray[i]->getDegreeProgram();
             if (deg == degreeProgram)
-                i->print();
+                classRosterArray[i]->print();
         }
     }
     catch (...) {
@@ -143,16 +144,22 @@ int main() {
     /* -------- F.4 -------- */
     classRoster.printAll();
     std::cout << std::endl;
+    
     classRoster.printInvalidEmails();
     std::cout << std::endl;
+    
     for(int i = 0; i < classRoster.size(); i++) {
         classRoster.printAverageDaysInCourse("A" + std::to_string(i+1));
     }
     std::cout << std::endl;
+    
     classRoster.printByDegreeProgram(SOFTWARE);
     std::cout << std::endl;
-    classRoster.remove("A3");
-    classRoster.remove("A3");
+    
+//    classRoster.remove("A3");
+//    classRoster.remove("A3");
+    
+    classRoster.~Roster();
     
     return 0;
 };

@@ -16,7 +16,7 @@ class SecurityStudent : public Student {
     private:
         Degree degree_ = SECURITY;
     public:
-        SecurityStudent(std::string, std::string, std::string, std::string, int, int*);
+        using Student::Student;
     
         // redundant constructor to comply with D.2.c
         SecurityStudent(std::string, std::string, std::string, std::string, int, int*, Degree);

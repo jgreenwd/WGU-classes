@@ -24,6 +24,7 @@ class Student {
     
     public:
         /* -------- CONSTRUCTOR D.2.c -------- */
+        Student();
         Student(std::string, std::string, std::string, std::string, int, int*);
         /* -------- DESTRUCTOR D.2.e -------- */
         ~Student();
@@ -34,7 +35,7 @@ class Student {
         std::string getLastName(void);
         std::string getEmailAddress(void);
         int getAge(void);
-        const int* getNumberOfDays(void);
+        int* getNumberOfDays(void);
     
         /* -------- MUTATORS D.2.b -------- */
         void setStudentID(std::string);

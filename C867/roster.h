@@ -27,7 +27,7 @@ class Roster {
         int lastElementIndex_ = 0;
     
         /* -------- E.1 -------- */
-        Student* classRosterArray[5];
+        Student* classRosterArray[];
     
     public:
         Roster();
