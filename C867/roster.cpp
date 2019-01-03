@@ -41,15 +41,41 @@ void Roster::remove(std::string studentID) {};
 
 /* -------- E.3.c -------- */
 void Roster::printAll() {
-    for(auto i: classRosterArray)
-        i->print();
+    try {
+        for(auto i: classRosterArray)
+            i->print();
+    }
+    catch (...) {
+        std::cerr << "unknown error in Roster.printAll()";
+    }
 };
 
 /* -------- E.3.d -------- */
 void Roster::printAverageDaysInCourse(std::string studentID) {};
 
 /* -------- E.3.e -------- */
-void Roster::printInvalidEmails() {};
+void Roster::printInvalidEmails() {
+    try {
+        bool allAddressesValid {true};
+        for(auto i: classRosterArray) {
+            std::string email = i->getEmailAddress();
+            
+            std::regex entry("\\w+@[a-zA-Z_]+\\.");
+            std::smatch match;
+            
+            if (!std::regex_search(email, match, entry)) {
+                std::cout << email << std::endl;
+                allAddressesValid = false;
+            }
+            
+            if (allAddressesValid)
+                std::cout << "No invalid email addresses found" << std::endl;
+        }
+    }
+    catch(...) {
+        std::cerr << "unknown error in Roster.printInvalidEmails()";
+    }
+};
 
 /* -------- E.3.f -------- */
 void Roster::printByDegreeProgram(Degree degreeProgram) {};
@@ -62,7 +88,7 @@ int main() {
     
     /* -------- F.2 -------- */
     Roster classRoster;
-    classRoster.printAll();
+    classRoster.printInvalidEmails();
     
     return 0;
 };

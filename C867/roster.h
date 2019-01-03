@@ -33,9 +33,9 @@ class Roster {
         int size_ = 5;
         /* -------- E.1 -------- */
         Student* classRosterArray[5] = {
-            new SecurityStudent("A1", "John", "Smith", "John1989@gmail.com", 20, days1),
-            new NetworkStudent("A2", "Suzan", "Erickson", "Erickson_1990@gmail.com", 19, days2),
-            new SoftwareStudent("A3", "Jack", "Napoli", "The_lawyer99@yahoo.com", 19, days3),
+            new SecurityStudent("A1", "John", "Smith", "John1989@gm ail.com", 20, days1),
+            new NetworkStudent("A2", "Suzan", "Erickson", "Erickson_1990@gmailcom", 19, days2),
+            new SoftwareStudent("A3", "Jack", "Napoli", "The_lawyer99yahoo.com", 19, days3),
             new SecurityStudent("A4", "Erin", "Black", "Erin.black@comcast.net", 22, days4),
             new SoftwareStudent("A5", "Jeremy", "Greenwood", "jgre369@wgu.edu", 41, days5)
         };
