@@ -30,15 +30,11 @@ int days1[3] {30,35,40},
 
 class Roster {
     private:
-        int size_ = 5;
+        int lastElementIndex_ = 0;
+    
         /* -------- E.1 -------- */
-        Student* classRosterArray[5] = {
-            new SecurityStudent("A1", "John", "Smith", "John1989@gm ail.com", 20, days1),
-            new NetworkStudent("A2", "Suzan", "Erickson", "Erickson_1990@gmailcom", 19, days2),
-            new SoftwareStudent("A3", "Jack", "Napoli", "The_lawyer99yahoo.com", 19, days3),
-            new SecurityStudent("A4", "Erin", "Black", "Erin.black@comcast.net", 22, days4),
-            new SoftwareStudent("A5", "Jeremy", "Greenwood", "jgre369@wgu.edu", 41, days5)
-        };
+        Student* classRosterArray[5];
+    
     public:
         Roster();
         ~Roster();
@@ -47,19 +43,19 @@ class Roster {
         void add(std::string, std::string, std::string, std::string, int, int, int, int, Degree);
     
         /* -------- E.3.b -------- */
-        void remove(std::string studentID);
+        void remove(const std::string studentID);
     
         /* -------- E.3.c -------- */
         void printAll();
     
         /* -------- E.3.d -------- */
-        void printAverageDaysInCourse(std::string studentID);
+        void printAverageDaysInCourse(const std::string studentID);
     
         /* -------- E.3.e -------- */
         void printInvalidEmails();
     
         /* -------- E.3.f -------- */
-        void printByDegreeProgram(Degree);
+        void printByDegreeProgram(const Degree);
 };
 
 #endif /* roster_h */

@@ -34,7 +34,7 @@ class Student {
         std::string getLastName(void);
         std::string getEmailAddress(void);
         int getAge(void);
-        int* getNumberOfDays(void);
+        const int* getNumberOfDays(void);
     
         /* -------- MUTATORS D.2.b -------- */
         void setStudentID(std::string);
@@ -42,7 +42,7 @@ class Student {
         void setLastName(std::string);
         void setEmailAddress(std::string);
         void setAge(int);
-        void setNumberOfDays(int*);
+        void setNumberOfDays(const int*);
     
         /* -------- D.2.f -------- */
         virtual Degree getDegreeProgram();

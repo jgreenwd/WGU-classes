@@ -41,7 +41,7 @@ int Student::getAge() {
 };
 
 // Return pointer to array[3] of number of days to complete each course
-int* Student::getNumberOfDays() {
+const int* Student::getNumberOfDays() {
     return number_of_days_;
 };
 
@@ -67,7 +67,7 @@ void Student::setAge(int age) {
     age_ = age;
 };
 
-void Student::setNumberOfDays(int* days) {
+void Student::setNumberOfDays(const int* days) {
     *number_of_days_ = *days;
 };
 

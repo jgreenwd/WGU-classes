@@ -23,18 +23,17 @@ Roster::~Roster() {
 /* -------- E.3.a -------- */
 void Roster::add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress,
                  int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
-    int days[3] {daysInCourse1, daysInCourse2, daysInCourse3};
+    int days[] {daysInCourse1, daysInCourse2, daysInCourse3};
     
     if (degreeProgram == SECURITY) {
-        classRosterArray[size_] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray[lastElementIndex_++] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, days);
     } else if (degreeProgram == NETWORK) {
-        classRosterArray[size_] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray[lastElementIndex_++] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, days);
     } else if (degreeProgram == SOFTWARE) {
-        classRosterArray[size_] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray[lastElementIndex_++] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, days);
     } else {
-        classRosterArray[size_] = new Student(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray[lastElementIndex_++] = new Student(studentID, firstName, lastName, emailAddress, age, days);
     }
-    size_++;
 };
 
 
@@ -119,11 +118,19 @@ int main() {
     
     /* -------- F.2 -------- */
     Roster classRoster;
-    classRoster.printAverageDaysInCourse("A2");
+    classRoster.add("A1","John","Smith","John1989@gm ail.com",20,30,35,40,SECURITY);
+    classRoster.add("A2","Suzan","Erickson","Erickson_1990@gmailcom",19,50,30,40,NETWORK);
+    classRoster.add("A3","Jack","Napoli","The_lawyer99yahoo.com",19,20,40,33,SOFTWARE);
+    classRoster.add("A4","Erin","Black","Erin.black@comcast.net",22,50,58,40,SECURITY);
+    classRoster.add("A5","Jeremy","Greenwood","jgre369@wgu.edu",41,30,30,30,SOFTWARE);
+    
+    classRoster.printAll();
+    
+//    int nums[] {30,35,40};
+//    SecurityStudent student1("A1","John","Smith","John1989@gm ail.com",20,nums);
+//    student1.print();
+    
     std::cout << std::endl;
     
     return 0;
 };
-
-
-

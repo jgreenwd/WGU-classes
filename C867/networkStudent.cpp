@@ -25,11 +25,8 @@ Degree NetworkStudent::getDegreeProgram() {
 
 void NetworkStudent::print() {
     try {
-        int *days = getNumberOfDays();
-        std::string daysInCourse = "{" + std::to_string(days[0]) + ", " + std::to_string(days[1]) + ", " + std::to_string(days[2]) + "}";
-        std::cout << getStudentID() << "\t" << "First Name: " << getFirstName() << "\tLast Name:" << getLastName() << "\tAge:" << getAge() << "\tdaysInCourse: " << daysInCourse << "\tDegree Program: Network" << std::endl;
+        std::cout << getStudentID() << "\t" << "First Name: " << getFirstName() << "\tLast Name:" << getLastName() << "\tAge:" << getAge() << "\tdaysInCourse: {" << getNumberOfDays()[0] << "," << getNumberOfDays()[1] << ", " << getNumberOfDays()[2] << "}" << "\tDegree Program: Software" << std::endl;
     }
     catch (...) {
-        std::cerr << "unknown error in NetworkStudent.print()" << std::endl;
-    }
-}
+        std::cerr << "unknown error in SoftwareStudent.print()" << std::endl;
+    }}
