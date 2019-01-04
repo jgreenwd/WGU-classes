@@ -14,25 +14,22 @@ Roster::Roster() {};
 
 Roster::~Roster() {
     for(int i = lastElementIndex_; i > 0; --i) {
-        delete classRosterArray[i];
+        delete classRosterArray_[i];
         lastElementIndex_--;
     }
 };
 
 // TODO: something wrong with days[]
 /* -------- E.3.a -------- */
-void Roster::add(string studentID, string firstName, string lastName, string emailAddress,
-                 int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
+void Roster::add(string ID, string fName, string lName, string email, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
     int days[] {daysInCourse1, daysInCourse2, daysInCourse3};
     
     if (degreeProgram == SECURITY) {
-        classRosterArray[lastElementIndex_++] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray_[lastElementIndex_++] = new SecurityStudent(ID, fName, lName, email, age, days);
     } else if (degreeProgram == NETWORK) {
-        classRosterArray[lastElementIndex_++] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray_[lastElementIndex_++] = new NetworkStudent(ID, fName, lName, email, age, days);
     } else if (degreeProgram == SOFTWARE) {
-        classRosterArray[lastElementIndex_++] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, days);
-    } else {
-        classRosterArray[lastElementIndex_++] = new Student(studentID, firstName, lastName, emailAddress, age, days);
+        classRosterArray_[lastElementIndex_++] = new SoftwareStudent(ID, fName, lName, email, age, days);
     }
 };
 
@@ -41,10 +38,10 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 void Roster::remove(string studentID) {
     bool present = false;
     for(int i = 0; i < lastElementIndex_; i++) {
-        if (classRosterArray[i] != NULL) {
-            if (classRosterArray[i]->getStudentID() == studentID) {
+        if (classRosterArray_[i] != NULL) {
+            if (classRosterArray_[i]->getStudentID() == studentID) {
                 present = true;
-                classRosterArray[i] = nullptr;
+                classRosterArray_[i] = nullptr;
                 lastElementIndex_--;
             }
         }
@@ -57,8 +54,8 @@ void Roster::remove(string studentID) {
 void Roster::printAll() {
     try {
         for(int i = 0; i < lastElementIndex_; i++) {
-            if (classRosterArray[i] != NULL)
-                classRosterArray[i]->print();
+            if (classRosterArray_[i] != NULL)
+                classRosterArray_[i]->print();
         }
     }
     catch (...) {
@@ -71,8 +68,8 @@ void Roster::printAll() {
 void Roster::printAverageDaysInCourse(string studentID) {
     try {
         for(int i = 0; i < lastElementIndex_; ++i) {
-            if (studentID == classRosterArray[i]->getStudentID()) {
-                int* days = classRosterArray[i]->getNumberOfDays();
+            if (studentID == classRosterArray_[i]->getStudentID()) {
+                int* days = classRosterArray_[i]->getNumberOfDays();
                 int avgDays = (days[0] + days[1] + days[2]) / 3;
                 std::cout << "Average days in course for student " << studentID << ": " << avgDays << std::endl;
             }
@@ -89,7 +86,7 @@ void Roster::printInvalidEmails() {
     try {
         bool allAddressesValid {true};
         for(int i = 0; i < lastElementIndex_; i++) {
-            string email = classRosterArray[i]->getEmailAddress();
+            string email = classRosterArray_[i]->getEmailAddress();
             
             std::regex entry("\\w+@[a-zA-Z_]+\\.");
             std::smatch match;
@@ -113,9 +110,9 @@ void Roster::printInvalidEmails() {
 void Roster::printByDegreeProgram(Degree degreeProgram) {
     try {
         for(int i = 0; i < lastElementIndex_; i++) {
-            Degree deg = classRosterArray[i]->getDegreeProgram();
+            Degree deg = classRosterArray_[i]->getDegreeProgram();
             if (deg == degreeProgram)
-                classRosterArray[i]->print();
+                classRosterArray_[i]->print();
         }
     }
     catch (...) {
@@ -126,6 +123,7 @@ void Roster::printByDegreeProgram(Degree degreeProgram) {
 int Roster::size() {
     return lastElementIndex_;
 }
+
 
 /* -------- F.x -------- */
 int main() {
@@ -159,7 +157,7 @@ int main() {
 //    classRoster.remove("A3");
 //    classRoster.remove("A3");
     
-    classRoster.~Roster();
+//    classRoster.~Roster();
     
     return 0;
 };
