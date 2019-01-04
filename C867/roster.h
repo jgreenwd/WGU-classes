@@ -9,11 +9,9 @@
 #ifndef roster_h
 #define roster_h
 
-#include "student.h"
 #include "networkStudent.h"
 #include "securityStudent.h"
 #include "softwareStudent.h"
-using std::string;
 
 const string studentData[] = {
     "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
