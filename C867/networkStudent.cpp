@@ -8,20 +8,16 @@
 
 #include "networkStudent.h"
 
-// redundant constructor to comply with D.2.c
 NetworkStudent::NetworkStudent(string ID, string fname, string lname, string email, int age, int* days, Degree degree)
-: Student(ID, fname, lname, email, age, days){};
+: Student(ID, fname, lname, email, age, new int[3] {days[0],days[1],days[2]}, degree){};
 
-NetworkStudent::~NetworkStudent() {};
+NetworkStudent::~NetworkStudent(){};
 
 Degree NetworkStudent::getDegreeProgram() {
     return degree_;
 };
 
 void NetworkStudent::print() {
-    try {
-        std::cout << getStudentID() << "\t" << "First Name: " << getFirstName() << "\tLast Name:" << getLastName() << "\tAge:" << getAge() << "\tdaysInCourse: {" << getNumberOfDays()[0] << "," << getNumberOfDays()[1] << ", " << getNumberOfDays()[2] << "}" << "\tDegree Program: Network" << std::endl;
-    }
-    catch (...) {
-        std::cerr << "unknown error in NetworkStudent.print()" << std::endl;
-    }}
+    int* days = getNumberOfDays();
+    std::cout << getStudentID() << "\t" << "First Name: " << getFirstName() << "\tLast Name:" << getLastName() << "\tAge:" << getAge() << "\tdaysInCourse: {" << days[0] << "," << days[1] << "," << days[2] << "}" << "\tDegree Program: Network" << std::endl;
+}

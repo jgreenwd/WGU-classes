@@ -13,13 +13,8 @@
 
 /* -------- D.3 -------- */
 class NetworkStudent : public Student {
-    private:
-        Degree degree_ = NETWORK;
     public:
-        using Student::Student;
-    
-        // redundant constructor to comply with D.2.c
-        NetworkStudent(string, string, string, string, int, int*, Degree);
+        NetworkStudent(string, string, string, string, int, int*, Degree = NETWORK);
         ~NetworkStudent();
     
         Degree getDegreeProgram() override;

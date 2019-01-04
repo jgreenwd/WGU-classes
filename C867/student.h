@@ -23,10 +23,13 @@ class Student {
         int     age_;
         int*    number_of_days_;
     
+    protected:
+        Degree  degree_;
+    
     public:
         /* -------- CONSTRUCTOR D.2.c -------- */
-        Student();
-        Student(string, string, string, string, int, int*);
+        Student(string, string, string, string, int, int*, Degree);
+    
         /* -------- DESTRUCTOR D.2.e -------- */
         ~Student();
     
@@ -48,7 +51,6 @@ class Student {
     
         /* -------- D.2.f -------- */
         virtual Degree getDegreeProgram();
-        virtual void setDegreeProgram();
     
         /* -------- D.2.d -------- */
         virtual void print();

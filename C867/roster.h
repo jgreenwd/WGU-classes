@@ -44,13 +44,13 @@ class Roster {
         void printAll();
     
         /* -------- E.3.d -------- */
-        void printAverageDaysInCourse(const string studentID);
+        void printAverageDaysInCourse(string studentID);
     
         /* -------- E.3.e -------- */
         void printInvalidEmails();
     
         /* -------- E.3.f -------- */
-        void printByDegreeProgram(const Degree);
+        void printByDegreeProgram(Degree);
     
         int size();
 };

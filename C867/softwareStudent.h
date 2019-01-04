@@ -13,13 +13,8 @@
 
 /* -------- D.3 -------- */
 class SoftwareStudent : public Student {
-    private:
-        Degree degree_ = SOFTWARE;
     public:
-        using Student::Student;
-    
-        // redundant constructor to comply with D.2.c
-        SoftwareStudent(string, string, string, string, int, int*, Degree);
+        SoftwareStudent(string, string, string, string, int, int*, Degree = SOFTWARE);
         ~SoftwareStudent();
     
         Degree getDegreeProgram() override;

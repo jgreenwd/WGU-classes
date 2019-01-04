@@ -7,13 +7,10 @@
 //
 
 #include "student.h"
-#include "degree.h"
 
 /* -------- CONSTRUCTOR D.2.c -------- */
-Student::Student(){};
-
-Student::Student(string ID, string fname, string lname, string email, int age, int* days)
-: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), age_(age), number_of_days_(days) {};
+Student::Student(string ID, string fname, string lname, string email, int age, int* days, Degree degree)
+: student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), age_(age), number_of_days_(days), degree_(degree) {};
 
 /* -------- DESTRUCTOR D.2.e -------- */
 Student::~Student() {};
@@ -28,7 +25,7 @@ string Student::getFirstName() {
     return first_name_;
 };
 
-string Student::getLastName(){
+string Student::getLastName() {
     return last_name_;
 };
 
@@ -43,6 +40,10 @@ int Student::getAge() {
 // Return pointer to array[3] of number of days to complete each course
 int* Student::getNumberOfDays() {
     return number_of_days_;
+};
+
+Degree Student::getDegreeProgram() {
+    return degree_;
 };
 
 
@@ -69,16 +70,6 @@ void Student::setAge(int age) {
 
 void Student::setNumberOfDays(const int* days) {
     *number_of_days_ = *days;
-};
-
-/* -------- D.2.f -------- */
-Degree Student::getDegreeProgram() {
-    std::cerr << "Error: Degree not available in base type" << std::endl;
-    return ERROR;
-};
-
-void Student::setDegreeProgram() {
-    std::cerr << "Error: Degree not available in base type" << std::endl;
 };
 
 /* -------- D.2.d -------- */

@@ -12,24 +12,16 @@
 
 Roster::Roster() {};
 
-Roster::~Roster() {
-    for(int i = lastElementIndex_; i > 0; --i) {
-        delete classRosterArray_[i];
-        lastElementIndex_--;
-    }
-};
+Roster::~Roster() {};
 
-// TODO: something wrong with days[]
 /* -------- E.3.a -------- */
 void Roster::add(string ID, string fName, string lName, string email, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
-    int days[] {daysInCourse1, daysInCourse2, daysInCourse3};
+    int days[3] {daysInCourse1, daysInCourse2, daysInCourse3};
     
-    if (degreeProgram == SECURITY) {
-        classRosterArray_[lastElementIndex_++] = new SecurityStudent(ID, fName, lName, email, age, days);
-    } else if (degreeProgram == NETWORK) {
-        classRosterArray_[lastElementIndex_++] = new NetworkStudent(ID, fName, lName, email, age, days);
-    } else if (degreeProgram == SOFTWARE) {
-        classRosterArray_[lastElementIndex_++] = new SoftwareStudent(ID, fName, lName, email, age, days);
+    switch (degreeProgram) {
+        case SECURITY : classRosterArray_[lastElementIndex_++] = new SecurityStudent(ID, fName, lName, email, age, days); break;
+        case NETWORK : classRosterArray_[lastElementIndex_++] = new NetworkStudent(ID, fName, lName, email, age, days); break;
+        case SOFTWARE : classRosterArray_[lastElementIndex_++] = new SoftwareStudent(ID, fName, lName, email, age, days); break;
     }
 };
 
@@ -52,72 +44,51 @@ void Roster::remove(string studentID) {
 
 /* -------- E.3.c -------- */
 void Roster::printAll() {
-    try {
-        for(int i = 0; i < lastElementIndex_; i++) {
-            if (classRosterArray_[i] != NULL)
-                classRosterArray_[i]->print();
-        }
+    for(int i = 0; i < lastElementIndex_; i++) {
+        if (classRosterArray_[i] != NULL)
+            classRosterArray_[i]->print();
     }
-    catch (...) {
-        std::cerr << "unknown error in Roster.printAll()";
-    }
+    std::cout << std::endl;
 };
 
 
 /* -------- E.3.d -------- */
 void Roster::printAverageDaysInCourse(string studentID) {
-    try {
-        for(int i = 0; i < lastElementIndex_; ++i) {
-            if (studentID == classRosterArray_[i]->getStudentID()) {
-                int* days = classRosterArray_[i]->getNumberOfDays();
-                int avgDays = (days[0] + days[1] + days[2]) / 3;
-                std::cout << "Average days in course for student " << studentID << ": " << avgDays << std::endl;
-            }
+    for(int i = 0; i < lastElementIndex_; ++i) {
+        if (studentID == classRosterArray_[i]->getStudentID()) {
+            int* days = classRosterArray_[i]->getNumberOfDays();
+            int avgDays = (days[0] + days[1] + days[2]) / 3;
+            std::cout << "Average days in course for student " << studentID << ": " << avgDays << std::endl;
         }
-    }
-    catch (...) {
-        std::cerr << "unknown error in Roster.printAverageDaysInCourse()";
     }
 };
 
 
 /* -------- E.3.e -------- */
 void Roster::printInvalidEmails() {
-    try {
-        bool allAddressesValid {true};
-        for(int i = 0; i < lastElementIndex_; i++) {
-            string email = classRosterArray_[i]->getEmailAddress();
+    bool allAddressesValid {true};
+    for(int i = 0; i < lastElementIndex_; i++) {
+        string email = classRosterArray_[i]->getEmailAddress();
+        
+        std::regex entry("\\w+@[a-zA-Z_]+\\.");
+        std::smatch match;
             
-            std::regex entry("\\w+@[a-zA-Z_]+\\.");
-            std::smatch match;
-            
-            if (!std::regex_search(email, match, entry)) {
-                std::cout << email << std::endl;
-                allAddressesValid = false;
-            }
-            
-            if (allAddressesValid)
-                std::cout << "No invalid email addresses found" << std::endl;
+        if (!std::regex_search(email, match, entry)) {
+            std::cout << email << std::endl;
+            allAddressesValid = false;
         }
-    }
-    catch(...) {
-        std::cerr << "unknown error in Roster.printInvalidEmails()";
     }
 };
 
 
 /* -------- E.3.f -------- */
 void Roster::printByDegreeProgram(Degree degreeProgram) {
-    try {
-        for(int i = 0; i < lastElementIndex_; i++) {
-            Degree deg = classRosterArray_[i]->getDegreeProgram();
-            if (deg == degreeProgram)
-                classRosterArray_[i]->print();
-        }
+    for(int i = 0; i < lastElementIndex_; i++) {
+        Degree deg = classRosterArray_[i]->getDegreeProgram();
+        if (deg == degreeProgram)
+            classRosterArray_[i]->print();
     }
-    catch (...) {
-        std::cerr << "unknown error in Roster.printByDegreeProgram()";
-    }
+    std::cout << std::endl;
 };
 
 int Roster::size() {
@@ -125,12 +96,12 @@ int Roster::size() {
 }
 
 
-/* -------- F.x -------- */
+/* ---------------- F.x ---------------- */
 int main() {
     /* -------- F.1 -------- */
     std::cout << "C867 - Scripting and Programming - Applications" << std::endl;
     std::cout << "C++ - Student ID#: 000917613 - Jeremy Greenwood" << std::endl << std::endl;
-    
+
     /* -------- F.2 -------- */
     Roster classRoster;
     classRoster.add("A1","John","Smith","John1989@gm ail.com",20,30,35,40,SECURITY);
@@ -141,8 +112,6 @@ int main() {
     
     /* -------- F.4 -------- */
     classRoster.printAll();
-    std::cout << std::endl;
-    
     classRoster.printInvalidEmails();
     std::cout << std::endl;
     
@@ -152,12 +121,11 @@ int main() {
     std::cout << std::endl;
     
     classRoster.printByDegreeProgram(SOFTWARE);
-    std::cout << std::endl;
     
-//    classRoster.remove("A3");
-//    classRoster.remove("A3");
+    classRoster.remove("A3");
+    classRoster.remove("A3");
     
-//    classRoster.~Roster();
+    classRoster.~Roster();
     
     return 0;
 };
