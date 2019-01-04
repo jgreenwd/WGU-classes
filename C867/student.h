@@ -11,37 +11,38 @@
 
 #include <iostream>
 #include "degree.h"
+using std::string;
 
 class Student {
     private:
         /* -------- D.1 -------- */
-        std::string student_ID_,
-                    first_name_,
-                    last_name_,
-                    email_address_;
-        int         age_;
-        int*        number_of_days_;
+        string  student_ID_,
+                first_name_,
+                last_name_,
+                email_address_;
+        int     age_;
+        int*    number_of_days_;
     
     public:
         /* -------- CONSTRUCTOR D.2.c -------- */
         Student();
-        Student(std::string, std::string, std::string, std::string, int, int*);
+        Student(string, string, string, string, int, int*);
         /* -------- DESTRUCTOR D.2.e -------- */
         ~Student();
     
         /* -------- ACCESSORS D.2.a -------- */
-        std::string getStudentID(void);
-        std::string getFirstName(void);
-        std::string getLastName(void);
-        std::string getEmailAddress(void);
+        string getStudentID(void);
+        string getFirstName(void);
+        string getLastName(void);
+        string getEmailAddress(void);
         int getAge(void);
         int* getNumberOfDays(void);
     
         /* -------- MUTATORS D.2.b -------- */
-        void setStudentID(std::string);
-        void setFirstName(std::string);
-        void setLastName(std::string);
-        void setEmailAddress(std::string);
+        void setStudentID(string);
+        void setFirstName(string);
+        void setLastName(string);
+        void setEmailAddress(string);
         void setAge(int);
         void setNumberOfDays(const int*);
     

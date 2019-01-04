@@ -12,8 +12,7 @@
 /* -------- CONSTRUCTOR D.2.c -------- */
 Student::Student(){};
 
-Student
-::Student(std::string ID, std::string fname, std::string lname, std::string email, int age, int* days)
+Student::Student(string ID, string fname, string lname, string email, int age, int* days)
 : student_ID_(ID), first_name_(fname), last_name_(lname), email_address_(email), age_(age), number_of_days_(days) {};
 
 /* -------- DESTRUCTOR D.2.e -------- */
@@ -21,19 +20,19 @@ Student::~Student() {};
 
 
 /* --------- ACCESSORS D.2.a -------- */
-std::string Student::getStudentID() {
+string Student::getStudentID() {
     return student_ID_;
 };
 
-std::string Student::getFirstName() {
+string Student::getFirstName() {
     return first_name_;
 };
 
-std::string Student::getLastName(){
+string Student::getLastName(){
     return last_name_;
 };
 
-std::string Student::getEmailAddress() {
+string Student::getEmailAddress() {
     return email_address_;
 };
 
@@ -48,19 +47,19 @@ int* Student::getNumberOfDays() {
 
 
 /* -------- MUTATORS D.2.b -------- */
-void Student::setStudentID(std::string ID) {
+void Student::setStudentID(string ID) {
     student_ID_ = ID;
 };
 
-void Student::setFirstName(std::string fname) {
+void Student::setFirstName(string fname) {
     first_name_ = fname;
 };
 
-void Student::setLastName(std::string lname){
+void Student::setLastName(string lname){
     last_name_ = lname;
 };
 
-void Student::setEmailAddress(std::string email) {
+void Student::setEmailAddress(string email) {
     email_address_ = email;
 };
 

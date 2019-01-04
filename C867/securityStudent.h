@@ -19,7 +19,7 @@ class SecurityStudent : public Student {
         using Student::Student;
     
         // redundant constructor to comply with D.2.c
-        SecurityStudent(std::string, std::string, std::string, std::string, int, int*, Degree);
+        SecurityStudent(string, string, string, string, int, int*, Degree);
         ~SecurityStudent();
     
         Degree getDegreeProgram() override;

@@ -6,7 +6,6 @@
 //  Copyright © 2018 Jeremy Greenwood. All rights reserved.
 //
 #include <iostream>
-#include <vector>
 #include <regex>
 #include "degree.h"
 #include "roster.h"
@@ -14,15 +13,15 @@
 Roster::Roster() {};
 
 Roster::~Roster() {
-//    for(int i = lastElementIndex_; i > 0; --i) {
-//        delete classRosterArray[i];
-//        lastElementIndex_--;
-//    }
+    for(int i = lastElementIndex_; i > 0; --i) {
+        delete classRosterArray[i];
+        lastElementIndex_--;
+    }
 };
 
 // TODO: something wrong with days[]
 /* -------- E.3.a -------- */
-void Roster::add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress,
+void Roster::add(string studentID, string firstName, string lastName, string emailAddress,
                  int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram) {
     int days[] {daysInCourse1, daysInCourse2, daysInCourse3};
     
@@ -39,7 +38,7 @@ void Roster::add(std::string studentID, std::string firstName, std::string lastN
 
 
 /* -------- E.3.b -------- */
-void Roster::remove(std::string studentID) {
+void Roster::remove(string studentID) {
     bool present = false;
     for(int i = 0; i < lastElementIndex_; i++) {
         if (classRosterArray[i] != NULL) {
@@ -69,11 +68,12 @@ void Roster::printAll() {
 
 
 /* -------- E.3.d -------- */
-void Roster::printAverageDaysInCourse(std::string studentID) {
+void Roster::printAverageDaysInCourse(string studentID) {
     try {
-        for(int i = 0; i < lastElementIndex_; i++) {
+        for(int i = 0; i < lastElementIndex_; ++i) {
             if (studentID == classRosterArray[i]->getStudentID()) {
-                int avgDays = (classRosterArray[i]->getNumberOfDays()[0] + classRosterArray[i]->getNumberOfDays()[1] + classRosterArray[i]->getNumberOfDays()[2]) / 3;
+                int* days = classRosterArray[i]->getNumberOfDays();
+                int avgDays = (days[0] + days[1] + days[2]) / 3;
                 std::cout << "Average days in course for student " << studentID << ": " << avgDays << std::endl;
             }
         }
@@ -89,7 +89,7 @@ void Roster::printInvalidEmails() {
     try {
         bool allAddressesValid {true};
         for(int i = 0; i < lastElementIndex_; i++) {
-            std::string email = classRosterArray[i]->getEmailAddress();
+            string email = classRosterArray[i]->getEmailAddress();
             
             std::regex entry("\\w+@[a-zA-Z_]+\\.");
             std::smatch match;

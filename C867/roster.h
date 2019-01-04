@@ -13,8 +13,9 @@
 #include "networkStudent.h"
 #include "securityStudent.h"
 #include "softwareStudent.h"
+using std::string;
 
-const std::string studentData[] = {
+const string studentData[] = {
     "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
     "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
     "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
@@ -34,16 +35,16 @@ class Roster {
         ~Roster();
     
         /* -------- E.3.a -------- */
-        void add(std::string, std::string, std::string, std::string, int, int, int, int, Degree);
+        void add(string, string, string, string, int, int, int, int, Degree);
     
         /* -------- E.3.b -------- */
-        void remove(const std::string studentID);
+        void remove(const string studentID);
     
         /* -------- E.3.c -------- */
         void printAll();
     
         /* -------- E.3.d -------- */
-        void printAverageDaysInCourse(const std::string studentID);
+        void printAverageDaysInCourse(const string studentID);
     
         /* -------- E.3.e -------- */
         void printInvalidEmails();

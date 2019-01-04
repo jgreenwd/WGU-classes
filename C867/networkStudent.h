@@ -19,7 +19,7 @@ class NetworkStudent : public Student {
         using Student::Student;
     
         // redundant constructor to comply with D.2.c
-        NetworkStudent(std::string, std::string, std::string, std::string, int, int*, Degree);
+        NetworkStudent(string, string, string, string, int, int*, Degree);
         ~NetworkStudent();
     
         Degree getDegreeProgram() override;
