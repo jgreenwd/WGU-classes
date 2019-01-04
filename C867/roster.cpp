@@ -99,7 +99,6 @@ int Roster::size() {
 /* ----------------- Local functions for parsing input array ----------------- */
 int ishift(std::smatch &sm, std::sregex_iterator iter) {
     sm = *iter;
-    
     return stoi(sm.str());
 };
 
@@ -110,13 +109,11 @@ Degree dshift(std::smatch &sm, std::sregex_iterator iter) {
     if (smVal == "SECURITY") return SECURITY;
     if (smVal == "NETWORK") return NETWORK;
     if (smVal == "SOFTWARE") return SOFTWARE;
-    
     return SOFTWARE;
 };
 
 string sshift(std::smatch &sm, std::sregex_iterator iter) {
     sm = *iter;
-    
     return sm.str();
 };
 

@@ -50,7 +50,7 @@ class Student {
         void setNumberOfDays(const int*);
     
         /* -------- D.2.f -------- */
-        virtual Degree getDegreeProgram();
+        virtual Degree getDegreeProgram() = 0;
     
         /* -------- D.2.d -------- */
         virtual void print();

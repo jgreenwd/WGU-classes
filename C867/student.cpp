@@ -42,11 +42,6 @@ int* Student::getNumberOfDays() {
     return number_of_days_;
 };
 
-Degree Student::getDegreeProgram() {
-    return degree_;
-};
-
-
 /* -------- MUTATORS D.2.b -------- */
 void Student::setStudentID(string ID) {
     student_ID_ = ID;
