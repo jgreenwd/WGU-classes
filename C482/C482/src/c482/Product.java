@@ -17,6 +17,16 @@ public class Product {
     private int min;
     private int max;
 
+    public Product(ArrayList<Part> associatedParts, int productID, String name, double price, int inStock, int min, int max) {
+        this.associatedParts = associatedParts;
+        this.productID = productID;
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+        this.min = min;
+        this.max = max;
+    }
+
     public int getProductID() { return productID; }
     public String getName() { return name; }
     public double getPrice() { return price; }
