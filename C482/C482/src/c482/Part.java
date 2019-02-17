@@ -1,11 +1,12 @@
+/**
+ * author Jeremy Greenwood
+ * mentor Rebekah Coggin
+ * WGU-ID 000917613
+ * course C482
+ */
+
 package c482;
 
-/**
- * @author Jeremy Greenwood
- * @mentor Rebekah Coggin
- * @ID     000917613
- * @class  C482
- */
 public class Part {
     private int PartID;
     private String name;
