@@ -7,7 +7,7 @@
 
 package c482;
 
-public class Part {
+public abstract class Part {
     private int PartID;
     private String name;
     private double price;
