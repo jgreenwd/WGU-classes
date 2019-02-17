@@ -14,7 +14,6 @@ public class Part {
     private int min;
     private int max;
 
-    public Part() {};
     public Part(int PartID, String name, double price, int inStock, int min, int max) {
         this.PartID = PartID;
         this.name = name;

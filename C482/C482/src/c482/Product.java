@@ -45,6 +45,7 @@ public class Product {
     }
     
     public boolean removeAssociatedPart(int partID) {
+        // removes ALL instances of the part
         boolean partFound = false;
         for (Part associatedPart: associatedParts) {
             if (associatedPart.getPartID() == partID) {
@@ -52,9 +53,6 @@ public class Product {
                 associatedParts.remove(associatedPart);
             }
         }
-        
         return partFound;
-    }
-
-    
+    }   
 }
