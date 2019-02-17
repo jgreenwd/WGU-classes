@@ -55,14 +55,13 @@ public class Product {
     }
     
     public boolean removeAssociatedPart(int partID) {
-        // removes ALL instances of the part
-        boolean partFound = false;
+        // removes the first instance of the part
         for (Part associatedPart: associatedParts) {
             if (associatedPart.getPartID() == partID) {
-                partFound = true;
                 associatedParts.remove(associatedPart);
+                return true;
             }
         }
-        return partFound;
+        return false;
     }   
 }
