@@ -14,6 +14,6 @@ public class InHouse extends Part {
         super(PartID, name, price, inStock, min, max);
     }
     
-    public int getMachineID() { return machineID; };
+    public int getMachineID() { return machineID; }
     public void setMachineID(int ID) { this.machineID = ID; }
 }
