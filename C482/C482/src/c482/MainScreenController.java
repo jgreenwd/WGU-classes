@@ -10,6 +10,8 @@ package c482;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +20,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/** TODO:
+ *  - populate parts table
+ *  - populate products table
+ *  - add parts
+ *  - modify parts
+ *  - search parts
+ *  - delete parts
+ *  - add products
+ *  - modify products
+ *  - search products
+ *  - delete products
+ */
 public class MainScreenController implements Initializable {
     
     /* ---------- Parts Management ---------- */
@@ -28,6 +44,12 @@ public class MainScreenController implements Initializable {
     @FXML private Button addParts;
     @FXML private Button modifyParts;
     @FXML private Button deleteParts;
+    @FXML private TableView<Part> partsTable;
+    @FXML private TableColumn<Part, String> partIdColumn;
+    @FXML private TableColumn<Part, String> partNameColumn;
+    @FXML private TableColumn<Part, String> partInvColumn;
+    @FXML private TableColumn<Part, String> partPriceColumn;
+    
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         System.out.println("Parts: Search button pressed");
@@ -55,6 +77,10 @@ public class MainScreenController implements Initializable {
     
     public void deletePartsButton(ActionEvent event) throws IOException {
         System.out.println("Parts: Delete button pressed");
+        Inventory.allParts.forEach((item) -> {
+            System.out.println(item.getName());
+        }); 
+
     }
     
     
@@ -63,6 +89,12 @@ public class MainScreenController implements Initializable {
     @FXML private Button addProducts;
     @FXML private Button modifyProducts;
     @FXML private Button deleteProducts;
+    @FXML private TableView<Product> productTable;
+    @FXML private TableColumn<Product, String> productIdColumn;
+    @FXML private TableColumn<Product, String> productNameColumn;
+    @FXML private TableColumn<Product, String> productInvColumn;
+    @FXML private TableColumn<Product, String> productPriceColumn;
+    
     
     public void searchProductsButton(ActionEvent event) throws IOException {
         System.out.println("Products: Search button pressed");
@@ -90,6 +122,7 @@ public class MainScreenController implements Initializable {
     
     public void deleteProductsButton(ActionEvent event) throws IOException {
         System.out.println("Products: Delete button pressed");
+        
     }
     
     
@@ -99,9 +132,49 @@ public class MainScreenController implements Initializable {
     public void exitButton() {
         System.exit(0);
     }
+
     
-    @Override public void initialize(URL url, ResourceBundle rb) {
+    /* ---------- test data ---------- */
+    // add products
+    public ObservableList<Part> updatePartsDisplay() {
+        ObservableList<Part> parts = FXCollections.observableArrayList();
+        parts.add(new InHouse(001,"Widget",1.99, 0,0,999));
+        parts.add(new InHouse(002,"Wodget",2.95, 0,0,999));
+        parts.add(new InHouse(003,"Wudget",3.90, 0,0,999));
+        parts.add(new Outsourced(004,"Thingy",2.99, 0,0,999));
+        parts.add(new Outsourced(005,"Doohickey",0.94, 0,0,999));
+        parts.add(new Outsourced(006,"Whatsit",0.10, 0,0,999));
         
-    }    
-    
+        return parts;
+    }
+
+
+    @Override public void initialize(URL url, ResourceBundle rb) {
+        /* ---------- init parts table display ---------- */
+        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
+        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+        partsTable.setItems( updatePartsDisplay() );
+        
+        /* ---------- init products table display ---------- */
+
+    }
+        /* ---------- synonyms for widget: ----------
+        007, "doohickey", 1.99, 0,0,999
+        008, "whatsis", 1.98, 0,0,999
+        009, "gubbins", 1.97, 0,0,999
+        010, "thingamajig", 1.96, 0,0,999
+        011, "whatchamacallit", 1.95, 0,0,999
+        012, "stuff", 1.94, 0,0,999
+        013, "gizmo", 1.93, 0,0,999
+        014, "thingamabob", 1.92, 0,0,999
+        015, "doodad", 1.91, 0,0,999
+        016, "gadget", 1.90, 0,0,999
+        017, "appliance", 1.89, 0,0,999
+        018, "contraption", 1.88, 0,0,999
+        019, "gimbal", 1.87, 0,0,999
+        020, "device", 1.86, 0,0,999
+    */
 }

@@ -7,8 +7,6 @@
 
 package c482;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +16,7 @@ import javafx.stage.Stage;
 
 public class C482 extends Application {
     
-    @Override
-    public void start(Stage stage) throws IOException {
+    @Override public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         
         Scene scene = new Scene(root);
@@ -29,9 +26,6 @@ public class C482 extends Application {
     }
 
     public static void main(String[] args) {
-        
-        Inventory inventory = new Inventory();
-        
         launch(args);
     }
 }

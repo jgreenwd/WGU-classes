@@ -15,13 +15,8 @@ public class Inventory {
     static ArrayList<Part> allParts;
 
     public Inventory() {
-        this.products = new ArrayList<Product>();
-        this.allParts = new ArrayList<Part>();
-    }
-    
-    public Inventory(ArrayList<Product> products, ArrayList<Part> allParts) {
-        this.products = products;
-        this.allParts = allParts;
+        Inventory.products = new ArrayList<>();
+        Inventory.allParts = new ArrayList<>();
     }
     
     public void addProduct(Product product) {

@@ -49,12 +49,12 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="430.0">
+                        <TableView fx:id="partsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="430.0">
                           <columns>
-                            <TableColumn prefWidth="85.0" resizable="false" text="Part ID" />
-                            <TableColumn prefWidth="85.0" resizable="false" text="Part Name" />
-                              <TableColumn prefWidth="110.0" resizable="false" text="Inventory Level" />
-                              <TableColumn prefWidth="150.0" resizable="false" text="Price/Cost Per Unit" />
+                            <TableColumn fx:id="partIdColumn" prefWidth="85.0" resizable="false" text="Part ID" />
+                            <TableColumn fx:id="partNameColumn" prefWidth="85.0" resizable="false" text="Part Name" />
+                              <TableColumn fx:id="partInvColumn" prefWidth="110.0" resizable="false" text="Inventory Level" />
+                              <TableColumn fx:id="partPriceColumn" prefWidth="150.0" resizable="false" text="Price/Cost Per Unit" />
                           </columns>
                            <VBox.margin>
                               <Insets left="18.0" top="10.0" />
@@ -123,12 +123,12 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="430.0">
+                        <TableView fx:id="productTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="430.0">
                            <columns>
-                              <TableColumn resizable="false" text="Product ID" />
-                              <TableColumn prefWidth="100.0" resizable="false" text="Product Name" />
-                              <TableColumn prefWidth="105.0" resizable="false" text="Inventory Level" />
-                              <TableColumn prefWidth="145.0" resizable="false" text="Price/Cost Per Unit" />
+                              <TableColumn fx:id="productIdColumn" resizable="false" text="Product ID" />
+                              <TableColumn fx:id="productNameColumn" prefWidth="100.0" resizable="false" text="Product Name" />
+                              <TableColumn fx:id="productInvColumn" prefWidth="105.0" resizable="false" text="Inventory Level" />
+                              <TableColumn fx:id="productPriceColumn" prefWidth="145.0" resizable="false" text="Price/Cost Per Unit" />
                            </columns>
                            <VBox.margin>
                               <Insets left="18.0" top="10.0" />
