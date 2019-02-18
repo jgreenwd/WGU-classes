@@ -51,6 +51,27 @@ public class PartScreenController implements Initializable {
         }
     }
     
+    public void saveButtonPressed() {
+        Part partToAdd;
+        if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
+            partToAdd = new InHouse(
+                1,
+                partName.getText(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(inv.getText()),
+                Integer.parseInt(min.getText()),
+                Integer.parseInt(max.getText())
+            );
+            
+            System.out.println(partToAdd.getPartID());
+            System.out.println(partToAdd.getName());
+            System.out.println(partToAdd.getInStock());
+            System.out.println(partToAdd.getPrice());
+            System.out.println(partToAdd.getMin());
+            System.out.println(partToAdd.getMax());
+        }
+    }
+    
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);

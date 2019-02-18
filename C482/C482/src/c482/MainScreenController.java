@@ -26,11 +26,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /** TODO:
- *  - populate products table
  *  - add parts
  *  - modify parts
  *  - search parts
  *  - delete parts
+ *  - populate products table
  *  - add products
  *  - modify products
  *  - search products
