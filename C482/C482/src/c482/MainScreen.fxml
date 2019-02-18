@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c482.MainScreenController">
    <children>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -37,7 +37,7 @@
                                     <Font name="SansSerif Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Search">
+                              <Button fx:id="searchParts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchPartsButton" prefHeight="25.0" prefWidth="100.0" text="Search">
                                  <HBox.margin>
                                     <Insets left="30.0" right="10.0" top="10.0" />
                                  </HBox.margin>
@@ -62,17 +62,17 @@
                         </TableView>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Add">
+                              <Button fx:id="addParts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addPartsButton" prefHeight="25.0" prefWidth="100.0" text="Add">
                                  <HBox.margin>
                                     <Insets left="100.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Modify">
+                              <Button fx:id="modifyParts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#modifyPartsButton" prefHeight="25.0" prefWidth="100.0" text="Modify">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Delete">
+                              <Button fx:id="deleteParts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deletePartsButton" prefHeight="25.0" prefWidth="100.0" text="Delete">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
@@ -111,7 +111,7 @@
                                     <Font name="SansSerif Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Search">
+                              <Button fx:id="searchProducts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchProductsButton" prefHeight="25.0" prefWidth="100.0" text="Search">
                                  <HBox.margin>
                                     <Insets left="20.0" right="10.0" top="10.0" />
                                  </HBox.margin>
@@ -136,17 +136,17 @@
                         </TableView>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add">
+                              <Button fx:id="addProducts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addProductsButton" prefHeight="25.0" prefWidth="95.0" text="Add">
                                  <HBox.margin>
                                     <Insets left="125.0" right="8.0" top="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Modify">
+                              <Button fx:id="modifyProducts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#modifyProductsButton" prefHeight="25.0" prefWidth="95.0" text="Modify">
                                  <HBox.margin>
                                     <Insets left="8.0" right="8.0" top="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Delete">
+                              <Button fx:id="deleteProducts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteProductsButton" prefHeight="25.0" prefWidth="95.0" text="Delete">
                                  <HBox.margin>
                                     <Insets left="8.0" right="10.0" top="10.0" />
                                  </HBox.margin>
@@ -161,7 +161,7 @@
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Exit">
+                  <Button fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButton" prefHeight="25.0" prefWidth="95.0" text="Exit">
                      <VBox.margin>
                         <Insets left="359.0" top="25.0" />
                      </VBox.margin>
