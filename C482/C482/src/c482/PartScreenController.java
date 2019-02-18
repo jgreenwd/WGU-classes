@@ -43,11 +43,11 @@ public class PartScreenController implements Initializable {
     public void partSourceSelect() {
         if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
             sourceTitle.setText("Machine ID");
-            sourceName.setText("Mach ID");
+            sourceName.setPromptText("Mach ID");
         }
         if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
             sourceTitle.setText("Company Name");
-            sourceName.setText("Comp Nm");
+            sourceName.setPromptText("Comp Nm");
         }
     }
     
