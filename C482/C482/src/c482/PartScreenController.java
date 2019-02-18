@@ -28,18 +28,28 @@ public class PartScreenController implements Initializable {
     @FXML private Label partLabel;
     @FXML private RadioButton inHouse; 
     @FXML private RadioButton outsourced;
-    private ToggleGroup makeInOrOut;
+    private ToggleGroup partSource;
     @FXML private TextField id;
     @FXML private TextField partName;
     @FXML private TextField inv;
     @FXML private TextField price;
     @FXML private TextField min;
     @FXML private TextField max;
-    @FXML private TextField companyName;
+    @FXML private Label sourceTitle;
+    @FXML private TextField sourceName;
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
     
-    public void makeInOrOutSelect() { }
+    public void partSourceSelect() {
+        if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
+            sourceTitle.setText("Machine ID");
+            sourceName.setText("Mach ID");
+        }
+        if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
+            sourceTitle.setText("Company Name");
+            sourceName.setText("Comp Nm");
+        }
+    }
     
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -53,8 +63,8 @@ public class PartScreenController implements Initializable {
     
     @Override public void initialize(URL url, ResourceBundle rb) {
         // toggle radiobuttons between "in-house" or "outsourced"
-        makeInOrOut = new ToggleGroup();
-        this.inHouse.setToggleGroup(makeInOrOut);
-        this.outsourced.setToggleGroup(makeInOrOut);
+        partSource = new ToggleGroup();
+        this.inHouse.setToggleGroup(partSource);
+        this.outsourced.setToggleGroup(partSource);
     }    
 }

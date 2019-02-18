@@ -28,12 +28,12 @@
                         <Font name="SansSerif Bold" size="17.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="inHouse" mnemonicParsing="false" text="In-House">
+                  <RadioButton fx:id="inHouse" mnemonicParsing="false" onAction="#partSourceSelect" text="In-House">
                      <HBox.margin>
                         <Insets left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton fx:id="outsourced" mnemonicParsing="false" text="Outsourced">
+                  <RadioButton fx:id="outsourced" mnemonicParsing="false" onAction="#partSourceSelect" text="Outsourced">
                      <HBox.margin>
                         <Insets left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>
@@ -70,7 +70,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Price" GridPane.rowIndex="3">
+                  <Label text="Price/Cost" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
@@ -80,32 +80,32 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="id" disable="true" GridPane.columnIndex="1">
+                  <TextField fx:id="id" disable="true" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="partName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="partName" promptText="Part Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="inv" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="price" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="price" promptText="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="max" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <TextField fx:id="max" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" promptText="Max" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="min" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <TextField fx:id="min" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -115,12 +115,12 @@
                         <Insets left="125.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Company Name" GridPane.rowIndex="5">
+                  <Label fx:id="sourceTitle" text="Source" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="companyName" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="sourceName" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>

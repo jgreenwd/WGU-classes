@@ -26,7 +26,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /** TODO:
- *  - populate parts table
  *  - populate products table
  *  - add parts
  *  - modify parts
@@ -142,12 +141,12 @@ public class MainScreenController implements Initializable {
         parts.add(new InHouse(002,"Wodget",2.95, 0,0,999));
         parts.add(new InHouse(003,"Wudget",3.90, 0,0,999));
         parts.add(new Outsourced(004,"Thingy",2.99, 0,0,999));
-        parts.add(new Outsourced(005,"Doohickey",0.94, 0,0,999));
-        parts.add(new Outsourced(006,"Whatsit",0.10, 0,0,999));
+        parts.add(new Outsourced(005,"Thingamajig", 1.96, 0,0,999));
+        parts.add(new Outsourced(006,"Thingamabob", 1.92, 0,0,999));
         
         return parts;
     }
-
+    
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         /* ---------- init parts table display ---------- */
@@ -159,22 +158,38 @@ public class MainScreenController implements Initializable {
         partsTable.setItems( updatePartsDisplay() );
         
         /* ---------- init products table display ---------- */
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
         /* ---------- synonyms for widget: ----------
-        007, "doohickey", 1.99, 0,0,999
-        008, "whatsis", 1.98, 0,0,999
-        009, "gubbins", 1.97, 0,0,999
-        010, "thingamajig", 1.96, 0,0,999
-        011, "whatchamacallit", 1.95, 0,0,999
+        001,"Widget",1.99, 0,0,999
+        002,"Wodget",2.95, 0,0,999
+        003,"Wudget",3.90, 0,0,999
+    
+        004,"Thingy",2.99, 0,0,999
+        005,"Thingamajig", 1.96, 0,0,999
+        006,"Thingamabob", 1.92, 0,0,999
+    
+        007,"Doohickey",0.94, 0,0,999
+        008,"Doodad", 1.91, 0,0,999
+        009,"Diddlydilly", 2.97, 0,0,999
+    
+        010,"Whatsit",0.10, 0,0,999
+        011,"Whatchamacallit", 1.95, 0,0,999
+        012,"Whatsis", 1.98, 0,0,999
+    
+        013,"Gadget", 1.90, 0,0,999
+        014,"Gizmo", 1.93, 0,0,999
+        015,"Gubbins", 1.97, 0,0,999
+        
+
         012, "stuff", 1.94, 0,0,999
-        013, "gizmo", 1.93, 0,0,999
-        014, "thingamabob", 1.92, 0,0,999
-        015, "doodad", 1.91, 0,0,999
-        016, "gadget", 1.90, 0,0,999
+        
         017, "appliance", 1.89, 0,0,999
         018, "contraption", 1.88, 0,0,999
-        019, "gimbal", 1.87, 0,0,999
         020, "device", 1.86, 0,0,999
     */
 }
