@@ -62,13 +62,6 @@ public class PartScreenController implements Initializable {
                 Integer.parseInt(min.getText()),
                 Integer.parseInt(max.getText())
             );
-            
-            System.out.println(partToAdd.getPartID());
-            System.out.println(partToAdd.getName());
-            System.out.println(partToAdd.getInStock());
-            System.out.println(partToAdd.getPrice());
-            System.out.println(partToAdd.getMin());
-            System.out.println(partToAdd.getMax());
         }
     }
     
@@ -87,5 +80,7 @@ public class PartScreenController implements Initializable {
         partSource = new ToggleGroup();
         this.inHouse.setToggleGroup(partSource);
         this.outsourced.setToggleGroup(partSource);
+        partSource.selectToggle(inHouse);
+        partSourceSelect();
     }    
 }
