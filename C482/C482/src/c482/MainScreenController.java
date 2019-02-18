@@ -52,6 +52,9 @@ public class MainScreenController implements Initializable {
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         System.out.println("Parts: Search button pressed");
+        for(Part item: Inventory.allParts) {
+            System.out.println(item.getName());
+        }
     }
     
     public void addPartsButton(ActionEvent event) throws IOException {
@@ -131,18 +134,10 @@ public class MainScreenController implements Initializable {
     public void exitButton() {
         System.exit(0);
     }
-
     
-    /* ---------- test data ---------- */
-    // add products
     public ObservableList<Part> updatePartsDisplay() {
         ObservableList<Part> parts = FXCollections.observableArrayList();
-        parts.add(new InHouse(001,"Widget",1.99, 0,0,999));
-        parts.add(new InHouse(002,"Wodget",2.95, 0,0,999));
-        parts.add(new InHouse(003,"Wudget",3.90, 0,0,999));
-        parts.add(new Outsourced(004,"Thingy",2.99, 0,0,999));
-        parts.add(new Outsourced(005,"Thingamajig", 1.96, 0,0,999));
-        parts.add(new Outsourced(006,"Thingamabob", 1.92, 0,0,999));
+        Inventory.allParts.forEach((item) -> { parts.add(item); });
         
         return parts;
     }

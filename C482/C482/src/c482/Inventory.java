@@ -10,14 +10,9 @@ package c482;
 import java.util.ArrayList;
 
 // TODO: updateProduct & updatePart need implementation
-public class Inventory {
-    static ArrayList<Product> products;
-    static ArrayList<Part> allParts;
-
-    public Inventory() {
-        Inventory.products = new ArrayList<>();
-        Inventory.allParts = new ArrayList<>();
-    }
+public final class Inventory {
+    public static ArrayList<Product> products = new ArrayList<>();
+    public static ArrayList<Part> allParts = new ArrayList<>();
     
     public void addProduct(Product product) {
         products.add(product);
