@@ -62,6 +62,8 @@ public class PartScreenController implements Initializable {
                 Integer.parseInt(min.getText()),
                 Integer.parseInt(max.getText())
             );
+            
+            Inventory.allParts.add(partToAdd);
         }
     }
     

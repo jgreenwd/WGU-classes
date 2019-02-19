@@ -159,32 +159,5 @@ public class MainScreenController implements Initializable {
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
-        /* ---------- synonyms for widget: ----------
-        001,"Widget",1.99, 0,0,999
-        002,"Wodget",2.95, 0,0,999
-        003,"Wudget",3.90, 0,0,999
-    
-        004,"Thingy",2.99, 0,0,999
-        005,"Thingamajig", 1.96, 0,0,999
-        006,"Thingamabob", 1.92, 0,0,999
-    
-        007,"Doohickey",0.94, 0,0,999
-        008,"Doodad", 1.91, 0,0,999
-        009,"Diddlydilly", 2.97, 0,0,999
-    
-        010,"Whatsit",0.10, 0,0,999
-        011,"Whatchamacallit", 1.95, 0,0,999
-        012,"Whatsis", 1.98, 0,0,999
-    
-        013,"Gadget", 1.90, 0,0,999
-        014,"Gizmo", 1.93, 0,0,999
-        015,"Gubbins", 1.97, 0,0,999
-        
 
-        012, "stuff", 1.94, 0,0,999
-        
-        017, "appliance", 1.89, 0,0,999
-        018, "contraption", 1.88, 0,0,999
-        020, "device", 1.86, 0,0,999
-    */
 }
