@@ -41,6 +41,18 @@ public class PartScreenController implements Initializable {
     @FXML private Button cancelButton;
 
 
+    /* ---------- Change sourceTitle to match partSource toggle ---------- */
+    public void partSourceSelect() {
+        if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
+            sourceTitle.setText("Machine ID");
+            sourceName.setPromptText("Mach ID");
+        }
+        if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
+            sourceTitle.setText("Company Name");
+            sourceName.setPromptText("Comp Nm");
+        }
+    }
+    
     /* ---------- Prep/Reset Part entry form ---------- */
     public void formReset() {
         id.setPromptText("Auto Gen - Disabled");
@@ -60,19 +72,14 @@ public class PartScreenController implements Initializable {
         sourceName.setText(null);
     }
 
-    /* ---------- Change sourceTitle to match partSource toggle ---------- */
-    public void partSourceSelect() {
-        if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
-            sourceTitle.setText("Machine ID");
-            sourceName.setPromptText("Mach ID");
-        }
-        if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
-            sourceTitle.setText("Company Name");
-            sourceName.setPromptText("Comp Nm");
-        }
-    }
-    
+    /** ---------- Press save button ----------
+     *  1. Create a part from InHouse or Outsourced
+     *  2. .setXXXXXX part source property (MachineID or Company)
+     *  3. .add(Part) to Inventory w/ auto-generated partID
+     *  4. formReset() form to initial setting
+     */
     public void saveButtonPressed() {
+        // save InHouse parts
         if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
             InHouse partToAdd = new InHouse(
                 Inventory.allParts.size() + 1,
@@ -83,12 +90,10 @@ public class PartScreenController implements Initializable {
                 Integer.parseInt(max.getText())
             );
             partToAdd.setMachineID(Integer.parseInt(sourceName.getText()));
-            
             Inventory.allParts.add(partToAdd);
-            
             formReset();
         }
-        
+        // save Outsourced parts
         if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
             Outsourced partToAdd = new Outsourced(
                 Inventory.allParts.size() + 1,
@@ -99,13 +104,12 @@ public class PartScreenController implements Initializable {
                 Integer.parseInt(max.getText())
             );
             partToAdd.setCompanyName(sourceName.getText().toString());
-            
             Inventory.allParts.add(partToAdd);
-            
             formReset();
         }
     }
     
+    /* ---------- Cancel page & return to Main Screen ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
@@ -116,6 +120,8 @@ public class PartScreenController implements Initializable {
         window.show();
     }
     
+    
+    /* ---------- Initialize Part Screen ---------- */
     @Override public void initialize(URL url, ResourceBundle rb) {
         // toggle radiobuttons between "in-house" or "outsourced"
         partSource = new ToggleGroup();
