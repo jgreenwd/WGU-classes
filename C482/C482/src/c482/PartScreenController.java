@@ -6,6 +6,7 @@
  */
 package c482;
 
+import static com.sun.deploy.util.ReflectionUtil.instanceOf;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,60 +27,74 @@ import javafx.stage.Stage;
 public class PartScreenController implements Initializable {
 
     @FXML private Label partLabel;
-    @FXML private RadioButton inHouse; 
-    @FXML private RadioButton outsourced;
+    @FXML private RadioButton inHouseRadio; 
+    @FXML private RadioButton outsourcedRadio;
     private ToggleGroup partSource;
-    @FXML private TextField id;
-    @FXML private TextField partName;
-    @FXML private TextField inv;
-    @FXML private TextField price;
-    @FXML private TextField min;
-    @FXML private TextField max;
-    @FXML private Label sourceTitle;
-    @FXML private TextField sourceName;
+    @FXML private TextField idField;
+    @FXML private TextField partNameField;
+    @FXML private TextField invField;
+    @FXML private TextField priceField;
+    @FXML private TextField minField;
+    @FXML private TextField maxField;
+    @FXML private Label sourceTitleLabel;
+    @FXML private TextField sourceNameField;
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
 
-    public void init(Part part) {
-        if ("c482.InHouse".equals(part.getClass().getName())) {
-            partSource.selectToggle(inHouse);
-            partSourceSelect();
-        }
-        if ("c482.Outsourced".equals(part.getClass().getName())) {
-            partSource.selectToggle(outsourced);
-            partSourceSelect();
-        }
+    //TODO fill out all part data on init(part)
+    public void loadPart(InHouse part) {
+        partSource.selectToggle(inHouseRadio);
+        partSourceSelect();
+        idField.setText(String.valueOf(part.getPartID()));
+        partNameField.setText(part.getName());
+        invField.setText(String.valueOf(part.getInStock()));
+        priceField.setText(String.valueOf(part.getPrice()));
+        minField.setText(String.valueOf(part.getMin()));
+        maxField.setText(String.valueOf(part.getMax()));
+        sourceNameField.setText(String.valueOf(part.getMachineID()));
+    }
+    
+    public void loadPart(Outsourced part) {
+        partSource.selectToggle(outsourcedRadio);
+        partSourceSelect();
+        idField.setText(String.valueOf(part.getPartID()));
+        partNameField.setText(part.getName());
+        invField.setText(String.valueOf(part.getInStock()));
+        priceField.setText(String.valueOf(part.getPrice()));
+        minField.setText(String.valueOf(part.getMin()));
+        maxField.setText(String.valueOf(part.getMax()));
+        sourceNameField.setText(String.valueOf(part.getCompanyName()));
     }
 
     /* ---------- Change sourceTitle to match partSource toggle ---------- */
     public void partSourceSelect() {
-        if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
-            sourceTitle.setText("Machine ID");
-            sourceName.setPromptText("Mach ID");
+        if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
+            sourceTitleLabel.setText("Machine ID");
+            sourceNameField.setPromptText("Mach ID");
         }
-        if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
-            sourceTitle.setText("Company Name");
-            sourceName.setPromptText("Comp Nm");
+        if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
+            sourceTitleLabel.setText("Company Name");
+            sourceNameField.setPromptText("Comp Nm");
         }
     }
     
     /* ---------- Prep/Reset Part entry form ---------- */
     public void formReset() {
-        id.setPromptText("Auto Gen - Disabled");
-        partName.setPromptText("Part Name");
-        inv.setPromptText("Inv");
-        price.setPromptText("Price/Cost");
-        min.setPromptText("Min");
-        max.setPromptText("Max");
-        sourceName.setPromptText("Mach ID");
+        idField.setPromptText("Auto Gen - Disabled");
+        partNameField.setPromptText("Part Name");
+        invField.setPromptText("Inv");
+        priceField.setPromptText("Price/Cost");
+        minField.setPromptText("Min");
+        maxField.setPromptText("Max");
+        sourceNameField.setPromptText("Mach ID");
         
-        id.setText(null);
-        partName.setText(null);
-        inv.setText(null);
-        price.setText(null);
-        min.setText(null);
-        max.setText(null);
-        sourceName.setText(null);
+        idField.setText(null);
+        partNameField.setText(null);
+        invField.setText(null);
+        priceField.setText(null);
+        minField.setText(null);
+        maxField.setText(null);
+        sourceNameField.setText(null);
     }
 
     /** ---------- Press save button ----------
@@ -90,30 +105,30 @@ public class PartScreenController implements Initializable {
      */
     public void saveButtonPressed() {
         // save InHouse parts
-        if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
+        if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
             InHouse partToAdd = new InHouse(
                 Inventory.allParts.size() + 1,
-                partName.getText(),
-                Double.parseDouble(price.getText()),
-                Integer.parseInt(inv.getText()),
-                Integer.parseInt(min.getText()),
-                Integer.parseInt(max.getText())
+                partNameField.getText(),
+                Double.parseDouble(priceField.getText()),
+                Integer.parseInt(invField.getText()),
+                Integer.parseInt(minField.getText()),
+                Integer.parseInt(maxField.getText())
             );
-            partToAdd.setMachineID(Integer.parseInt(sourceName.getText()));
+            partToAdd.setMachineID(Integer.parseInt(sourceNameField.getText()));
             Inventory.allParts.add(partToAdd);
             formReset();
         }
         // save Outsourced parts
-        if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
+        if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
             Outsourced partToAdd = new Outsourced(
                 Inventory.allParts.size() + 1,
-                partName.getText(),
-                Double.parseDouble(price.getText()),
-                Integer.parseInt(inv.getText()),
-                Integer.parseInt(min.getText()),
-                Integer.parseInt(max.getText())
+                partNameField.getText(),
+                Double.parseDouble(priceField.getText()),
+                Integer.parseInt(invField.getText()),
+                Integer.parseInt(minField.getText()),
+                Integer.parseInt(maxField.getText())
             );
-            partToAdd.setCompanyName(sourceName.getText().toString());
+            partToAdd.setCompanyName(sourceNameField.getText().toString());
             Inventory.allParts.add(partToAdd);
             formReset();
         }
@@ -135,9 +150,9 @@ public class PartScreenController implements Initializable {
     @Override public void initialize(URL url, ResourceBundle rb) {
         // toggle radiobuttons between "in-house" or "outsourced"
         partSource = new ToggleGroup();
-        this.inHouse.setToggleGroup(partSource);
-        this.outsourced.setToggleGroup(partSource);
-        partSource.selectToggle(inHouse);
+        this.inHouseRadio.setToggleGroup(partSource);
+        this.outsourcedRadio.setToggleGroup(partSource);
+        partSource.selectToggle(inHouseRadio); // set default
         partSourceSelect();
     }    
 }
