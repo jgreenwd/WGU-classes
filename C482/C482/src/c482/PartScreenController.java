@@ -39,7 +39,28 @@ public class PartScreenController implements Initializable {
     @FXML private TextField sourceName;
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
-    
+
+
+    /* ---------- Prep/Reset Part entry form ---------- */
+    public void formReset() {
+        id.setPromptText("Auto Gen - Disabled");
+        partName.setPromptText("Part Name");
+        inv.setPromptText("Inv");
+        price.setPromptText("Price/Cost");
+        min.setPromptText("Min");
+        max.setPromptText("Max");
+        sourceName.setPromptText("Mach ID");
+        
+        id.setText(null);
+        partName.setText(null);
+        inv.setText(null);
+        price.setText(null);
+        min.setText(null);
+        max.setText(null);
+        sourceName.setText(null);
+    }
+
+    /* ---------- Change sourceTitle to match partSource toggle ---------- */
     public void partSourceSelect() {
         if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
             sourceTitle.setText("Machine ID");
@@ -52,18 +73,36 @@ public class PartScreenController implements Initializable {
     }
     
     public void saveButtonPressed() {
-        Part partToAdd;
         if (this.partSource.getSelectedToggle().equals(this.inHouse)) {
-            partToAdd = new InHouse(
-                1,
+            InHouse partToAdd = new InHouse(
+                Inventory.allParts.size() + 1,
                 partName.getText(),
                 Double.parseDouble(price.getText()),
                 Integer.parseInt(inv.getText()),
                 Integer.parseInt(min.getText()),
                 Integer.parseInt(max.getText())
             );
+            partToAdd.setMachineID(Integer.parseInt(sourceName.getText()));
             
             Inventory.allParts.add(partToAdd);
+            
+            formReset();
+        }
+        
+        if (this.partSource.getSelectedToggle().equals(this.outsourced)) {
+            Outsourced partToAdd = new Outsourced(
+                Inventory.allParts.size() + 1,
+                partName.getText(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(inv.getText()),
+                Integer.parseInt(min.getText()),
+                Integer.parseInt(max.getText())
+            );
+            partToAdd.setCompanyName(sourceName.getText().toString());
+            
+            Inventory.allParts.add(partToAdd);
+            
+            formReset();
         }
     }
     
