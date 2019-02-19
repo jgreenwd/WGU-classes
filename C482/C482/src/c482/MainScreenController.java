@@ -26,7 +26,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /** TODO:
- *  - add parts
  *  - modify parts
  *  - search parts
  *  - delete parts
@@ -35,6 +34,7 @@ import javafx.stage.Stage;
  *  - modify products
  *  - search products
  *  - delete products
+ *  - toggle add/modify parts Label
  */
 public class MainScreenController implements Initializable {
     
@@ -51,30 +51,37 @@ public class MainScreenController implements Initializable {
     
     
     public void searchPartsButton(ActionEvent event) throws IOException {
-        System.out.println("Parts: Search button pressed");
-        for(Part item: Inventory.allParts) {
-            System.out.println(item.getName());
-        }
+        Inventory.allParts.forEach((item) -> {
+            System.out.println("Part name: " + item.getName());
+        });
     }
     
     public void addPartsButton(ActionEvent event) throws IOException {
-        Parent addPartsParent = FXMLLoader.load(getClass().getResource("PartScreen.fxml"));
-        Scene addPartsScene = new Scene(addPartsParent);
+        Parent addPartParent = FXMLLoader.load(getClass().getResource("PartScreen.fxml"));
+        Scene addPartScene = new Scene(addPartParent);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         
-        window.setScene(addPartsScene);
+        window.setScene(addPartScene);
         window.show();
     }
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
-        Parent modifyPartsParent = FXMLLoader.load(getClass().getResource("PartScreen.fxml"));
-        Scene modifyPartsScene = new Scene(modifyPartsParent);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PartScreen.fxml"));
+        Parent modifyPartParent = loader.load();
+        
+        Scene modifyPartScene = new Scene(modifyPartParent);
+        
+        PartScreenController controller = loader.getController();
+        controller.init(partsTable.getSelectionModel().getSelectedItem());
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         
-        window.setScene(modifyPartsScene);
+        window.setScene(modifyPartScene);
         window.show();
+        
+
     }
     
     public void deletePartsButton(ActionEvent event) throws IOException {

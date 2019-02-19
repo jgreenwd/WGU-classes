@@ -30,12 +30,18 @@ public class C482 extends Application {
         // add products
         Inventory inventory = new Inventory();
         
-        Part part1 = new InHouse(001,"Widget",1.99, 0,0,999);
-        Part part2 = new InHouse(002,"Wodget",2.95, 0,0,999);
-        Part part3 = new InHouse(003,"Wudget",3.90, 0,0,999);
-        Part part4 = new Outsourced(004,"Thingy",2.99, 0,0,999);
-        Part part5 = new Outsourced(005,"Thingamajig", 1.96, 0,0,999);
-        Part part6 = new Outsourced(006,"Thingamabob", 1.92, 0,0,999);
+        InHouse part1 = new InHouse(001,"Widget",1.99, 0,0,999);
+        part1.setMachineID(1);
+        InHouse part2 = new InHouse(002,"Wodget",2.95, 0,0,999);
+        part2.setMachineID(2);
+        InHouse part3 = new InHouse(003,"Wudget",3.90, 0,0,999);
+        part3.setMachineID(1);
+        Outsourced part4 = new Outsourced(004,"Thingy",2.99, 0,0,999);
+        part4.setCompanyName("ACME");
+        Outsourced part5 = new Outsourced(005,"Thingamajig", 1.96, 0,0,999);
+        part5.setCompanyName("Ajax");
+        Outsourced part6 = new Outsourced(006,"Thingamabob", 1.92, 0,0,999);
+        part6.setCompanyName("ACME");
         
         inventory.addPart(part1);
         inventory.addPart(part2);

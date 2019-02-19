@@ -40,6 +40,16 @@ public class PartScreenController implements Initializable {
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
 
+    public void init(Part part) {
+        if ("c482.InHouse".equals(part.getClass().getName())) {
+            partSource.selectToggle(inHouse);
+            partSourceSelect();
+        }
+        if ("c482.Outsourced".equals(part.getClass().getName())) {
+            partSource.selectToggle(outsourced);
+            partSourceSelect();
+        }
+    }
 
     /* ---------- Change sourceTitle to match partSource toggle ---------- */
     public void partSourceSelect() {
