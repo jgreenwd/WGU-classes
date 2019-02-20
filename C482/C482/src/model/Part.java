@@ -16,7 +16,7 @@ public abstract class Part {
     private int max;
 
     // inStock needs a solid increment/decrement mechanism
-    public Part(int PartID, String name, double price, int inStock, int min, int max) {
+    protected Part(int PartID, String name, double price, int inStock, int min, int max) {
         this.PartID = PartID;
         this.name = name;
         this.price = price;
