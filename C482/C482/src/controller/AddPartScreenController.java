@@ -85,23 +85,24 @@ public class AddPartScreenController implements Initializable {
      */
     public void saveButtonPressed() {
         int ID = Inventory.allParts.size() + 1;
-        String name = partNameField.getText();
+        String name = partNameField.getText(),
+               companyName = sourceNameField.getText();
         Double price = Double.parseDouble((priceField.getText()).replace("$", ""));
         int inv = Integer.parseInt(invField.getText()),
             min = Integer.parseInt(minField.getText()),
-            max = Integer.parseInt(maxField.getText());
+            max = Integer.parseInt(maxField.getText()),
+            machineID = Integer.parseInt(sourceNameField.getText());
+        
         
         // save InHouse parts
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
-            InHouse partToAdd = new InHouse(ID, name, price, inv, min, max);
-            partToAdd.setMachineID(Integer.parseInt(sourceNameField.getText()));
-            Inventory.allParts.add(partToAdd);
+            InHouse partToAdd = new InHouse(ID, name, price, inv, min, max, machineID);
+            Inventory.addPart(partToAdd);
         }
         // save Outsourced parts
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
-            Outsourced partToAdd = new Outsourced(ID, name, price, inv, min, max);
-            partToAdd.setCompanyName(sourceNameField.getText());
-            Inventory.allParts.add(partToAdd);
+            Outsourced partToAdd = new Outsourced(ID, name, price, inv, min, max, companyName);
+            Inventory.addPart(partToAdd);
         }
         
         modify = false;

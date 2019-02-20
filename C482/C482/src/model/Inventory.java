@@ -16,9 +16,9 @@ public final class Inventory {
     
     
     /* ---------- Parts ---------- */
-    public void addPart(Part part) { allParts.add(part); }
+    public static void addPart(Part part) { allParts.add(part); }
     
-    public boolean deletePart(Part part) {
+    public static boolean deletePart(Part part) {
         for(Part item: allParts) {
             if (item == part) {
                 allParts.remove(part);
