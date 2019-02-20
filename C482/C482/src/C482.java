@@ -53,7 +53,7 @@ public class C482 extends Application {
     }
     
     public static void main(String[] args) {
-//        loadDB();
+        loadDB();
         launch(args);
     }
     

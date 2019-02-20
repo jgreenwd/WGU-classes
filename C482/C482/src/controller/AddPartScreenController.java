@@ -69,46 +69,13 @@ public class AddPartScreenController implements Initializable {
     public void partSourceSelect() {
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
             sourceTitleLabel.setText("Machine ID");
-            sourceNameField.setPromptText("Mach ID");
+            sourceNameField.setPromptText("Machine ID");
         }
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
             sourceTitleLabel.setText("Company Name");
-            sourceNameField.setPromptText("Comp Nm");
+            sourceNameField.setPromptText("Company Name");
         }
     }
-    
-    
-    /** ---------- Load Part details to Modify ---------- 
-     *  loadPart(<Part-type> part) - set fields to derived-class type-specific values
-     *  loadPartData(Part part) - set fields to all parent-class type-specific values
-     */
-    public void loadPart(InHouse part) {
-        partSource.selectToggle(inHouseRadio);
-        sourceNameField.setText(String.valueOf(part.getMachineID()));
-        loadPartData(part);
-    }
-    
-    public void loadPart(Outsourced part) {
-        partSource.selectToggle(outsourcedRadio);
-        sourceNameField.setText(String.valueOf(part.getCompanyName()));
-        loadPartData(part);
-    }
-    
-    public void loadPartData(Part part) {
-        modify = true;
-        partLabel.setText("Modify Part");
-        partSourceSelect();
-        idField.setText(String.valueOf(part.getPartID()));
-        partNameField.setText(part.getName());
-        invField.setText(String.valueOf(part.getInStock()));
-        priceField.setText(String.format("$%,.2f", part.getPrice()));
-        minField.setText(String.valueOf(part.getMin()));
-        maxField.setText(String.valueOf(part.getMax())); 
-    }
-
-
-    
-
 
     /** ---------- Press save button ----------
      *  1. Create a part from InHouse or Outsourced

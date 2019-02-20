@@ -6,10 +6,7 @@
  */
 package controller;
 
-import model.InHouse;
-import model.Inventory;
-import model.Outsourced;
-import model.Part;
+import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

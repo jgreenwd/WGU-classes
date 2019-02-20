@@ -117,7 +117,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void addProductsButton(ActionEvent event) throws IOException {
-        Parent addProductsParent = FXMLLoader.load(getClass().getResource("ProductScreen.fxml"));
+        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
         Scene addProductsScene = new Scene(addProductsParent);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -127,7 +127,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/view/ProductScreen.fxml"));
+        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
         Scene modifyProductsScene = new Scene(modifyProductsParent);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
