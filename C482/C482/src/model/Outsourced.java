@@ -5,7 +5,7 @@
  * course C482
  */
 
-package c482;
+package model;
 
 public class Outsourced extends Part {
     private String companyName;

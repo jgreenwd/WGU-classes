@@ -1,12 +1,13 @@
-/**
+    /**
  * author Jeremy Greenwood
  * mentor Rebekah Coggin
  * WGU-ID 000917613
  * course C482
  */
 
-package c482;
+package controller;
 
+import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,7 +58,8 @@ public class MainScreenController implements Initializable {
     }
     
     public void addPartsButton(ActionEvent event) throws IOException {
-        Parent addPartParent = FXMLLoader.load(getClass().getResource("PartScreen.fxml"));
+        Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
+        
         Scene addPartScene = new Scene(addPartParent);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -68,12 +70,12 @@ public class MainScreenController implements Initializable {
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("PartScreen.fxml"));
+        loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
         Parent modifyPartParent = loader.load();
         
         Scene modifyPartScene = new Scene(modifyPartParent);
         
-        PartScreenController controller = loader.getController();
+        ModifyPartScreenController controller = loader.getController();
         Part part = partsTable.getSelectionModel().getSelectedItem();
 
         // call appropriate overloaded loadPart() based on type of part selected in TableView
@@ -125,7 +127,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("ProductScreen.fxml"));
+        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/view/ProductScreen.fxml"));
         Scene modifyProductsScene = new Scene(modifyProductsParent);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

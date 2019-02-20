@@ -5,8 +5,7 @@
  * course C482
  */
 
-package c482;
-
+import model.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,10 +16,11 @@ import javafx.stage.Stage;
 public class C482 extends Application {
     
     @Override public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainScreen.fxml"));
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("WGU Software I - Inventory Mgmt System - Jeremy Greenwood #000917613");
         stage.setScene(scene);
         stage.show();
     }
@@ -53,7 +53,7 @@ public class C482 extends Application {
     }
     
     public static void main(String[] args) {
-        loadDB();
+//        loadDB();
         launch(args);
     }
     

@@ -4,9 +4,12 @@
  * WGU-ID 000917613
  * course C482
  */
-package c482;
+package controller;
 
-import static com.sun.deploy.util.ReflectionUtil.instanceOf;
+import model.InHouse;
+import model.Inventory;
+import model.Outsourced;
+import model.Part;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,8 +27,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class PartScreenController implements Initializable {
+public class ModifyPartScreenController implements Initializable {
 
+    private boolean modify = false;
     @FXML private Label partLabel;
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
@@ -46,6 +50,8 @@ public class PartScreenController implements Initializable {
      *  partSourceSelect() - change sourceTitleField to match InHouse or Outsourced
      */
     public void formReset() {
+        partLabel.setText("Add Part");
+        
         idField.setText(null);
         partNameField.setText(null);
         invField.setText(null);
@@ -75,9 +81,9 @@ public class PartScreenController implements Initializable {
     }
     
     
-    /** ---------- Modify Part specifics ---------- 
-     *  loadPart(<Part-type> part) - set fields to child-class type-specific values
-     *  loadPartData(Part part) - set fields to all parent-class type-specific values
+    /** ---------- Load Part details to Modify ---------- 
+     *  loadPart(<Part-type> @param) - set fields to derived-class type-specific values
+     *  loadPartData(Part @param) - set fields to all parent-class type-specific values
      */
     public void loadPart(InHouse part) {
         partSource.selectToggle(inHouseRadio);
@@ -92,12 +98,13 @@ public class PartScreenController implements Initializable {
     }
     
     public void loadPartData(Part part) {
+        modify = true;
         partLabel.setText("Modify Part");
         partSourceSelect();
         idField.setText(String.valueOf(part.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
-        priceField.setText(String.valueOf(part.getPrice()));
+        priceField.setText(String.format("$%,.2f", part.getPrice()));
         minField.setText(String.valueOf(part.getMin()));
         maxField.setText(String.valueOf(part.getMax())); 
     }
@@ -113,39 +120,34 @@ public class PartScreenController implements Initializable {
      *  4. formReset() form to initial setting
      */
     public void saveButtonPressed() {
+        int ID = Inventory.allParts.size() + 1;
+        String name = partNameField.getText();
+        Double price = Double.parseDouble((priceField.getText()).replace("$", ""));
+        int inv = Integer.parseInt(invField.getText()),
+            min = Integer.parseInt(minField.getText()),
+            max = Integer.parseInt(maxField.getText());
+        
         // save InHouse parts
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
-            InHouse partToAdd = new InHouse(
-                Inventory.allParts.size() + 1,
-                partNameField.getText(),
-                Double.parseDouble(priceField.getText()),
-                Integer.parseInt(invField.getText()),
-                Integer.parseInt(minField.getText()),
-                Integer.parseInt(maxField.getText())
-            );
+            InHouse partToAdd = new InHouse(ID, name, price, inv, min, max);
             partToAdd.setMachineID(Integer.parseInt(sourceNameField.getText()));
             Inventory.allParts.add(partToAdd);
-            formReset();
         }
         // save Outsourced parts
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
-            Outsourced partToAdd = new Outsourced(
-                Inventory.allParts.size() + 1,
-                partNameField.getText(),
-                Double.parseDouble(priceField.getText()),
-                Integer.parseInt(invField.getText()),
-                Integer.parseInt(minField.getText()),
-                Integer.parseInt(maxField.getText())
-            );
-            partToAdd.setCompanyName(sourceNameField.getText().toString());
+            Outsourced partToAdd = new Outsourced(ID, name, price, inv, min, max);
+            partToAdd.setCompanyName(sourceNameField.getText());
             Inventory.allParts.add(partToAdd);
-            formReset();
         }
+        
+        modify = false;
+        formReset();
     }
+    
     
     /* ---------- Cancel page & return to Main Screen ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/MainScreen.fxml"));
         Scene scene = new Scene(root);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

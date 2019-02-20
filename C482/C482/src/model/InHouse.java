@@ -5,7 +5,7 @@
  * course C482
  */
 
-package c482;
+package model;
 
 public class InHouse extends Part {
     private int machineID;
@@ -14,6 +14,11 @@ public class InHouse extends Part {
         super(PartID, name, price, inStock, min, max);
     }
     
-    public int getMachineID() { return machineID; }
-    public void setMachineID(int ID) { this.machineID = ID; }
+    public int getMachineID() {
+        return machineID;
+    }
+    
+    public void setMachineID(int ID) {
+        this.machineID = ID;
+    }
 }

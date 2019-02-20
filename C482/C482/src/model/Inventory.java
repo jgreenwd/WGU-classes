@@ -5,7 +5,7 @@
  * course C482
  */
 
-package c482;
+package model;
 
 import java.util.ArrayList;
 

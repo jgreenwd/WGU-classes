@@ -5,7 +5,7 @@
  * course C482
  */
 
-package c482;
+package model;
 
 public abstract class Part {
     private int PartID;
