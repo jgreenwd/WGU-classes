@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 
 public class AddPartScreenController implements Initializable {
 
-    private boolean modify = false;
     @FXML private Label partLabel;
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
@@ -58,9 +57,7 @@ public class AddPartScreenController implements Initializable {
 
     /** ---------- Press save button ----------
      *  1. Create a part from InHouse or Outsourced
-     *  2. .setXXXXXX part source property (MachineID or Company)
      *  3. .add(Part) to Inventory w/ auto-generated partID
-     *  4. formReset() form to initial setting
      */
     public void saveButtonPressed() {
         int ID = Inventory.allParts.size() + 1;
@@ -83,9 +80,6 @@ public class AddPartScreenController implements Initializable {
             Outsourced partToAdd = new Outsourced(ID, name, price, inv, min, max, companyName);
             Inventory.addPart(partToAdd);
         }
-        
-        modify = false;
-        formReset();
     }
     
     
