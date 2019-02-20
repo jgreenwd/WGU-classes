@@ -59,11 +59,8 @@ public class MainScreenController implements Initializable {
     
     public void addPartsButton(ActionEvent event) throws IOException {
         Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
-        
         Scene addPartScene = new Scene(addPartParent);
-        
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
         window.setScene(addPartScene);
         window.show();
     }
@@ -76,6 +73,10 @@ public class MainScreenController implements Initializable {
         Scene modifyPartScene = new Scene(modifyPartParent);
         
         ModifyPartScreenController controller = loader.getController();
+        
+        System.out.println(controller);
+        System.out.println(partsTable.getSelectionModel().getSelectedItem());
+        
         Part part = partsTable.getSelectionModel().getSelectedItem();
 
         // call appropriate overloaded loadPart() based on type of part selected in TableView
@@ -127,7 +128,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
+        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/view/ModifyProductScreen.fxml"));
         Scene modifyProductsScene = new Scene(modifyProductsParent);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

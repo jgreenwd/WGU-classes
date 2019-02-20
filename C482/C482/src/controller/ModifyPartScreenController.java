@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
 
-    private boolean modify = false;
     @FXML private Label partLabel;
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
@@ -43,29 +42,8 @@ public class ModifyPartScreenController implements Initializable {
     @FXML private Button cancelButton;
 
     /** ---------- UI/UX functions ---------- 
-     *  formReset() - CLEAR entries & RESET data entry fields to prompts
      *  partSourceSelect() - change sourceTitleField to match InHouse or Outsourced
      */
-    public void formReset() {
-        partLabel.setText("Add Part");
-        
-        idField.setText(null);
-        partNameField.setText(null);
-        invField.setText(null);
-        priceField.setText(null);
-        minField.setText(null);
-        maxField.setText(null);
-        sourceNameField.setText(null);
-        
-        idField.setPromptText("Auto Gen - Disabled");
-        partNameField.setPromptText("Part Name");
-        invField.setPromptText("Inv");
-        priceField.setPromptText("Price/Cost");
-        minField.setPromptText("Min");
-        maxField.setPromptText("Max");
-        sourceNameField.setPromptText("Mach ID");
-    }
-    
     public void partSourceSelect() {
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
             sourceTitleLabel.setText("Machine ID");
@@ -95,8 +73,6 @@ public class ModifyPartScreenController implements Initializable {
     }
     
     public void loadPartData(Part part) {
-        modify = true;
-        partLabel.setText("Modify Part");
         partSourceSelect();
         idField.setText(String.valueOf(part.getPartID()));
         partNameField.setText(part.getName());
