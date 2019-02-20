@@ -28,7 +28,7 @@ public final class Inventory {
         return false;
     }
    
-    public Part lookupPart(int partID) {
+    public static Part lookupPart(int partID) {
         for(Part item: allParts) {
             if (item.getPartID() == partID)
                 return item;
@@ -36,7 +36,7 @@ public final class Inventory {
         return null;
     }
     
-    public void updatePart(int partID) { }
+    public static void updatePart(int partID) { }
     
     
     /* ---------- Products ---------- */

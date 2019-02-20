@@ -60,26 +60,32 @@ public class AddPartScreenController implements Initializable {
      *  3. .add(Part) to Inventory w/ auto-generated partID
      */
     public void saveButtonPressed() {
-        int ID = Inventory.allParts.size() + 1;
-        String name = partNameField.getText(),
-               companyName = sourceNameField.getText();
-        Double price = Double.parseDouble((priceField.getText()).replace("$", ""));
-        int inv = Integer.parseInt(invField.getText()),
-            min = Integer.parseInt(minField.getText()),
-            max = Integer.parseInt(maxField.getText()),
-            machineID = Integer.parseInt(sourceNameField.getText());
-        
-        
+        Part partToAdd = null;
         // save InHouse parts
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
-            InHouse partToAdd = new InHouse(ID, name, price, inv, min, max, machineID);
-            Inventory.addPart(partToAdd);
+            partToAdd = new InHouse(
+                Inventory.allParts.size() + 1,
+                partNameField.getText(),
+                Double.parseDouble((priceField.getText()).replace("$", "")),
+                Integer.parseInt(invField.getText()),
+                Integer.parseInt(minField.getText()),
+                Integer.parseInt(maxField.getText()),
+                Integer.parseInt(sourceNameField.getText())
+            );
         }
         // save Outsourced parts
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
-            Outsourced partToAdd = new Outsourced(ID, name, price, inv, min, max, companyName);
-            Inventory.addPart(partToAdd);
+            partToAdd = new Outsourced(
+                Inventory.allParts.size() + 1,
+                partNameField.getText(),
+                Double.parseDouble((priceField.getText()).replace("$", "")),
+                Integer.parseInt(invField.getText()),
+                Integer.parseInt(minField.getText()),
+                Integer.parseInt(maxField.getText()),
+                sourceNameField.getText()
+            );
         }
+        Inventory.addPart(partToAdd);
     }
     
     
