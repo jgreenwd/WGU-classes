@@ -43,29 +43,8 @@ public class AddPartScreenController implements Initializable {
     @FXML private Button cancelButton;
 
     /** ---------- UI/UX functions ---------- 
-     *  formReset() - CLEAR entries & RESET data entry fields to prompts
-     *  partSourceSelect() - change sourceTitleField to match InHouse or Outsourced
+     *  partSourceSelect() - change sourceTitleLabel to match InHouse or Outsourced
      */
-    public void formReset() {
-        partLabel.setText("Add Part");
-        
-        idField.setText(null);
-        partNameField.setText(null);
-        invField.setText(null);
-        priceField.setText(null);
-        minField.setText(null);
-        maxField.setText(null);
-        sourceNameField.setText(null);
-        
-        idField.setPromptText("Auto Gen - Disabled");
-        partNameField.setPromptText("Part Name");
-        invField.setPromptText("Inv");
-        priceField.setPromptText("Price/Cost");
-        minField.setPromptText("Min");
-        maxField.setPromptText("Max");
-        sourceNameField.setPromptText("Mach ID");
-    }
-    
     public void partSourceSelect() {
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
             sourceTitleLabel.setText("Machine ID");
