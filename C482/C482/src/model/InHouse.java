@@ -10,6 +10,10 @@ package model;
 public final class InHouse extends Part {
     private int machineID;
     
+    public InHouse() {
+        super();
+    }
+    
     public InHouse(int PartID, String name, double price, int inStock, int min, int max, int machineID) {
         super(PartID, name, price, inStock, min, max);
         setMachineID(machineID);

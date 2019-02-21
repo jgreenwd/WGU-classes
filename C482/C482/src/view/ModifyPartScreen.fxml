@@ -36,12 +36,12 @@
                         <Font name="SansSerif Bold" size="17.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="inHouseRadio" mnemonicParsing="false" onAction="#partSourceSelect" text="In-House">
+                  <RadioButton fx:id="inHouseRadio" mnemonicParsing="false" text="In-House">
                      <HBox.margin>
                         <Insets left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" onAction="#partSourceSelect" text="Outsourced">
+                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" text="Outsourced">
                      <HBox.margin>
                         <Insets left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>

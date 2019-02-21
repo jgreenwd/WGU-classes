@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
 
-    @FXML private Label partLabel;
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
     private ToggleGroup partSource;
@@ -38,24 +37,7 @@ public class ModifyPartScreenController implements Initializable {
     @FXML private TextField maxField;
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
-    @FXML private Button saveButton;
-    @FXML private Button cancelButton;
 
-    /** ---------- UI/UX functions ---------- 
-     *  partSourceSelect() - change sourceTitleField to match InHouse or Outsourced
-     */
-    public void partSourceSelect() {
-        if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
-            sourceTitleLabel.setText("Machine ID");
-            sourceNameField.setPromptText("Mach ID");
-        }
-        if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
-            sourceTitleLabel.setText("Company Name");
-            sourceNameField.setPromptText("Comp Nm");
-        }
-    }
-    
-    
     /** ---------- Load Part details to Modify ---------- 
      *  loadPart(<Part-type> @param) - set fields to derived-class type-specific values
      *  loadPartData(Part @param) - set fields to all parent-class type-specific values
@@ -73,7 +55,6 @@ public class ModifyPartScreenController implements Initializable {
     }
     
     public void loadPartData(Part part) {
-        partSourceSelect();
         idField.setText(String.valueOf(part.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
@@ -83,34 +64,35 @@ public class ModifyPartScreenController implements Initializable {
     }
 
 
-    
-
-
-    /** ---------- Press save button ----------
-     *  1. Create a part from InHouse or Outsourced
+    /* ---------- Press save button ----------
+     *  1. .getText() input from TextFields
+     *  2. Create a part from InHouse or Outsourced
      *  3. .add(Part) to Inventory w/ auto-generated partID
-     */
-    public void saveButtonPressed() {
-        int ID = Inventory.allParts.size() + 1;
-        String name = partNameField.getText(),
-               companyName = sourceNameField.getText();
-        Double price = Double.parseDouble((priceField.getText()).replace("$", ""));
-        int inv = Integer.parseInt(invField.getText()),
+     * --------------------------------------- */
+    public void saveButtonPressed(ActionEvent event) throws IOException {
+        Part partToAdd = null;
+        int ID = Inventory.allParts.size() + 1,
+            inv = Integer.parseInt(invField.getText()),
             min = Integer.parseInt(minField.getText()),
-            max = Integer.parseInt(maxField.getText()),
-            machineID = Integer.parseInt(sourceNameField.getText());
-        
-        
+            max = Integer.parseInt(minField.getText());
+        double price = Double.parseDouble((priceField.getText()).replace("$", ""));
+        String name = partNameField.getText();
+
         // save InHouse parts
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
-            InHouse partToAdd = new InHouse(ID, name, price, inv, min, max, machineID);
-            Inventory.addPart(partToAdd);
+            partToAdd = new InHouse(ID, name, price, inv, min, max,
+                Integer.parseInt(sourceNameField.getText())
+            );
         }
         // save Outsourced parts
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
-            Outsourced partToAdd = new Outsourced(ID, name, price, inv, min, max, companyName);
-            Inventory.addPart(partToAdd);
+            partToAdd = new Outsourced(ID, name, price, inv, min, max,
+                sourceNameField.getText()
+            );
         }
+        Inventory.addPart(partToAdd);
+        
+        cancelButtonPressed(event);
     }
     
     
@@ -118,9 +100,7 @@ public class ModifyPartScreenController implements Initializable {
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
-        
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
         window.setScene(scene);
         window.show();
     }
@@ -133,8 +113,17 @@ public class ModifyPartScreenController implements Initializable {
         this.inHouseRadio.setToggleGroup(partSource);
         this.outsourcedRadio.setToggleGroup(partSource);
         
-        // set default RadioButton option as InHouse
-        partSource.selectToggle(inHouseRadio);
-        partSourceSelect();
+        inHouseRadio.selectedProperty().addListener((obs, then, now) -> {
+            if (now) {
+                sourceTitleLabel.setText("Machine ID");
+                sourceNameField.setPromptText("Machine ID");
+            }
+        });
+        outsourcedRadio.selectedProperty().addListener((obs, then, now) -> {
+            if (now) {
+                sourceTitleLabel.setText("Company Name");
+                sourceNameField.setPromptText("Company Name");
+            }
+        });
     }    
 }

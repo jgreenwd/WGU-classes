@@ -39,8 +39,6 @@ import javafx.stage.Stage;
  *  - toggle add/modify parts Label
  */
 public class MainScreenController implements Initializable {
-    /* ---------- Display ---------- */
-    @FXML private AnchorPane Primary;
     
     /* ---------- Parts Management ---------- */
     @FXML private Button searchParts;
@@ -53,6 +51,8 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
     
+    String source_InHouse = "model.InHouse",
+           source_Outsourced = "model.Outsourced";
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         Inventory.allParts.forEach((item) -> {
@@ -80,9 +80,10 @@ public class MainScreenController implements Initializable {
         Part part = partsTable.getSelectionModel().getSelectedItem();
 
         // call appropriate overloaded loadPart() based on type of part selected in TableView
-        String origin_InHouse = "c482.InHouse", origin_Outsourced = "c482.Outsourced";
-        if (origin_InHouse.equals(part.getClass().getName())) { controller.loadPart((InHouse) part); }
-        if (origin_Outsourced.equals(part.getClass().getName())) { controller.loadPart((Outsourced) part); }
+        System.out.println(part.getClass().getName());
+        controller.loadPartData(part);
+        if (source_InHouse.equals(part.getClass().getName())) { controller.loadPart((InHouse) part); }
+        if (source_Outsourced.equals(part.getClass().getName())) { controller.loadPart((Outsourced) part); }
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(modifyPartScene);
