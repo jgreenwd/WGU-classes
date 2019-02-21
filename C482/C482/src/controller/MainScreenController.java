@@ -87,8 +87,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void deletePartsButton(ActionEvent event) throws IOException {
-        Part part = partsTable.getSelectionModel().getSelectedItem();
-        Inventory.deletePart(part);
+        Inventory.deletePart(partsTable.getSelectionModel().getSelectedItem());
         partsTable.setItems( updatePartsDisplay() );
     }
     
