@@ -36,11 +36,7 @@ public class AddPartScreenController implements Initializable {
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
     
-    /* ---------- Press save button ----------
-     *  1. .getText() input from TextFields
-     *  2. Create a part from InHouse or Outsourced
-     *  3. .add(Part) to Inventory w/ auto-generated partID
-     * --------------------------------------- */
+    
     public void saveButtonPressed(ActionEvent event) throws IOException {
         
         // save as InHouse part
@@ -70,6 +66,8 @@ public class AddPartScreenController implements Initializable {
             
             Inventory.addPart(partToAdd);
         }
+        
+        // return to Main Screen after save
         cancelButtonPressed(event);
     }
     

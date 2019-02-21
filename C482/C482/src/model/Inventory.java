@@ -29,14 +29,12 @@ public final class Inventory {
     }
    
     public static Part lookupPart(int partID) {
-        for(Part item: allParts) {
-            if (item.getPartID() == partID)
-                return item;
-        }
-        return null;
+        return allParts.get(partID);
     }
     
-    public static void updatePart(int partID) { }
+    public static void updatePart(int partID) {
+        
+    }
     
     
     /* ---------- Products ---------- */

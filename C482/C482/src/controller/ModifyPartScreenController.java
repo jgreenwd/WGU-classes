@@ -50,7 +50,7 @@ public class ModifyPartScreenController implements Initializable {
     }
     
     public void loadPart(Outsourced part) {
-        partSource.selectToggle(inHouseRadio);
+        partSource.selectToggle(outsourcedRadio);
         idField.setText(String.valueOf(part.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
@@ -67,6 +67,8 @@ public class ModifyPartScreenController implements Initializable {
      *  3. .add(Part) to Inventory w/ auto-generated partID
      * --------------------------------------- */
     public void saveButtonPressed(ActionEvent event) throws IOException {
+        
+        
         Part partToAdd = null;
         int ID = Inventory.allParts.size() + 1,
             inv = Integer.parseInt(invField.getText()),
@@ -92,6 +94,39 @@ public class ModifyPartScreenController implements Initializable {
         cancelButtonPressed(event);
     }
     
+//    public void saveButtonPressed(ActionEvent event) throws IOException {
+//        
+//        // save as InHouse part
+//        if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
+//            InHouse partToAdd = new InHouse();
+//            partToAdd.setPartID(Inventory.allParts.size() + 1);
+//            partToAdd.setName(partNameField.getText());
+//            partToAdd.setInStock(Integer.parseInt(invField.getText()));
+//            partToAdd.setMin(Integer.parseInt(minField.getText()));
+//            partToAdd.setMax(Integer.parseInt(maxField.getText()));
+//            partToAdd.setPrice(Double.parseDouble((priceField.getText()).replace("$", "")));
+//            partToAdd.setMachineID(Integer.parseInt(sourceNameField.getText()));
+//            
+//            Inventory.addPart(partToAdd);
+//        }
+//        
+//        // save Outsourced part
+//        if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
+//            Outsourced partToAdd = new Outsourced();
+//            partToAdd.setPartID(Inventory.allParts.size() + 1);
+//            partToAdd.setName(partNameField.getText());
+//            partToAdd.setInStock(Integer.parseInt(invField.getText()));
+//            partToAdd.setMin(Integer.parseInt(minField.getText()));
+//            partToAdd.setMax(Integer.parseInt(maxField.getText()));
+//            partToAdd.setPrice(Double.parseDouble((priceField.getText()).replace("$", "")));
+//            partToAdd.setCompanyName(sourceNameField.getText());
+//            
+//            Inventory.addPart(partToAdd);
+//        }
+//        
+//        // return to Main Screen after save
+//        cancelButtonPressed(event);
+//    }
     
     /* ---------- Cancel page & return to Main Screen ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
