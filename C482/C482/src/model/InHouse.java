@@ -7,7 +7,7 @@
 
 package model;
 
-public class InHouse extends Part {
+public final class InHouse extends Part {
     private int machineID;
     
     public InHouse(int PartID, String name, double price, int inStock, int min, int max, int machineID) {

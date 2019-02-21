@@ -74,9 +74,6 @@ public class MainScreenController implements Initializable {
         
         ModifyPartScreenController controller = loader.getController();
         
-        System.out.println(controller);
-        System.out.println(partsTable.getSelectionModel().getSelectedItem());
-        
         Part part = partsTable.getSelectionModel().getSelectedItem();
 
         // call appropriate overloaded loadPart() based on type of part selected in TableView
@@ -85,7 +82,6 @@ public class MainScreenController implements Initializable {
         if (origin_Outsourced.equals(part.getClass().getName())) { controller.loadPart((Outsourced) part); }
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
         window.setScene(modifyPartScene);
         window.show();
         

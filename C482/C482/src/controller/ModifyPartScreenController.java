@@ -116,7 +116,7 @@ public class ModifyPartScreenController implements Initializable {
     
     /* ---------- Cancel page & return to Main Screen ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("view/MainScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

@@ -7,7 +7,7 @@
 
 package model;
 
-public class Outsourced extends Part {
+public final class Outsourced extends Part {
     private String companyName;
     
     public Outsourced(int PartID, String name, double price, int inStock, int min, int max, String companyName) {
