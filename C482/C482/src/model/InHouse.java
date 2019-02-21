@@ -12,7 +12,7 @@ public class InHouse extends Part {
     
     public InHouse(int PartID, String name, double price, int inStock, int min, int max, int machineID) {
         super(PartID, name, price, inStock, min, max);
-        this.machineID = machineID;
+        setMachineID(machineID);
     }
     
     public int getMachineID() { return machineID; }
