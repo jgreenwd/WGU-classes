@@ -87,11 +87,9 @@ public class MainScreenController implements Initializable {
     }
     
     public void deletePartsButton(ActionEvent event) throws IOException {
-        System.out.println("Parts: Delete button pressed");
-        Inventory.allParts.forEach((item) -> {
-            System.out.println(item.getName());
-        }); 
-
+        Part part = partsTable.getSelectionModel().getSelectedItem();
+        Inventory.deletePart(part);
+        partsTable.setItems( updatePartsDisplay() );
     }
     
     
@@ -151,7 +149,6 @@ public class MainScreenController implements Initializable {
         return parts;
     }
     
-
     @Override public void initialize(URL url, ResourceBundle rb) {
         /* ---------- init parts table display ---------- */
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
