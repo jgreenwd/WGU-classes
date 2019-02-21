@@ -15,11 +15,6 @@ public class InHouse extends Part {
         this.machineID = machineID;
     }
     
-    public int getMachineID() {
-        return machineID;
-    }
-    
-    public void setMachineID(int ID) {
-        this.machineID = ID;
-    }
+    public int getMachineID() { return machineID; }
+    public void setMachineID(int ID) { this.machineID = ID; }
 }
