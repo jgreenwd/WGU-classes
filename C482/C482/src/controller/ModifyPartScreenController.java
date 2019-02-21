@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -38,29 +37,27 @@ public class ModifyPartScreenController implements Initializable {
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
 
-    /** ---------- Load Part details to Modify ---------- 
-     *  loadPart(<Part-type> @param) - set fields to derived-class type-specific values
-     *  loadPartData(Part @param) - set fields to all parent-class type-specific values
-     */
+    /* ---------- Load Part details to Screen ---------- */
     public void loadPart(InHouse part) {
         partSource.selectToggle(inHouseRadio);
-        sourceNameField.setText(String.valueOf(part.getMachineID()));
-        loadPartData(part);
-    }
-    
-    public void loadPart(Outsourced part) {
-        partSource.selectToggle(outsourcedRadio);
-        sourceNameField.setText(String.valueOf(part.getCompanyName()));
-        loadPartData(part);
-    }
-    
-    public void loadPartData(Part part) {
         idField.setText(String.valueOf(part.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
         priceField.setText(String.format("$%,.2f", part.getPrice()));
         minField.setText(String.valueOf(part.getMin()));
-        maxField.setText(String.valueOf(part.getMax())); 
+        maxField.setText(String.valueOf(part.getMax()));
+        sourceNameField.setText(String.valueOf(part.getMachineID()));
+    }
+    
+    public void loadPart(Outsourced part) {
+        partSource.selectToggle(inHouseRadio);
+        idField.setText(String.valueOf(part.getPartID()));
+        partNameField.setText(part.getName());
+        invField.setText(String.valueOf(part.getInStock()));
+        priceField.setText(String.format("$%,.2f", part.getPrice()));
+        minField.setText(String.valueOf(part.getMin()));
+        maxField.setText(String.valueOf(part.getMax()));
+        sourceNameField.setText(String.valueOf(part.getCompanyName()));
     }
 
 

@@ -51,8 +51,7 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
     
-    String source_InHouse = "model.InHouse",
-           source_Outsourced = "model.Outsourced";
+    private String inhouse = "InHouse", outsourced = "Outsourced";
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         Inventory.allParts.forEach((item) -> {
@@ -69,27 +68,22 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
+        // identify selected part
+        Part part = partsTable.getSelectionModel().getSelectedItem();
+        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
         Parent modifyPartParent = loader.load();
-        
         Scene modifyPartScene = new Scene(modifyPartParent);
         
+        // identify part type and send to loadPart()
         ModifyPartScreenController controller = loader.getController();
-        
-        Part part = partsTable.getSelectionModel().getSelectedItem();
-
-        // call appropriate overloaded loadPart() based on type of part selected in TableView
-        System.out.println(part.getClass().getName());
-        controller.loadPartData(part);
-        if (source_InHouse.equals(part.getClass().getName())) { controller.loadPart((InHouse) part); }
-        if (source_Outsourced.equals(part.getClass().getName())) { controller.loadPart((Outsourced) part); }
+        if (part.getClass().getSimpleName().equals(inhouse)) { controller.loadPart((InHouse)part); }
+        if (part.getClass().getSimpleName().equals(outsourced)) { controller.loadPart((Outsourced)part); }
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(modifyPartScene);
         window.show();
-        
-
     }
     
     public void deletePartsButton(ActionEvent event) throws IOException {
