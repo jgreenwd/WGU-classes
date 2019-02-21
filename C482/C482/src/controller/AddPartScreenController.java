@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 public class AddPartScreenController implements Initializable {
 
-    private ToggleGroup partSource = new ToggleGroup();
+    private final ToggleGroup partSource = new ToggleGroup();
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
     @FXML private TextField partNameField;
@@ -50,7 +50,7 @@ public class AddPartScreenController implements Initializable {
             partToAdd.setName(partNameField.getText());
             partToAdd.setInStock(Integer.parseInt(invField.getText()));
             partToAdd.setMin(Integer.parseInt(minField.getText()));
-            partToAdd.setMax(Integer.parseInt(minField.getText()));
+            partToAdd.setMax(Integer.parseInt(maxField.getText()));
             partToAdd.setPrice(Double.parseDouble((priceField.getText()).replace("$", "")));
             partToAdd.setMachineID(Integer.parseInt(sourceNameField.getText()));
             
@@ -64,7 +64,7 @@ public class AddPartScreenController implements Initializable {
             partToAdd.setName(partNameField.getText());
             partToAdd.setInStock(Integer.parseInt(invField.getText()));
             partToAdd.setMin(Integer.parseInt(minField.getText()));
-            partToAdd.setMax(Integer.parseInt(minField.getText()));
+            partToAdd.setMax(Integer.parseInt(maxField.getText()));
             partToAdd.setPrice(Double.parseDouble((priceField.getText()).replace("$", "")));
             partToAdd.setCompanyName(sourceNameField.getText());
             
