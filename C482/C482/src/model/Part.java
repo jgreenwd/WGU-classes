@@ -17,12 +17,12 @@ public abstract class Part {
 
     // inStock needs a solid increment/decrement mechanism
     protected Part(int PartID, String name, double price, int inStock, int min, int max) {
-        this.PartID = PartID;
-        this.name = name;
-        this.price = price;
-        this.inStock = inStock;
-        this.min = min;
-        this.max = max;
+        setPartID(PartID);
+        setName(name);
+        setPrice(price);
+        setInStock(inStock);
+        setMin(min);
+        setMax(max);
     }
 
     public String getName() { return name; }
