@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /** TODO:
@@ -38,6 +39,8 @@ import javafx.stage.Stage;
  *  - toggle add/modify parts Label
  */
 public class MainScreenController implements Initializable {
+    /* ---------- Display ---------- */
+    @FXML private AnchorPane Primary;
     
     /* ---------- Parts Management ---------- */
     @FXML private Button searchParts;

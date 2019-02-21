@@ -29,17 +29,13 @@ public class C482 extends Application {
         
         InHouse part1 = new InHouse(001,"Widget",1.99, 0,0,999,1);
         InHouse part2 = new InHouse(002,"Wodget",2.95, 0,0,999,2);
-        InHouse part3 = new InHouse(003,"Wudget",3.90, 0,0,999,1);
-        Outsourced part4 = new Outsourced(004,"Thingy",2.99, 0,0,999,"ACME");
-        Outsourced part5 = new Outsourced(005,"Thingamajig", 1.96, 0,0,999,"Ajax");
-        Outsourced part6 = new Outsourced(006,"Thingamabob", 1.92, 0,0,999,"ACME");
+        Outsourced part4 = new Outsourced(003,"Thingy",2.99, 0,0,999,"ACME");
+        Outsourced part5 = new Outsourced(004,"Thingamajig", 1.96, 0,0,999,"Ajax");
         
         inventory.addPart(part1);
         inventory.addPart(part2);
-        inventory.addPart(part3);
         inventory.addPart(part4);
         inventory.addPart(part5);
-        inventory.addPart(part6);
         
     }
     
