@@ -25,9 +25,9 @@ import javafx.stage.Stage;
 
 public class AddPartScreenController implements Initializable {
 
+    private ToggleGroup partSource = new ToggleGroup();
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
-    private ToggleGroup partSource = new ToggleGroup();
     @FXML private TextField partNameField;
     @FXML private TextField invField;
     @FXML private TextField priceField;
@@ -94,7 +94,7 @@ public class AddPartScreenController implements Initializable {
         outsourcedRadio.selectedProperty().addListener((obs, then, now) -> {
             if (now) {
                 sourceTitleLabel.setText("Company Name");
-            sourceNameField.setPromptText("Company Name");
+                sourceNameField.setPromptText("Company Name");
             }
         });
         partSource.selectToggle(inHouseRadio);
