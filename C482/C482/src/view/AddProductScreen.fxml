@@ -186,7 +186,7 @@
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
                         <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Save" />
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Cancel" />
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="25.0" prefWidth="100.0" text="Cancel" />
                     </buttons>
                      <padding>
                         <Insets right="100.0" />

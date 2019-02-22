@@ -28,15 +28,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /** TODO:
- *  - modify parts
+ *  - selecting Modify Part needs an alert for no-part-selected
+ *  - Inventory needs setters/getters
  *  - search parts
- *  - delete parts
  *  - populate products table
  *  - add products
  *  - modify products
  *  - search products
  *  - delete products
- *  - toggle add/modify parts Label
  */
 public class MainScreenController implements Initializable {
     
@@ -110,9 +109,7 @@ public class MainScreenController implements Initializable {
     public void addProductsButton(ActionEvent event) throws IOException {
         Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
         Scene addProductsScene = new Scene(addProductsParent);
-        
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
         window.setScene(addProductsScene);
         window.show();
     }
@@ -145,6 +142,13 @@ public class MainScreenController implements Initializable {
         Inventory.allParts.forEach((item) -> { parts.add(item); });
         
         return parts;
+    }
+    
+    public ObservableList<Product> updateProductsDisplay() {
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        Inventory.products.forEach((item) -> { products.add(item); });
+                
+        return products;
     }
     
     @Override public void initialize(URL url, ResourceBundle rb) {
