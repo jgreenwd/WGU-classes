@@ -19,12 +19,12 @@ public abstract class Part {
     protected Part() {};
     
     protected Part(int PartID, String name, double price, int inStock, int min, int max) {
-        setPartID(PartID);
-        setName(name);
-        setPrice(price);
-        setInStock(inStock);
-        setMin(min);
-        setMax(max);
+        this.PartID = PartID;
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+        this.min = min;
+        this.max = max;
     }
 
     public String getName() { return name; }
@@ -41,4 +41,18 @@ public abstract class Part {
     public void setPrice(double price) { this.price = price; }
     public void setMin(int min) { this.min = min; }
     public void setMax(int max) { this.max = max;}
+    
+    /* always return a higher partID than current highest partID so
+     * that deleted partIDs are still viable for historical references
+     */
+    public int createPartID() {
+        int i = 1;
+        for(Part item: Inventory.allParts) {
+            if (item.getPartID() >= i) {
+                i = item.getPartID() + 1;
+            }
+        }
+        
+        return i;
+    }
 }
