@@ -24,12 +24,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /** TODO:
  *  - selecting Modify Part needs an alert for no-part-selected
- *  - Inventory needs setters/getters
  *  - search parts
  *  - populate products table
  *  - add products
@@ -50,7 +48,8 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
     
-    
+    private boolean inhouse = false; // false==InHouse true==Outsourced
+    private Part part = null;
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         Inventory.allParts.forEach((item) -> {
@@ -66,23 +65,27 @@ public class MainScreenController implements Initializable {
         window.show();
     }
     
+    
     public void modifyPartsButton(ActionEvent event) throws IOException {
-        // identify selected part
-        int partID = partsTable.getSelectionModel().getSelectedItem().getPartID() - 1;
-        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
         Parent modifyPartParent = loader.load();
         Scene modifyPartScene = new Scene(modifyPartParent);
-        
-        // identify part type and send to loadPart()
         ModifyPartScreenController controller = loader.getController();
-        controller.loadPart(partID);
+        
+        // identify selected part & its source(InHouse or Outsourced)
+        part = partsTable.getSelectionModel().getSelectedItem();
+        if (part.getClass().getSimpleName().equals("InHouse")) { inhouse = true; }
+        
+        // identify part type and send to loadPart((source-type) part)
+        if (inhouse) { controller.loadPart((InHouse)part); }
+        else { controller.loadPart((Outsourced)part); }
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(modifyPartScene);
         window.show();
     }
+    
     
     public void deletePartsButton(ActionEvent event) throws IOException {
         Inventory.deletePart(partsTable.getSelectionModel().getSelectedItem());
