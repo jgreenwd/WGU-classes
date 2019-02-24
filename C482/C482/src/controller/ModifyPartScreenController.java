@@ -37,35 +37,35 @@ public class ModifyPartScreenController implements Initializable {
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
 
-    private final String inhouse = "InHouse", outsourced = "Outsourced";
-    private InHouse _in = new InHouse();
-    private Outsourced _out = new Outsourced();
     private Part part = null;
     
     /* ---------- Load Part details to Screen ---------- */
-    public void loadPart(int partID) {
-        String partType = Inventory.lookupPart(partID).getClass().getSimpleName();
+    public void loadPart(InHouse param) {
+        part = (InHouse) param;
+        partSource.selectToggle(inHouseRadio);
+        sourceNameField.setText(String.valueOf(param.getMachineID()));
         
-        if (partType.equals(inhouse)) {
-            partSource.selectToggle(inHouseRadio);
-            _in = (InHouse) Inventory.lookupPart(partID);
-            sourceNameField.setText(String.valueOf(_in.getMachineID()));
-        } else if (partType.equals(outsourced)) {
-            partSource.selectToggle(outsourcedRadio);
-            _out = (Outsourced) Inventory.lookupPart(partID);
-            sourceNameField.setText(String.valueOf(_out.getCompanyName()));
-        }
-        
-        part = Inventory.lookupPart(partID);
-        
-        idField.setText(String.valueOf(part.getPartID()));
+        idField.setText(String.valueOf(param.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
         priceField.setText(String.format("$%,.2f", part.getPrice()));
         minField.setText(String.valueOf(part.getMin()));
         maxField.setText(String.valueOf(part.getMax()));
     }
-
+    
+    public void loadPart(Outsourced param) {
+        part = (Outsourced) param;
+        partSource.selectToggle(outsourcedRadio);
+        sourceNameField.setText(String.valueOf(param.getCompanyName()));
+        
+        idField.setText(String.valueOf(param.getPartID()));
+        partNameField.setText(part.getName());
+        invField.setText(String.valueOf(part.getInStock()));
+        priceField.setText(String.format("$%,.2f", part.getPrice()));
+        minField.setText(String.valueOf(part.getMin()));
+        maxField.setText(String.valueOf(part.getMax()));
+    }
+        
 
     public void saveButtonPressed(ActionEvent event) throws IOException {
         // InHouse
