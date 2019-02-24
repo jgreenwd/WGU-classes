@@ -42,7 +42,7 @@ public class AddPartScreenController implements Initializable {
         // save as InHouse part
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
             InHouse partToAdd = new InHouse();
-            partToAdd.setPartID(Inventory.allParts.size() + 1);
+            partToAdd.setPartID(partToAdd.createPartID());
             partToAdd.setName(partNameField.getText());
             partToAdd.setInStock(Integer.parseInt(invField.getText()));
             partToAdd.setMin(Integer.parseInt(minField.getText()));
@@ -56,7 +56,7 @@ public class AddPartScreenController implements Initializable {
         // save Outsourced part
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
             Outsourced partToAdd = new Outsourced();
-            partToAdd.setPartID(Inventory.allParts.size() + 1);
+            partToAdd.setPartID(partToAdd.createPartID());
             partToAdd.setName(partNameField.getText());
             partToAdd.setInStock(Integer.parseInt(invField.getText()));
             partToAdd.setMin(Integer.parseInt(minField.getText()));
