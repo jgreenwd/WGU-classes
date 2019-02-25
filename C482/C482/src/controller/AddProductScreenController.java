@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -30,6 +34,18 @@ public class AddProductScreenController implements Initializable {
     @FXML private TextField priceField;
     @FXML private TextField minField;
     @FXML private TextField maxField;
+    
+    @FXML private TableView<Part> availablePartsTable;
+    @FXML private TableColumn<Part, String> availablePartIdColumn;
+    @FXML private TableColumn<Part, String> availablePartNameColumn;
+    @FXML private TableColumn<Part, String> availablePartInvColumn;
+    @FXML private TableColumn<Part, String> availablePartPriceColumn;
+    
+    @FXML private TableView<Part> addedPartsTable;
+    @FXML private TableColumn<Part, String> addedPartIdColumn;
+    @FXML private TableColumn<Part, String> addedPartNameColumn;
+    @FXML private TableColumn<Part, String> addedPartInvColumn;
+    @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
     ArrayList<Part> parts = new ArrayList<>();
     
@@ -64,13 +80,20 @@ public class AddProductScreenController implements Initializable {
         window.show();
     }
     
+    public ObservableList<Part> updateAvailablePartsDisplay() {
+        ObservableList<Part> items = FXCollections.observableArrayList();
+        Inventory.allParts.forEach((item) -> { items.add(item); });
+        
+        return items;
+    }
+    
     @Override public void initialize(URL url, ResourceBundle rb) {
-//        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
-//        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        partInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
-//        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        
-//        partsTable.setItems( updatePartsDisplay() );
+        availablePartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
+        availablePartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        availablePartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        availablePartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+        availablePartsTable.setItems( updateAvailablePartsDisplay() );
     }    
     
 }

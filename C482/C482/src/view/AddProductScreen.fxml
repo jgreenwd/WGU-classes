@@ -148,12 +148,12 @@
                         <Insets top="50.0" />
                      </VBox.margin>
                   </HBox>
-                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="400.0">
+                  <TableView fx:id="availablePartsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="400.0">
                     <columns>
-                      <TableColumn text="Part ID" />
-                      <TableColumn prefWidth="110.0" text="Part Name" />
-                        <TableColumn prefWidth="100.0" text="Inventory Level" />
-                        <TableColumn prefWidth="110.0" text="Price per Unit" />
+                      <TableColumn fx:id="availablePartIdColumn" text="Part ID" />
+                      <TableColumn fx:id="availablePartNameColumn" prefWidth="110.0" text="Part Name" />
+                        <TableColumn fx:id="availablePartInvColumn" prefWidth="100.0" text="Inventory Level" />
+                        <TableColumn fx:id="availablePartPriceColumn" prefWidth="110.0" text="Price per Unit" />
                     </columns>
                   </TableView>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
@@ -167,12 +167,12 @@
                         <Insets right="100.0" />
                      </padding>
                   </ButtonBar>
-                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="400.0">
+                  <TableView fx:id="addedPartsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="400.0">
                     <columns>
-                      <TableColumn text="Part ID" />
-                      <TableColumn prefWidth="110.0" text="Part Name" />
-                        <TableColumn prefWidth="100.0" text="Inventory Level" />
-                        <TableColumn prefWidth="110.0" text="Price per Unit" />
+                      <TableColumn fx:id="addedPartIdColumn" text="Part ID" />
+                      <TableColumn fx:id="addedPartNameColumn" prefWidth="110.0" text="Part Name" />
+                        <TableColumn fx:id="addedPartInvColumn" prefWidth="100.0" text="Inventory Level" />
+                        <TableColumn fx:id="addedPartPriceColumn" prefWidth="110.0" text="Price per Unit" />
                     </columns>
                   </TableView>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
