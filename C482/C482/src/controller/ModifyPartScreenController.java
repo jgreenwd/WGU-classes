@@ -98,12 +98,19 @@ public class ModifyPartScreenController implements Initializable {
         Inventory.updatePart(part);
         
         // return to Main Screen after save
-        cancelButtonPressed(event);
+        returnToMainScreen(event);
     }
     
     
-    /* ---------- Cancel page & return to Main Screen ---------- */
+    /* ---------- Cancel Modification & Exit ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
+        //TODO process validation
+        returnToMainScreen(event);
+    }
+    
+    
+    /* ---------- Return to Main Screen ---------- */
+    public void returnToMainScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
