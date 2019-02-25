@@ -64,5 +64,19 @@ public class Product {
             }
         }
         return false;
-    }   
+    }
+    
+    /* always return a higher productID than current highest productID so
+     * that deleted productIDs are still viable for historical references
+     */
+    public int createProductID() {
+        int i = 1;
+        for(Product item: Inventory.products) {
+            if (item.getProductID() >= i) {
+                i = item.getProductID() + 1;
+            }
+        }
+        
+        return i;
+    }
 }
