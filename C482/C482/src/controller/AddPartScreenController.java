@@ -38,6 +38,7 @@ public class AddPartScreenController implements Initializable {
     
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
+        //TODO: insert part validation
         
         // save as InHouse part
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
@@ -68,10 +69,8 @@ public class AddPartScreenController implements Initializable {
         }
         
         // return to Main Screen after save
-        cancelButtonPressed(event);
+        returnToMainScreen(event);
     }
-    
-    
     
     
     /* ---------- Cancel page & return to Main Screen ---------- */
