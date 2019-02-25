@@ -89,7 +89,7 @@ public class MainScreenController implements Initializable {
     
     
     public void searchProductsButton(ActionEvent event) throws IOException {
-        Inventory.products.forEach((item) -> System.out.println(item));
+        Inventory.products.forEach( (item) -> { System.out.println(item.getName()); });
     }
     
     public void addProductsButton(ActionEvent event) throws IOException {
