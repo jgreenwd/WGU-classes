@@ -42,10 +42,8 @@ public class ModifyPartScreenController implements Initializable {
     /* ---------- Load Part details to Screen ---------- */
     public void loadPart(InHouse param) {
         part = (InHouse) param;
-        
         partSource.selectToggle(inHouseRadio);
         sourceNameField.setText(String.valueOf(param.getMachineID()));
-        
         idField.setText(String.valueOf(param.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
@@ -56,10 +54,8 @@ public class ModifyPartScreenController implements Initializable {
     
     public void loadPart(Outsourced param) {
         part = (Outsourced) param;
-        
         partSource.selectToggle(outsourcedRadio);
         sourceNameField.setText(String.valueOf(param.getCompanyName()));
-        
         idField.setText(String.valueOf(param.getPartID()));
         partNameField.setText(part.getName());
         invField.setText(String.valueOf(part.getInStock()));
@@ -69,6 +65,7 @@ public class ModifyPartScreenController implements Initializable {
     }
         
 
+    /* ---------- Save changes to Inventory ---------- */
     public void saveButtonPressed(ActionEvent event) throws IOException {
         // InHouse
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
@@ -94,10 +91,7 @@ public class ModifyPartScreenController implements Initializable {
                 sourceNameField.getText());
         }
         
-        // update Inventory
         Inventory.updatePart(part);
-        
-        // return to Main Screen after save
         returnToMainScreen(event);
     }
     

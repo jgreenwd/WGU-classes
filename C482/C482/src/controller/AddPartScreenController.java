@@ -72,8 +72,16 @@ public class AddPartScreenController implements Initializable {
     }
     
     
+    
+    
     /* ---------- Cancel page & return to Main Screen ---------- */
+    /* redundant, but added for consistency between controllers  */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
+        returnToMainScreen(event);
+    }
+    
+    /* ---------- Return to Main Screen ---------- */
+    public void returnToMainScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

@@ -9,7 +9,7 @@ package model;
 
 import java.util.ArrayList;
 
-// TODO: updateProduct & updatePart need implementation
+// TODO: updateProduct needs implementation
 public final class Inventory {
     public static ArrayList<Part> allParts = new ArrayList<>();
     public static ArrayList<Product> products = new ArrayList<>();
@@ -39,23 +39,13 @@ public final class Inventory {
     }
     
     
-    /* ---------- Parts - My Utility Methods ---------- */
-    public static int part_size() {
-        return allParts.size();
+    /* ---------- Products - UML Rubric Methods ---------- */
+    public void addProduct(Product product) {
+        products.add(product);
     }
     
-    
-    /* ---------- Products ---------- */
-    public void addProduct(Product product) { products.add(product); }
-    
     public boolean removeProduct(Product product) {
-        for(Product item: products) {
-            if (item == product) {
-                products.remove(product);
-                return true;
-            }
-        }
-        return false;
+        return products.remove(product);
     }
     
     public Product lookupProduct(int productID) {
