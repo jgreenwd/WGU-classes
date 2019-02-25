@@ -155,6 +155,7 @@ public class MainScreenController implements Initializable {
         productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        productTable.setItems( updateProductsDisplay() );
     }
 
 }
