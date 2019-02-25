@@ -21,49 +21,24 @@ public final class Inventory {
     }
     
     public static boolean deletePart(Part part) {
-        for(Part item: allParts) {
-            if (item == part) {
-                allParts.remove(part);
-                return true;
-            }
-        }
-        return false;
+        return allParts.remove(part);
     }
    
-    public static Part lookupPart(int index) {
-        return allParts.get(index);
+    public static Part lookupPart(int partID) {
+        for(Part part: allParts) {
+            if (part.getPartID() == partID) {
+                return part;
+            }
+        }
+        return null;
     }
     
-    public static void updatePart(int partID, Part part) {
-        allParts.set(partID - 1, part);
+    public static void updatePart(Part part) {
+        
     }
     
     
     /* ---------- Parts - My Utility Methods ---------- */
-    public static boolean deletePart(int index) {
-        if (!allParts.isEmpty()) {
-            allParts.remove(index);
-            return true;
-        }
-        return false;
-    }
-
-    public static Part part_pop() {
-        Part temp = allParts.get(allParts.size() - 1);
-        allParts.remove(allParts.size() - 1);
-        return temp;
-    }
-    
-    public static void part_push(Part part) { allParts.add(part); }
-    
-    public static Part part_shift() {
-        Part temp = allParts.get(0);
-        allParts.remove(0);
-        return temp;
-    }
-    
-    public static void part_unshift(Part part) { allParts.add(0, part); }
-    
     public static int part_size() {
         return allParts.size();
     }
