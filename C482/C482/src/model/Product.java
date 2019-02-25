@@ -83,4 +83,8 @@ public class Product {
         
         return i;
     }
+    
+    public ArrayList<Part> getAllAssociatedParts() {
+        return associatedParts;
+    }
 }
