@@ -29,7 +29,6 @@ import javafx.stage.Stage;
 /** TODO:
  *  - selecting Modify Part needs an alert for no-part-selected
  *  - search parts
- *  - populate products table
  *  - add products
  *  - modify products
  *  - search products
@@ -37,15 +36,13 @@ import javafx.stage.Stage;
  */
 public class MainScreenController implements Initializable {
     
-    /* ---------- Parts Management ---------- */
+    /* ---------- Parts Management Segment ---------- */
     @FXML private TableView<Part> partsTable;
     @FXML private TableColumn<Part, String> partIdColumn;
     @FXML private TableColumn<Part, String> partNameColumn;
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
-    
-    private Part part = null;
-    
+
     public void searchPartsButton(ActionEvent event) throws IOException {
         Inventory.allParts.forEach((item) -> {
             System.out.println("Part name: " + item.getName());
@@ -60,7 +57,6 @@ public class MainScreenController implements Initializable {
         window.show();
     }
     
-    
     public void modifyPartsButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
@@ -69,7 +65,7 @@ public class MainScreenController implements Initializable {
         ModifyPartScreenController controller = loader.getController();
         
         // identify part type and send to loadPart((source-type) part)
-        part = partsTable.getSelectionModel().getSelectedItem();
+        Part part = partsTable.getSelectionModel().getSelectedItem();
         if (part instanceof InHouse) { controller.loadPart((InHouse)part); }
         else { controller.loadPart((Outsourced)part); }
         
@@ -78,14 +74,13 @@ public class MainScreenController implements Initializable {
         window.show();
     }
     
-    
     public void deletePartsButton(ActionEvent event) throws IOException {
         Inventory.deletePart(partsTable.getSelectionModel().getSelectedItem());
         partsTable.setItems( updatePartsDisplay() );
     }
     
     
-    /* ---------- Products Management ---------- */
+    /* ---------- Products Management Segment ---------- */
     @FXML private TableView<Product> productTable;
     @FXML private TableColumn<Product, String> productIdColumn;
     @FXML private TableColumn<Product, String> productNameColumn;
@@ -94,7 +89,7 @@ public class MainScreenController implements Initializable {
     
     
     public void searchProductsButton(ActionEvent event) throws IOException {
-        System.out.println("Products: Search button pressed");
+        Inventory.products.forEach((item) -> System.out.println(item));
     }
     
     public void addProductsButton(ActionEvent event) throws IOException {
@@ -116,8 +111,8 @@ public class MainScreenController implements Initializable {
     }
     
     public void deleteProductsButton(ActionEvent event) throws IOException {
-        System.out.println("Products: Delete button pressed");
-        
+        Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
+        productTable.setItems( updateProductsDisplay() );
     }
     
     
@@ -157,5 +152,4 @@ public class MainScreenController implements Initializable {
 
         productTable.setItems( updateProductsDisplay() );
     }
-
 }
