@@ -50,6 +50,16 @@ public class AddProductScreenController implements Initializable {
     ArrayList<Part> parts = new ArrayList<>();
     
     
+    public void addButtonPressed() {
+        parts.add(availablePartsTable.getSelectionModel().getSelectedItem());
+        addedPartsTable.setItems( updateAddedPartsDisplay() );
+    }
+    
+    public void deleteButtonPressed() {
+        parts.remove(addedPartsTable.getSelectionModel().getSelectedItem());
+        addedPartsTable.setItems( updateAddedPartsDisplay() );
+    }
+    
     public void saveButtonPressed(ActionEvent event) throws IOException {
         Product product = new Product();
         
@@ -82,7 +92,14 @@ public class AddProductScreenController implements Initializable {
     
     public ObservableList<Part> updateAvailablePartsDisplay() {
         ObservableList<Part> items = FXCollections.observableArrayList();
-        Inventory.allParts.forEach((item) -> { items.add(item); });
+        Inventory.allParts.forEach((part) -> { items.add(part); });
+        
+        return items;
+    }
+    
+    public ObservableList<Part> updateAddedPartsDisplay() {
+        ObservableList<Part> items = FXCollections.observableArrayList();
+        parts.forEach((part) -> { items.add(part); });
         
         return items;
     }
@@ -94,6 +111,13 @@ public class AddProductScreenController implements Initializable {
         availablePartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
         availablePartsTable.setItems( updateAvailablePartsDisplay() );
+        
+        addedPartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
+        addedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        addedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        addedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+        addedPartsTable.setItems( updateAddedPartsDisplay() );
     }    
     
 }
