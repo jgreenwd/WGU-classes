@@ -38,10 +38,6 @@ import javafx.stage.Stage;
 public class MainScreenController implements Initializable {
     
     /* ---------- Parts Management ---------- */
-    @FXML private Button searchParts;
-    @FXML private Button addParts;
-    @FXML private Button modifyParts;
-    @FXML private Button deleteParts;
     @FXML private TableView<Part> partsTable;
     @FXML private TableColumn<Part, String> partIdColumn;
     @FXML private TableColumn<Part, String> partNameColumn;
@@ -94,10 +90,6 @@ public class MainScreenController implements Initializable {
     
     
     /* ---------- Products Management ---------- */
-    @FXML private Button searchProducts;
-    @FXML private Button addProducts;
-    @FXML private Button modifyProducts;
-    @FXML private Button deleteProducts;
     @FXML private TableView<Product> productTable;
     @FXML private TableColumn<Product, String> productIdColumn;
     @FXML private TableColumn<Product, String> productNameColumn;
