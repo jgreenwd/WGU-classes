@@ -7,6 +7,7 @@
 
 import model.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,19 +25,32 @@ public class C482 extends Application {
 
     public static void loadDB() {
         /* ---------- test data ---------- */
-        // add products
-        Inventory inventory = new Inventory();
-        
         InHouse part1 = new InHouse(001,"Widget",1.99, 0,0,999,1);
-        InHouse part2 = new InHouse(002,"Wodget",2.95, 0,0,999,2);
-        Outsourced part4 = new Outsourced(003,"Thingy",2.99, 0,0,999,"ACME");
-        Outsourced part5 = new Outsourced(004,"Thingamajig", 1.96, 0,0,999,"Ajax");
+        InHouse part2 = new InHouse(002,"Wedget",2.95, 0,0,999,2);
+        Outsourced part3 = new Outsourced(003,"Wodget",2.99, 0,0,999,"ACME");
+        Outsourced part4 = new Outsourced(004,"Wudget", 1.96, 0,0,999,"Ajax");
         
-        inventory.addPart(part1);
-        inventory.addPart(part2);
-        inventory.addPart(part4);
-        inventory.addPart(part5);
+        Inventory.addPart(part1);
+        Inventory.addPart(part2);
+        Inventory.addPart(part3);
+        Inventory.addPart(part4);
         
+        // add products
+        ArrayList<Part> partset1 = new ArrayList<>();
+        partset1.add(part1);
+        partset1.add(part2);
+        partset1.add(part3);
+        partset1.add(part4);
+        
+        ArrayList<Part> partset2 = new ArrayList<>();
+        partset2.add(part2);
+        partset2.add(part4);
+        
+        Product product1 = new Product(partset1, 001, "Doohickey", 14.95, 0,0,999);
+        Product product2 = new Product(partset2, 002, "Doodad", 7.81, 0,0,999);
+        
+        Inventory.addProduct(product1);
+        Inventory.addProduct(product2);
     }
     
     public static void main(String[] args) {
