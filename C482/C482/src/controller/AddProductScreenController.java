@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
@@ -42,7 +43,8 @@ public class AddProductScreenController implements Initializable {
         product.setInStock(Integer.parseInt(invField.getText()));
         product.setMin(Integer.parseInt(minField.getText()));
         product.setMax(Integer.parseInt(maxField.getText()));
-            
+        
+        Inventory.addProduct(product);
         returnToMainScreen(event);
     }
 
@@ -63,7 +65,12 @@ public class AddProductScreenController implements Initializable {
     }
     
     @Override public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+//        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
+//        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        partInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+//        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        
+//        partsTable.setItems( updatePartsDisplay() );
     }    
     
 }
