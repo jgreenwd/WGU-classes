@@ -55,12 +55,10 @@ public class Product {
     }
 
     public void addAssociatedPart(Part part) {
-        // parts list may contain multiples of the same part
         associatedParts.add(part);
     }
     
     public boolean removeAssociatedPart(int partID) {
-        // removes the first instance of the part
         for (Part associatedPart: associatedParts) {
             if (associatedPart.getPartID() == partID) {
                 associatedParts.remove(associatedPart);
@@ -74,6 +72,8 @@ public class Product {
      * that deleted productIDs are still viable for historical references
      */
     public int createProductID() {
+        if (Inventory.products.isEmpty()) { return 1; }
+        
         int i = 1;
         for(Product item: Inventory.products) {
             if (item.getProductID() >= i) {
