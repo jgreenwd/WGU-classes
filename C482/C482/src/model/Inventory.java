@@ -34,7 +34,8 @@ public final class Inventory {
     }
     
     public static void updatePart(Part part) {
-        
+        allParts.remove(lookupPart(part.getPartID()));
+        allParts.add(part);
     }
     
     
