@@ -44,7 +44,6 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
     
-    private boolean inhouse = false; // false==InHouse true==Outsourced
     private Part part = null;
     
     public void searchPartsButton(ActionEvent event) throws IOException {
@@ -69,12 +68,9 @@ public class MainScreenController implements Initializable {
         Scene modifyPartScene = new Scene(modifyPartParent);
         ModifyPartScreenController controller = loader.getController();
         
-        // identify selected part & its source(InHouse or Outsourced)
-        part = partsTable.getSelectionModel().getSelectedItem();
-        if (part.getClass().getSimpleName().equals("InHouse")) { inhouse = true; }
-        
         // identify part type and send to loadPart((source-type) part)
-        if (inhouse) { controller.loadPart((InHouse)part); }
+        part = partsTable.getSelectionModel().getSelectedItem();
+        if (part instanceof InHouse) { controller.loadPart((InHouse)part); }
         else { controller.loadPart((Outsourced)part); }
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -126,8 +122,6 @@ public class MainScreenController implements Initializable {
     
     
     /* ---------- Exit ---------- */
-    @FXML private Button exitButton;
-    
     public void exitButton() {
         System.exit(0);
     }
