@@ -20,6 +20,7 @@ public class Product {
 
     public Product() {
         this.productID = createProductID();
+        this.associatedParts = new ArrayList<>();
     };
     
     public Product(ArrayList<Part> associatedParts, int productID, String name, double price, int inStock, int min, int max) {

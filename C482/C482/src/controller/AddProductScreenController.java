@@ -47,23 +47,22 @@ public class AddProductScreenController implements Initializable {
     @FXML private TableColumn<Part, String> addedPartInvColumn;
     @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
-    ArrayList<Part> parts = new ArrayList<>();
+    Product product = new Product();
+    ArrayList<Part> productPartsList = new ArrayList<>();
     
     
     public void addButtonPressed() {
-        parts.add(availablePartsTable.getSelectionModel().getSelectedItem());
+        productPartsList.add(availablePartsTable.getSelectionModel().getSelectedItem());
         addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
     public void deleteButtonPressed() {
-        parts.remove(addedPartsTable.getSelectionModel().getSelectedItem());
+        productPartsList.remove(addedPartsTable.getSelectionModel().getSelectedItem());
         addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
-    public void saveButtonPressed(ActionEvent event) throws IOException {
-        Product product = new Product();
-        
-        parts.forEach((item) -> product.addAssociatedPart(item));
+    public void saveButtonPressed(ActionEvent event) throws IOException {        
+        productPartsList.forEach((item) -> { product.addAssociatedPart(item); });
         product.setName(productNameField.getText());
         product.setPrice(Double.parseDouble(priceField.getText()));
         product.setInStock(Integer.parseInt(invField.getText()));
@@ -99,7 +98,7 @@ public class AddProductScreenController implements Initializable {
     
     public ObservableList<Part> updateAddedPartsDisplay() {
         ObservableList<Part> items = FXCollections.observableArrayList();
-        parts.forEach((part) -> { items.add(part); });
+        productPartsList.forEach((part) -> { items.add(part); });
         
         return items;
     }
@@ -119,5 +118,4 @@ public class AddProductScreenController implements Initializable {
         
         addedPartsTable.setItems( updateAddedPartsDisplay() );
     }    
-    
 }
