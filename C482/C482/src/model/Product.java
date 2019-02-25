@@ -18,6 +18,10 @@ public class Product {
     private int min;
     private int max;
 
+    public Product() {
+        this.productID = createProductID();
+    };
+    
     public Product(ArrayList<Part> associatedParts, int productID, String name, double price, int inStock, int min, int max) {
         this.associatedParts = associatedParts;
         this.productID = productID;
