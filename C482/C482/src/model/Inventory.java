@@ -40,15 +40,15 @@ public final class Inventory {
     
     
     /* ---------- Products - UML Rubric Methods ---------- */
-    public void addProduct(Product product) {
+    public static void addProduct(Product product) {
         products.add(product);
     }
     
-    public boolean removeProduct(Product product) {
+    public static boolean removeProduct(Product product) {
         return products.remove(product);
     }
     
-    public Product lookupProduct(int productID) {
+    public static Product lookupProduct(int productID) {
         for(Product item: products) {
             if (item.getProductID() == productID)
                 return item;
@@ -56,7 +56,7 @@ public final class Inventory {
         return null;
     }
     
-    public void updateProduct(int productID) { }
+    public static void updateProduct(int productID) { }
     
     public static int product_size() {
         return products.size();
