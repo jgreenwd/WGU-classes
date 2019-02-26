@@ -40,8 +40,9 @@ import javafx.stage.Stage;
  * 
  */
 public class MainScreenController implements Initializable {
-    
+    /* ---------- Display Exceptions on this Label ---------- */
     @FXML private Label exceptionMessage;
+    
     
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
