@@ -34,12 +34,22 @@ import javafx.stage.Stage;
 public class MainScreenController implements Initializable {
     
     /* ---------- Search Query Segment ---------- */
-    @FXML private TextField partSearch;
+    @FXML private TextField partSearchQuery;
+    @FXML private TextField productSearchQuery;
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         Inventory.allParts.forEach((item) -> {
-            System.out.println(item.getPartID());
-            System.out.println(partSearch.getText());
+            if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
+                partsTable.getSelectionModel().select(item);
+            }
+        });
+    }
+    
+    public void searchProductsButton(ActionEvent event) throws IOException {
+        Inventory.products.forEach((item) -> {
+            if (item.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
+                productTable.getSelectionModel().select(item);
+            }
         });
     }
     
@@ -88,14 +98,6 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Product, String> productNameColumn;
     @FXML private TableColumn<Product, String> productInvColumn;
     @FXML private TableColumn<Product, String> productPriceColumn;
-    
-    
-    public void searchProductsButton(ActionEvent event) throws IOException {
-        Inventory.products.forEach( (item) -> { 
-            item.getAllAssociatedParts().forEach(part -> System.out.print(part+ " "));
-            System.out.println();
-        });
-    }
     
     public void addProductsButton(ActionEvent event) throws IOException {
         Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
