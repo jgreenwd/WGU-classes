@@ -49,6 +49,7 @@ public class MainScreenController implements Initializable {
     
     public void searchPartsButton() {
         boolean found = false;
+        exceptionMessage.setVisible(false);
         int temp;
         for(Part part: Inventory.getAllParts()) {
             try {
@@ -65,18 +66,25 @@ public class MainScreenController implements Initializable {
             }
         }
         if (!found) { partSearchQuery.setPromptText("Part ID not found"); }
-        if (found) { exceptionMessage.setVisible(false); }
         partSearchQuery.clear();
     }
     
     public void searchProductsButton() {
         boolean found = false;
+        exceptionMessage.setVisible(false);
+        int temp;
         for(Product product: Inventory.getAllProducts()) {
-            if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
-                productTable.getSelectionModel().select(product);
-                productSearchQuery.setPromptText("Enter Product ID");
-                found = true;
-                break;
+            try {
+                temp = Integer.parseInt(productSearchQuery.getText());
+                if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
+                    productTable.getSelectionModel().select(product);
+                    productSearchQuery.setPromptText("Enter Product ID");
+                    found = true;
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Please enter a valid Product ID");
+                exceptionMessage.setVisible(true);
             }
         }
         if (!found) { productSearchQuery.setPromptText("Product ID not found"); }
