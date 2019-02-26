@@ -31,6 +31,7 @@ import model.Product;
 public class ModifyProductScreenController implements Initializable {
 
     @FXML private TextField productNameField;
+    @FXML private TextField idField;
     @FXML private TextField invField;
     @FXML private TextField priceField;
     @FXML private TextField minField;
@@ -53,6 +54,7 @@ public class ModifyProductScreenController implements Initializable {
     
     
     public void loadProduct(Product product) {
+        idField.setText(String.valueOf(product.getProductID()));
         productNameField.setText(product.getName());
         invField.setText(String.valueOf(product.getInStock()));
         priceField.setText(String.valueOf(product.getPrice()));
@@ -82,13 +84,14 @@ public class ModifyProductScreenController implements Initializable {
     public void saveButtonPressed(ActionEvent event) throws IOException {
         //TODO: validate input before executing
         productPartsList.forEach((item) -> { product.addAssociatedPart(item); });
+        product.setProductID(Integer.parseInt(idField.getText()));
         product.setName(productNameField.getText());
         product.setPrice(Double.parseDouble(priceField.getText()));
         product.setInStock(Integer.parseInt(invField.getText()));
         product.setMin(Integer.parseInt(minField.getText()));
         product.setMax(Integer.parseInt(maxField.getText()));
         
-        Inventory.addProduct(product);
+        Inventory.updateProduct(product);
         returnToMainScreen(event);
     }
 
