@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,21 +29,40 @@ import javafx.stage.Stage;
 
 /** TODO:
  *  - selecting Modify Part needs an alert for no-part-selected
- *  - search parts
- *  - search products
+ *  - exception handling
+ *      - inventory bounds checking on entry
+ *      - product must have at least 1 part
+ *      - product price > combined parts price
+ *      - product entry validation
+ *      - part entry validation
+ *  - confirmation box
+ *      - all Delete & Cancel buttons
+ * 
  */
 public class MainScreenController implements Initializable {
+    
+    @FXML private Label exceptionMessage;
     
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
     @FXML private TextField productSearchQuery;
     
-    public void searchPartsButton(ActionEvent event) throws IOException {
-        Inventory.getAllParts().forEach((item) -> {
-            if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
-                partsTable.getSelectionModel().select(item);
-            }
-        });
+    public void searchPartsButton() {
+        try {
+            Inventory.getAllParts().forEach((item) -> {
+                if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
+                    partsTable.getSelectionModel().select(item);
+                    partSearchQuery.setText(null);
+                    partSearchQuery.setPromptText("Enter Part ID");
+                } else {
+                    partSearchQuery.setText(null);
+                    partSearchQuery.setPromptText("Part ID not found");
+                }
+            });
+        } finally {
+            
+        }
+        
     }
     
     public void searchProductsButton(ActionEvent event) throws IOException {
@@ -121,9 +141,6 @@ public class MainScreenController implements Initializable {
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(modifyProductsScene);
         window.show();
-
-        System.out.print(productTable.getSelectionModel().getSelectedItem().getClass().getSimpleName());
-
     }
     
     public void deleteProductsButton(ActionEvent event) throws IOException {
@@ -152,8 +169,6 @@ public class MainScreenController implements Initializable {
     }
     
     @Override public void initialize(URL url, ResourceBundle rb) {
-        /* ---------- init search query binding ---------- */
-//        partSearch.textProperty().bind(txtCharacter.textProperty());
         
         /* ---------- init parts table display ---------- */
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
@@ -163,6 +178,7 @@ public class MainScreenController implements Initializable {
         
         partsTable.setItems( updatePartsDisplay() );
         
+
         /* ---------- init products table display ---------- */
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
