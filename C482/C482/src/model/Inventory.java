@@ -56,7 +56,10 @@ public final class Inventory {
         return null;
     }
     
-    public static void updateProduct(int productID) { }
+    public static void updateProduct(Product product) {
+        products.remove(lookupProduct(product.getProductID()));
+        products.add(product);
+    }
     
     public static int product_size() {
         return products.size();
