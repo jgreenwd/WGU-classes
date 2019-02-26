@@ -50,7 +50,18 @@ public class AddProductScreenController implements Initializable {
     Product product = new Product();
     ArrayList<Part> productPartsList = new ArrayList<>();
     
+    /* ---------- Search Query Segment ---------- */
+    @FXML private TextField partSearchQuery;
     
+    public void searchPartsButton(ActionEvent event) throws IOException {
+        Inventory.getAllParts().forEach((item) -> {
+            if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
+                availablePartsTable.getSelectionModel().select(item);
+            }
+        });
+    }
+    
+    /* ---------- Add/Delete Parts Segment ---------- */
     public void addButtonPressed() {
         productPartsList.add(availablePartsTable.getSelectionModel().getSelectedItem());
         addedPartsTable.setItems( updateAddedPartsDisplay() );

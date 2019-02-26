@@ -65,8 +65,15 @@ public class ModifyProductScreenController implements Initializable {
         addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
-    public void searchButtonPressed() {
-        System.out.println("Search button pressed");
+    /* ---------- Search Query Segment ---------- */
+    @FXML private TextField partSearchQuery;
+    
+    public void searchPartsButton(ActionEvent event) throws IOException {
+        Inventory.getAllParts().forEach((item) -> {
+            if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
+                availablePartsTable.getSelectionModel().select(item);
+            }
+        });
     }
     
     public void addButtonPressed() {
