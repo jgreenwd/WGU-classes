@@ -49,15 +49,23 @@ public class MainScreenController implements Initializable {
     
     public void searchPartsButton() {
         boolean found = false;
+        int temp;
         for(Part part: Inventory.getAllParts()) {
-            if (part.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
-                partsTable.getSelectionModel().select(part);
-                partSearchQuery.setPromptText("Enter Part ID");
-                found = true;
-                break;
+            try {
+                temp = Integer.parseInt(partSearchQuery.getText());
+                if (part.getPartID() == temp) {
+                    partsTable.getSelectionModel().select(part);
+                    partSearchQuery.setPromptText("Enter Part ID");
+                    found = true;
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Please enter a valid Part ID");
+                exceptionMessage.setVisible(true);
             }
         }
         if (!found) { partSearchQuery.setPromptText("Part ID not found"); }
+        if (found) { exceptionMessage.setVisible(false); }
         partSearchQuery.clear();
     }
     
