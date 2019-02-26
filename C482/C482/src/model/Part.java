@@ -47,7 +47,7 @@ public abstract class Part {
      */
     public int createPartID() {
         int i = 1;
-        for(Part item: Inventory.allParts) {
+        for(Part item: Inventory.getAllParts()) {
             if (item.getPartID() >= i) {
                 i = item.getPartID() + 1;
             }

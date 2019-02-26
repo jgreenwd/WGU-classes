@@ -9,21 +9,21 @@ package model;
 
 import java.util.ArrayList;
 
-// TODO: updateProduct needs implementation
 public final class Inventory {
-    public static ArrayList<Part> allParts = new ArrayList<>();
-    public static ArrayList<Product> products = new ArrayList<>();
+    private static ArrayList<Part> allParts = new ArrayList<>();
+    private static ArrayList<Product> products = new ArrayList<>();
     
     
-    /* ---------- Parts - UML Rubric Methods ---------- */
-    public static void addPart(Part part) {
+    /* ---------- Parts - Management Methods ---------- */
+    public static ArrayList<Part> getAllParts() { return allParts; }
+    public static void addPart(Part part) { allParts.add(part); }
+    public static boolean deletePart(Part part) { return allParts.remove(part); }
+   
+    public static void updatePart(Part part) {
+        allParts.remove(lookupPart(part.getPartID()));
         allParts.add(part);
     }
     
-    public static boolean deletePart(Part part) {
-        return allParts.remove(part);
-    }
-   
     public static Part lookupPart(int partID) {
         for(Part part: allParts) {
             if (part.getPartID() == partID) {
@@ -33,19 +33,15 @@ public final class Inventory {
         return null;
     }
     
-    public static void updatePart(Part part) {
-        allParts.remove(lookupPart(part.getPartID()));
-        allParts.add(part);
-    }
-    
     
     /* ---------- Products - UML Rubric Methods ---------- */
-    public static void addProduct(Product product) {
-        products.add(product);
-    }
+    public static ArrayList<Product> getAllProducts() { return products; }
+    public static void addProduct(Product product) { products.add(product); }
+    public static boolean removeProduct(Product product) { return products.remove(product); }
     
-    public static boolean removeProduct(Product product) {
-        return products.remove(product);
+    public static void updateProduct(Product product) {
+        products.remove(lookupProduct(product.getProductID()));
+        products.add(product);
     }
     
     public static Product lookupProduct(int productID) {
@@ -56,8 +52,7 @@ public final class Inventory {
         return null;
     }
     
-    public static void updateProduct(Product product) {
-        products.remove(lookupProduct(product.getProductID()));
-        products.add(product);
-    }
+    
+    
+
 }

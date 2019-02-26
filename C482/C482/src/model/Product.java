@@ -73,10 +73,10 @@ public class Product {
      * that deleted productIDs are still viable for historical references
      */
     public final int createProductID() {
-        if (Inventory.products.isEmpty()) { return 1; }
+        if (Inventory.getAllProducts().isEmpty()) { return 1; }
         
         int i = 1;
-        for(Product item: Inventory.products) {
+        for(Product item: Inventory.getAllProducts()) {
             if (item.getProductID() >= i) {
                 i = item.getProductID() + 1;
             }

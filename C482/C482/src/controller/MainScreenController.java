@@ -38,7 +38,7 @@ public class MainScreenController implements Initializable {
     @FXML private TextField productSearchQuery;
     
     public void searchPartsButton(ActionEvent event) throws IOException {
-        Inventory.allParts.forEach((item) -> {
+        Inventory.getAllParts().forEach((item) -> {
             if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
                 partsTable.getSelectionModel().select(item);
             }
@@ -46,7 +46,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void searchProductsButton(ActionEvent event) throws IOException {
-        Inventory.products.forEach((item) -> {
+        Inventory.getAllProducts().forEach((item) -> {
             if (item.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
                 productTable.getSelectionModel().select(item);
             }
@@ -139,14 +139,14 @@ public class MainScreenController implements Initializable {
     
     public ObservableList<Part> updatePartsDisplay() {
         ObservableList<Part> parts = FXCollections.observableArrayList();
-        Inventory.allParts.forEach((item) -> { parts.add(item); });
+        Inventory.getAllParts().forEach((item) -> { parts.add(item); });
         
         return parts;
     }
     
     public ObservableList<Product> updateProductsDisplay() {
         ObservableList<Product> products = FXCollections.observableArrayList();
-        Inventory.products.forEach((item) -> { products.add(item); });
+        Inventory.getAllProducts().forEach((item) -> { products.add(item); });
                 
         return products;
     }

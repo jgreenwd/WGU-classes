@@ -92,7 +92,7 @@ public class AddProductScreenController implements Initializable {
     
     public ObservableList<Part> updateAvailablePartsDisplay() {
         ObservableList<Part> items = FXCollections.observableArrayList();
-        Inventory.allParts.forEach((part) -> { items.add(part); });
+        Inventory.getAllParts().forEach((part) -> { items.add(part); });
         
         return items;
     }
