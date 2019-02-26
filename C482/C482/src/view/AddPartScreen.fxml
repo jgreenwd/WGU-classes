@@ -150,6 +150,14 @@
                   <Insets />
                </VBox.margin>
             </ButtonBar>
+            <Label fx:id="exceptionMessage" alignment="CENTER" contentDisplay="CENTER" text="Error:" textFill="#f03232" visible="false">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="50.0" top="10.0" />
+               </VBox.margin>
+            </Label>
          </children>
          <padding>
             <Insets top="40.0" />
