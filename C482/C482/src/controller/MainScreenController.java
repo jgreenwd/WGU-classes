@@ -20,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,9 +28,7 @@ import javafx.stage.Stage;
 /** TODO:
  *  - selecting Modify Part needs an alert for no-part-selected
  *  - search parts
- *  - modify products
  *  - search products
- *  - delete products
  */
 public class MainScreenController implements Initializable {
     
