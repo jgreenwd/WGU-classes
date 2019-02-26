@@ -10,7 +10,7 @@ package model;
 import java.util.ArrayList;
 
 public class Product {
-    private ArrayList<Part> associatedParts;
+    private final ArrayList<Part> associatedParts;
     private int productID;
     private String name;
     private double price;
@@ -72,7 +72,7 @@ public class Product {
     /* always return a higher productID than current highest productID so
      * that deleted productIDs are still viable for historical references
      */
-    public int createProductID() {
+    public final int createProductID() {
         if (Inventory.products.isEmpty()) { return 1; }
         
         int i = 1;

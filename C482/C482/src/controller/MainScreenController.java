@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -32,6 +33,17 @@ import javafx.stage.Stage;
  */
 public class MainScreenController implements Initializable {
     
+    /* ---------- Search Query Segment ---------- */
+    @FXML private TextField partSearch;
+    
+    public void searchPartsButton(ActionEvent event) throws IOException {
+        Inventory.allParts.forEach((item) -> {
+            System.out.println(item.getPartID());
+            System.out.println(partSearch.getText());
+        });
+    }
+    
+    
     /* ---------- Parts Management Segment ---------- */
     @FXML private TableView<Part> partsTable;
     @FXML private TableColumn<Part, String> partIdColumn;
@@ -39,12 +51,6 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
 
-    public void searchPartsButton(ActionEvent event) throws IOException {
-        Inventory.allParts.forEach((item) -> {
-            System.out.println("Part name: " + item.getName());
-        });
-    }
-    
     public void addPartsButton(ActionEvent event) throws IOException {
         Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
         Scene addPartScene = new Scene(addPartParent);
@@ -144,6 +150,9 @@ public class MainScreenController implements Initializable {
     }
     
     @Override public void initialize(URL url, ResourceBundle rb) {
+        /* ---------- init search query binding ---------- */
+//        partSearch.textProperty().bind(txtCharacter.textProperty());
+        
         /* ---------- init parts table display ---------- */
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

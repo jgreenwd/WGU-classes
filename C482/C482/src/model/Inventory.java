@@ -60,8 +60,4 @@ public final class Inventory {
         products.remove(lookupProduct(product.getProductID()));
         products.add(product);
     }
-    
-    public static int product_size() {
-        return products.size();
-    }
 }
