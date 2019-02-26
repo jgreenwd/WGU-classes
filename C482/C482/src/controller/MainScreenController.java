@@ -29,7 +29,6 @@ import javafx.stage.Stage;
 /** TODO:
  *  - selecting Modify Part needs an alert for no-part-selected
  *  - search parts
- *  - add products
  *  - modify products
  *  - search products
  *  - delete products
@@ -89,7 +88,10 @@ public class MainScreenController implements Initializable {
     
     
     public void searchProductsButton(ActionEvent event) throws IOException {
-        Inventory.products.forEach( (item) -> { System.out.println(item.getName() + " " + item.getProductID()); });
+        Inventory.products.forEach( (item) -> { 
+            item.getAllAssociatedParts().forEach(part -> System.out.print(part+ " "));
+            System.out.println();
+        });
     }
     
     public void addProductsButton(ActionEvent event) throws IOException {
@@ -101,13 +103,22 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        Parent modifyProductsParent = FXMLLoader.load(getClass().getResource("/view/ModifyProductScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
+        Parent modifyProductsParent = loader.load();
         Scene modifyProductsScene = new Scene(modifyProductsParent);
+        ModifyProductScreenController controller = loader.getController();
+        
+        // send product info from here
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        controller.loadProduct(product);
         
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
         window.setScene(modifyProductsScene);
         window.show();
+
+        System.out.print(productTable.getSelectionModel().getSelectedItem().getClass().getSimpleName());
+
     }
     
     public void deleteProductsButton(ActionEvent event) throws IOException {

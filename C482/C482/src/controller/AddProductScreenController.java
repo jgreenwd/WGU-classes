@@ -61,7 +61,8 @@ public class AddProductScreenController implements Initializable {
         addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
-    public void saveButtonPressed(ActionEvent event) throws IOException {        
+    public void saveButtonPressed(ActionEvent event) throws IOException {
+        //TODO: validate input before executing
         productPartsList.forEach((item) -> { product.addAssociatedPart(item); });
         product.setName(productNameField.getText());
         product.setPrice(Double.parseDouble(priceField.getText()));
