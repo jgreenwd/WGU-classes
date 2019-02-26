@@ -48,29 +48,31 @@ public class MainScreenController implements Initializable {
     @FXML private TextField productSearchQuery;
     
     public void searchPartsButton() {
-        try {
-            Inventory.getAllParts().forEach((item) -> {
-                if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
-                    partsTable.getSelectionModel().select(item);
-                    partSearchQuery.setText(null);
-                    partSearchQuery.setPromptText("Enter Part ID");
-                } else {
-                    partSearchQuery.setText(null);
-                    partSearchQuery.setPromptText("Part ID not found");
-                }
-            });
-        } finally {
-            
+        boolean found = false;
+        for(Part part: Inventory.getAllParts()) {
+            if (part.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
+                partsTable.getSelectionModel().select(part);
+                partSearchQuery.setPromptText("Enter Part ID");
+                found = true;
+                break;
+            }
         }
-        
+        if (!found) { partSearchQuery.setPromptText("Part ID not found"); }
+        partSearchQuery.clear();
     }
     
-    public void searchProductsButton(ActionEvent event) throws IOException {
-        Inventory.getAllProducts().forEach((item) -> {
-            if (item.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
-                productTable.getSelectionModel().select(item);
+    public void searchProductsButton() {
+        boolean found = false;
+        for(Product product: Inventory.getAllProducts()) {
+            if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
+                productTable.getSelectionModel().select(product);
+                productSearchQuery.setPromptText("Enter Product ID");
+                found = true;
+                break;
             }
-        });
+        }
+        if (!found) { productSearchQuery.setPromptText("Product ID not found"); }
+        productSearchQuery.clear();
     }
     
     
