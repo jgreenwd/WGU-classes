@@ -15,7 +15,6 @@ public abstract class Part {
     private int min;
     private int max;
 
-    // inStock needs a solid increment/decrement mechanism
     protected Part() { this.PartID = createPartID(); };
     
     protected Part(int PartID, String name, double price, int inStock, int min, int max) {
