@@ -45,7 +45,7 @@ public abstract class Part {
     /* always return a higher partID than current highest partID so
      * that deleted partIDs are still viable for historical references
      */
-    public int createPartID() {
+    public static int createPartID() {
         int i = 1;
         for(Part item: Inventory.getAllParts()) {
             if (item.getPartID() >= i) {
