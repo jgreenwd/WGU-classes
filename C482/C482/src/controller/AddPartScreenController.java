@@ -38,18 +38,22 @@ public class AddPartScreenController implements Initializable {
     
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        //TODO: insert part validation
+        int min = Integer.parseInt(minField.getText());
+        int max = Integer.parseInt(maxField.getText());
+        int machID = Integer.parseInt(sourceNameField.getText());
+        double price = Double.parseDouble((priceField.getText()).replace("$", ""));
+        String partName = partNameField.getText();
+        String companyName = sourceNameField.getText();
         
         // save as InHouse part
         if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
             InHouse partToAdd = new InHouse();
-            partToAdd.setPartID(partToAdd.createPartID());
-            partToAdd.setName(partNameField.getText());
+            partToAdd.setName(partName);
             partToAdd.setInStock(Integer.parseInt(invField.getText()));
-            partToAdd.setMin(Integer.parseInt(minField.getText()));
-            partToAdd.setMax(Integer.parseInt(maxField.getText()));
-            partToAdd.setPrice(Double.parseDouble((priceField.getText()).replace("$", "")));
-            partToAdd.setMachineID(Integer.parseInt(sourceNameField.getText()));
+            partToAdd.setMin(min);
+            partToAdd.setMax(max);
+            partToAdd.setPrice(price);
+            partToAdd.setMachineID(machID);
             
             Inventory.addPart(partToAdd);
         }
@@ -57,12 +61,11 @@ public class AddPartScreenController implements Initializable {
         // save Outsourced part
         if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
             Outsourced partToAdd = new Outsourced();
-            partToAdd.setPartID(partToAdd.createPartID());
-            partToAdd.setName(partNameField.getText());
+            partToAdd.setName(partName);
             partToAdd.setInStock(Integer.parseInt(invField.getText()));
-            partToAdd.setMin(Integer.parseInt(minField.getText()));
-            partToAdd.setMax(Integer.parseInt(maxField.getText()));
-            partToAdd.setPrice(Double.parseDouble((priceField.getText()).replace("$", "")));
+            partToAdd.setMin(min);
+            partToAdd.setMax(max);
+            partToAdd.setPrice(price);
             partToAdd.setCompanyName(sourceNameField.getText());
             
             Inventory.addPart(partToAdd);
@@ -92,7 +95,11 @@ public class AddPartScreenController implements Initializable {
     /* ---------- Initialize Part Screen ---------- */
     @Override public void initialize(URL url, ResourceBundle rb) {
         
-        // create ToggleGroup for RadioButtons
+        /* ---------- RadioButtons ----------
+         * 1. create ToggleGroup for RadioButtons
+         * 2. add listener to each RadioButton
+         * 3. set InHouse as default RadioButton value
+         * -------------------------------- */
         this.inHouseRadio.setToggleGroup(partSource);
         this.outsourcedRadio.setToggleGroup(partSource);
         
@@ -109,7 +116,24 @@ public class AddPartScreenController implements Initializable {
             }
         });
         
-        // set default RadioButton option as InHouse
         partSource.selectToggle(inHouseRadio);
-    }    
+        
+        
+        /* ---------- TextField Listeners ---------- */
+        invField.textProperty().addListener((obs, prev, next) -> {
+            invField.setText(InputControl.IntCtrl(next));
+        });
+        
+        minField.textProperty().addListener((obs, prev, next) -> {
+            minField.setText(InputControl.IntCtrl(next));
+        });
+        
+        maxField.textProperty().addListener((obs, prev, next) -> {
+            maxField.setText(InputControl.IntCtrl(next));
+        });
+        
+        priceField.textProperty().addListener((obs) -> {
+            priceField = InputControl.DblCtrl(priceField);
+        });
+    }
 }

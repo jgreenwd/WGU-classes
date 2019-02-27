@@ -25,9 +25,9 @@ import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
 
+    private final ToggleGroup partSource = new ToggleGroup();
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
-    private ToggleGroup partSource;
     @FXML private TextField idField;
     @FXML private TextField partNameField;
     @FXML private TextField invField;
@@ -115,8 +115,11 @@ public class ModifyPartScreenController implements Initializable {
     
     /* ---------- Initialize Part Screen ---------- */
     @Override public void initialize(URL url, ResourceBundle rb) {
-        // create ToggleGroup for RadioButtons
-        partSource = new ToggleGroup();
+        
+        /* ---------- RadioButtons ----------
+         * 1. create ToggleGroup for RadioButtons
+         * 2. add listener to each RadioButton
+         * -------------------------------- */
         this.inHouseRadio.setToggleGroup(partSource);
         this.outsourcedRadio.setToggleGroup(partSource);
         
@@ -132,5 +135,22 @@ public class ModifyPartScreenController implements Initializable {
                 sourceNameField.setPromptText("Company Name");
             }
         });
-    }    
+        
+        /* ---------- TextField Listeners ---------- */
+        invField.textProperty().addListener((obs, prev, next) -> {
+            invField.setText(InputControl.IntCtrl(next));
+        });
+        
+        minField.textProperty().addListener((obs, prev, next) -> {
+            minField.setText(InputControl.IntCtrl(next));
+        });
+        
+        maxField.textProperty().addListener((obs, prev, next) -> {
+            maxField.setText(InputControl.IntCtrl(next));
+        });
+        
+        priceField.textProperty().addListener((obs) -> {
+            priceField = InputControl.DblCtrl(priceField);
+        });
+    }
 }
