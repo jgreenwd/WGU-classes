@@ -10,8 +10,8 @@ package model;
 import java.util.ArrayList;
 
 public final class Inventory {
-    private static ArrayList<Part> allParts = new ArrayList<>();
-    private static ArrayList<Product> products = new ArrayList<>();
+    private final static ArrayList<Part> allParts = new ArrayList<>();
+    private final static ArrayList<Product> products = new ArrayList<>();
     
     
     /* ---------- Parts - Management Methods ---------- */
@@ -34,7 +34,7 @@ public final class Inventory {
     }
     
     
-    /* ---------- Products - UML Rubric Methods ---------- */
+    /* ---------- Products - Management Methods ---------- */
     public static ArrayList<Product> getAllProducts() { return products; }
     public static void addProduct(Product product) { products.add(product); }
     public static boolean removeProduct(Product product) { return products.remove(product); }
