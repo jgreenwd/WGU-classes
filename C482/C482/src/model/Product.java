@@ -72,7 +72,7 @@ public class Product {
     /* always return a higher productID than current highest productID so
      * that deleted productIDs are still viable for historical references
      */
-    public final int createProductID() {
+    public static int createProductID() {
         if (Inventory.getAllProducts().isEmpty()) { return 1; }
         
         int i = 1;

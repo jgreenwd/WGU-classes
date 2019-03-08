@@ -15,8 +15,7 @@ public abstract class Part {
     private int min;
     private int max;
 
-    // inStock needs a solid increment/decrement mechanism
-    protected Part() {};
+    protected Part() { this.PartID = createPartID(); };
     
     protected Part(int PartID, String name, double price, int inStock, int min, int max) {
         this.PartID = PartID;
@@ -45,7 +44,7 @@ public abstract class Part {
     /* always return a higher partID than current highest partID so
      * that deleted partIDs are still viable for historical references
      */
-    public int createPartID() {
+    public static int createPartID() {
         int i = 1;
         for(Part item: Inventory.getAllParts()) {
             if (item.getPartID() >= i) {
