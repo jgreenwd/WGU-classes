@@ -11,8 +11,6 @@ import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,47 +47,50 @@ public class MainScreenController implements Initializable {
     @FXML private TextField productSearchQuery;
     
     public void searchPartsButton() {
-        boolean found = false;
-        exceptionMessage.setVisible(false);
-        int temp;
+//        boolean found = false;
+//        exceptionMessage.setVisible(false);
+//        int temp;
+//        for(Part part: Inventory.getAllParts()) {
+//            try {
+//                temp = Integer.parseInt(partSearchQuery.getText());
+//                if (part.getPartID() == temp) {
+//                    partsTable.getSelectionModel().select(part);
+//                    partSearchQuery.setPromptText("Enter Part ID");
+//                    found = true;
+//                    break;
+//                }
+//            } catch (NumberFormatException e) {
+//                exceptionMessage.setText("Please enter a valid Part ID");
+//                exceptionMessage.setVisible(true);
+//            }
+//        }
+//        if (!found) { partSearchQuery.setPromptText("Part ID not found"); }
+//        partSearchQuery.clear();
         for(Part part: Inventory.getAllParts()) {
-            try {
-                temp = Integer.parseInt(partSearchQuery.getText());
-                if (part.getPartID() == temp) {
-                    partsTable.getSelectionModel().select(part);
-                    partSearchQuery.setPromptText("Enter Part ID");
-                    found = true;
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                exceptionMessage.setText("Please enter a valid Part ID");
-                exceptionMessage.setVisible(true);
-            }
+            System.out.println(part.getName());
         }
-        if (!found) { partSearchQuery.setPromptText("Part ID not found"); }
-        partSearchQuery.clear();
     }
     
     public void searchProductsButton() {
-        boolean found = false;
-        exceptionMessage.setVisible(false);
-        int temp;
-        for(Product product: Inventory.getAllProducts()) {
-            try {
-                temp = Integer.parseInt(productSearchQuery.getText());
-                if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
-                    productTable.getSelectionModel().select(product);
-                    productSearchQuery.setPromptText("Enter Product ID");
-                    found = true;
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                exceptionMessage.setText("Please enter a valid Product ID");
-                exceptionMessage.setVisible(true);
-            }
-        }
-        if (!found) { productSearchQuery.setPromptText("Product ID not found"); }
-        productSearchQuery.clear();
+//        boolean found = false;
+//        exceptionMessage.setVisible(false);
+//        int temp;
+//        for(Product product: Inventory.getAllProducts()) {
+//            try {
+//                temp = Integer.parseInt(productSearchQuery.getText());
+//                if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
+//                    productTable.getSelectionModel().select(product);
+//                    productSearchQuery.setPromptText("Enter Product ID");
+//                    found = true;
+//                    break;
+//                }
+//            } catch (NumberFormatException e) {
+//                exceptionMessage.setText("Please enter a valid Product ID");
+//                exceptionMessage.setVisible(true);
+//            }
+//        }
+//        if (!found) { productSearchQuery.setPromptText("Product ID not found"); }
+//        productSearchQuery.clear();
     }
     
     
@@ -127,44 +128,43 @@ public class MainScreenController implements Initializable {
     
     public void deletePartsButton(ActionEvent event) throws IOException {
         Inventory.deletePart(partsTable.getSelectionModel().getSelectedItem());
-        partsTable.setItems( updatePartsDisplay() );
     }
     
     
     /* ---------- Products Management Segment ---------- */
-    @FXML private TableView<Product> productTable;
-    @FXML private TableColumn<Product, String> productIdColumn;
-    @FXML private TableColumn<Product, String> productNameColumn;
-    @FXML private TableColumn<Product, String> productInvColumn;
-    @FXML private TableColumn<Product, String> productPriceColumn;
-    
+//    @FXML private TableView<Product> productTable;
+//    @FXML private TableColumn<Product, String> productIdColumn;
+//    @FXML private TableColumn<Product, String> productNameColumn;
+//    @FXML private TableColumn<Product, String> productInvColumn;
+//    @FXML private TableColumn<Product, String> productPriceColumn;
+//    
     public void addProductsButton(ActionEvent event) throws IOException {
-        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
-        Scene addProductsScene = new Scene(addProductsParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(addProductsScene);
-        window.show();
+//        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
+//        Scene addProductsScene = new Scene(addProductsParent);
+//        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+//        window.setScene(addProductsScene);
+//        window.show();
     }
-    
+//    
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
-        Parent modifyProductsParent = loader.load();
-        Scene modifyProductsScene = new Scene(modifyProductsParent);
-        ModifyProductScreenController controller = loader.getController();
-        
-        // send product info from here
-        Product product = productTable.getSelectionModel().getSelectedItem();
-        controller.loadProduct(product);
-        
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(modifyProductsScene);
-        window.show();
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
+//        Parent modifyProductsParent = loader.load();
+//        Scene modifyProductsScene = new Scene(modifyProductsParent);
+//        ModifyProductScreenController controller = loader.getController();
+//        
+//        // send product info from here
+//        Product product = productTable.getSelectionModel().getSelectedItem();
+//        controller.loadProduct(product);
+//        
+//        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+//        window.setScene(modifyProductsScene);
+//        window.show();
     }
-    
+//    
     public void deleteProductsButton(ActionEvent event) throws IOException {
-        Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
-        productTable.setItems( updateProductsDisplay() );
+//        Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
+//        productTable.setItems( updateProductsDisplay() );
     }
     
     
@@ -173,19 +173,6 @@ public class MainScreenController implements Initializable {
         System.exit(0);
     }
     
-    public ObservableList<Part> updatePartsDisplay() {
-        ObservableList<Part> parts = FXCollections.observableArrayList();
-        Inventory.getAllParts().forEach((item) -> { parts.add(item); });
-        
-        return parts;
-    }
-    
-    public ObservableList<Product> updateProductsDisplay() {
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        Inventory.getAllProducts().forEach((item) -> { products.add(item); });
-                
-        return products;
-    }
     
     @Override public void initialize(URL url, ResourceBundle rb) {
         
@@ -195,15 +182,15 @@ public class MainScreenController implements Initializable {
         partInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        partsTable.setItems( updatePartsDisplay() );
+        partsTable = new TableView<>(Inventory.getAllParts());
         
 
         /* ---------- init products table display ---------- */
-        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
-        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
-        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        productTable.setItems( updateProductsDisplay() );
+//        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
+//        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+//        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+//
+//        productTable.setItems( updateProductsDisplay() );
     }
 }
