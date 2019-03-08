@@ -36,21 +36,21 @@ public class C482 extends Application {
         Inventory.addPart(part4);
         
         // add products
-        ArrayList<Part> partset1 = new ArrayList<>();
-        partset1.add(part1);
-        partset1.add(part2);
-        partset1.add(part3);
-        partset1.add(part4);
-        
-        ArrayList<Part> partset2 = new ArrayList<>();
-        partset2.add(part2);
-        partset2.add(part4);
-        
-        Product product1 = new Product(partset1, 001, "Doohickey", 14.95, 0,0,999);
-        Product product2 = new Product(partset2, 002, "Doodad", 7.81, 0,0,999);
-        
-        Inventory.addProduct(product1);
-        Inventory.addProduct(product2);
+//        ArrayList<Part> partset1 = new ArrayList<>();
+//        partset1.add(part1);
+//        partset1.add(part2);
+//        partset1.add(part3);
+//        partset1.add(part4);
+//        
+//        ArrayList<Part> partset2 = new ArrayList<>();
+//        partset2.add(part2);
+//        partset2.add(part4);
+//        
+//        Product product1 = new Product(partset1, 001, "Doohickey", 14.95, 0,0,999);
+//        Product product2 = new Product(partset2, 002, "Doodad", 7.81, 0,0,999);
+//        
+//        Inventory.addProduct(product1);
+//        Inventory.addProduct(product2);
     }
     
     public static void main(String[] args) {

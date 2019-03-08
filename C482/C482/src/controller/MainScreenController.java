@@ -47,28 +47,28 @@ public class MainScreenController implements Initializable {
     @FXML private TextField productSearchQuery;
     
     public void searchPartsButton() {
-//        boolean found = false;
-//        exceptionMessage.setVisible(false);
-//        int temp;
-//        for(Part part: Inventory.getAllParts()) {
-//            try {
-//                temp = Integer.parseInt(partSearchQuery.getText());
-//                if (part.getPartID() == temp) {
-//                    partsTable.getSelectionModel().select(part);
-//                    partSearchQuery.setPromptText("Enter Part ID");
-//                    found = true;
-//                    break;
-//                }
-//            } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Please enter a valid Part ID");
-//                exceptionMessage.setVisible(true);
-//            }
-//        }
-//        if (!found) { partSearchQuery.setPromptText("Part ID not found"); }
-//        partSearchQuery.clear();
+        boolean found = false;
+        exceptionMessage.setVisible(false);
+        int temp;
         for(Part part: Inventory.getAllParts()) {
-            System.out.println(part.getName());
+            try {
+                temp = Integer.parseInt(partSearchQuery.getText());
+                if (part.getPartID() == temp) {
+                    partsTable.getSelectionModel().select(part);
+                    partSearchQuery.setPromptText("Enter Part ID");
+                    found = true;
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Please enter a valid Part ID");
+                exceptionMessage.setVisible(true);
+            }
         }
+        if (!found) {
+            partSearchQuery.setPromptText("Part ID not found");
+            partsTable.getSelectionModel().clearSelection();
+        }
+        partSearchQuery.clear();
     }
     
     public void searchProductsButton() {
@@ -95,7 +95,7 @@ public class MainScreenController implements Initializable {
     
     
     /* ---------- Parts Management Segment ---------- */
-    @FXML private TableView<Part> partsTable;
+    @FXML private TableView<Part> partsTable = new TableView<>();
     @FXML private TableColumn<Part, String> partIdColumn;
     @FXML private TableColumn<Part, String> partNameColumn;
     @FXML private TableColumn<Part, String> partInvColumn;
@@ -182,8 +182,7 @@ public class MainScreenController implements Initializable {
         partInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        partsTable = new TableView<>(Inventory.getAllParts());
-        
+        partsTable.setItems(Inventory.getAllParts());
 
         /* ---------- init products table display ---------- */
 //        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
