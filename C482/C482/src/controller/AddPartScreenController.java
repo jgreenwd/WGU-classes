@@ -24,7 +24,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class AddPartScreenController implements Initializable {
+    /* ---------- Display Exceptions on this Label ---------- */
+    @FXML private Label exceptionMessage;
 
+    
     private final ToggleGroup partSource = new ToggleGroup();
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
@@ -38,41 +41,69 @@ public class AddPartScreenController implements Initializable {
     
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        int inv = Integer.parseInt(invField.getText());
-        int min = Integer.parseInt(minField.getText());
-        int max = Integer.parseInt(maxField.getText());
-        double price = Double.parseDouble((priceField.getText()).replace("$", ""));
-        String partName = partNameField.getText();
-        String source = sourceNameField.getText();
+        boolean validPart = true;
+        boolean saved = false;
         
-        // save as InHouse part
-        if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
-            InHouse partToAdd = new InHouse();
-            partToAdd.setName(partName);
-            partToAdd.setInStock(inv);
-            partToAdd.setMin(min);
-            partToAdd.setMax(max);
-            partToAdd.setPrice(price);
-            partToAdd.setMachineID(Integer.parseInt(source));
+        try {
+            int inv = Integer.parseInt(invField.getText());
+            int min = Integer.parseInt(minField.getText());
+            int max = Integer.parseInt(maxField.getText());
+            double price = Double.parseDouble((priceField.getText()).replace("$", ""));
+            String partName = partNameField.getText();
+            String source = sourceNameField.getText();
             
-            Inventory.addPart(partToAdd);
-        }
+            if (invField.getText() == null || minField.getText() == null ||
+                maxField.getText() == null || priceField.getText() == null ||
+                partName.isEmpty() || source.isEmpty()) {
+                validPart = false;
+                exceptionMessage.setText("All fields must have a value");
+                exceptionMessage.setVisible(true);
+            } else if (max < min) {
+                validPart = false;
+                exceptionMessage.setText("Min value must not exceed Max value");
+                exceptionMessage.setVisible(true);
+            } else if (inv > max || min > inv) {
+                validPart = false;
+                exceptionMessage.setText("Inventory Level must be between Min and Max values");
+                exceptionMessage.setVisible(true);
+            } else {
+                validPart = true;
+                exceptionMessage.setVisible(false);
+            }
+            
+            // save as InHouse part
+            if (this.partSource.getSelectedToggle().equals(this.inHouseRadio) && validPart) {
+                InHouse partToAdd = new InHouse();
+                partToAdd.setName(partName);
+                partToAdd.setInStock(inv);
+                partToAdd.setMin(min);
+                partToAdd.setMax(max);
+                partToAdd.setPrice(price);
+                partToAdd.setMachineID(Integer.parseInt(source));
+            
+                Inventory.addPart(partToAdd);
+                saved = true;
+            }
         
-        // save Outsourced part
-        if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
-            Outsourced partToAdd = new Outsourced();
-            partToAdd.setName(partName);
-            partToAdd.setInStock(inv);
-            partToAdd.setMin(min);
-            partToAdd.setMax(max);
-            partToAdd.setPrice(price);
-            partToAdd.setCompanyName(source);
+            // save Outsourced part
+            if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio) && validPart) {
+                Outsourced partToAdd = new Outsourced();
+                partToAdd.setName(partName);
+                partToAdd.setInStock(inv);
+                partToAdd.setMin(min);
+                partToAdd.setMax(max);
+                partToAdd.setPrice(price);
+                partToAdd.setCompanyName(source);
             
-            Inventory.addPart(partToAdd);
+                Inventory.addPart(partToAdd);
+                saved = true;
+            }
+        } catch (NumberFormatException e) {
+            
         }
         
         // return to Main Screen after save
-        returnToMainScreen(event);
+        if (saved) { returnToMainScreen(event); }
     }
     
     
