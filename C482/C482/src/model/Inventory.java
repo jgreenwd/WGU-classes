@@ -7,15 +7,16 @@
 
 package model;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public final class Inventory {
-    private final static ArrayList<Part> allParts = new ArrayList<>();
-    private final static ArrayList<Product> products = new ArrayList<>();
-    
+    private final static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private final static ObservableList<Product> products = FXCollections.observableArrayList();
+
     
     /* ---------- Parts - Management Methods ---------- */
-    public static ArrayList<Part> getAllParts() { return allParts; }
+    public static ObservableList<Part> getAllParts() { return allParts; }
     public static void addPart(Part part) { allParts.add(part); }
     public static boolean deletePart(Part part) { return allParts.remove(part); }
    
@@ -35,7 +36,7 @@ public final class Inventory {
     
     
     /* ---------- Products - Management Methods ---------- */
-    public static ArrayList<Product> getAllProducts() { return products; }
+    public static ObservableList<Product> getAllProducts() { return products; }
     public static void addProduct(Product product) { products.add(product); }
     public static boolean removeProduct(Product product) { return products.remove(product); }
     
