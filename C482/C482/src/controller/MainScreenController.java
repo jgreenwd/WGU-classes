@@ -154,19 +154,24 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
-        Parent modifyProductsParent = loader.load();
-        Scene modifyProductsScene = new Scene(modifyProductsParent);
-        ModifyProductScreenController controller = loader.getController();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
+            Parent modifyProductsParent = loader.load();
+            Scene modifyProductsScene = new Scene(modifyProductsParent);
+            ModifyProductScreenController controller = loader.getController();
         
-        // send product info from here
-        Product product = productTable.getSelectionModel().getSelectedItem();
-        controller.loadProduct(product);
+            // send product info from here
+            Product product = productTable.getSelectionModel().getSelectedItem();
+            controller.loadProduct(product);
         
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(modifyProductsScene);
-        window.show();
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(modifyProductsScene);
+            window.show();
+        } catch (NullPointerException e) {
+            exceptionMessage.setText("Please select a Product from the list");
+            exceptionMessage.setVisible(true);
+        }
     }
     
     public void deleteProductsButton(ActionEvent event) throws IOException {
