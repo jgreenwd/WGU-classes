@@ -26,7 +26,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /** TODO:
- *  - selecting Modify Part needs an alert for no-part-selected
  *  - exception handling
  *      - inventory bounds checking on entry
  *      - product must have at least 1 part
@@ -72,25 +71,28 @@ public class MainScreenController implements Initializable {
     }
     
     public void searchProductsButton() {
-//        boolean found = false;
-//        exceptionMessage.setVisible(false);
-//        int temp;
-//        for(Product product: Inventory.getAllProducts()) {
-//            try {
-//                temp = Integer.parseInt(productSearchQuery.getText());
-//                if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
-//                    productTable.getSelectionModel().select(product);
-//                    productSearchQuery.setPromptText("Enter Product ID");
-//                    found = true;
-//                    break;
-//                }
-//            } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Please enter a valid Product ID");
-//                exceptionMessage.setVisible(true);
-//            }
-//        }
-//        if (!found) { productSearchQuery.setPromptText("Product ID not found"); }
-//        productSearchQuery.clear();
+        boolean found = false;
+        exceptionMessage.setVisible(false);
+        int temp;
+        for(Product product: Inventory.getAllProducts()) {
+            try {
+                temp = Integer.parseInt(productSearchQuery.getText());
+                if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
+                    productTable.getSelectionModel().select(product);
+                    productSearchQuery.setPromptText("Enter Product ID");
+                    found = true;
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Please enter a valid Product ID");
+                exceptionMessage.setVisible(true);
+            }
+        }
+        if (!found) { 
+            productSearchQuery.setPromptText("Product ID not found");
+            productTable.getSelectionModel().clearSelection();
+        }
+        productSearchQuery.clear();
     }
     
     
@@ -110,20 +112,25 @@ public class MainScreenController implements Initializable {
     }
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
-        Parent modifyPartParent = loader.load();
-        Scene modifyPartScene = new Scene(modifyPartParent);
-        ModifyPartScreenController controller = loader.getController();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
+            Parent modifyPartParent = loader.load();
+            Scene modifyPartScene = new Scene(modifyPartParent);
+            ModifyPartScreenController controller = loader.getController();
         
-        // identify part type and send to loadPart((source-type) part)
-        Part part = partsTable.getSelectionModel().getSelectedItem();
-        if (part instanceof InHouse) { controller.loadPart((InHouse)part); }
-        else { controller.loadPart((Outsourced)part); }
-        
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(modifyPartScene);
-        window.show();
+            // identify part type and send to loadPart((source-type) part)
+            Part part = partsTable.getSelectionModel().getSelectedItem();
+            if (part instanceof InHouse) { controller.loadPart((InHouse)part); }
+            else { controller.loadPart((Outsourced)part); }
+
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(modifyPartScene);
+            window.show();
+        } catch (NullPointerException e) {
+            exceptionMessage.setText("Please select a Part from the list");
+            exceptionMessage.setVisible(true);
+        }
     }
     
     public void deletePartsButton(ActionEvent event) throws IOException {
@@ -132,39 +139,38 @@ public class MainScreenController implements Initializable {
     
     
     /* ---------- Products Management Segment ---------- */
-//    @FXML private TableView<Product> productTable;
-//    @FXML private TableColumn<Product, String> productIdColumn;
-//    @FXML private TableColumn<Product, String> productNameColumn;
-//    @FXML private TableColumn<Product, String> productInvColumn;
-//    @FXML private TableColumn<Product, String> productPriceColumn;
-//    
+    @FXML private TableView<Product> productTable;
+    @FXML private TableColumn<Product, String> productIdColumn;
+    @FXML private TableColumn<Product, String> productNameColumn;
+    @FXML private TableColumn<Product, String> productInvColumn;
+    @FXML private TableColumn<Product, String> productPriceColumn;
+    
     public void addProductsButton(ActionEvent event) throws IOException {
-//        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
-//        Scene addProductsScene = new Scene(addProductsParent);
-//        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//        window.setScene(addProductsScene);
-//        window.show();
+        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
+        Scene addProductsScene = new Scene(addProductsParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(addProductsScene);
+        window.show();
     }
-//    
+    
     public void modifyProductsButton(ActionEvent event) throws IOException {
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
-//        Parent modifyProductsParent = loader.load();
-//        Scene modifyProductsScene = new Scene(modifyProductsParent);
-//        ModifyProductScreenController controller = loader.getController();
-//        
-//        // send product info from here
-//        Product product = productTable.getSelectionModel().getSelectedItem();
-//        controller.loadProduct(product);
-//        
-//        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//        window.setScene(modifyProductsScene);
-//        window.show();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
+        Parent modifyProductsParent = loader.load();
+        Scene modifyProductsScene = new Scene(modifyProductsParent);
+        ModifyProductScreenController controller = loader.getController();
+        
+        // send product info from here
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        controller.loadProduct(product);
+        
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(modifyProductsScene);
+        window.show();
     }
-//    
+    
     public void deleteProductsButton(ActionEvent event) throws IOException {
-//        Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
-//        productTable.setItems( updateProductsDisplay() );
+        Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
     }
     
     
@@ -185,11 +191,11 @@ public class MainScreenController implements Initializable {
         partsTable.setItems(Inventory.getAllParts());
 
         /* ---------- init products table display ---------- */
-//        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
-//        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
-//        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//
-//        productTable.setItems( updateProductsDisplay() );
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        productTable.setItems( Inventory.getAllProducts());
     }
 }
