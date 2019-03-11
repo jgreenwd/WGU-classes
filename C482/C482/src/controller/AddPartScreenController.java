@@ -38,11 +38,10 @@ public class AddPartScreenController implements Initializable {
     @FXML private TextField maxField;
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
-    
+    boolean validPart = false;    
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        boolean validPart = true;
-        boolean saved = false;
+        exceptionMessage.setVisible(false);
         
         try {
             int inv = Integer.parseInt(invField.getText());
@@ -52,27 +51,10 @@ public class AddPartScreenController implements Initializable {
             String partName = partNameField.getText();
             String source = sourceNameField.getText();
             
-            if (invField.getText() == null || minField.getText() == null ||
-                maxField.getText() == null || priceField.getText() == null ||
-                partName.isEmpty() || source.isEmpty()) {
-                validPart = false;
-                exceptionMessage.setText("All fields must have a value");
-                exceptionMessage.setVisible(true);
-            } else if (max < min) {
-                validPart = false;
-                exceptionMessage.setText("Min value must not exceed Max value");
-                exceptionMessage.setVisible(true);
-            } else if (inv > max || min > inv) {
-                validPart = false;
-                exceptionMessage.setText("Inventory Level must be between Min and Max values");
-                exceptionMessage.setVisible(true);
-            } else {
-                validPart = true;
-                exceptionMessage.setVisible(false);
-            }
+            if (min > max) { validPart = false; }
             
             // save as InHouse part
-            if (this.partSource.getSelectedToggle().equals(this.inHouseRadio) && validPart) {
+            if (this.partSource.getSelectedToggle().equals(this.inHouseRadio)) {
                 InHouse partToAdd = new InHouse();
                 partToAdd.setName(partName);
                 partToAdd.setInStock(inv);
@@ -82,11 +64,11 @@ public class AddPartScreenController implements Initializable {
                 partToAdd.setMachineID(Integer.parseInt(source));
             
                 Inventory.addPart(partToAdd);
-                saved = true;
+                validPart = true;
             }
         
             // save Outsourced part
-            if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio) && validPart) {
+            if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio)) {
                 Outsourced partToAdd = new Outsourced();
                 partToAdd.setName(partName);
                 partToAdd.setInStock(inv);
@@ -96,14 +78,16 @@ public class AddPartScreenController implements Initializable {
                 partToAdd.setCompanyName(source);
             
                 Inventory.addPart(partToAdd);
-                saved = true;
+                validPart = true;
             }
         } catch (NumberFormatException e) {
-            
+            exceptionMessage.setText("Invalid Part Input");
+            exceptionMessage.setVisible(true);
+            validPart = false;
         }
         
         // return to Main Screen after save
-        if (saved) { returnToMainScreen(event); }
+        if (validPart) { returnToMainScreen(event); }
     }
     
     
@@ -128,21 +112,18 @@ public class AddPartScreenController implements Initializable {
         
         /* ---------- RadioButtons ----------
          * 1. create ToggleGroup for RadioButtons
-         * 2. add listener to each RadioButton
+         * 2. add listener to RadioButton ToggleGroup
          * 3. set InHouse as default RadioButton value
          * -------------------------------- */
         this.inHouseRadio.setToggleGroup(partSource);
         this.outsourcedRadio.setToggleGroup(partSource);
         
-        inHouseRadio.selectedProperty().addListener((obs, then, now) -> {
-            if (now) {
+        partSource.selectedToggleProperty().addListener((obs, prev, next) -> {
+            if (next == inHouseRadio) {
                 sourceTitleLabel.setText("Machine ID");
                 sourceNameField.clear();
                 sourceNameField.setPromptText("Machine ID");
-            }
-        });
-        outsourcedRadio.selectedProperty().addListener((obs, then, now) -> {
-            if (now) {
+            } else {
                 sourceTitleLabel.setText("Company Name");
                 sourceNameField.clear();
                 sourceNameField.setPromptText("Company Name");
@@ -150,7 +131,6 @@ public class AddPartScreenController implements Initializable {
         });
         
         partSource.selectToggle(inHouseRadio);
-        
         
         /* ---------- TextField Listeners ---------- */
         invField.textProperty().addListener((obs, prev, next) -> {
@@ -165,14 +145,10 @@ public class AddPartScreenController implements Initializable {
             maxField.setText(InputControl.IntCtrl(next));
         });
         
-        sourceNameField.textProperty().addListener((obs, prev, next) -> {
-           if (partSource.getSelectedToggle() == inHouseRadio) {
-               sourceNameField.setText(InputControl.IntCtrl(next));
-           } 
-        });
-        
         priceField.textProperty().addListener((obs) -> {
             priceField = InputControl.DblCtrl(priceField);
         });
+        
+        
     }
 }
