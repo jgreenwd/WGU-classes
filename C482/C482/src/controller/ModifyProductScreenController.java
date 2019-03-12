@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -33,6 +34,7 @@ public class ModifyProductScreenController implements Initializable {
     @FXML private TextField priceField;
     @FXML private TextField minField;
     @FXML private TextField maxField;
+    @FXML private Label exceptionMessage;
     
     @FXML private TableView<Part> availablePartsTable;
     @FXML private TableColumn<Part, String> availablePartIdColumn;
@@ -68,11 +70,28 @@ public class ModifyProductScreenController implements Initializable {
     @FXML private TextField partSearchQuery;
     
     public void searchPartsButton(ActionEvent event) throws IOException {
-        Inventory.getAllParts().forEach((item) -> {
-            if (item.getPartID() == Integer.parseInt(partSearchQuery.getText())) {
-                availablePartsTable.getSelectionModel().select(item);
+        boolean found = false;
+        exceptionMessage.setVisible(false);
+        int temp;
+        for(Part part: Inventory.getAllParts()) {
+            try {
+                temp = Integer.parseInt(partSearchQuery.getText());
+                if (part.getPartID() == temp) {
+                    availablePartsTable.getSelectionModel().select(part);
+                    partSearchQuery.setPromptText("Enter Part ID");
+                    found = true;
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Please enter a valid Part ID");
+                exceptionMessage.setVisible(true);
             }
-        });
+        }
+        if (!found) {
+            partSearchQuery.setPromptText("Part ID not found");
+            availablePartsTable.getSelectionModel().clearSelection();
+        }
+        partSearchQuery.clear();
     }
     
     public void addButtonPressed() {
