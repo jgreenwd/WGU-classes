@@ -48,7 +48,7 @@ public class ModifyProductScreenController implements Initializable {
     @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
     Product product = new Product();
-    ArrayList<Part> productPartsList = new ArrayList<>();
+    ObservableList<Part> productPartsList = FXCollections.observableArrayList();
     
     
     public void loadProduct(Product product) {
@@ -137,7 +137,7 @@ public class ModifyProductScreenController implements Initializable {
         addedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         addedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
+        addedPartsTable.setItems( productPartsList );
     }    
     
 }
