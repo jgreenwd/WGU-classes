@@ -23,11 +23,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class AddPartScreenController implements Initializable {
-    /* ---------- Display Exceptions on this Label ---------- */
-    @FXML private Label exceptionMessage;
+// TODO: confirmation dialog for cancel click
 
-    
+public class AddPartScreenController implements Initializable {
+
     private final ToggleGroup partSource = new ToggleGroup();
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
@@ -38,80 +37,37 @@ public class AddPartScreenController implements Initializable {
     @FXML private TextField maxField;
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
-    
+    @FXML private Label exceptionMessage;
+    private int inv, min, max, MachineID;
+    private boolean isInHouse = true;
+    private double price;
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        boolean validPart = true;
-        boolean saved = false;
+        exceptionMessage.setVisible(false);
+        Part partToAdd;
         
-        try {
-            int inv = Integer.parseInt(invField.getText());
-            int min = Integer.parseInt(minField.getText());
-            int max = Integer.parseInt(maxField.getText());
-            double price = Double.parseDouble((priceField.getText()).replace("$", ""));
-            String partName = partNameField.getText();
-            String source = sourceNameField.getText();
-            
-            if (invField.getText() == null || minField.getText() == null ||
-                maxField.getText() == null || priceField.getText() == null ||
-                partName.isEmpty() || source.isEmpty()) {
-                validPart = false;
-                exceptionMessage.setText("All fields must have a value");
-                exceptionMessage.setVisible(true);
-            } else if (max < min) {
-                validPart = false;
-                exceptionMessage.setText("Min value must not exceed Max value");
-                exceptionMessage.setVisible(true);
-            } else if (inv > max || min > inv) {
-                validPart = false;
-                exceptionMessage.setText("Inventory Level must be between Min and Max values");
-                exceptionMessage.setVisible(true);
+        // Validate Max/Inv/Min Input Values
+        if (max >= inv && inv >= min && ((MachineID != 0 && isInHouse) || (MachineID == 0 && !isInHouse))) {
+            if (isInHouse) {
+                partToAdd = new InHouse(partNameField.getText(), price, inv, min, max, MachineID);
             } else {
-                validPart = true;
-                exceptionMessage.setVisible(false);
+                partToAdd = new Outsourced(partNameField.getText(), price, inv, min, max, sourceNameField.getText());
             }
-            
-            // save as InHouse part
-            if (this.partSource.getSelectedToggle().equals(this.inHouseRadio) && validPart) {
-                InHouse partToAdd = new InHouse();
-                partToAdd.setName(partName);
-                partToAdd.setInStock(inv);
-                partToAdd.setMin(min);
-                partToAdd.setMax(max);
-                partToAdd.setPrice(price);
-                partToAdd.setMachineID(Integer.parseInt(source));
-            
-                Inventory.addPart(partToAdd);
-                saved = true;
-            }
-        
-            // save Outsourced part
-            if (this.partSource.getSelectedToggle().equals(this.outsourcedRadio) && validPart) {
-                Outsourced partToAdd = new Outsourced();
-                partToAdd.setName(partName);
-                partToAdd.setInStock(inv);
-                partToAdd.setMin(min);
-                partToAdd.setMax(max);
-                partToAdd.setPrice(price);
-                partToAdd.setCompanyName(source);
-            
-                Inventory.addPart(partToAdd);
-                saved = true;
-            }
-        } catch (NumberFormatException e) {
-            
+            // return to Main Screen after save
+            Inventory.addPart(partToAdd);
+            returnToMainScreen(event);
+        } else {
+            exceptionMessage.setText("Invalid Part Input");
+            exceptionMessage.setVisible(true);
         }
-        
-        // return to Main Screen after save
-        if (saved) { returnToMainScreen(event); }
     }
+
     
-    
-    /* ---------- Cancel page & return to Main Screen ---------- */
-    /* redundant, but added for consistency between controllers  */
+    /* ---------- Cancel Modification & Exit ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         returnToMainScreen(event);
     }
+    
     
     /* ---------- Return to Main Screen ---------- */
     public void returnToMainScreen(ActionEvent event) throws IOException {
@@ -128,51 +84,108 @@ public class AddPartScreenController implements Initializable {
         
         /* ---------- RadioButtons ----------
          * 1. create ToggleGroup for RadioButtons
-         * 2. add listener to each RadioButton
-         * 3. set InHouse as default RadioButton value
+         * 2. add listener to RadioButton ToggleGroup
+         * 3. based on toggle, validate sourceNameField
+         * 4. set InHouse as default RadioButton value
          * -------------------------------- */
         this.inHouseRadio.setToggleGroup(partSource);
         this.outsourcedRadio.setToggleGroup(partSource);
         
-        inHouseRadio.selectedProperty().addListener((obs, then, now) -> {
-            if (now) {
+        partSource.selectedToggleProperty().addListener((obs, prev, next) -> {
+            isInHouse = (next == inHouseRadio);
+            if (isInHouse) {
                 sourceTitleLabel.setText("Machine ID");
-                sourceNameField.clear();
                 sourceNameField.setPromptText("Machine ID");
+            } else {
+                sourceTitleLabel.setText("Company Name");
+                sourceNameField.setPromptText("Company Name");
             }
         });
-        outsourcedRadio.selectedProperty().addListener((obs, then, now) -> {
-            if (now) {
-                sourceTitleLabel.setText("Company Name");
-                sourceNameField.clear();
-                sourceNameField.setPromptText("Company Name");
+        
+        sourceNameField.textProperty().addListener((obs, prev, next) -> {
+            if(isInHouse) {
+                // validate MachineID
+                try {
+                    if (!sourceNameField.getText().matches("[0-9]*")) {
+                        sourceNameField.setText(prev);
+                    } else {
+                        MachineID = Integer.parseInt(next);
+                        exceptionMessage.setVisible(false);
+                    }
+                } catch (NumberFormatException e) {
+                    exceptionMessage.setText("Invalid Machine ID");
+                    exceptionMessage.setVisible(true);
+                }
+            } else {
+                MachineID = 0;
             }
         });
         
         partSource.selectToggle(inHouseRadio);
         
         
-        /* ---------- TextField Listeners ---------- */
+        /* ---------- TextField Listeners ---------- *
+         * === copied to ModifyPartScreenController ===
+         * ===      same issues here as there       ===
+         * Waaaaay too much going on here
+         * Replace with a listener on the GridPane?
+         * Implement an external class for input validation instead?
+         */
         invField.textProperty().addListener((obs, prev, next) -> {
-            invField.setText(InputControl.IntCtrl(next));
+            try {
+                if (!invField.getText().matches("[0-9]*")) {
+                    invField.setText(prev);
+                } else {
+                    inv = Integer.parseInt(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Inventory Field Input");
+                exceptionMessage.setVisible(true);
+            }
         });
         
         minField.textProperty().addListener((obs, prev, next) -> {
-            minField.setText(InputControl.IntCtrl(next));
+            try {
+                if (!minField.getText().matches("[0-9]*")) {
+                    minField.setText(prev);
+                } else {
+                    min = Integer.parseInt(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Min Field Input");
+                exceptionMessage.setVisible(true);
+            }
         });
         
         maxField.textProperty().addListener((obs, prev, next) -> {
-            maxField.setText(InputControl.IntCtrl(next));
+            try {
+                if (!maxField.getText().matches("[0-9]*")) {
+                    maxField.setText(prev);
+                } else {
+                    max = Integer.parseInt(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Max Field Input");
+                exceptionMessage.setVisible(true);
+            }
         });
         
-        sourceNameField.textProperty().addListener((obs, prev, next) -> {
-           if (partSource.getSelectedToggle() == inHouseRadio) {
-               sourceNameField.setText(InputControl.IntCtrl(next));
-           } 
-        });
-        
-        priceField.textProperty().addListener((obs) -> {
-            priceField = InputControl.DblCtrl(priceField);
+        // NOT perfect regex, but it will do for now
+        priceField.textProperty().addListener((obs, prev, next) -> {
+            try {
+                if (!priceField.getText().matches("[.0-9]*")) {
+                    priceField.setText(prev);
+                } else {
+                    price = Double.parseDouble(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Price Field Input");
+                exceptionMessage.setVisible(true);
+            }
         });
     }
 }

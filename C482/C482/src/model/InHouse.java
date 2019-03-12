@@ -10,13 +10,16 @@ package model;
 public final class InHouse extends Part {
     private int machineID;
     
-    public InHouse() {
-        super();
+    // InHouse with UNknown PartID
+    public InHouse(String name, double price, int inStock, int min, int max, int source) {
+        super(name, price, inStock, min, max);
+        setMachineID(source);
     }
     
-    public InHouse(int PartID, String name, double price, int inStock, int min, int max, int machineID) {
-        super(PartID, name, price, inStock, min, max);
-        setMachineID(machineID);
+    // InHouse with KNOWN PartID
+    public InHouse(int PartID, String name, double price, int inStock, int min, int max, int source) {
+        this(name, price, inStock, min, max, source);
+        this.setPartID(PartID);
     }
     
     public int getMachineID() { return machineID; }

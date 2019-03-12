@@ -9,7 +9,6 @@ package controller;
 import model.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +47,7 @@ public class AddProductScreenController implements Initializable {
     @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
     Product product = new Product();
-    ArrayList<Part> productPartsList = new ArrayList<>();
+    ObservableList<Part> productPartsList = FXCollections.observableArrayList();
     
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
@@ -64,22 +63,23 @@ public class AddProductScreenController implements Initializable {
     /* ---------- Add/Delete Parts Segment ---------- */
     public void addButtonPressed() {
         productPartsList.add(availablePartsTable.getSelectionModel().getSelectedItem());
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
     public void deleteButtonPressed() {
         productPartsList.remove(addedPartsTable.getSelectionModel().getSelectedItem());
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
         //TODO: validate input before executing
-        productPartsList.forEach((item) -> { product.addAssociatedPart(item); });
-        product.setName(productNameField.getText());
-        product.setPrice(Double.parseDouble(priceField.getText()));
-        product.setInStock(Integer.parseInt(invField.getText()));
-        product.setMin(Integer.parseInt(minField.getText()));
-        product.setMax(Integer.parseInt(maxField.getText()));
+        
+        if (true) {
+            productPartsList.forEach((item) -> { product.addAssociatedPart(item); });
+            product.setName(productNameField.getText());
+            product.setPrice(Double.parseDouble(priceField.getText()));
+            product.setInStock(Integer.parseInt(invField.getText()));
+            product.setMin(Integer.parseInt(minField.getText()));
+            product.setMax(Integer.parseInt(maxField.getText()));
+        }
         
         Inventory.addProduct(product);
         returnToMainScreen(event);
@@ -101,33 +101,20 @@ public class AddProductScreenController implements Initializable {
         window.show();
     }
     
-    public ObservableList<Part> updateAvailablePartsDisplay() {
-        ObservableList<Part> items = FXCollections.observableArrayList();
-        Inventory.getAllParts().forEach((part) -> { items.add(part); });
-        
-        return items;
-    }
-    
-    public ObservableList<Part> updateAddedPartsDisplay() {
-        ObservableList<Part> items = FXCollections.observableArrayList();
-        productPartsList.forEach((part) -> { items.add(part); });
-        
-        return items;
-    }
-    
+
     @Override public void initialize(URL url, ResourceBundle rb) {
         availablePartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
         availablePartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         availablePartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         availablePartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        availablePartsTable.setItems( updateAvailablePartsDisplay() );
+        availablePartsTable.setItems( Inventory.getAllParts() );
         
         addedPartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
         addedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         addedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         addedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
+        addedPartsTable.setItems( productPartsList );
     }    
 }

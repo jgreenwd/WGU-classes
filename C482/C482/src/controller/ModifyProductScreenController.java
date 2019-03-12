@@ -48,7 +48,7 @@ public class ModifyProductScreenController implements Initializable {
     @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
     Product product = new Product();
-    ArrayList<Part> productPartsList = new ArrayList<>();
+    ObservableList<Part> productPartsList = FXCollections.observableArrayList();
     
     
     public void loadProduct(Product product) {
@@ -96,7 +96,7 @@ public class ModifyProductScreenController implements Initializable {
         product.setMin(Integer.parseInt(minField.getText()));
         product.setMax(Integer.parseInt(maxField.getText()));
         
-        Inventory.updateProduct(product);
+        Inventory.updateProduct(Integer.parseInt(idField.getText()) -1, product);
         returnToMainScreen(event);
     }
 
@@ -117,13 +117,6 @@ public class ModifyProductScreenController implements Initializable {
         window.show();
     }
     
-    public ObservableList<Part> updateAvailablePartsDisplay() {
-        ObservableList<Part> items = FXCollections.observableArrayList();
-        Inventory.getAllParts().forEach((part) -> { items.add(part); });
-        
-        return items;
-    }
-    
     public ObservableList<Part> updateAddedPartsDisplay() {
         ObservableList<Part> items = FXCollections.observableArrayList();
         productPartsList.forEach((part) -> { items.add(part); });
@@ -137,14 +130,14 @@ public class ModifyProductScreenController implements Initializable {
         availablePartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         availablePartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        availablePartsTable.setItems( updateAvailablePartsDisplay() );
+        availablePartsTable.setItems( Inventory.getAllParts() );
         
         addedPartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
         addedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         addedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         addedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
+        addedPartsTable.setItems( productPartsList );
     }    
     
 }

@@ -15,7 +15,16 @@ public abstract class Part {
     private int min;
     private int max;
 
-    protected Part() { this.PartID = createPartID(); };
+    private Part() { this.PartID = createPartID(); };
+
+    protected Part(String name, double price, int inStock, int min, int max) {
+        this(); // if PartID is unknown, generate one
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+        this.min = min;
+        this.max = max;
+    }
     
     protected Part(int PartID, String name, double price, int inStock, int min, int max) {
         this.PartID = PartID;
