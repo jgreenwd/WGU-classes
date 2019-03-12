@@ -25,15 +25,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
-/* TODO: validateInput
-         addlistener for sourceTitleField
-*/
 public class AddPartScreenController implements Initializable {
 
     private final ToggleGroup partSource = new ToggleGroup();
     @FXML private RadioButton inHouseRadio; 
     @FXML private RadioButton outsourcedRadio;
-    @FXML private GridPane grid;
     @FXML private TextField partNameField;
     @FXML private TextField invField;
     @FXML private TextField priceField;
@@ -65,16 +61,17 @@ public class AddPartScreenController implements Initializable {
             exceptionMessage.setVisible(true);
         }
     }
+
     
-    
-    /* ---------- Cancel page & return to Main Screen ---------- */
-    /* redundant, but added for consistency between controllers  */
+    /* ---------- Cancel Modification & Exit ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
+        //TODO process validation
         returnToMainScreen(event);
     }
     
+    
     /* ---------- Return to Main Screen ---------- */
-    private void returnToMainScreen(ActionEvent event) throws IOException {
+    public void returnToMainScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -89,7 +86,8 @@ public class AddPartScreenController implements Initializable {
         /* ---------- RadioButtons ----------
          * 1. create ToggleGroup for RadioButtons
          * 2. add listener to RadioButton ToggleGroup
-         * 3. set InHouse as default RadioButton value
+         * 3. based on toggle, validate sourceNameField
+         * 4. set InHouse as default RadioButton value
          * -------------------------------- */
         this.inHouseRadio.setToggleGroup(partSource);
         this.outsourcedRadio.setToggleGroup(partSource);
