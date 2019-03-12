@@ -96,7 +96,7 @@ public class ModifyProductScreenController implements Initializable {
         product.setMin(Integer.parseInt(minField.getText()));
         product.setMax(Integer.parseInt(maxField.getText()));
         
-        Inventory.updateProduct(product);
+        Inventory.updateProduct(Integer.parseInt(idField.getText()) -1, product);
         returnToMainScreen(event);
     }
 

@@ -83,7 +83,7 @@ public class ModifyPartScreenController implements Initializable {
                         partNameField.getText(), price, inv, min, max, sourceNameField.getText() );
             }
         
-            Inventory.updatePart(partToUpdate);
+            Inventory.updatePart(Integer.parseInt(idField.getText()) -1, partToUpdate);
             returnToMainScreen(event);
             
         } else {
