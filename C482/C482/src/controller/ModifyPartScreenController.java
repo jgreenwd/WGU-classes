@@ -76,11 +76,11 @@ public class ModifyPartScreenController implements Initializable {
         
         if (max >= inv && inv >= min && ((MachineID != 0 && isInHouse) || (MachineID == 0 && !isInHouse))) {
             if (isInHouse) {
-                partToUpdate = new InHouse( Integer.parseInt(idField.getText()), partNameField.getText(),
-                        price, inv, min, max, MachineID );
+                partToUpdate = new InHouse( Integer.parseInt(idField.getText()), 
+                        partNameField.getText(), price, inv, min, max, MachineID );
             } else {
-                partToUpdate = new Outsourced( Integer.parseInt(idField.getText()), partNameField.getText(),
-                        price, inv, min, max, sourceNameField.getText() );
+                partToUpdate = new Outsourced( Integer.parseInt(idField.getText()), 
+                        partNameField.getText(), price, inv, min, max, sourceNameField.getText() );
             }
         
             Inventory.updatePart(partToUpdate);
@@ -134,6 +134,7 @@ public class ModifyPartScreenController implements Initializable {
         
         sourceNameField.textProperty().addListener((obs, prev, next) -> {
             if(isInHouse) {
+                // validate MachineID
                 try {
                     if (!sourceNameField.getText().matches("[0-9]*")) {
                         sourceNameField.setText(prev);

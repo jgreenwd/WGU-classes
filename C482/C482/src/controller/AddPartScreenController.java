@@ -104,6 +104,7 @@ public class AddPartScreenController implements Initializable {
         
         sourceNameField.textProperty().addListener((obs, prev, next) -> {
             if(isInHouse) {
+                // validate MachineID
                 try {
                     if (!sourceNameField.getText().matches("[0-9]*")) {
                         sourceNameField.setText(prev);
