@@ -21,7 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
@@ -47,7 +46,7 @@ public class AddPartScreenController implements Initializable {
         Part partToAdd;
         
         // Validate Max/Inv/Min Input Values
-        if (max >= inv && inv >= min && MachineID != 0) {
+        if (max >= inv && inv >= min && ((MachineID != 0 && isInHouse) || (MachineID == 0 && !isInHouse))) {
             if (isInHouse) {
                 partToAdd = new InHouse(partNameField.getText(), price, inv, min, max, MachineID);
             } else {
@@ -124,8 +123,13 @@ public class AddPartScreenController implements Initializable {
         partSource.selectToggle(inHouseRadio);
         
         
-        /* ---------- TextField Listeners ---------- */
-        
+        /* ---------- TextField Listeners ---------- *
+         * === copied to ModifyPartScreenController ===
+         * ===      same issues here as there       ===
+         * Waaaaay too much going on here
+         * Replace with a listener on the GridPane?
+         * Implement an external class for input validation instead?
+         */
         invField.textProperty().addListener((obs, prev, next) -> {
             try {
                 if (!invField.getText().matches("[0-9]*")) {
@@ -182,7 +186,5 @@ public class AddPartScreenController implements Initializable {
                 exceptionMessage.setVisible(true);
             }
         });
-        
-
     }
 }
