@@ -105,7 +105,6 @@ public class AddProductScreenController implements Initializable {
     }
 
     /* ---------- Cancel page & return to Main Screen ---------- */
-    /* redundant, but added for consistency between controllers  */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         returnToMainScreen(event);
     }

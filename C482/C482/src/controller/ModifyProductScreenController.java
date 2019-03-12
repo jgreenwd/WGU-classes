@@ -59,11 +59,7 @@ public class ModifyProductScreenController implements Initializable {
         priceField.setText(String.valueOf(product.getPrice()));
         minField.setText(String.valueOf(product.getMin()));
         maxField.setText(String.valueOf(product.getMax()));
-        
-        product.getAllAssociatedParts().forEach((item) -> {
-            productPartsList.add(item);
-        });
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
+        addedPartsTable.setItems( FXCollections.observableArrayList(product.getAllAssociatedParts()) );
     }
     
     /* ---------- Search Query Segment ---------- */
@@ -96,12 +92,10 @@ public class ModifyProductScreenController implements Initializable {
     
     public void addButtonPressed() {
         productPartsList.add(availablePartsTable.getSelectionModel().getSelectedItem());
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
     public void deleteButtonPressed() {
         productPartsList.remove(addedPartsTable.getSelectionModel().getSelectedItem());
-        addedPartsTable.setItems( updateAddedPartsDisplay() );
     }
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
@@ -134,12 +128,6 @@ public class ModifyProductScreenController implements Initializable {
         window.show();
     }
     
-    public ObservableList<Part> updateAddedPartsDisplay() {
-        ObservableList<Part> items = FXCollections.observableArrayList();
-        productPartsList.forEach((part) -> { items.add(part); });
-        
-        return items;
-    }
 
     @Override public void initialize(URL url, ResourceBundle rb) {
         availablePartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
