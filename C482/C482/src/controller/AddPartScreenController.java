@@ -95,14 +95,29 @@ public class AddPartScreenController implements Initializable {
         this.outsourcedRadio.setToggleGroup(partSource);
         
         partSource.selectedToggleProperty().addListener((obs, prev, next) -> {
-            if (next == inHouseRadio) {
-                isInHouse = true;
+            isInHouse = (next == inHouseRadio);
+            if (isInHouse) {
                 sourceTitleLabel.setText("Machine ID");
                 sourceNameField.setPromptText("Machine ID");
             } else {
-                isInHouse = false;
                 sourceTitleLabel.setText("Company Name");
                 sourceNameField.setPromptText("Company Name");
+            }
+        });
+        
+        sourceNameField.textProperty().addListener((obs, prev, next) -> {
+            if(isInHouse) {
+                try {
+                    if (!sourceNameField.getText().matches("[0-9]*")) {
+                        sourceNameField.setText(prev);
+                    } else {
+                        MachineID = Integer.parseInt(next);
+                        exceptionMessage.setVisible(false);
+                    }
+                } catch (Exception e) {
+                    exceptionMessage.setText("Invalid Machine ID");
+                    exceptionMessage.setVisible(true);
+                }
             }
         });
         
@@ -168,20 +183,6 @@ public class AddPartScreenController implements Initializable {
             }
         });
         
-        sourceNameField.textProperty().addListener((obs, prev, next) -> {
-            try {
-                if(isInHouse) {
-                    if (!sourceNameField.getText().matches("[0-9]*")) {
-                        sourceNameField.setText(prev);
-                    } else {
-                        MachineID = Integer.parseInt(next);
-                        exceptionMessage.setVisible(false);
-                    }
-                }
-            } catch (Exception e) {
-                exceptionMessage.setText("Invalid Machine ID");
-                exceptionMessage.setVisible(true);
-            }
-        });
+
     }
 }
