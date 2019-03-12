@@ -51,7 +51,7 @@ public class AddPartScreenController implements Initializable {
         Part partToAdd;
         
         // Validate Max/Inv/Min Input Values
-        if (max >= inv && inv >= min) {
+        if (max >= inv && inv >= min && MachineID != 0) {
             if (isInHouse) {
                 partToAdd = new InHouse(partNameField.getText(), price, inv, min, max, MachineID);
             } else {
@@ -114,10 +114,12 @@ public class AddPartScreenController implements Initializable {
                         MachineID = Integer.parseInt(next);
                         exceptionMessage.setVisible(false);
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     exceptionMessage.setText("Invalid Machine ID");
                     exceptionMessage.setVisible(true);
                 }
+            } else {
+                MachineID = 0;
             }
         });
         
