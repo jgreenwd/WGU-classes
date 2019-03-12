@@ -27,11 +27,9 @@ import javafx.stage.Stage;
 
 /** TODO:
  *  - exception handling
- *      - inventory bounds checking on entry
  *      - product must have at least 1 part
  *      - product price > combined parts price
  *      - product entry validation
- *      - part entry validation
  *  - confirmation box
  *      - all Delete & Cancel buttons
  * 
@@ -104,14 +102,23 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partPriceColumn;
 
     public void addPartsButton(ActionEvent event) throws IOException {
-        Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
-        Scene addPartScene = new Scene(addPartParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(addPartScene);
-        window.show();
+        exceptionMessage.setVisible(false);
+        
+        try {
+            Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
+            Scene addPartScene = new Scene(addPartParent);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(addPartScene);
+            window.show();            
+        } catch (NullPointerException e) {
+            exceptionMessage.setText("Part Screen Not Found");
+            exceptionMessage.setVisible(true);
+        }
     }
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
+        exceptionMessage.setVisible(false);
+        
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
@@ -146,14 +153,23 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Product, String> productPriceColumn;
     
     public void addProductsButton(ActionEvent event) throws IOException {
-        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
-        Scene addProductsScene = new Scene(addProductsParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(addProductsScene);
-        window.show();
+        exceptionMessage.setVisible(false);
+        
+        try {
+            Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
+            Scene addProductsScene = new Scene(addProductsParent);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(addProductsScene);
+            window.show();
+        } catch (NullPointerException e) {
+            exceptionMessage.setText("Product Screen Not Found");
+            exceptionMessage.setVisible(true);
+        }
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
+        exceptionMessage.setVisible(false);
+        
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
@@ -193,7 +209,7 @@ public class MainScreenController implements Initializable {
         partInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        partsTable.setItems(Inventory.getAllParts());
+        partsTable.setItems( Inventory.getAllParts() );
 
         /* ---------- init products table display ---------- */
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductID"));

@@ -9,7 +9,6 @@ package controller;
 import model.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,7 +101,6 @@ public class ModifyProductScreenController implements Initializable {
 
     
     /* ---------- Cancel page & return to Main Screen ---------- */
-    /* redundant, but added for consistency between controllers  */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
         returnToMainScreen(event);
     }
