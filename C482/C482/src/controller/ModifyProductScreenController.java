@@ -117,13 +117,6 @@ public class ModifyProductScreenController implements Initializable {
         window.show();
     }
     
-    public ObservableList<Part> updateAvailablePartsDisplay() {
-        ObservableList<Part> items = FXCollections.observableArrayList();
-        Inventory.getAllParts().forEach((part) -> { items.add(part); });
-        
-        return items;
-    }
-    
     public ObservableList<Part> updateAddedPartsDisplay() {
         ObservableList<Part> items = FXCollections.observableArrayList();
         productPartsList.forEach((part) -> { items.add(part); });
@@ -137,7 +130,7 @@ public class ModifyProductScreenController implements Initializable {
         availablePartInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         availablePartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        availablePartsTable.setItems( updateAvailablePartsDisplay() );
+        availablePartsTable.setItems( Inventory.getAllParts() );
         
         addedPartIdColumn.setCellValueFactory(new PropertyValueFactory<>("PartID"));
         addedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

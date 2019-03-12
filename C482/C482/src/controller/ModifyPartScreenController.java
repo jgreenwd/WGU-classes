@@ -23,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+// TODO: confirmation dialog for cancel click
+
 public class ModifyPartScreenController implements Initializable {
 
     private final ToggleGroup partSource = new ToggleGroup();
@@ -95,7 +97,6 @@ public class ModifyPartScreenController implements Initializable {
     
     /* ---------- Cancel Modification & Exit ---------- */
     public void cancelButtonPressed(ActionEvent event) throws IOException {
-        //TODO process validation
         returnToMainScreen(event);
     }
     
