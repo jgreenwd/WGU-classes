@@ -1,4 +1,4 @@
-    /**
+/*
  * author Jeremy Greenwood
  * mentor Rebekah Coggin
  * WGU-ID 000917613
@@ -7,6 +7,7 @@
 
 package controller;
 
+import AppBase.AppBase;
 import model.*;
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
  *      - all Delete & Cancel buttons
  */
 public class MainScreenController implements Initializable {
-    
+    private AppBase App;
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
     @FXML private TextField productSearchQuery;
@@ -96,6 +97,7 @@ public class MainScreenController implements Initializable {
 
     public void addPartsButton(ActionEvent event) throws IOException {
         try {
+            
             Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
             Scene addPartScene = new Scene(addPartParent);
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

@@ -5,6 +5,8 @@
  * course C482
  */
 
+package AppBase;
+
 import model.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,39 +16,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
-public class C482 extends Application {
+public class AppBase extends Application {
     private Stage primaryStage;
-    private BorderPane rootLayout;
+    private AnchorPane rootPane;
     
     @Override public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
         this.primaryStage.setTitle("WGU Software I - Inventory Mgmt System - Jeremy Greenwood #000917613");
         
-        initRootLayout();
-        LoadMainScreen();
+        loadMainScreen();
     }
     
-    public void initRootLayout() {
+    public void loadMainScreen() {
         // set the stage & scene
         try {
-            rootLayout = (BorderPane) FXMLLoader.load(getClass().getClassLoader()
-                    .getResource("view/RootLayout.fxml"));
-            Scene scene = new Scene(rootLayout);
+            rootPane = (AnchorPane) FXMLLoader.load(getClass().getClassLoader()
+                    .getResource("view/MainScreen.fxml"));
+            Scene scene = new Scene(rootPane);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void LoadMainScreen() {
-        // load the application
-        try {
-            AnchorPane mainScreen = FXMLLoader.load(getClass().getClassLoader()
-                    .getResource("view/MainScreen.fxml"));
-            rootLayout.setCenter(mainScreen);
         } catch (IOException e) {
             e.printStackTrace();
         }
