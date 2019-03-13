@@ -18,31 +18,29 @@ import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 
 public class MainApp extends Application {
-    private Stage primaryStage;
-    private AnchorPane rootPane;
+    private Stage stage;
+    private AnchorPane root;
     
     @Override public void start(Stage stage) throws IOException {
-        this.primaryStage = stage;
-        this.primaryStage.setTitle("WGU Software I - Inventory Mgmt System - Jeremy Greenwood #000917613");
+        // set the stage
+        this.stage = stage;
+        this.stage.setTitle("WGU Software I - Inventory Mgmt System - Jeremy Greenwood #000917613");
         
-        loadMainScreen();
-    }
-    
-    public void loadMainScreen() {
-        // set the stage & scene
+        // set the scene
         try {
-            rootPane = (AnchorPane) FXMLLoader.load(getClass().getClassLoader()
+            root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader()
                     .getResource("view/MainScreen.fxml"));
-            Scene scene = new Scene(rootPane);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
 
     public Stage getPrimaryStage() {
-        return primaryStage;
+        return stage;
     }
     
 
