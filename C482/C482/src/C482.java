@@ -1,4 +1,4 @@
-/**
+/*
  * author Jeremy Greenwood
  * mentor Rebekah Coggin
  * WGU-ID 000917613

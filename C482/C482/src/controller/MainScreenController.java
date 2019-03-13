@@ -18,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,9 +34,6 @@ import javafx.stage.Stage;
  * 
  */
 public class MainScreenController implements Initializable {
-    /* ---------- Display Exceptions on this Label ---------- */
-    @FXML private Label exceptionMessage;
-    
     
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
@@ -45,7 +41,6 @@ public class MainScreenController implements Initializable {
     
     public void searchPartsButton() {
         boolean found = false;
-        exceptionMessage.setVisible(false);
         int temp;
         for(Part part: Inventory.getAllParts()) {
             try {
@@ -57,8 +52,7 @@ public class MainScreenController implements Initializable {
                     break;
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Please enter a valid Part ID");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Please enter a valid Part ID");
             }
         }
         if (!found) {
@@ -70,7 +64,6 @@ public class MainScreenController implements Initializable {
     
     public void searchProductsButton() {
         boolean found = false;
-        exceptionMessage.setVisible(false);
         int temp;
         for(Product product: Inventory.getAllProducts()) {
             try {
@@ -82,8 +75,7 @@ public class MainScreenController implements Initializable {
                     break;
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Please enter a valid Product ID");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Please enter a valid Product ID");
             }
         }
         if (!found) { 
@@ -102,8 +94,6 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partPriceColumn;
 
     public void addPartsButton(ActionEvent event) throws IOException {
-        exceptionMessage.setVisible(false);
-        
         try {
             Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
             Scene addPartScene = new Scene(addPartParent);
@@ -111,14 +101,11 @@ public class MainScreenController implements Initializable {
             window.setScene(addPartScene);
             window.show();            
         } catch (NullPointerException e) {
-            exceptionMessage.setText("Part Screen Not Found");
-            exceptionMessage.setVisible(true);
+//            exceptionMessage.setText("Part Screen Not Found");
         }
     }
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
-        exceptionMessage.setVisible(false);
-        
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/ModifyPartScreen.fxml"));
@@ -135,8 +122,7 @@ public class MainScreenController implements Initializable {
             window.setScene(modifyPartScene);
             window.show();
         } catch (NullPointerException e) {
-            exceptionMessage.setText("Please select a Part from the list");
-            exceptionMessage.setVisible(true);
+//            exceptionMessage.setText("Please select a Part from the list");
         }
     }
     
@@ -153,8 +139,6 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Product, String> productPriceColumn;
     
     public void addProductsButton(ActionEvent event) throws IOException {
-        exceptionMessage.setVisible(false);
-        
         try {
             Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
             Scene addProductsScene = new Scene(addProductsParent);
@@ -162,14 +146,11 @@ public class MainScreenController implements Initializable {
             window.setScene(addProductsScene);
             window.show();
         } catch (NullPointerException e) {
-            exceptionMessage.setText("Product Screen Not Found");
-            exceptionMessage.setVisible(true);
+//            exceptionMessage.setText("Product Screen Not Found");
         }
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
-        exceptionMessage.setVisible(false);
-        
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/ModifyProductScreen.fxml"));
@@ -185,8 +166,7 @@ public class MainScreenController implements Initializable {
             window.setScene(modifyProductsScene);
             window.show();
         } catch (NullPointerException e) {
-            exceptionMessage.setText("Please select a Product from the list");
-            exceptionMessage.setVisible(true);
+//            exceptionMessage.setText("Please select a Product from the list");
         }
     }
     

@@ -20,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,7 +34,6 @@ public class AddProductScreenController implements Initializable {
     @FXML private TextField priceField;
     @FXML private TextField minField;
     @FXML private TextField maxField;
-    @FXML private Label exceptionMessage;
     
     @FXML private TableView<Part> availablePartsTable;
     @FXML private TableColumn<Part, String> availablePartIdColumn;
@@ -60,7 +58,6 @@ public class AddProductScreenController implements Initializable {
     
     public void searchPartsButton(ActionEvent event) throws IOException {
         boolean found = false;
-        exceptionMessage.setVisible(false);
         int temp;
         for(Part part: Inventory.getAllParts()) {
             try {
@@ -72,8 +69,7 @@ public class AddProductScreenController implements Initializable {
                     break;
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Please enter a valid Part ID");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Please enter a valid Part ID");
             }
         }
         if (!found) {
@@ -95,7 +91,6 @@ public class AddProductScreenController implements Initializable {
     
     /* ---------- Save Product & return to Main Screen ---------- */
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        exceptionMessage.setVisible(false);
         double total = 0;
         for(Part part: productPartsList) {
             total += part.getPrice();
@@ -113,12 +108,10 @@ public class AddProductScreenController implements Initializable {
                 Inventory.addProduct(product);
                 returnToMainScreen(event);
             } catch (NullPointerException e) {
-                exceptionMessage.setText("Invalid Product Entry");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Product Entry");
             }
         } else {
-            exceptionMessage.setText("Invalid Product Entry");
-            exceptionMessage.setVisible(true);
+//            exceptionMessage.setText("Invalid Product Entry");
         }
     }
 
@@ -166,11 +159,9 @@ public class AddProductScreenController implements Initializable {
                     invField.setText(prev);
                 } else {
                     inv = Integer.parseInt(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Inventory Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Inventory Field Input");
             }
         });
         
@@ -180,11 +171,9 @@ public class AddProductScreenController implements Initializable {
                     minField.setText(prev);
                 } else {
                     min = Integer.parseInt(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Min Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Min Field Input");
             }
         });
         
@@ -194,11 +183,9 @@ public class AddProductScreenController implements Initializable {
                     maxField.setText(prev);
                 } else {
                     max = Integer.parseInt(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Max Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Max Field Input");
             }
         });
         
@@ -209,11 +196,9 @@ public class AddProductScreenController implements Initializable {
                     priceField.setText(prev);
                 } else {
                     price = Double.parseDouble(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Price Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Price Field Input");
             }
         });
     }    

@@ -37,13 +37,11 @@ public class AddPartScreenController implements Initializable {
     @FXML private TextField maxField;
     @FXML private Label sourceTitleLabel;
     @FXML private TextField sourceNameField;
-    @FXML private Label exceptionMessage;
     private int inv, min, max, MachineID;
     private boolean isInHouse = true;
     private double price;
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        exceptionMessage.setVisible(false);
         Part partToAdd;
         
         // Validate Max/Inv/Min Input Values
@@ -57,8 +55,7 @@ public class AddPartScreenController implements Initializable {
             Inventory.addPart(partToAdd);
             returnToMainScreen(event);
         } else {
-            exceptionMessage.setText("Invalid Part Input");
-            exceptionMessage.setVisible(true);
+//            exceptionMessage.setText("Invalid Part Input");
         }
     }
 
@@ -110,11 +107,9 @@ public class AddPartScreenController implements Initializable {
                         sourceNameField.setText(prev);
                     } else {
                         MachineID = Integer.parseInt(next);
-                        exceptionMessage.setVisible(false);
                     }
                 } catch (NumberFormatException e) {
-                    exceptionMessage.setText("Invalid Machine ID");
-                    exceptionMessage.setVisible(true);
+//                    exceptionMessage.setText("Invalid Machine ID");
                 }
             } else {
                 MachineID = 0;
@@ -137,11 +132,9 @@ public class AddPartScreenController implements Initializable {
                     invField.setText(prev);
                 } else {
                     inv = Integer.parseInt(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Inventory Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Inventory Field Input");
             }
         });
         
@@ -151,11 +144,9 @@ public class AddPartScreenController implements Initializable {
                     minField.setText(prev);
                 } else {
                     min = Integer.parseInt(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Min Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Min Field Input");
             }
         });
         
@@ -165,11 +156,9 @@ public class AddPartScreenController implements Initializable {
                     maxField.setText(prev);
                 } else {
                     max = Integer.parseInt(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Max Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Max Field Input");
             }
         });
         
@@ -180,11 +169,9 @@ public class AddPartScreenController implements Initializable {
                     priceField.setText(prev);
                 } else {
                     price = Double.parseDouble(next);
-                    exceptionMessage.setVisible(false);
                 }
             } catch (NumberFormatException e) {
-                exceptionMessage.setText("Invalid Price Field Input");
-                exceptionMessage.setVisible(true);
+//                exceptionMessage.setText("Invalid Price Field Input");
             }
         });
     }
