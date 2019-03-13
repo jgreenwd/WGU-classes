@@ -7,7 +7,6 @@
 
 package controller;
 
-import AppBase.AppBase;
 import model.*;
 import java.io.IOException;
 import java.net.URL;
@@ -19,10 +18,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /** TODO:
@@ -34,7 +36,7 @@ import javafx.stage.Stage;
  *      - all Delete & Cancel buttons
  */
 public class MainScreenController implements Initializable {
-    private AppBase App;
+    
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
     @FXML private TextField productSearchQuery;
@@ -95,9 +97,9 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Part, String> partInvColumn;
     @FXML private TableColumn<Part, String> partPriceColumn;
 
+    
     public void addPartsButton(ActionEvent event) throws IOException {
         try {
-            
             Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
             Scene addPartScene = new Scene(addPartParent);
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -125,7 +127,14 @@ public class MainScreenController implements Initializable {
             window.setScene(modifyPartScene);
             window.show();
         } catch (NullPointerException e) {
-//            exceptionMessage.setText("Please select a Part from the list");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(new Stage());
+            alert.initModality(Modality.WINDOW_MODAL);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Part Selected");
+            alert.setContentText("Please select a Part from the list");
+            
+            alert.showAndWait();
         }
     }
     
