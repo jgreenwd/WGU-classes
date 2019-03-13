@@ -10,21 +10,56 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class C482 extends Application {
     
+    private Stage primaryStage;
+    private BorderPane rootLayout;
+    
     @Override public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainScreen.fxml"));
-        stage.setTitle("WGU Software I - Inventory Mgmt System - Jeremy Greenwood #000917613");
-        stage.setScene(new Scene(root));
-        stage.show();
+        this.primaryStage = stage;
+        this.primaryStage.setTitle("WGU Software I - Inventory Mgmt System - Jeremy Greenwood #000917613");
+        
+        initRootLayout();
+        LoadMainScreen();
+    }
+    
+    public void initRootLayout() {
+        // set the stage & scene
+        try {
+            rootLayout = (BorderPane) FXMLLoader.load(getClass().getClassLoader()
+                    .getResource("view/RootLayout.fxml"));
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void LoadMainScreen() {
+        // load the application
+        try {
+            AnchorPane mainScreen = FXMLLoader.load(getClass().getClassLoader()
+                    .getResource("view/MainScreen.fxml"));
+            rootLayout.setCenter(mainScreen);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+    
+
+    /* ---------- Development Test Data ---------- */
     public static void loadDB() {
-        /* ---------- test data ---------- */
         InHouse part1 = new InHouse(001,"Widget",1.99, 0,0,999,1);
         InHouse part2 = new InHouse(002,"Wedget",2.95, 0,0,999,2);
         Outsourced part3 = new Outsourced(003,"Wodget",2.99, 0,0,999,"ACME");
