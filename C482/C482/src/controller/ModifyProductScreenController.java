@@ -48,8 +48,8 @@ public class ModifyProductScreenController implements Initializable {
     @FXML private TableColumn<Part, String> addedPartInvColumn;
     @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
+    @FXML private ObservableList<Part> productPartsList = FXCollections.observableArrayList();
     Product product = new Product();
-    ObservableList<Part> productPartsList = FXCollections.observableArrayList();
     
     
     public void loadProduct(Product product) {

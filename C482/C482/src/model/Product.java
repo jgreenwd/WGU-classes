@@ -10,7 +10,7 @@ package model;
 import java.util.ArrayList;
 
 public class Product {
-    private final ArrayList<Part> associatedParts;
+    private ArrayList<Part> associatedParts;
     private int productID;
     private String name;
     private double price;
@@ -23,7 +23,27 @@ public class Product {
         this.associatedParts = new ArrayList<>();
     };
     
+    public Product(String name, double price, int inStock, int min, int max) {
+        this();
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+        this.min = min;
+        this.max = max;
+    }
+
+    public Product(ArrayList<Part> associatedParts, String name, double price, int inStock, int min, int max) {
+        this();
+        this.associatedParts = associatedParts;
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+        this.min = min;
+        this.max = max;
+    }
+    
     public Product(ArrayList<Part> associatedParts, int productID, String name, double price, int inStock, int min, int max) {
+        this();
         this.associatedParts = associatedParts;
         this.productID = productID;
         this.name = name;

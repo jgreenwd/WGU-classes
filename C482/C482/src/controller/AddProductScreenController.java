@@ -9,6 +9,7 @@ package controller;
 import model.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,8 +49,11 @@ public class AddProductScreenController implements Initializable {
     @FXML private TableColumn<Part, String> addedPartInvColumn;
     @FXML private TableColumn<Part, String> addedPartPriceColumn;
     
-    Product product = new Product();
-    ObservableList<Part> productPartsList = FXCollections.observableArrayList();
+    @FXML private ObservableList<Part> productPartsList = FXCollections.observableArrayList();
+    private Product product;
+    private int max, inv, min;
+    private double price;
+
     
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
@@ -88,20 +92,34 @@ public class AddProductScreenController implements Initializable {
         productPartsList.remove(addedPartsTable.getSelectionModel().getSelectedItem());
     }
     
+    
+    /* ---------- Save Product & return to Main Screen ---------- */
     public void saveButtonPressed(ActionEvent event) throws IOException {
-        //TODO: validate input before executing
-        
-        if (true) {
-            productPartsList.forEach((item) -> { product.addAssociatedPart(item); });
-            product.setName(productNameField.getText());
-            product.setPrice(Double.parseDouble(priceField.getText()));
-            product.setInStock(Integer.parseInt(invField.getText()));
-            product.setMin(Integer.parseInt(minField.getText()));
-            product.setMax(Integer.parseInt(maxField.getText()));
+        exceptionMessage.setVisible(false);
+        double total = 0;
+        for(Part part: productPartsList) {
+            total += part.getPrice();
         }
+
+        boolean isValidProduct = (max >= inv && inv >= min && price >= total && 
+                productPartsList.size() > 0 && !productNameField.getText().isEmpty() &&
+                !priceField.getText().isEmpty() && inv >= 0);
         
-        Inventory.addProduct(product);
-        returnToMainScreen(event);
+        if (isValidProduct) {
+            try {
+                product = new Product( new ArrayList<>(productPartsList), 
+                        productNameField.getText(), price, inv, min, max);
+                
+                Inventory.addProduct(product);
+                returnToMainScreen(event);
+            } catch (NullPointerException e) {
+                exceptionMessage.setText("Invalid Product Entry");
+                exceptionMessage.setVisible(true);
+            }
+        } else {
+            exceptionMessage.setText("Invalid Product Entry");
+            exceptionMessage.setVisible(true);
+        }
     }
 
     /* ---------- Cancel page & return to Main Screen ---------- */
@@ -134,5 +152,69 @@ public class AddProductScreenController implements Initializable {
         addedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         
         addedPartsTable.setItems( productPartsList );
+        
+        /* ---------- TextField Listeners ---------- *
+         * === copied to ModifyPartScreenController ===
+         * ===      same issues here as there       ===
+         * Waaaaay too much going on here
+         * Replace with a listener on the GridPane?
+         * Implement an external class for input validation instead?
+         */
+        invField.textProperty().addListener((obs, prev, next) -> {
+            try {
+                if (!invField.getText().matches("[0-9]*")) {
+                    invField.setText(prev);
+                } else {
+                    inv = Integer.parseInt(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Inventory Field Input");
+                exceptionMessage.setVisible(true);
+            }
+        });
+        
+        minField.textProperty().addListener((obs, prev, next) -> {
+            try {
+                if (!minField.getText().matches("[0-9]*")) {
+                    minField.setText(prev);
+                } else {
+                    min = Integer.parseInt(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Min Field Input");
+                exceptionMessage.setVisible(true);
+            }
+        });
+        
+        maxField.textProperty().addListener((obs, prev, next) -> {
+            try {
+                if (!maxField.getText().matches("[0-9]*")) {
+                    maxField.setText(prev);
+                } else {
+                    max = Integer.parseInt(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Max Field Input");
+                exceptionMessage.setVisible(true);
+            }
+        });
+        
+        // NOT perfect regex, but it will do for now
+        priceField.textProperty().addListener((obs, prev, next) -> {
+            try {
+                if (!priceField.getText().matches("[.0-9]*")) {
+                    priceField.setText(prev);
+                } else {
+                    price = Double.parseDouble(next);
+                    exceptionMessage.setVisible(false);
+                }
+            } catch (NumberFormatException e) {
+                exceptionMessage.setText("Invalid Price Field Input");
+                exceptionMessage.setVisible(true);
+            }
+        });
     }    
 }
