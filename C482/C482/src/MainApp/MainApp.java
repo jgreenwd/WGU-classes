@@ -28,15 +28,13 @@ public class MainApp extends Application {
         
         // set the scene
         try {
-            root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader()
-                    .getResource("view/MainScreen.fxml"));
+            root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("view/MainScreen.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
 
     public Stage getPrimaryStage() {
