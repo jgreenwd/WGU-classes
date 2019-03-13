@@ -154,7 +154,7 @@ public class AddProductScreenController implements Initializable {
         addedPartsTable.setItems( productPartsList );
         
         /* ---------- TextField Listeners ---------- *
-         * === copied to ModifyPartScreenController ===
+         * === copied to <xyz>PartScreenController  ===
          * ===      same issues here as there       ===
          * Waaaaay too much going on here
          * Replace with a listener on the GridPane?
