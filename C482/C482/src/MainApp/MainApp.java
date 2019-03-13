@@ -5,7 +5,7 @@
  * course C482
  */
 
-package C482Project;
+package MainApp;
 
 import model.*;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 
-public class C482Project extends Application {
+public class MainApp extends Application {
     private Stage primaryStage;
     private AnchorPane rootPane;
     

@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -128,13 +129,17 @@ public class MainScreenController implements Initializable {
             window.show();
         } catch (NullPointerException e) {
             Alert alert = new Alert(AlertType.WARNING);
-            alert.initOwner(new Stage());
-            alert.initModality(Modality.WINDOW_MODAL);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Part Selected");
-            alert.setContentText("Please select a Part from the list");
+            alert.showAndWait().filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> System.out.println("alert clicked"));
             
-            alert.showAndWait();
+//            Alert alert = new Alert(AlertType.WARNING);
+//            alert.initOwner(null);
+//            alert.initModality(Modality.APPLICATION_MODAL);
+//            alert.setTitle("No Selection");
+//            alert.setHeaderText("No Part Selected");
+//            alert.setContentText("Please select a Part from the list");
+//            
+//            alert.showAndWait();
         }
     }
     
