@@ -66,26 +66,27 @@ public class ModifyProductScreenController implements Initializable {
     /* ---------- Search Query Segment ---------- */
     @FXML private TextField partSearchQuery;
     
-    public void searchPartsButton(ActionEvent event) throws IOException {
+    public void searchPartsButton() {
         boolean found = false;
-        int temp;
-        for(Part part: Inventory.getAllParts()) {
-            try {
-                temp = Integer.parseInt(partSearchQuery.getText());
+        try {
+            int temp = Integer.parseInt(partSearchQuery.getText());
+            for(Part part: Inventory.getAllParts()) {
                 if (part.getPartID() == temp) {
                     availablePartsTable.getSelectionModel().select(part);
+                    availablePartsTable.requestFocus();
                     partSearchQuery.setPromptText("Enter Part ID");
                     found = true;
                     break;
                 }
-            } catch (NumberFormatException e) {
-//                partSearchQuery.setPromptText("Invalid Part ID");
             }
+            if (!found) {
+                partSearchQuery.setPromptText("Part ID not found");
+                availablePartsTable.getSelectionModel().clearSelection();
+            }
+        } catch (NumberFormatException e) {
+            partSearchQuery.setPromptText("Invalid Part ID");            
         }
-        if (!found) {
-            partSearchQuery.setPromptText("Part ID not found");
-            availablePartsTable.getSelectionModel().clearSelection();
-        }
+
         partSearchQuery.clear();
     }
     

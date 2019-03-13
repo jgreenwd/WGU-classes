@@ -40,47 +40,49 @@ public class MainScreenController implements Initializable {
     
     public void searchPartsButton() {
         boolean found = false;
-        int temp;
-        for(Part part: Inventory.getAllParts()) {
-            try {
-                temp = Integer.parseInt(partSearchQuery.getText());
+        try {
+            int temp = Integer.parseInt(partSearchQuery.getText());
+            for(Part part: Inventory.getAllParts()) {
                 if (part.getPartID() == temp) {
                     partsTable.getSelectionModel().select(part);
+                    partsTable.requestFocus();
                     partSearchQuery.setPromptText("Enter Part ID");
                     found = true;
                     break;
                 }
-            } catch (NumberFormatException e) {
-                partSearchQuery.setPromptText("Invalid Part ID");
             }
+            if (!found) {
+                partSearchQuery.setPromptText("Part ID not found");
+                partsTable.getSelectionModel().clearSelection();
+            }
+        } catch (NumberFormatException e) {
+            partSearchQuery.setPromptText("Invalid Part ID");            
         }
-        if (!found) {
-            partSearchQuery.setPromptText("Part ID not found");
-            partsTable.getSelectionModel().clearSelection();
-        }
+
         partSearchQuery.clear();
     }
     
     public void searchProductsButton() {
         boolean found = false;
-        int temp;
-        for(Product product: Inventory.getAllProducts()) {
-            try {
-                temp = Integer.parseInt(productSearchQuery.getText());
-                if (product.getProductID() == Integer.parseInt(productSearchQuery.getText())) {
+        try {
+            int temp = Integer.parseInt(productSearchQuery.getText());
+            for(Product product: Inventory.getAllProducts()) {
+                if (product.getProductID() == temp) {
                     productTable.getSelectionModel().select(product);
+                    productTable.requestFocus();
                     productSearchQuery.setPromptText("Enter Product ID");
                     found = true;
                     break;
                 }
-            } catch (NumberFormatException e) {
-                productSearchQuery.setPromptText("Invalid Product ID");
             }
-        }
-        if (!found) { 
+            if (!found) { 
             productSearchQuery.setPromptText("Product ID not found");
             productTable.getSelectionModel().clearSelection();
         }
+        } catch (NumberFormatException e) {
+            productSearchQuery.setPromptText("Invalid Product ID");
+        }
+        
         productSearchQuery.clear();
     }
     
