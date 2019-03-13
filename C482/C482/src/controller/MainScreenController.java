@@ -31,7 +31,6 @@ import javafx.stage.Stage;
  *      - product entry validation
  *  - confirmation box
  *      - all Delete & Cancel buttons
- * 
  */
 public class MainScreenController implements Initializable {
     
@@ -52,7 +51,7 @@ public class MainScreenController implements Initializable {
                     break;
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Please enter a valid Part ID");
+                partSearchQuery.setPromptText("Invalid Part ID");
             }
         }
         if (!found) {
@@ -75,7 +74,7 @@ public class MainScreenController implements Initializable {
                     break;
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Please enter a valid Product ID");
+                productSearchQuery.setPromptText("Invalid Product ID");
             }
         }
         if (!found) { 

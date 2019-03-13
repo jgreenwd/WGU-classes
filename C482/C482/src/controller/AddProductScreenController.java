@@ -69,7 +69,7 @@ public class AddProductScreenController implements Initializable {
                     break;
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Please enter a valid Part ID");
+                partSearchQuery.setPromptText("Invalid Part ID");
             }
         }
         if (!found) {
