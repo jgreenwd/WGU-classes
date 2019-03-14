@@ -60,12 +60,12 @@ public class AddPartScreenController implements Initializable {
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setTitle("Part Error");
                 
-            if (max < inv) {
-                alert.setContentText("Inventory level must be less than Max");
-            } else if (min > inv) {
-                alert.setContentText("Inventory level must be greater than Min");
+            if (min > inv || inv > max) {
+                alert.setContentText("Inventory level must be between Max and Min");
             } else if (min > max) {
-                alert.setContentText("Max must be greater than Min");
+                alert.setContentText("Min must be less than Max");
+            } else {
+                alert.setContentText("MACHINE_ID field may only contain numbers");
             }
                 
             alert.showAndWait();
@@ -83,9 +83,9 @@ public class AddPartScreenController implements Initializable {
     public void returnToMainScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
     
     
@@ -126,7 +126,7 @@ public class AddPartScreenController implements Initializable {
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.setTitle("Part Error");
-                alert.setContentText("Machine ID field must be a number");
+                alert.setContentText("MACHINE_ID field may only contain numbers");
             
                 alert.showAndWait();
                 }
@@ -142,8 +142,7 @@ public class AddPartScreenController implements Initializable {
          * === copied to ModifyPartScreenController ===
          * ===      same issues here as there       ===
          * Waaaaay too much going on here
-         * Replace with a listener on the GridPane?
-         * Implement an external class for input validation instead?
+         * Implement an external class for input validation?
          */
         invField.textProperty().addListener((obs, prev, next) -> {
             try {
@@ -157,7 +156,7 @@ public class AddPartScreenController implements Initializable {
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.setTitle("Part Error");
-                alert.setContentText("Inventory field must be a number");
+                alert.setContentText("INVENTORY field may only contain numbers");
             
                 alert.showAndWait();
             }
@@ -175,7 +174,7 @@ public class AddPartScreenController implements Initializable {
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.setTitle("Part Error");
-                alert.setContentText("Min field must be a number");
+                alert.setContentText("MIN field may only contain numbers");
             
                 alert.showAndWait();
             }
@@ -193,7 +192,7 @@ public class AddPartScreenController implements Initializable {
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.setTitle("Part Error");
-                alert.setContentText("Max field must be a number");
+                alert.setContentText("MAX field may only contain numbers");
             
                 alert.showAndWait();
             }
@@ -212,7 +211,7 @@ public class AddPartScreenController implements Initializable {
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.setTitle("Part Error");
-                alert.setContentText("Price field must be a decimal number");
+                alert.setContentText("PRICE field may only contain real numbers");
             
                 alert.showAndWait();
             }
