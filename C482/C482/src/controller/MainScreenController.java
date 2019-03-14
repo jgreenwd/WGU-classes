@@ -180,6 +180,14 @@ public class MainScreenController implements Initializable {
         
         if (product.getAllAssociatedParts().isEmpty()) {
             Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(null);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("Product Error");
+            alert.setContentText("Products with associated parts can not be deleted");
+            
+            alert.showAndWait();
         }
     }
     
