@@ -51,6 +51,7 @@ public class AddPartScreenController implements Initializable {
             } else {
                 partToAdd = new Outsourced(partNameField.getText(), price, inv, min, max, sourceNameField.getText());
             }
+            
             // return to Main Screen after save
             Inventory.addPart(partToAdd);
             returnToMainScreen(event);
@@ -122,13 +123,13 @@ public class AddPartScreenController implements Initializable {
                         MachineID = Integer.parseInt(next);
                     }
                 } catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(null);
-                alert.initModality(Modality.APPLICATION_MODAL);
-                alert.setTitle("Part Error");
-                alert.setContentText("MACHINE_ID field may only contain numbers");
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(null);
+                    alert.initModality(Modality.APPLICATION_MODAL);
+                    alert.setTitle("Part Error");
+                    alert.setContentText("MACHINE_ID field may only contain numbers");
             
-                alert.showAndWait();
+                    alert.showAndWait();
                 }
             } else {
                 MachineID = 0;
@@ -198,7 +199,7 @@ public class AddPartScreenController implements Initializable {
             }
         });
         
-        // NOT perfect regex, but it will do for now
+        // NOT perfect regex, but it will do for this project
         priceField.textProperty().addListener((obs, prev, next) -> {
             try {
                 if (!priceField.getText().matches("[.0-9]*")) {

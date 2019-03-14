@@ -17,10 +17,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 // TODO: confirmation dialog for cancel click
@@ -82,11 +84,24 @@ public class ModifyPartScreenController implements Initializable {
                         partNameField.getText(), price, inv, min, max, sourceNameField.getText() );
             }
         
+            // return to Main Screen after save
             Inventory.updatePart(Integer.parseInt(idField.getText()) -1, partToUpdate);
             returnToMainScreen(event);
-            
         } else {
-//            exceptionMessage.setText("Invalid Part Input");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(null);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("Part Error");
+                
+            if (min > inv || inv > max) {
+                alert.setContentText("Inventory level must be between Max and Min");
+            } else if (min > max) {
+                alert.setContentText("Min must be less than Max");
+            } else {
+                alert.setContentText("MACHINE_ID field may only contain numbers");
+            }
+                
+            alert.showAndWait();
         }
     }
     
@@ -139,7 +154,13 @@ public class ModifyPartScreenController implements Initializable {
                         MachineID = Integer.parseInt(next);
                     }
                 } catch (NumberFormatException e) {
-//                    exceptionMessage.setText("Invalid Machine ID");
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(null);
+                    alert.initModality(Modality.APPLICATION_MODAL);
+                    alert.setTitle("Part Error");
+                    alert.setContentText("MACHINE_ID field may only contain numbers");
+            
+                    alert.showAndWait();
                 }
             } else {
                 MachineID = 0;
@@ -147,11 +168,10 @@ public class ModifyPartScreenController implements Initializable {
         });
         
         /* ---------- TextField Listeners ---------- *
-         * === copied from AddPartScreenController ===
-         * ===      same issues here as there      ===
+         * === copied to ModifyPartScreenController ===
+         * ===      same issues here as there       ===
          * Waaaaay too much going on here
-         * Replace with a listener on the GridPane?
-         * Implement an external class for input validation instead?
+         * Implement an external class for input validation?
          */
         invField.textProperty().addListener((obs, prev, next) -> {
             try {
@@ -161,7 +181,13 @@ public class ModifyPartScreenController implements Initializable {
                     inv = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Inventory Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("INVENTORY field may only contain numbers");
+            
+                alert.showAndWait();
             }
         });
         
@@ -173,7 +199,13 @@ public class ModifyPartScreenController implements Initializable {
                     min = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Min Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("MIN field may only contain numbers");
+            
+                alert.showAndWait();
             }
         });
         
@@ -185,11 +217,17 @@ public class ModifyPartScreenController implements Initializable {
                     max = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Max Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("MAX field may only contain numbers");
+            
+                alert.showAndWait();
             }
         });
         
-        // NOT perfect regex, but it will do for now
+        // NOT perfect regex, but it will do for this project
         priceField.textProperty().addListener((obs, prev, next) -> {
             try {
                 if (!priceField.getText().matches("[.0-9]*")) {
@@ -198,7 +236,13 @@ public class ModifyPartScreenController implements Initializable {
                     price = Double.parseDouble(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Price Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("PRICE field may only contain real numbers");
+            
+                alert.showAndWait();
             }
         });
     }
