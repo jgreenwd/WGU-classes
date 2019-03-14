@@ -113,7 +113,7 @@ public class ModifyProductScreenController implements Initializable {
         
         if (isValidProduct) {
             try {
-                product = new Product( new ArrayList<>(productPartsList), 
+                product = new Product( new ArrayList<>(productPartsList), Integer.parseInt(idField.getText()), 
                         productNameField.getText(), price, inv, min, max);
                 
                 Inventory.updateProduct(Integer.parseInt(idField.getText()) -1, product);
