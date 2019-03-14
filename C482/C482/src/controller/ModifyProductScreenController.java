@@ -20,10 +20,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ModifyProductScreenController implements Initializable {
@@ -106,7 +108,7 @@ public class ModifyProductScreenController implements Initializable {
         }
 
         boolean isValidProduct = (max >= inv && inv >= min && price >= total && 
-                productPartsList.size() > 0 && !productNameField.getText().isEmpty() &&
+                !productPartsList.isEmpty() && !productNameField.getText().isEmpty() &&
                 !priceField.getText().isEmpty() && inv >= 0);
         
         if (isValidProduct) {
@@ -117,10 +119,33 @@ public class ModifyProductScreenController implements Initializable {
                 Inventory.updateProduct(Integer.parseInt(idField.getText()) -1, product);
                 returnToMainScreen(event);
             } catch (NullPointerException e) {
-//                exceptionMessage.setText("Invalid Product Entry");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("Please complete ALL product field entries");
+                
+                alert.showAndWait();
             }
         } else {
-//            exceptionMessage.setText("Invalid Product Entry");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(null);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("Part Error");
+            
+            if (min > inv || inv > max) {
+                alert.setContentText("Inventory level must be between Max and Min");
+            } else if (min > max) {
+                alert.setContentText("Min must be less than Max");
+            } else if (price < total) {
+                alert.setContentText("Price must be greater than combined Part prices");
+            } else if (productPartsList.isEmpty()) {
+                alert.setContentText("Please add Parts to Product");
+            } else {
+                alert.setContentText("Please complete ALL Product field entries");
+            }
+            
+            alert.showAndWait();
         }
     }
 
@@ -160,8 +185,7 @@ public class ModifyProductScreenController implements Initializable {
          * === copied to <xyz>PartScreenController  ===
          * ===      same issues here as there       ===
          * Waaaaay too much going on here
-         * Replace with a listener on the GridPane?
-         * Implement an external class for input validation instead?
+         * Implement an external class for input validation?
          */
         invField.textProperty().addListener((obs, prev, next) -> {
             try {
@@ -171,7 +195,13 @@ public class ModifyProductScreenController implements Initializable {
                     inv = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Inventory Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Product Error");
+                alert.setContentText("INVENTORY field may only contain numbers");
+            
+                alert.showAndWait();
             }
         });
         
@@ -183,7 +213,13 @@ public class ModifyProductScreenController implements Initializable {
                     min = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Min Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Product Error");
+                alert.setContentText("MIN field may only contain numbers");
+            
+                alert.showAndWait();
             }
         });
         
@@ -195,7 +231,13 @@ public class ModifyProductScreenController implements Initializable {
                     max = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Max Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Product Error");
+                alert.setContentText("MAX field may only contain numbers");
+            
+                alert.showAndWait();
             }
         });
         
@@ -208,7 +250,13 @@ public class ModifyProductScreenController implements Initializable {
                     price = Double.parseDouble(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Price Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Product Error");
+                alert.setContentText("PRICE field may only contain real numbers");
+            
+                alert.showAndWait();
             }
         });
     }    

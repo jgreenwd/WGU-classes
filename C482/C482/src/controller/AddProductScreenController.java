@@ -176,8 +176,7 @@ public class AddProductScreenController implements Initializable {
          * === copied to <xyz>PartScreenController  ===
          * ===      same issues here as there       ===
          * Waaaaay too much going on here
-         * Replace with a listener on the GridPane?
-         * Implement an external class for input validation instead?
+         * Implement an external class for input validation?
          */
         invField.textProperty().addListener((obs, prev, next) -> {
             try {
@@ -190,7 +189,7 @@ public class AddProductScreenController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
-                alert.setTitle("Part Error");
+                alert.setTitle("Product Error");
                 alert.setContentText("INVENTORY field may only contain numbers");
             
                 alert.showAndWait();
@@ -208,7 +207,7 @@ public class AddProductScreenController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
-                alert.setTitle("Part Error");
+                alert.setTitle("Product Error");
                 alert.setContentText("MIN field may only contain numbers");
             
                 alert.showAndWait();
@@ -226,7 +225,7 @@ public class AddProductScreenController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
-                alert.setTitle("Part Error");
+                alert.setTitle("Product Error");
                 alert.setContentText("MAX field may only contain numbers");
             
                 alert.showAndWait();
@@ -245,11 +244,10 @@ public class AddProductScreenController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
-                alert.setTitle("Part Error");
+                alert.setTitle("Product Error");
                 alert.setContentText("PRICE field may only contain real numbers");
             
                 alert.showAndWait();
-
             }
         });
     }    
