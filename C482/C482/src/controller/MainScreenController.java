@@ -176,7 +176,11 @@ public class MainScreenController implements Initializable {
     }
     
     public void deleteProductsButton(ActionEvent event) throws IOException {
-        Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        
+        if (product.getAllAssociatedParts().isEmpty()) {
+            Inventory.removeProduct(productTable.getSelectionModel().getSelectedItem());
+        }
     }
     
     
