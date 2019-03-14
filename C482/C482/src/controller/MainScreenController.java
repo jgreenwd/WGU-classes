@@ -20,7 +20,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -124,22 +123,18 @@ public class MainScreenController implements Initializable {
             if (part instanceof InHouse) { controller.loadPart((InHouse)part); }
             else { controller.loadPart((Outsourced)part); }
 
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            window.setScene(modifyPartScene);
-            window.show();
-        } catch (NullPointerException e) {
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(modifyPartScene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (NullPointerException e) {            
             Alert alert = new Alert(AlertType.WARNING);
-            alert.showAndWait().filter(response -> response == ButtonType.OK)
-                .ifPresent(response -> System.out.println("alert clicked"));
+            alert.initOwner(null);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Part Selected");
+            alert.setContentText("Please select a Part from the list");
             
-//            Alert alert = new Alert(AlertType.WARNING);
-//            alert.initOwner(null);
-//            alert.initModality(Modality.APPLICATION_MODAL);
-//            alert.setTitle("No Selection");
-//            alert.setHeaderText("No Part Selected");
-//            alert.setContentText("Please select a Part from the list");
-//            
-//            alert.showAndWait();
+            alert.showAndWait();
         }
     }
     
@@ -159,9 +154,10 @@ public class MainScreenController implements Initializable {
         try {
             Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
             Scene addProductsScene = new Scene(addProductsParent);
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            window.setScene(addProductsScene);
-            window.show();
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(addProductsScene);
+            stage.setResizable(false);
+            stage.show();
         } catch (NullPointerException e) {
 //            exceptionMessage.setText("Product Screen Not Found");
         }
@@ -179,11 +175,18 @@ public class MainScreenController implements Initializable {
             Product product = productTable.getSelectionModel().getSelectedItem();
             controller.loadProduct(product);
         
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            window.setScene(modifyProductsScene);
-            window.show();
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(modifyProductsScene);
+            stage.setResizable(false);
+            stage.show();
         } catch (NullPointerException e) {
-//            exceptionMessage.setText("Please select a Product from the list");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(null);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Product Selected");
+            alert.setContentText("Please select a Product from the list");
+            
+            alert.showAndWait();
         }
     }
     

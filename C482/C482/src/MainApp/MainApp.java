@@ -31,6 +31,7 @@ public class MainApp extends Application {
             root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("view/MainScreen.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
