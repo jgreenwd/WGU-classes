@@ -18,11 +18,13 @@ public class Product {
     private int min;
     private int max;
 
+    // default Constructor
     public Product() {
         this.productID = createProductID();
         this.associatedParts = new ArrayList<>();
     };
     
+    // used for chaining
     public Product(String name, double price, int inStock, int min, int max) {
         this();
         this.name = name;
@@ -32,6 +34,7 @@ public class Product {
         this.max = max;
     }
 
+    // AutoGen ProductID - use in AddProductScreenController
     public Product(ArrayList<Part> associatedParts, String name, double price, int inStock, int min, int max) {
         this();
         this.associatedParts = associatedParts;
@@ -42,6 +45,7 @@ public class Product {
         this.max = max;
     }
     
+    // Known ProductID - use in ModifyProductScreenController
     public Product(ArrayList<Part> associatedParts, int productID, String name, double price, int inStock, int min, int max) {
         this();
         this.associatedParts = associatedParts;
@@ -89,9 +93,8 @@ public class Product {
         return false;
     }
     
-    /* always return a higher productID than current highest productID so
-     * that deleted productIDs are still viable for historical references
-     */
+   /* always return a higher productID than current highest productID so *
+    * that deleted productIDs are still viable for historical reference  */
     public static int createProductID() {
         if (Inventory.getAllProducts().isEmpty()) { return 1; }
         
