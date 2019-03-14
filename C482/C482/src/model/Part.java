@@ -15,10 +15,12 @@ public abstract class Part {
     private int min;
     private int max;
 
+    // default Constructor: use in AddPartScreenController
     private Part() { this.PartID = createPartID(); };
 
+    // if PartID is unknown, generate one
     protected Part(String name, double price, int inStock, int min, int max) {
-        this(); // if PartID is unknown, generate one
+        this(); 
         this.name = name;
         this.price = price;
         this.inStock = inStock;
@@ -26,6 +28,7 @@ public abstract class Part {
         this.max = max;
     }
     
+    // if all details are known: use in ModifyPartScreenController
     protected Part(int PartID, String name, double price, int inStock, int min, int max) {
         this.PartID = PartID;
         this.name = name;
@@ -50,9 +53,8 @@ public abstract class Part {
     public void setMin(int min) { this.min = min; }
     public void setMax(int max) { this.max = max;}
     
-    /* always return a higher partID than current highest partID so
-     * that deleted partIDs are still viable for historical references
-     */
+   /* always return a higher partID than current highest partID so   *
+    * that deleted partIDs are still viable for historical reference */
     public static int createPartID() {
         int i = 1;
         for(Part item: Inventory.getAllParts()) {
