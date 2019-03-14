@@ -17,13 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-// TODO: confirmation dialog for cancel click
 
 public class AddPartScreenController implements Initializable {
 
@@ -43,7 +43,7 @@ public class AddPartScreenController implements Initializable {
     
     public void saveButtonPressed(ActionEvent event) throws IOException {
         Part partToAdd;
-        
+
         // Validate Max/Inv/Min Input Values
         if (max >= inv && inv >= min && ((MachineID != 0 && isInHouse) || (MachineID == 0 && !isInHouse))) {
             if (isInHouse) {
@@ -55,7 +55,20 @@ public class AddPartScreenController implements Initializable {
             Inventory.addPart(partToAdd);
             returnToMainScreen(event);
         } else {
-//            exceptionMessage.setText("Invalid Part Input");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(null);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("Part Error");
+                
+            if (max < inv) {
+                alert.setContentText("Inventory level must be less than Max");
+            } else if (min > inv) {
+                alert.setContentText("Inventory level must be greater than Min");
+            } else if (min > max) {
+                alert.setContentText("Max must be greater than Min");
+            }
+                
+            alert.showAndWait();
         }
     }
 
@@ -109,7 +122,13 @@ public class AddPartScreenController implements Initializable {
                         MachineID = Integer.parseInt(next);
                     }
                 } catch (NumberFormatException e) {
-//                    exceptionMessage.setText("Invalid Machine ID");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("Machine ID field must be a number");
+            
+                alert.showAndWait();
                 }
             } else {
                 MachineID = 0;
@@ -134,7 +153,13 @@ public class AddPartScreenController implements Initializable {
                     inv = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Inventory Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("Inventory field must be a number");
+            
+                alert.showAndWait();
             }
         });
         
@@ -146,7 +171,13 @@ public class AddPartScreenController implements Initializable {
                     min = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Min Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("Min field must be a number");
+            
+                alert.showAndWait();
             }
         });
         
@@ -158,7 +189,13 @@ public class AddPartScreenController implements Initializable {
                     max = Integer.parseInt(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Max Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("Max field must be a number");
+            
+                alert.showAndWait();
             }
         });
         
@@ -171,7 +208,13 @@ public class AddPartScreenController implements Initializable {
                     price = Double.parseDouble(next);
                 }
             } catch (NumberFormatException e) {
-//                exceptionMessage.setText("Invalid Price Field Input");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                alert.setTitle("Part Error");
+                alert.setContentText("Price field must be a decimal number");
+            
+                alert.showAndWait();
             }
         });
     }
