@@ -99,15 +99,12 @@ public class MainScreenController implements Initializable {
 
     
     public void addPartsButton(ActionEvent event) throws IOException {
-        try {
-            Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
-            Scene addPartScene = new Scene(addPartParent);
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            window.setScene(addPartScene);
-            window.show();            
-        } catch (NullPointerException e) {
-//            exceptionMessage.setText("Part Screen Not Found");
-        }
+        Parent addPartParent = FXMLLoader.load(getClass().getResource("/view/AddPartScreen.fxml"));
+        Scene addPartScene = new Scene(addPartParent);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(addPartScene);
+        stage.setResizable(false);
+        stage.show();
     }
     
     public void modifyPartsButton(ActionEvent event) throws IOException {
@@ -151,16 +148,12 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Product, String> productPriceColumn;
     
     public void addProductsButton(ActionEvent event) throws IOException {
-        try {
-            Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
-            Scene addProductsScene = new Scene(addProductsParent);
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(addProductsScene);
-            stage.setResizable(false);
-            stage.show();
-        } catch (NullPointerException e) {
-//            exceptionMessage.setText("Product Screen Not Found");
-        }
+        Parent addProductsParent = FXMLLoader.load(getClass().getResource("/view/AddProductScreen.fxml"));
+        Scene addProductsScene = new Scene(addProductsParent);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(addProductsScene);
+        stage.setResizable(false);
+        stage.show();
     }
     
     public void modifyProductsButton(ActionEvent event) throws IOException {
