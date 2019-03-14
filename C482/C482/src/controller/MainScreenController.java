@@ -26,15 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-/** TODO:
- *  - exception handling
- *      - product must have at least 1 part
- *      - product price > combined parts price
- *      - product entry validation
- *  - confirmation box
- *      - all Delete & Cancel buttons
- */
+ 
 public class MainScreenController implements Initializable {
     
     /* ---------- Search Query Segment ---------- */
@@ -194,6 +186,7 @@ public class MainScreenController implements Initializable {
     }
     
     
+    /* ---------- Initialize Tables on Load ---------- */
     @Override public void initialize(URL url, ResourceBundle rb) {
         
         /* ---------- init parts table display ---------- */
