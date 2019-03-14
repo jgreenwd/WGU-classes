@@ -29,6 +29,7 @@ public final class Inventory {
         return null;
     }
     
+    // just here to fit the UML diagram: actual implementation below
     public static void updatePart(int index) {
         System.out.println("Updating Part: " + allParts.get(index).getName());
     }
@@ -51,6 +52,7 @@ public final class Inventory {
         return null;
     }    
     
+    // just here to fit the UML diagram: actual implementation below
     public static void updateProduct(int index) {
         System.out.println("Updating Product: " + products.get(index).getName());
     }
