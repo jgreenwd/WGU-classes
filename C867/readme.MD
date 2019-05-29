@@ -80,17 +80,12 @@ A.  Modify the studentData table to include your personal information as the las
 
 B.  Create a C++ project in your integrated development environment (IDE) with the following files:
 
-•   degree.h
-
-•   student.h and student.cpp
-
-•   networkStudent.h and networkStudent.cpp
-
-•   securityStudent.h and securityStudent.cpp
-
-•   softwareStudent.h and softwareStudent.cpp
-
-•   roster.h and roster.cpp
+  * degree.h
+  * student.h and student.cpp
+  * networkStudent.h and networkStudent.cpp
+  * securityStudent.h and securityStudent.cpp
+  * softwareStudent.h and softwareStudent.cpp
+  * roster.h and roster.cpp
  
 
 Note: There must be a total of 11 source code files.
@@ -106,19 +101,13 @@ D.  For the Student class, do the following:
 
 1.  Create the base class Student in the files student.h and student.cpp, which includes each  of the following variables:
 
-•   student ID
-
-•   first name
-
-•   last name
-
-•   email address
-
-•   age
-
-•   array of number of days to complete each course
-
-•   degree types
+  * student ID
+  * first name
+  * last name
+  * email address
+  * age
+  * array of number of days to complete each course
+  * degree types
  
 
 Note: Degree type should be populated in subclasses only.
@@ -148,11 +137,9 @@ Note: Leave the implementation of the getDegreeProgram() function empty.
 
 3.  Create the three following classes as subclasses of Student, using the files created in part B:
 
-•   SecurityStudent
-
-•   NetworkStudent
-
-•   SoftwareStudent
+  * SecurityStudent
+  * NetworkStudent
+  * SoftwareStudent
 
 Each subclass should override the getDegreeProgram() function. Each  subclass should have a data member to hold the enumerated type for the degree program using the types defined in part C.
  
