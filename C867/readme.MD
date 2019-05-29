@@ -176,13 +176,13 @@ f.  public void printByDegreeProgram(int degreeProgram) that prints out student 
 
 F.  Demonstrate the program’s required functionality by adding a void main() function to roster.cpp, which will contain the required function calls to achieve the following results:
 
-1.  Print out to the screen, via your application, the course title, the programming language used, your student ID, and your name.
+  1.  Print out to the screen, via your application, the course title, the programming language used, your student ID, and your name.
 
-2.  Create an instance of the Roster class called classRoster.
+  2.  Create an instance of the Roster class called classRoster.
 
-3.  Add each student to classRoster.
+  3.  Add each student to classRoster.
 
-4.  Convert the following pseudo code to complete the rest of the main() function:
+  4.  Convert the following pseudo code to complete the rest of the main() function:
 classRoster.printAll();
  classRoster.printInvalidEmails();
  //loop through classRosterArray and for each element:
@@ -192,4 +192,4 @@ classRoster.printAll();
  classRoster.remove("A3");
  //expected: the above line should print a message saying such a student with this ID was not found.
 
-5.  Call the destructor to release the Roster memory.
+  5.  Call the destructor to release the Roster memory.
