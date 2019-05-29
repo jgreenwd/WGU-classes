@@ -41,7 +41,7 @@ You must write a program containing five classes (i.e.,  Student , SecurityStude
 STUDENT DATA TABLE
 
 | Student ID	| First Name |	Last Name |	Email |	Age |	Days in Course	| Degree |
-|-----------:| ---------- | --------- | ----- | --- | -------------- | ------ |
+|:----------- | ----------:|:--------- | ----- | --- | -------------- | ------ |
 | A1	| John	|	Smith	|	John1989@gm ail.com	|	20	|	30, 35, 40 |	SECURITY |
 | A2	| Suzan	|	Erickson	|	Erickson_1990@gmailcom	|	19	|	50, 30, 40 |	NETWORK |
 | A3	| Jack	|	Napoli	|	The_lawyer99yahoo.com	|	19	|	20, 40, 33 |	SOFTWARE |
@@ -49,7 +49,7 @@ STUDENT DATA TABLE
 | A5	| my name	| my name	| my email address |	my age	| Number of days to complete 3 courses	| SOFTWARE |
 
 The data should be input as follows:
-
+```
 const string studentData[] =
  {"A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
@@ -57,6 +57,7 @@ const string studentData[] =
  "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
  "A5,[firstname],[lastname],[emailaddress],[age],
  [numberofdaystocomplete3courses],SOFTWARE"
+```
 
 You may not include third party libraries. Your submission should include one zip file with all the necessary code files to compile, support, and run your application. You must also provide evidence of the program’s required functionality by taking a screen capture of the console run, saved as an image file or PDF.
 
@@ -67,13 +68,10 @@ Note: This assessment requires you to submit pictures, graphics, and/or diagrams
 Your submission must be your original work. No more than a combined total of 30% of the submission and no more than a 10% match to any one individual source can be directly quoted or closely paraphrased from sources, even if cited correctly. An originality report is provided when you submit your task that can be used as a guide.
 
 
-
 You must use the rubric to direct the creation of your submission because it provides detailed criteria that will be used to evaluate your work. Each requirement below may be evaluated by more than one rubric aspect. The rubric aspect titles may contain hyperlinks to relevant portions of the course.
 
 
-
 Create a program that converts the array of strings found in the studentData table to an array of student objects by doing the following:
-
 
 
 A.  Modify the studentData table to include your personal information as the last item.
@@ -87,27 +85,27 @@ B.  Create a C++ project in your integrated development environment (IDE) with t
   * softwareStudent.h and softwareStudent.cpp
   * roster.h and roster.cpp
  
-  Note: There must be a total of 11 source code files.
+__Note: There must be a total of 11 source code files.__
  
 
 C.  Define an enumerated data type Degree for the degree programs containing the following data elements SECURITY, NETWORKING and SOFTWARE.
  
-Note: This information should be included in the degree.h file.
+__Note: This information should be included in the degree.h file.__
  
 
 D.  For the Student class, do the following:
 
   1.  Create the base class Student in the files student.h and student.cpp, which includes each  of the following variables:
-    * student ID
-    * first name
-    * last name
-    * email address
-    * age
-    * array of number of days to complete each course
-    * degree types
+      * student ID
+      * first name
+      * last name
+      * email address
+      * age
+      * array of number of days to complete each course
+      * degree types
  
 
-  Note: Degree type should be populated in subclasses only.
+__Note: Degree type should be populated in subclasses only.__
  
 
   2.  Create each of the following functions in the Student class:
