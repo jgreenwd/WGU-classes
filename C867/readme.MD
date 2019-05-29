@@ -1,6 +1,7 @@
-## Project for C867 - Scripting and Programming - Applications
+# Project for C867 - Scripting and Programming - Applications
 
 ## Competencies
+======
 
 4048.2.1 Introduction to Programming
 
