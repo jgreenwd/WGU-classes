@@ -107,12 +107,14 @@ D.  For the Student class, do the following:
 __Note: Degree type should be populated in subclasses only.__
  
   2.  Create each of the following functions in the Student class:
+```
       a.  an accessor (i.e., getter) for each  instance variable from part D1
       b.  a mutator (i.e., setter) for each  instance variable from part D1
       c.  constructor using all  of the input parameters provided in the table
       d.  virtual print() to print specific student data 
       e.  destructor
       f.  virtual getDegreeProgram()
+```
  
  __Note: All access and changes to the instance variables of the Student class should be done through the accessor and mutator functions.__
 __Note: Leave the implementation of the getDegreeProgram() function empty.__
@@ -135,7 +137,7 @@ E.  Create a Roster class (roster.cpp) by doing the following:
       b.  Add each student object to classRosterArray.
 
   3.  Define the following functions:
-
+```
       a.  public void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, <degree program>) that sets the instance variables from part D1 and updates the roster
 
       b.  public void remove(string studentID) that removes students from the roster by student ID. If the student ID does not exist, the function prints an error message indicating that the student was not found.
@@ -150,7 +152,7 @@ E.  Create a Roster class (roster.cpp) by doing the following:
       f.  public void printByDegreeProgram(int degreeProgram) that prints out student information for a degree program specified by an enumerated type
 
 __Note: A valid email should include an at sign ('@') and period ('.') and should not include a space (' ').__
-
+```
 
 F.  Demonstrate the program’s required functionality by adding a void main() function to roster.cpp, which will contain the required function calls to achieve the following results:
 
