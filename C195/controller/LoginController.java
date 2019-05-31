@@ -7,12 +7,17 @@
 
 package controller;
 
+import c195.C195;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +28,7 @@ import lib.DBConnection;
 public class LoginController implements Initializable {
     @FXML private Label loginPromptLabel;
     @FXML private TextField loginUsername, loginPassword;
-    @FXML private Button accessDB;
+    @FXML private Button accessDbButton, exitButton;
     private ResourceBundle rb;
     private final String USERNAME = "test", PASSWORD = "test";
 
@@ -39,39 +44,34 @@ public class LoginController implements Initializable {
             loginPromptLabel.setText(rb.getString("Login_Prompt"));
             loginUsername.setPromptText(rb.getString("Username_Field"));
             loginPassword.setPromptText(rb.getString("Password_Field"));
-            accessDB.setText(rb.getString("Access_Button"));
+            accessDbButton.setText(rb.getString("Access_Button"));
+            exitButton.setText(rb.getString("Exit"));
         } catch(Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
     
     
-    /* ===============================================================
-     * Should NOT write DB credentials directly into code, but this is
-     * necessary to achieve requirement: "You must use “test” as 
-     * the username and password to log-in."
-     * 
-     * Ideally, would read user entry and validate on server side:
-     * DBConnection.makeConnection(loginUsername.getText(), loginPassword.getText());
-     *
-     * Display Alert if login fails.
-     * =============================================================== */
-    public void accessButtonPressed(ActionEvent e) {
+    public void accessButtonPressed(ActionEvent e) throws IOException, ClassNotFoundException, SQLException {
         if (validLogin()) {
-            try {
-                DBConnection.makeConnection("U05sep", "53688595689");
-            
-                DBConnection.closeConnection();
-            } catch (SQLException | ClassNotFoundException ex) {
-                System.out.println("Error: " + ex.getMessage());
-            }
+            Parent customerParent = FXMLLoader.load((getClass().getResource("/view/Customer.fxml")));
+
+            Scene customerScene = new Scene(customerParent);
+            C195.getPrimaryStage().setScene(customerScene);
+            C195.getPrimaryStage().show();    
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(null);
             alert.setTitle(rb.getString("Invalid_Login_Title"));
             alert.setContentText(rb.getString("Invalid_Login_Message"));
             alert.showAndWait();
         }
+    }
+    
+    
+    public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException {
+        DBConnection.closeConnection();
+        System.exit(0);
     }
     
 
