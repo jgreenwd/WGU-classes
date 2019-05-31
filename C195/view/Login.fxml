@@ -8,32 +8,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <VBox alignment="CENTER" prefHeight="480.0" prefWidth="720.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: dodgerblue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label fx:id="loginPromptLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Enter Username &amp; Password">
+            <Label fx:id="loginPromptLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" text="Enter Username &amp; Password" textFill="WHITE">
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="15.0" />
                </VBox.margin>
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" promptText="UserName">
+            <TextField fx:id="loginUsername" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" promptText="UserName">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="loginPassword" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" promptText="Password">
+            <TextField fx:id="loginPassword" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" promptText="Password">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="accessDB" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#accessButtonPressed" prefWidth="300.0" text="ACCESS DATABASE">
+            <Button fx:id="accessDbButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#accessButtonPressed" prefHeight="30.0" prefWidth="300.0" text="ACCESS DATABASE">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin></Button>
+            <Button fx:id="exitButton" layoutX="70.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="50.0" prefWidth="300.0" text="EXIT">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>
