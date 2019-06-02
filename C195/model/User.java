@@ -6,16 +6,26 @@
  */
 package model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class User {
-    private int     userID;
-    private String  userName;
-    private String  password;
+    private final   SimpleIntegerProperty       userId = new SimpleIntegerProperty();
+    private final   SimpleStringProperty        userName = new SimpleStringProperty();
+    private final   SimpleStringProperty        password = new SimpleStringProperty();
+    private final   SimpleIntegerProperty       active = new SimpleIntegerProperty();
     
-    public int getUserID()                  { return userID; }
-    public String getUsername()             { return userName; }
-    public String getPassword()             { return password; }
+    public int      getUserID()                 { return userId.get(); }
+    public void     setUserID(int ID)           { userId.set(ID); }
+    public String   getUsername()               { return userName.get(); }
+    public void     setUsername(String name)    { userName.set(name); }
+    public String   getPassword()               { return password.get(); }
+    public void     setPassword(String pwd)     { password.set(pwd); }
     
-    public void setUserID(int ID)           { userID = ID; }
-    public void setUsername(String name)    { userName = name; }
-    public void setPassword(String pwd)     { password = pwd; }
+    public User(int ID, String usr, String pwd, int active) {
+        this.userId.set(ID);
+        this.userName.set(usr);
+        this.password.set(pwd);
+        this.active.set(active);
+    }
 }

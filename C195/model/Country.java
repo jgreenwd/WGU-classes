@@ -6,6 +6,15 @@
  */
 package model;
 
-public enum Country {
-    USA, JAPAN, AUSTRALIA, RUSSIA, BRITAIN;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+public class Country {
+    private         SimpleIntegerProperty           countryId = new SimpleIntegerProperty();
+    private         SimpleStringProperty            countryName = new SimpleStringProperty();
+    
+    public int      getCountryId()                  { return countryId.get(); }
+    public void     setCountryId(int ID)            { countryId.set(ID); }
+    public String   getCountry()                    { return countryName.get(); }
+    public void     setCountry(String country)      { countryName.set(country); }
 }

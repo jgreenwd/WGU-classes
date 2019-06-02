@@ -6,16 +6,15 @@
  */
 package model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class City {
-    private int     CityID;
-    private String  City;
-    private int     CountryID;
+    private         SimpleIntegerProperty           cityId = new SimpleIntegerProperty();
+    private         SimpleStringProperty            cityName = new SimpleStringProperty();
     
-    public int getCityID()           { return CityID; }
-    public String getCity()          { return City; }
-    public int getCountryID()        { return CountryID; }
-    
-    public void setCityID(int ID)    { CityID = ID; }
-    public void setCountryID(int ID) { CountryID = ID; }
-    public void setCity(String city) { City = city; }
+    public int      getCityId()                     { return cityId.get(); }
+    public void     setCityID(int ID)               { cityId.set(ID); }
+    public String   getCityName()                   { return cityName.get(); }
+    public void     setCityName(String city)        { cityName.set(city); }
 }

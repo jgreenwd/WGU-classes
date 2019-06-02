@@ -9,6 +9,7 @@ package lib;
 
 import static lib.DBConnection.conn;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 
@@ -24,7 +25,7 @@ public class Query {
         try {
             stmt = conn.createStatement();
             
-            // determin query execution
+            // determine query execution
             if (query.startsWith("select")) {
                 result = stmt.executeQuery(query);
             } 
@@ -32,7 +33,7 @@ public class Query {
             if (query.startsWith("delete") || query.startsWith("insert") || query.startsWith("update")) {
                 stmt.executeUpdate(query);
             }
-        } catch(Exception ex) {
+        } catch(SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
     }
