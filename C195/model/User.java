@@ -22,6 +22,8 @@ public class User {
     public String   getPassword()               { return password.get(); }
     public void     setPassword(String pwd)     { password.set(pwd); }
     
+    public User() {}
+    
     public User(int ID, String usr, String pwd, int active) {
         this.userId.set(ID);
         this.userName.set(usr);

@@ -11,6 +11,7 @@ import static lib.DBConnection.conn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import model.User;
 
 
 public class Query {
@@ -40,5 +41,34 @@ public class Query {
     
     public static ResultSet getResult() {
         return result;
+    }
+    
+    /* ===============================================================
+     * Create static version of repeatedly used queries
+     *
+     * Query DB for customer info & render results to table
+     * =============================================================== */
+    public static void getAllCustomers() {
+        makeQuery(
+            "SELECT country.countryId, country, city.cityId, city, "
+                + "address.addressId, address, address2, postalCode, phone, "
+                + "customer.customerId, customerName FROM country "
+                + "JOIN city ON country.countryId = city.countryId "
+                + "JOIN address ON city.cityId = address.cityId "
+                + "JOIN customer ON address.addressId=customer.addressId "
+                + "ORDER BY customer.customerId;"
+        );
+    }
+    
+    public static User getUser(String name) throws SQLException {
+        makeQuery( "SELECT userId, userName, password, active FROM user WHERE userName=\""+ name +"\";");
+        getResult().first();
+        
+        int userId = getResult().getInt("userID");
+        String user = getResult().getString("userName");
+        String pwd = getResult().getString("password");
+        int active = getResult().getInt("active");
+        
+        return new User(userId, user, pwd, active);
     }
 }

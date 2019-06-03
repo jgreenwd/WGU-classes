@@ -17,11 +17,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lib.DBConnection;
+import model.User;
 
 public class C195 extends Application {
     // global variables for stage reuse
     public static Stage primaryStage = new Stage();    
     public static ResourceBundle rb;
+    public static User user;
 
     
     /* ===============================================================

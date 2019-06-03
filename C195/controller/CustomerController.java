@@ -41,46 +41,40 @@ public class CustomerController implements Initializable {
     @FXML private TableColumn<City, String> cityColumn;
     @FXML private TableColumn<Country, String> countryColumn;
     
+    /* ===============================================================
+     * On load, build ObservableList of DataBase Intersections:
+     * Country/City/Address/Customer
+     * =============================================================== */
     @Override public void initialize(URL url, ResourceBundle rb) {
         try {
             // Query DB for Customer details
-            Query.makeQuery(
-                    "SELECT country.countryId, country, city.cityId, city, "
-                    + "address.addressId, address, address2, postalCode, phone, "
-                    + "customer.customerId, customerName FROM country "
-                    + "JOIN city ON country.countryId = city.countryId "
-                    + "JOIN address ON city.cityId = address.cityId "
-                    + "JOIN customer ON address.addressId=customer.addressId "
-                    + "ORDER BY customer.customerId;"
-            );
-            
+            Query.getAllCustomers();
             
             // build ObservableList from Query
             while(Query.getResult().next()) {
-                Country c1 = new Country();
-                c1.setCountryId(Query.getResult().getInt("countryId"));
-                c1.setCountry(Query.getResult().getString("country"));
+                Country o = new Country();
+                o.setCountryId(Query.getResult().getInt("countryId"));
+                o.setCountry(Query.getResult().getString("country"));
                 
-                City c2 = new City();
-                c2.setCityID(Query.getResult().getInt("cityId"));
-                c2.setCityName(Query.getResult().getString("city"));
+                City i = new City(o);
+                i.setCityId(Query.getResult().getInt("cityId"));
+                i.setCityName(Query.getResult().getString("city"));
                 
-                Address a = new Address();
-                a.setAddressID(Query.getResult().getInt("addressId"));
+                Address a = new Address(i);
+                a.setAddressId(Query.getResult().getInt("addressId"));
                 a.setAddress(Query.getResult().getString("address"));
                 a.setAddress2(Query.getResult().getString("address2"));
                 a.setPostalCode(Query.getResult().getString("postalCode"));
                 a.setPhone(Query.getResult().getString("phone"));
                 
-                Customer c3 = new Customer();
-                c3.setCustomerId(Query.getResult().getInt("customerId"));
-                c3.setCustomerName(Query.getResult().getString("customerName"));
+                Customer c = new Customer(a);
+                c.setCustomerId(Query.getResult().getInt("customerId"));
+                c.setCustomerName(Query.getResult().getString("customerName"));
                 
-                CustomerDelegate temp = new CustomerDelegate(c3, a, c2, c1);
-                CUSTOMER_LIST.add(temp);
+                CUSTOMER_LIST.add(new CustomerDelegate(c));
             }
 
-            // display Query results in window
+            // render Query results in TableView
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
             phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
             addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -102,59 +96,73 @@ public class CustomerController implements Initializable {
      * Display Alert if login fails.
      * =============================================================== */
     @FXML private VBox customerBox;
-    @FXML private TextField customerName;
-    @FXML private TextField customerPhone;
-    @FXML private TextField customerAddress;
-    @FXML private TextField customerAddress2;
-    @FXML private TextField customerCity;
-    @FXML private TextField customerZip;
-    @FXML private TextField customerCountry;
+    @FXML private TextField nameField;
+    @FXML private TextField phoneField;
+    @FXML private TextField addressField;
+    @FXML private TextField address2Field;
+    @FXML private TextField cityField;
+    @FXML private TextField zipField;
+    @FXML private TextField countryField;
+    private int customerId = -1, addressId = -1, cityId = -1, countryId = -1;
     private String name, phone, addr, addr2, city, zip, country;
+    private enum AMD { ADD, MODIFY, DELETE };
+    private AMD status;
     
     public void newCustomerButtonPressed(ActionEvent e) {
+        status = AMD.ADD;
         customerBox.setDisable(false);
-        customerName.clear();
-        customerPhone.clear();
-        customerAddress.clear();
-        customerAddress2.clear();
-        customerCity.clear();
-        customerZip.clear();
-        customerCountry.clear();
+        
+        nameField.clear();
+        phoneField.clear();
+        addressField.clear();
+        address2Field.clear();
+        cityField.clear();
+        zipField.clear();
+        countryField.clear();
     }
     
     public void modifyCustomerButtonPressed(ActionEvent e) {
-        System.out.println("modify pressed");
+        customerBox.setDisable(false);
+        status = AMD.MODIFY;
     }
     
     public void deleteCustomerButtonPressed(ActionEvent e) {
-        System.out.println("delete pressed");
+        status = AMD.DELETE;
     }
     
     public void getAppointmentsCalendar(ActionEvent e) {
         System.out.println("calendar pressed");
     }
     
-    public void populateForm(ActionEvent e) {
-        
-    }
     
-    public void submitButtonPressed(ActionEvent e) {
+    /* ===============================================================
+     * (4025.01.05) - B: Add/Update/Delete DB records
+     *
+     * On Submit, check for pre-existing country/city/address/customer.
+     * If exists, return <x>Id, else DB will auto-increment.
+     * =============================================================== */
+    public void submitButtonPressed(ActionEvent e) throws SQLException {
+        country = countryField.getText();
+        city = cityField.getText();
+        addr = addressField.getText();
+        addr2 = address2Field.getText();
+        zip = zipField.getText();
+        phone = phoneField.getText();
+        name = nameField.getText();
+
         customerBox.setDisable(true);
-        name = customerName.getText();
-        phone = customerPhone.getText();
-        addr = customerAddress.getText();
-        addr2 = customerAddress2.getText();
-        city = customerCity.getText();
-        zip = customerZip.getText();
-        country = customerCountry.getText();
     }
     
     /* ===============================================================
      * Return to Login screen
      *
+     * Clear current user.
+     * Load Login screen.
      * Use ResourceBundle to maintain I18N of Login screen on all viewings
      * =============================================================== */
     public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException, IOException {
+        C195.user = null;
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
         loader.setResources(C195.getResourceBundle());
         
