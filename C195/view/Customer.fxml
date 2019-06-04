@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,7 +16,7 @@
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: dodgerblue;">
          <children>
-            <TableView fx:id="customerTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="750.0">
+            <TableView fx:id="customerTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="760.0" style="-fx-selection-bar: royalblue; -fx-selection-bar-non-focused: royalblue;">
               <columns>
                   <TableColumn fx:id="nameColumn" editable="false" maxWidth="120.0" minWidth="120.0" prefWidth="-1.0" resizable="false" text="Customer" />
                   <TableColumn fx:id="phoneColumn" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Telephone" />
@@ -23,15 +25,15 @@
                   <TableColumn fx:id="countryColumn" editable="false" maxWidth="90.0" minWidth="90.0" prefWidth="-1.0" resizable="false" text="Country" />
               </columns>
                <VBox.margin>
-                  <Insets left="25.0" top="25.0" />
+                  <Insets left="20.0" top="20.0" />
                </VBox.margin>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="750.0">
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="760.0">
                <children>
-                  <VBox fx:id="customerBox" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="420.0" style="-fx-border-style: solid; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-border-color: lightblue;">
+                  <VBox fx:id="customerBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="420.0" style="-fx-border-style: solid; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-border-color: gainsboro;">
                      <children>
                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="390.0">
                            <children>
@@ -124,9 +126,9 @@
                               <Insets left="10.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="30.0" prefWidth="390.0" text="Submit">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="30.0" prefWidth="385.0" text="Submit">
                            <VBox.margin>
-                              <Insets left="10.0" top="20.0" />
+                              <Insets left="15.0" top="65.0" />
                            </VBox.margin>
                         </Button>
                      </children>
@@ -134,31 +136,34 @@
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="310.0" style="-fx-border-style: solid; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-border-color: lightblue;">
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="320.0" style="-fx-border-style: solid; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-border-color: gainsboro;">
                      <children>
-                        <Button layoutX="50.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getAppointmentsCalendar" prefHeight="30.0" prefWidth="250.0" text="Display Appointments Calendar">
+                        <ImageView fitHeight="80.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Logo.png" />
+                           </image>
                            <VBox.margin>
-                              <Insets left="30.0" top="20.0" />
+                              <Insets />
+                           </VBox.margin>
+                        </ImageView>
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newCustomerButtonPressed" prefHeight="30.0" prefWidth="285.0" text="New Customer">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newCustomerButtonPressed" prefHeight="30.0" prefWidth="250.0" text="New Customer">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCustomerButtonPressed" prefHeight="30.0" prefWidth="285.0" text="Delete Customer">
                            <VBox.margin>
-                              <Insets left="30.0" top="30.0" />
+                              <Insets left="15.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#modifyCustomerButtonPressed" prefHeight="30.0" prefWidth="250.0" text="Modify Customer">
+                        <Button layoutX="50.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getAppointmentsCalendar" prefHeight="30.0" prefWidth="285.0" text="Display Appointments Calendar">
                            <VBox.margin>
-                              <Insets left="30.0" top="7.0" />
+                              <Insets left="15.0" top="40.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCustomerButtonPressed" prefHeight="30.0" prefWidth="250.0" text="Delete Customer">
+                        <Button layoutX="10.0" layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="50.0" prefWidth="285.0" text="Exit">
                            <VBox.margin>
-                              <Insets left="30.0" top="7.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="50.0" prefWidth="250.0" text="Exit">
-                           <VBox.margin>
-                              <Insets left="30.0" top="42.0" />
+                              <Insets left="15.0" top="30.0" />
                            </VBox.margin>
                         </Button>
                      </children>
@@ -168,7 +173,7 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets left="25.0" top="25.0" />
+                  <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </HBox>
          </children>
