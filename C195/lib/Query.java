@@ -52,7 +52,7 @@ public class Query {
         makeQuery(
             "SELECT country.countryId, country, city.cityId, city, "
                 + "address.addressId, address, address2, postalCode, phone, "
-                + "customer.customerId, customerName FROM country "
+                + "customer.customerId, customerName, active FROM country "
                 + "JOIN city ON country.countryId = city.countryId "
                 + "JOIN address ON city.cityId = address.cityId "
                 + "JOIN customer ON address.addressId=customer.addressId "

@@ -10,11 +10,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Country {
-    private final SimpleIntegerProperty             countryId = new SimpleIntegerProperty();
-    private final SimpleStringProperty              countryName = new SimpleStringProperty();
+    private final   SimpleIntegerProperty       countryId = new SimpleIntegerProperty();
+    private final   SimpleStringProperty        countryName = new SimpleStringProperty();
     
-    public int      getCountryId()                  { return countryId.get(); }
-    public void     setCountryId(int ID)            { countryId.set(ID); }
-    public String   getCountry()                    { return countryName.get(); }
-    public void     setCountry(String country)      { countryName.set(country); }
+    public  int     getCountryId()              { return countryId.get(); }
+    public  Country setCountryId(int ID)        { countryId.set(ID); return this; }
+    public  String  getCountryName()            { return countryName.get(); }
+    public  Country setCountryName(String ctry) { countryName.set(ctry); return this; }
+    
+    public Country(String name) {
+        this.countryName.set(name);
+    }
+    
+    public Country(int ID, String name) {
+        this(name);
+        this.countryId.set(ID);
+    }
 }
