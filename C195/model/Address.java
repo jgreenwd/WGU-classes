@@ -6,27 +6,24 @@
  */
 package model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class Address {
-    private final   SimpleIntegerProperty       addressId = new SimpleIntegerProperty();
-    private final   SimpleStringProperty        address1 = new SimpleStringProperty();
-    private final   SimpleStringProperty        address2 = new SimpleStringProperty();
-    private final   SimpleStringProperty        postalCode = new SimpleStringProperty();
-    private final   SimpleStringProperty        phone = new SimpleStringProperty();
-    private         City                        city;
+    private int     addressId;
+    private String  address1;
+    private String  address2;
+    private String  postalCode;
+    private String  phone;
+    private City    city;
 
-    public  int     getAddressId()              { return addressId.get(); }
-    public  void    setAddressId(int ID)        { addressId.set(ID); }
-    public  String  getAddress1()               { return address1.get(); }
-    public  void    setAddress1(String addr)    { address1.set(addr); }
-    public  String  getAddress2()               { return address2.get(); }
-    public  void    setAddress2(String addr2)   { address2.set(addr2); }
-    public  String  getPostalCode()             { return postalCode.get(); }
-    public  void    setPostalCode(String zip)   { postalCode.set(zip); }
-    public  String  getPhone()                  { return phone.get(); }
-    public  void    setPhone(String num)        { phone.set(num); }
+    public  int     getAddressId()              { return addressId; }
+    public  void    setAddressId(int ID)        { addressId = ID; }
+    public  String  getAddress1()               { return address1; }
+    public  void    setAddress1(String addr)    { address1 = addr; }
+    public  String  getAddress2()               { return address2; }
+    public  void    setAddress2(String addr2)   { address2 = addr2; }
+    public  String  getPostalCode()             { return postalCode; }
+    public  void    setPostalCode(String zip)   { postalCode = zip; }
+    public  String  getPhone()                  { return phone; }
+    public  void    setPhone(String num)        { phone = num; }
     public  City    getCityObj()                { return city; }
     public  void    setCityObj(City city)       { this.city = city; }
     
@@ -37,27 +34,27 @@ public class Address {
     
     public Address(String postalCode, City city) {
         this(city);
-        this.postalCode.set(postalCode);
+        this.postalCode = postalCode;
         
     }
     
     public Address(String address1, String postalCode, City city) {
         this(postalCode, city);
-        this.address1.set(address1);
+        this.address1 = address1;
     }
     
     public Address(String address1, String address2, String postalCode, City city) {
         this(address1, postalCode, city);
-        this.address2.set(address2);
+        this.address2 = address2;
     }
     
     public Address(String address1, String address2, String postalCode, String phone, City city) {
         this(address1, address2, postalCode, city);
-        this.phone.set(phone);
+        this.phone = phone;
     }
     
     public Address(int ID, String address1, String address2, String postalCode, String phone, City city) {
         this(address1, address2, postalCode, phone, city);
-        this.addressId.set(ID);
+        this.addressId = ID;
     }
 }

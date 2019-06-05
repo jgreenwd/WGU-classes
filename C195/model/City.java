@@ -6,18 +6,15 @@
  */
 package model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class City {
-    private final   SimpleIntegerProperty       cityId = new SimpleIntegerProperty();
-    private final   SimpleStringProperty        cityName = new SimpleStringProperty();
-    private         Country                     country;
+    private int     cityId;
+    private String  cityName;
+    private Country country;
 
-    public  int     getCityId()                 { return cityId.get(); }
-    public  void    setCityId(int ID)           { cityId.set(ID); }
-    public  String  getCityName()               { return cityName.get(); }
-    public  void    setCityName(String city)    { cityName.set(city); }
+    public  int     getCityId()                 { return cityId; }
+    public  void    setCityId(int ID)           { cityId = ID; }
+    public  String  getCityName()               { return cityName; }
+    public  void    setCityName(String city)    { cityName = city; }
     public  Country getCountryObj()             { return country; }
     public  void    setCountryObj(Country ctry) { this.country = ctry; }
     
@@ -27,11 +24,11 @@ public class City {
     
     public City(String name, Country country) {
         this(country);
-        this.cityName.set(name);
+        this.cityName = name;
     }
     
     public City(int ID, String name, Country country) {
         this(name, country);
-        this.cityId.set(ID);
+        this.cityId = ID;
     }
 }

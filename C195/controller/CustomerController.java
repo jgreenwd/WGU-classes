@@ -63,7 +63,9 @@ public class CustomerController implements Initializable {
             // build ObservableList of Customer objects
             while(Query.getResult().next()) {
                 Customer customer =  new CustomerBuilder()
+                    .setCustomerId(Query.getResult().getInt("customerId"))
                     .setCustomerName(Query.getResult().getString("customerName"))
+                    .setActive(Query.getResult().getInt("active"))
                     .setAddressId(Query.getResult().getInt("addressId"))
                     .setAddress1(Query.getResult().getString("address"))
                     .setAddress2(Query.getResult().getString("address2"))
@@ -73,15 +75,11 @@ public class CustomerController implements Initializable {
                     .setCityName(Query.getResult().getString("city"))
                     .setCountryId(Query.getResult().getInt("countryId"))
                     .setCountryName(Query.getResult().getString("country"))
-                    .setCustomerId(Query.getResult().getInt("customerId"))
                 .createCustomer();
                 
                 CUSTOMER_LIST.add( new ObservableCustomer(customer) );
-                
-                System.out.print(Query.getResult().getInt("customerId") + " ");
-                System.out.print(customer.getCustomerId() + "\n");
             }
-
+            
             // render Query results in TableView
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
             phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));

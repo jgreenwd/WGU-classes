@@ -6,24 +6,21 @@
  */
 package model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class Country {
-    private final   SimpleIntegerProperty       countryId = new SimpleIntegerProperty();
-    private final   SimpleStringProperty        countryName = new SimpleStringProperty();
+    private int     countryId;
+    private String  countryName;
     
-    public  int     getCountryId()              { return countryId.get(); }
-    public  void    setCountryId(int ID)        { countryId.set(ID); }
-    public  String  getCountryName()            { return countryName.get(); }
-    public  void    setCountryName(String ctry) { countryName.set(ctry); }
+    public  int     getCountryId()              { return countryId; }
+    public  void    setCountryId(int ID)        { countryId = ID; }
+    public  String  getCountryName()            { return countryName; }
+    public  void    setCountryName(String ctry) { countryName = ctry; }
     
     public Country(String name) {
-        this.countryName.set(name);
+        this.countryName = name;
     }
     
     public Country(int ID, String name) {
         this(name);
-        this.countryId.set(ID);
+        this.countryId = ID;
     }
 }
