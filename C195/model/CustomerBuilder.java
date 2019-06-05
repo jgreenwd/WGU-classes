@@ -42,8 +42,7 @@ public class CustomerBuilder {
     public  CustomerBuilder setCountryId(int ID)        { countryId.set(ID); return this; }
     public  CustomerBuilder setCountryName(String ctry) { countryName.set(ctry); return this; }
     
-    public CustomerBuilder with(
-            Consumer<CustomerBuilder> builderFunction) {
+    public CustomerBuilder with( Consumer<CustomerBuilder> builderFunction) {
         builderFunction.accept(this);
         return this;
     }

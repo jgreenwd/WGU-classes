@@ -17,11 +17,11 @@ public class Customer {
     private          Address                     address;
     
     public  int      getCustomerId()             { return customerId.get(); }
-    public  Customer setCustomerId(int ID)       { customerId.set(ID); return this; }
+    public  void     setCustomerId(int ID)       { customerId.set(ID); }
     public  String   getCustomerName()           { return customerName.get(); }
-    public  Customer setCustomerName(String name){ customerName.set(name); return this; }
+    public  void     setCustomerName(String name){ customerName.set(name); }
     public  int      getActive()                 { return active.get(); }
-    public  Customer setActive(int value)        { active.set(value); return this; }
+    public  void     setActive(int value)        { active.set(value); }
     public  Address  getAddressObj()             { return address; }
     public  void     setAddressObj(Address addr) { this.address = addr; }
     

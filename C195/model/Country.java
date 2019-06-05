@@ -14,9 +14,9 @@ public class Country {
     private final   SimpleStringProperty        countryName = new SimpleStringProperty();
     
     public  int     getCountryId()              { return countryId.get(); }
-    public  Country setCountryId(int ID)        { countryId.set(ID); return this; }
+    public  void    setCountryId(int ID)        { countryId.set(ID); }
     public  String  getCountryName()            { return countryName.get(); }
-    public  Country setCountryName(String ctry) { countryName.set(ctry); return this; }
+    public  void    setCountryName(String ctry) { countryName.set(ctry); }
     
     public Country(String name) {
         this.countryName.set(name);

@@ -53,7 +53,6 @@ public class CustomerController implements Initializable {
      * On load, build ObservableList of DataBase Intersections
      *
      * Add listener for list selection
-     * - store IDs for selection
      * - fill out form on selection
      * =============================================================== */
     @Override public void initialize(URL url, ResourceBundle rb) {
@@ -64,11 +63,7 @@ public class CustomerController implements Initializable {
             // build ObservableList of Customer objects
             while(Query.getResult().next()) {
                 Customer customer =  new CustomerBuilder()
-                    .setCountryName(Query.getResult().getString("country"))
-                    .setCountryId(Query.getResult().getInt("countryId"))
-                    .setCustomerId(Query.getResult().getInt("customerId"))
                     .setCustomerName(Query.getResult().getString("customerName"))
-                    .setActive(Query.getResult().getInt("active"))
                     .setAddressId(Query.getResult().getInt("addressId"))
                     .setAddress1(Query.getResult().getString("address"))
                     .setAddress2(Query.getResult().getString("address2"))
@@ -76,10 +71,15 @@ public class CustomerController implements Initializable {
                     .setPhone(Query.getResult().getString("phone"))
                     .setCityId(Query.getResult().getInt("cityId"))
                     .setCityName(Query.getResult().getString("city"))
-                    .createCustomer();
+                    .setCountryId(Query.getResult().getInt("countryId"))
+                    .setCountryName(Query.getResult().getString("country"))
+                    .setCustomerId(Query.getResult().getInt("customerId"))
+                .createCustomer();
                 
                 CUSTOMER_LIST.add( new ObservableCustomer(customer) );
                 
+                System.out.print(Query.getResult().getInt("customerId") + " ");
+                System.out.print(customer.getCustomerId() + "\n");
             }
 
             // render Query results in TableView
@@ -103,7 +103,7 @@ public class CustomerController implements Initializable {
              * succinct and readable code. It also allows one to maintain a
              * more consistently functional approach to development.
              * =============================================================== */
-            // on Click populate form & store IDs
+            // on Click populate form
             customerTable.getSelectionModel().selectedItemProperty().addListener((obs, prev, next) -> {
                 nameField.setText(next.getCustomerName());
                 phoneField.setText(next.getPhone());
@@ -126,7 +126,7 @@ public class CustomerController implements Initializable {
      * Display Alert if login fails.
      * =============================================================== */
     
-    // Press button to clear fields & reset *Ids
+    // Press button to clear fields
     public void newCustomerButtonPressed(ActionEvent e) {
         System.out.println("new pressed");
         nameField.clear();
@@ -154,39 +154,19 @@ public class CustomerController implements Initializable {
      * (4025.01.05) - B: Add/Update/Delete DB records
      *
      * On Submit, check for pre-existing country/city/address/customer.
-     * If exists, return <x>Id, else DB will auto-increment.
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-//        Country o = new Country();
-//        o.setCountry(countryField.getText());
-//        
-//        
-//        City i = new City(o);
-//        i.setCityName(cityField.getText());
-//        CUSTOMER_LIST.forEach((item) ->  {
-//            if (item.getCityName().equals(cityField.getText()) && countryId > -1) {
-//                i.setCityId(item.getCityId());
-//                return;
-//            }
-//        });
-//        
-//        Address a = new Address(i);
-//        a.setAddress(addressField.getText());
-//        a.setAddress2(address2Field.getText());
-//        a.setPostalCode(zipField.getText());
-//        a.setPhone(phoneField.getText());
-//        CUSTOMER_LIST.forEach((item) ->  {
-//            if (item.getAddress().equals(addressField.getText()) && 
-//                item.getAddress2().equals(address2Field.getText()) &&
-//                item.getPostalCode().equals(zipField.getText()) &&
-//                item.getPhone().equals(phoneField.getText()) &&
-//                cityId > -1) {
-//                a.setAddressId(item.getAddressId());
-//                return;
-//            }
-//        });
-//        
+        Customer customer =  new CustomerBuilder()
+            .setCustomerName(nameField.getText())
+            .setAddress1(address1Field.getText())
+            .setAddress2(address2Field.getText())
+            .setPostalCode(zipField.getText())
+            .setPhone(phoneField.getText())
+            .setCityName(cityField.getText())
+            .setCountryName(countryField.getText())
+        .createCustomer();
 
+        
     }
     
     /* ===============================================================
@@ -208,6 +188,5 @@ public class CustomerController implements Initializable {
         C195.getPrimaryStage().setScene(scene);
         C195.getPrimaryStage().show();
     }
-    
 
 }

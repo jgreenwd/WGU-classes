@@ -15,9 +15,9 @@ public class City {
     private         Country                     country;
 
     public  int     getCityId()                 { return cityId.get(); }
-    public  City    setCityId(int ID)           { cityId.set(ID); return this; }
+    public  void    setCityId(int ID)           { cityId.set(ID); }
     public  String  getCityName()               { return cityName.get(); }
-    public  City    setCityName(String city)    { cityName.set(city); return this;  }
+    public  void    setCityName(String city)    { cityName.set(city); }
     public  Country getCountryObj()             { return country; }
     public  void    setCountryObj(Country ctry) { this.country = ctry; }
     

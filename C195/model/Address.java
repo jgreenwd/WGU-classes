@@ -18,15 +18,15 @@ public class Address {
     private         City                        city;
 
     public  int     getAddressId()              { return addressId.get(); }
-    public  Address setAddressId(int ID)        { addressId.set(ID); return this; }
+    public  void    setAddressId(int ID)        { addressId.set(ID); }
     public  String  getAddress1()               { return address1.get(); }
-    public  Address setAddress1(String addr)    { address1.set(addr); return this; }
+    public  void    setAddress1(String addr)    { address1.set(addr); }
     public  String  getAddress2()               { return address2.get(); }
-    public  Address setAddress2(String addr2)   { address2.set(addr2);; return this; }
+    public  void    setAddress2(String addr2)   { address2.set(addr2); }
     public  String  getPostalCode()             { return postalCode.get(); }
-    public  Address setPostalCode(String zip)   { postalCode.set(zip); return this; }
+    public  void    setPostalCode(String zip)   { postalCode.set(zip); }
     public  String  getPhone()                  { return phone.get(); }
-    public  Address setPhone(String num)        { phone.set(num); return this; }
+    public  void    setPhone(String num)        { phone.set(num); }
     public  City    getCityObj()                { return city; }
     public  void    setCityObj(City city)       { this.city = city; }
     
