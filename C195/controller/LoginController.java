@@ -60,7 +60,7 @@ public class LoginController implements Initializable {
     // Render login form and set current User
     public void accessButtonPressed(ActionEvent e) throws IOException, ClassNotFoundException, SQLException, NullPointerException {
         boolean validity = false;
-        if (validLogin()) {
+        if (Query.login(loginUsername.getText(), loginPassword.getText())) {
             C195.user = Query.getUser(loginUsername.getText());
             validity = true;
             Parent customerParent = FXMLLoader.load((getClass().getResource("/view/Customer.fxml")));
@@ -84,23 +84,6 @@ public class LoginController implements Initializable {
             System.out.println("Exception: " + ex.getMessage());
         }
         
-    }
-    
-    // Validate login credentials
-    public boolean validLogin() throws SQLException {
-        String usr = loginUsername.getText();
-        String pwd = loginPassword.getText();
-
-        Query.makeQuery(
-            "SELECT CASE WHEN EXISTS("
-            + "SELECT * FROM user WHERE userName=\"" + usr + "\" AND password=\"" + pwd +"\") "
-            + "THEN TRUE "
-            + "ELSE FALSE "
-            +"END AS valid;");
-            
-        Query.getResult().first();
-        
-        return Query.getResult().getBoolean("valid");
     }
     
     // Exit program

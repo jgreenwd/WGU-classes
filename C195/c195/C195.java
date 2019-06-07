@@ -24,7 +24,7 @@ public class C195 extends Application {
     public static Stage primaryStage = new Stage();    
     public static ResourceBundle rb;
     public static User user;
-
+    public enum ProcessState { ADD, EDIT, DELETE };
     
     /* ===============================================================
      * (4025.01.08) - A: Internationalize Login form

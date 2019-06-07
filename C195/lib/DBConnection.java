@@ -37,13 +37,4 @@ public class DBConnection {
         conn.close();
         System.out.println("Closing Connection: " + DB_NAME);
     } 
-    
-    //    Statement stmt = conn.createStatement();
-    //    Statement update = conn.executeUpdate(sqlstatement string);
-    //        same for UPDATE, INSERT, & DELETE
-    //    ResultSet result = conn.executeQuery(sqlstatement string);
-    
-    //    Statement stmt = conn.createStatement();
-    //    String query = "SELECT * FROM user";
-    //    ResultSet result = stmt.executeQuery(query);
 }

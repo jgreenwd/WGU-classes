@@ -22,6 +22,8 @@ public class Customer {
     public  Address getAddressObj()             { return address; }
     public  void    setAddressObj(Address addr) { this.address = addr; }
     
+    public Customer() {}
+    
     public Customer(Address address) {
         this.address = address;
     }

@@ -9,7 +9,7 @@ package model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class ObservableCustomer {
+public class ObservableCustomer extends Customer {
     public    SimpleIntegerProperty       customerId = new SimpleIntegerProperty();
     public    SimpleStringProperty        customerName = new SimpleStringProperty();
     public    SimpleIntegerProperty       active = new SimpleIntegerProperty();
