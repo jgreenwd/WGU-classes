@@ -23,8 +23,6 @@ public class CustomerBuilder {
     
     public  int     cityId;
     public  String  cityName;
-    
-    public  int     countryId;
     public  String  countryName;
     
     public  CustomerBuilder setCustomerId(int ID)       { customerId = ID; return this;}
@@ -36,9 +34,8 @@ public class CustomerBuilder {
     public  CustomerBuilder setPostalCode(String zip)   { postalCode = zip; return this; }
     public  CustomerBuilder setPhone(String num)        { phone = num; return this; }
     public  CustomerBuilder setCityId(int ID)           { cityId = ID; return this; }
-    public  CustomerBuilder setCityName(String city)    { cityName = city; return this; }
-    public  CustomerBuilder setCountryId(int ID)        { countryId = ID; return this; }
-    public  CustomerBuilder setCountryName(String ctry) { countryName = ctry; return this; }
+    public  CustomerBuilder setCityName(String name)    { cityName = name; return this; }
+    public  CustomerBuilder setCountryName(String name) { countryName = name; return this; }
     
     public CustomerBuilder with( Consumer<CustomerBuilder> builderFunction) {
         builderFunction.accept(this);
@@ -47,10 +44,8 @@ public class CustomerBuilder {
     
     public Customer createCustomer() {
         return new Customer(customerId, active, customerName, 
-            new Address(addressId, address1, address2, postalCode, phone, 
-                new City(cityId, cityName, 
-                    new Country(countryId, countryName)
-                )
+            new Address(addressId, address1, address2, postalCode, phone,
+                new City(cityId, cityName, countryName)
             )
         );
     }

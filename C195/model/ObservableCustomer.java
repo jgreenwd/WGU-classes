@@ -22,12 +22,13 @@ public class ObservableCustomer extends Customer {
     
     public    SimpleIntegerProperty       cityId = new SimpleIntegerProperty();
     public    SimpleStringProperty        cityName = new SimpleStringProperty();
-    
-    public    SimpleIntegerProperty       countryId = new SimpleIntegerProperty();
     public    SimpleStringProperty        countryName = new SimpleStringProperty();
     
+    @Override
     public  int     getCustomerId()             { return customerId.get(); }
+    @Override
     public  String  getCustomerName()           { return customerName.get(); }
+    @Override
     public  int     getActive()                 { return active.get(); }
     public  int     getAddressId()              { return addressId.get(); }
     public  String  getAddress1()               { return address1.get(); }
@@ -36,9 +37,7 @@ public class ObservableCustomer extends Customer {
     public  String  getPhone()                  { return phone.get(); }
     public  int     getCityId()                 { return cityId.get(); }
     public  String  getCityName()               { return cityName.get(); }
-    public  int     getCountryId()              { return countryId.get(); }
     public  String  getCountryName()            { return countryName.get(); }
-    
     
     public ObservableCustomer(Customer cust) {
         this.customerId.set(cust.getCustomerId());
@@ -53,8 +52,6 @@ public class ObservableCustomer extends Customer {
         
         this.cityId.set(cust.getAddressObj().getCityObj().getCityId());
         this.cityName.set(cust.getAddressObj().getCityObj().getCityName());
-        
-        this.countryId.set(cust.getAddressObj().getCityObj().getCountryObj().getCountryId());
-        this.countryName.set(cust.getAddressObj().getCityObj().getCountryObj().getCountryName());
+        this.countryName.set(cust.getAddressObj().getCityObj().getCountryName());
     }
 }

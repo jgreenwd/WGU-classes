@@ -5,30 +5,28 @@
  * course C195
  */
 package model;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 
 public class City {
-    private int     cityId;
-    private String  cityName;
-    private Country country;
+    private final SimpleIntegerProperty cityId = new SimpleIntegerProperty();
+    private final SimpleStringProperty  cityName = new SimpleStringProperty();
+    private final SimpleStringProperty  countryName = new SimpleStringProperty();
+    
+    public int    getCityId()           { return this.cityId.get(); }
+    public String getCityName()         { return this.cityName.get(); }
+    public String getCountryName()      { return this.countryName.get(); }
+    public void   setCityId(int ID)     { this.cityId.set(ID); }
+    public void   setCityName(String name) { this.cityName.set(name); }
+    public void   setCountryName(String name) { this.countryName.set(name); }
 
-    public  int     getCityId()                 { return cityId; }
-    public  void    setCityId(int ID)           { cityId = ID; }
-    public  String  getCityName()               { return cityName; }
-    public  void    setCityName(String city)    { cityName = city; }
-    public  Country getCountryObj()             { return country; }
-    public  void    setCountryObj(Country ctry) { this.country = ctry; }
     
-    public City(Country country) {
-        this.country = country;
-    };
+    public City() {}
     
-    public City(String name, Country country) {
-        this(country);
-        this.cityName = name;
-    }
-    
-    public City(int ID, String name, Country country) {
-        this(name, country);
-        this.cityId = ID;
+    public City(int ID, String name, String countryName) {
+        this.cityId.set(ID);
+        this.cityName.set(name);
+        this.countryName.set(countryName);
     }
 }

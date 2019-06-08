@@ -17,14 +17,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lib.DBConnection;
-import model.User;
+import model.*;
 
 public class C195 extends Application {
     // global variables for stage reuse
     public static Stage primaryStage = new Stage();    
     public static ResourceBundle rb;
     public static User user;
-    public enum ProcessState { ADD, EDIT, DELETE };
     
     /* ===============================================================
      * (4025.01.08) - A: Internationalize Login form
@@ -47,6 +46,7 @@ public class C195 extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+    
     }
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
