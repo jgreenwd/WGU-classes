@@ -64,6 +64,24 @@ public class Query {
         }
     }
     
+    // 
+    public static User getUser(String name) throws SQLException {
+        try(PreparedStatement st = conn.prepareStatement(
+                "SELECT userId, userName, password, active "
+                + "FROM user WHERE userName=?");) {
+            st.setString(1, name);
+            result = st.executeQuery();
+            result.first();
+        
+            int userId = result.getInt("userID");
+            String user = result.getString("userName");
+            String pwd = result.getString("password");
+            int active = result.getInt("active");
+        
+            return new User(userId, user, pwd, active);
+        }
+    }
+    
     // Query DB for customer info & render results to table
     public static void getAllCustomers() throws SQLException {
         try {
@@ -82,23 +100,6 @@ public class Query {
         }
     }
     
-    // 
-    public static User getUser(String name) throws SQLException {
-        try(PreparedStatement st = conn.prepareStatement(
-                "SELECT userId, userName, password, active "
-                + "FROM user WHERE userName=?");) {
-            st.setString(1, name);
-            result = st.executeQuery();
-            result.first();
-        
-            int userId = result.getInt("userID");
-            String user = result.getString("userName");
-            String pwd = result.getString("password");
-            int active = result.getInt("active");
-        
-            return new User(userId, user, pwd, active);
-        }
-    }
     
     /* *******************************************************
         Customer
@@ -169,17 +170,14 @@ public class Query {
         }
     }
     
-    public static int getAddressId(String addr, String addr2, String zip, String phone) throws SQLException {
+    public static boolean isSingleton(Address address) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
-                "SELECT addressId FROM address WHERE address=? AND "
-                + "address2=? AND postalCode=? AND phone=?");) {
-            st.setString(1, addr);
-            st.setString(2, addr2);
-            st.setString(3, zip);
-            st.setString(4, phone);
+                "SELECT COUNT(addressId) FROM customer WHERE addressId=?;");) {
+            st.setInt(1, address.getAddressId());
             result = st.executeQuery();
+            result.first();
             
-            return result.next() ? result.getInt("addressId") : 0;
+            return result.getInt("COUNT(addressId)") == 0;
         }
     }
     
@@ -224,32 +222,4 @@ public class Query {
     }
     
     
-    /* *******************************************************
-        City
-    
-       ******************************************************* */
-//    public static int getCityId(String name) throws SQLException {
-//        try (PreparedStatement st =conn.prepareStatement(
-//            "SELECT cityId FROM city WHERE city=?");) {
-//            st.setString(1, name);
-//            result = st.executeQuery();
-//            
-//            return result.next() ? result.getInt("cityId") : 0;
-//        }
-//    }
-//    
-    
-    /* *******************************************************
-        Country
-    
-       ******************************************************* */
-//    public static int getCountryId(String name) throws SQLException {
-//        try (PreparedStatement st = conn.prepareStatement(
-//                "SELECT countryId FROM country WHERE country=?");) {
-//            st.setString(1, name);
-//            result = st.executeQuery();
-//        
-//            return result.next() ? result.getInt("countryId") : 0;
-//        }
-//    }
 }

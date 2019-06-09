@@ -31,7 +31,6 @@ import lib.LocalDB;
 import lib.Query;
 import model.*;
 
-// TODO Refactor ADD Customer Record
 // TODO Refactor EDIT Customer Record
 
 public class CustomerController implements Initializable {
@@ -64,11 +63,6 @@ public class CustomerController implements Initializable {
 //        C195.getPrimaryStage().setScene(calendarScene);
 //        C195.getPrimaryStage().show();
         System.out.println("getAppointmentsCalendar pressed");
-//        try {
-//            Query.deleteAddress(addressId);
-//        } catch (SQLException ex){
-//            System.out.println("ERROR: " + ex.getMessage());
-//        }   
     }
     
     public void clearEntry() {
@@ -115,20 +109,8 @@ public class CustomerController implements Initializable {
                 /* *******************************************************
                                     ADD NEW CUSTOMER
                 ******************************************************* */
-                case NEW:{    
-                    // If Address exists...
-                    if (LocalDB.contains(address)) {
-                        addressId = LocalDB.getAddressId(address);
-                        address.setAddressId(addressId);
-                    } else {
-                        Query.insertAddress(address, C195.user);
-                        address.setAddressId(Query.getAddressId(address));
-                    }
-                    
-                    Query.insertCustomer(customer, C195.user);
-                    customer.setCustomerId(Query.getCustomerId(customer.getCustomerName()));
+                case NEW:{
                     LocalDB.add(customer);
-                
                     break;
                 }
                 case EDIT:{
@@ -138,11 +120,11 @@ public class CustomerController implements Initializable {
                     customer.setCustomerId(customerId);
 
                     // If address has changed...
-                    if (!LocalDB.contains(address)) {
-                        Query.insertAddress(address, C195.user);
-                        int ID = Query.getAddressId(address);
-                        address.setAddressId(ID);
-                    }
+//                    if (!LocalDB.contains(address)) {
+//                        Query.insertAddress(address, C195.user);
+//                        int ID = Query.getAddressId(address);
+//                        address.setAddressId(ID);
+//                    }
                     Query.updateCustomer(customer, C195.user);
 
                     LocalDB.set(customerTable.getSelectionModel().getSelectedIndex(), customer);
@@ -151,7 +133,7 @@ public class CustomerController implements Initializable {
                 }
                 case DELETE:{
                 /* *******************************************************
-                                  DELETE EXISTING CUSTOMER
+                                      DELETE  CUSTOMER
                     ****************************************************** */
                     customer = customerTable.getSelectionModel().getSelectedItem();
 
@@ -161,6 +143,7 @@ public class CustomerController implements Initializable {
                     alert.showAndWait();
                     
                     if (alert.getResult().getButtonData().equals(OK_DONE)) {
+                        System.out.print("CustID: "+ customerId + " AddrID: " + addressId + "\n");
                         LocalDB.remove(customer);
                     } else {
                         return;
@@ -233,8 +216,8 @@ public class CustomerController implements Initializable {
          * (4025.01.06) - G: Use Lambdas
          *
          * Justification: Using a lambda to add a listener creates more
-         * succinct and readable code. It also allows one to maintain a
-         * more consistently functional approach to development.
+         * succinct and readable code. It also allows a more consistently
+         * functional approach to development.
          * =============================================================== */
         customerTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Customer> obs, Customer prev, Customer next) -> {

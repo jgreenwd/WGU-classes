@@ -6,6 +6,7 @@
  */
 package lib;
 
+import c195.C195;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,10 @@ import javafx.collections.ObservableList;
 import model.*;
 
 
+/* *******************************************************
+    Use a local copy of the DB to avoid expensive calls
+    to external resources.
+******************************************************* */
 public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
     private static final List<City> CITIES = new ArrayList<>();
@@ -53,7 +58,17 @@ public class LocalDB {
         return CUSTOMER_LIST;
     }
     
-    public static final void add(Customer customer) {
+    public static final void add(Customer customer) throws SQLException {
+        Address address = customer.getAddressObj();
+        if (exists(address)) {
+            address.setAddressId(getAddressId(address));
+        } else {
+            Query.insertAddress(address, C195.user);
+            address.setAddressId(Query.getAddressId(address));
+        }
+        
+        Query.insertCustomer(customer, C195.user);
+        customer.setCustomerId(Query.getCustomerId(customer.getCustomerName()));
         CUSTOMER_LIST.add(customer);
     }
         
@@ -62,12 +77,13 @@ public class LocalDB {
     }
     
     public static final void remove(Customer customer) throws SQLException {
-        int addressId = customer.getAddressObj().getAddressId();
+        Address address = customer.getAddressObj();
         
         Query.deleteCustomer(customer);
+        
         // If address no long used in DB, remove
-        if (singleton(addressId)){
-            Query.deleteAddress(addressId);
+        if (Query.isSingleton(address)){
+            Query.deleteAddress(address.getAddressId());
         }
         
         CUSTOMER_LIST.remove(customer);
@@ -84,7 +100,7 @@ public class LocalDB {
     }
     
     // Required to validate cities passed with no cityId
-    public static final boolean contains(Address address) {
+    public static final boolean exists(Address address) {
         String addr1 = address.getAddress1();
         String addr2 = address.getAddress2();
         String zip   = address.getPostalCode();
@@ -126,16 +142,5 @@ public class LocalDB {
         }
         
         return 0;
-    }
-    
-    public static final boolean singleton(int addressId) {
-        int count = 0;
-        for(Customer cust: CUSTOMER_LIST) {
-            if (cust.getAddressId() == addressId) {
-                count++;
-            }
-        }
-        
-        return count == 1;
     }
 }
