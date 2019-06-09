@@ -27,14 +27,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import lib.LocalDB;
 import lib.Query;
 import model.*;
 
-// TODO Add Customer Record
-// TODO Delete Customer Record
-// TODO Move CUSTOMER_LIST to appropriate external
+// TODO Refactor ADD Customer Record
+// TODO Refactor EDIT Customer Record
+
 public class CustomerController implements Initializable {
     @FXML private TableView<Customer> customerTable = new TableView<>(LocalDB.getLocalDB());
     @FXML private TableColumn<Customer, String> customerColumn;
@@ -43,7 +42,7 @@ public class CustomerController implements Initializable {
     @FXML private TableColumn<Address, String> zipColumn;
     @FXML private TableColumn<City, String> cityColumn;
     @FXML private TableColumn<City, String> countryColumn;
-    @FXML private ToggleGroup radioGroup = new ToggleGroup();
+    @FXML private final ToggleGroup radioGroup = new ToggleGroup();
     @FXML private RadioButton newRadio;
     @FXML private RadioButton editRadio;
     @FXML private RadioButton deleteRadio;
@@ -54,16 +53,32 @@ public class CustomerController implements Initializable {
     @FXML private TextField   cityNameField;
     @FXML private TextField   zipField;
     @FXML private TextField   countryField;
-    private int               customerId, addressId, cityId;
+    private int               customerId, addressId;
     private enum NEDstate { NEW,EDIT,DELETE; }
     private NEDstate          state = NEDstate.NEW;
     
     
     public void getAppointmentsCalendar(ActionEvent e) throws IOException {
-        Parent calendarParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
-        Scene calendarScene = new Scene(calendarParent);
-        C195.getPrimaryStage().setScene(calendarScene);
-        C195.getPrimaryStage().show();
+//        Parent calendarParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
+//        Scene calendarScene = new Scene(calendarParent);
+//        C195.getPrimaryStage().setScene(calendarScene);
+//        C195.getPrimaryStage().show();
+        System.out.println("getAppointmentsCalendar pressed");
+//        try {
+//            Query.deleteAddress(addressId);
+//        } catch (SQLException ex){
+//            System.out.println("ERROR: " + ex.getMessage());
+//        }   
+    }
+    
+    public void clearEntry() {
+        nameField.clear();
+        address1Field.clear();
+        address2Field.clear();
+        zipField.clear();
+        phoneField.clear();
+        cityNameField.clear();
+        countryField.clear();
     }
     
     
@@ -89,8 +104,8 @@ public class CustomerController implements Initializable {
             .setCityName(cityNameField.getText())
             .setCountryName(countryField.getText())
             .createCustomer();
-        City city = customer.getAddressObj().getCityObj();
         Address address = customer.getAddressObj();        
+        City city = address.getCityObj();
         
         // If City exists...
         if (LocalDB.contains(city)) {
@@ -103,12 +118,11 @@ public class CustomerController implements Initializable {
                 case NEW:{    
                     // If Address exists...
                     if (LocalDB.contains(address)) {
-                        int ID = LocalDB.getAddressId(address);
-                        address.setAddressId(ID);
+                        addressId = LocalDB.getAddressId(address);
+                        address.setAddressId(addressId);
                     } else {
                         Query.insertAddress(address, C195.user);
                         address.setAddressId(Query.getAddressId(address));
-                        LocalDB.add(address);
                     }
                     
                     Query.insertCustomer(customer, C195.user);
@@ -123,14 +137,11 @@ public class CustomerController implements Initializable {
                    ******************************************************* */
                     customer.setCustomerId(customerId);
 
-                    // If address has not changed...
-                    if (LocalDB.contains(address)) {
-                        address.setAddressId(LocalDB.getAddressId(address));
-                    } else {
+                    // If address has changed...
+                    if (!LocalDB.contains(address)) {
                         Query.insertAddress(address, C195.user);
                         int ID = Query.getAddressId(address);
                         address.setAddressId(ID);
-                        LocalDB.add(address);
                     }
                     Query.updateCustomer(customer, C195.user);
 
@@ -143,31 +154,23 @@ public class CustomerController implements Initializable {
                                   DELETE EXISTING CUSTOMER
                     ****************************************************** */
                     customer = customerTable.getSelectionModel().getSelectedItem();
-                    // add verification popup    
+
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Delete Customer");
                     alert.setContentText("Are you sure?");
                     alert.showAndWait();
+                    
                     if (alert.getResult().getButtonData().equals(OK_DONE)) {
-                        Query.deleteCustomer(customer);
                         LocalDB.remove(customer);
-                        if (LocalDB.redundant(address)) {
-                            Query.deleteAddress(address);
-                            LocalDB.remove(address);
-                        }
                     } else {
                         return;
                     }
                     break;
                 }
             }
-            nameField.clear();
-            address1Field.clear();
-            address2Field.clear();
-            zipField.clear();
-            phoneField.clear();
-            cityNameField.clear();
-            countryField.clear();
+            
+            clearEntry();
+            
         } else {
         // City doesn't exist in database
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -211,7 +214,7 @@ public class CustomerController implements Initializable {
     @Override public void initialize(URL url, ResourceBundle rb) {
         // Query for customers
         try {
-            LocalDB.loadCustomers();
+            LocalDB.init();
         } catch(SQLException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -242,7 +245,6 @@ public class CustomerController implements Initializable {
                 address2Field.setText(next.getAddressObj().getAddress2());
                 phoneField.setText(next.getAddressObj().getPhone());
                 zipField.setText(next.getAddressObj().getPostalCode());
-                cityId = next.getAddressObj().getCityObj().getCityId();
                 cityNameField.setText(next.getAddressObj().getCityObj().getCityName());
                 countryField.setText(next.getAddressObj().getCityObj().getCountryName());
             }

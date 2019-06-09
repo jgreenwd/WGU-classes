@@ -16,10 +16,9 @@ import model.*;
 
 public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
-    private static final List<Address> ADDRESSES = new ArrayList<>();
     private static final List<City> CITIES = new ArrayList<>();
     
-    public static final void loadCustomers() throws SQLException {
+    public static final void init() throws SQLException {
         // Query DB for Customer details
         Query.getAllCustomers();
 
@@ -43,13 +42,8 @@ public class LocalDB {
                 .createCustomer();
                 CUSTOMER_LIST.add( customer );
                 
-                
-                
                 City city = customer.getAddressObj().getCityObj();
                 CITIES.add(city);
-                
-                Address address = customer.getAddressObj();
-                ADDRESSES.add(address);
                 
             } while(Query.getResult().next());
         }
@@ -62,27 +56,23 @@ public class LocalDB {
     public static final void add(Customer customer) {
         CUSTOMER_LIST.add(customer);
     }
-    
-    public static final void add(Address address) {
-        ADDRESSES.add(address);
-    }
-    
-    public static final void set(int index, Address address) {
-        ADDRESSES.set(index, address);
-    }
-    
+        
     public static final void set(int index, Customer customer) {
         CUSTOMER_LIST.set(index, customer);
     }
     
-    public static final void remove(Customer customer) {
+    public static final void remove(Customer customer) throws SQLException {
+        int addressId = customer.getAddressObj().getAddressId();
+        
+        Query.deleteCustomer(customer);
+        // If address no long used in DB, remove
+        if (singleton(addressId)){
+            Query.deleteAddress(addressId);
+        }
+        
         CUSTOMER_LIST.remove(customer);
     }
-    
-    public static final void remove(Address address) {
-        ADDRESSES.remove(address);
-    }
-    
+       
     // Required to validate cities passed with no cityId
     public static final boolean contains(City city) {
         String ciName = city.getCityName();
@@ -100,11 +90,11 @@ public class LocalDB {
         String zip   = address.getPostalCode();
         String phone = address.getPhone();
         
-        return ADDRESSES.stream().anyMatch((item) -> (
-                item.getAddress1().equals(addr1) && 
-                item.getAddress2().equals(addr2) &&
-                item.getPostalCode().equals(zip) &&
-                item.getPhone().equals(phone)));
+        return CUSTOMER_LIST.stream().anyMatch((cust) -> (
+                cust.getAddress1().equals(addr1) && 
+                cust.getAddress2().equals(addr2) &&
+                cust.getPostalCode().equals(zip) &&
+                cust.getPhone().equals(phone)));
     }
     
     public static final int getAddressId(Address address) {
@@ -113,7 +103,7 @@ public class LocalDB {
         String zip   = address.getPostalCode();
         String phone = address.getPhone();
         
-        for(Address item : ADDRESSES) {
+        for(Customer item : CUSTOMER_LIST) {
             if (item.getAddress1().equals(addr1) && 
                 item.getAddress2().equals(addr2) &&
                 item.getPostalCode().equals(zip) &&
@@ -138,9 +128,14 @@ public class LocalDB {
         return 0;
     }
     
-    public static final boolean redundant(Address address) {
-        return CUSTOMER_LIST.stream().anyMatch((customer) -> (
-                customer.getAddressObj().getAddressId() == address.getAddressId())
-        );
+    public static final boolean singleton(int addressId) {
+        int count = 0;
+        for(Customer cust: CUSTOMER_LIST) {
+            if (cust.getAddressId() == addressId) {
+                count++;
+            }
+        }
+        
+        return count == 1;
     }
 }

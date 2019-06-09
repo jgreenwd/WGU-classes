@@ -215,10 +215,10 @@ public class Query {
         }
     }
     
-    public static void deleteAddress(Address address) throws SQLException{
+    public static void deleteAddress(int addressId) throws SQLException{
         try (PreparedStatement st = conn.prepareStatement(
                 "DELETE FROM address WHERE addressId=?");) {
-            st.setInt(1, address.getAddressId());
+            st.setInt(1, addressId);
             st.executeUpdate();
         }
     }
@@ -228,28 +228,28 @@ public class Query {
         City
     
        ******************************************************* */
-    public static int getCityId(String name) throws SQLException {
-        try (PreparedStatement st =conn.prepareStatement(
-            "SELECT cityId FROM city WHERE city=?");) {
-            st.setString(1, name);
-            result = st.executeQuery();
-            
-            return result.next() ? result.getInt("cityId") : 0;
-        }
-    }
-    
+//    public static int getCityId(String name) throws SQLException {
+//        try (PreparedStatement st =conn.prepareStatement(
+//            "SELECT cityId FROM city WHERE city=?");) {
+//            st.setString(1, name);
+//            result = st.executeQuery();
+//            
+//            return result.next() ? result.getInt("cityId") : 0;
+//        }
+//    }
+//    
     
     /* *******************************************************
         Country
     
        ******************************************************* */
-    public static int getCountryId(String name) throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement(
-                "SELECT countryId FROM country WHERE country=?");) {
-            st.setString(1, name);
-            result = st.executeQuery();
-        
-            return result.next() ? result.getInt("countryId") : 0;
-        }
-    }
+//    public static int getCountryId(String name) throws SQLException {
+//        try (PreparedStatement st = conn.prepareStatement(
+//                "SELECT countryId FROM country WHERE country=?");) {
+//            st.setString(1, name);
+//            result = st.executeQuery();
+//        
+//            return result.next() ? result.getInt("countryId") : 0;
+//        }
+//    }
 }
