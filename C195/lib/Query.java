@@ -68,9 +68,10 @@ public class Query {
     public static void getAllCustomers() throws SQLException {
         try {
             PreparedStatement st = conn.prepareStatement(
-            "SELECT country.countryId, country, city.cityId, city, "
+            "SELECT customer.customerId, customerName, active, "
                 + "address.addressId, address, address2, postalCode, phone, "
-                + "customer.customerId, customerName, active FROM country "
+                + "country.countryId, country, city.cityId, city "
+                + "FROM country "
                 + "JOIN city ON country.countryId = city.countryId "
                 + "JOIN address ON city.cityId = address.cityId "
                 + "JOIN customer ON address.addressId=customer.addressId "
@@ -140,11 +141,34 @@ public class Query {
         }
     }
     
+    public static void deleteCustomer(Customer customer) throws SQLException{
+        try (PreparedStatement st = conn.prepareStatement(
+                "DELETE FROM customer WHERE customerId=?");) {
+            st.setInt(1, customer.getCustomerId());
+            st.executeUpdate();
+        }
+    }
+    
     
     /* *******************************************************
         Address
     
        ******************************************************* */
+    public static int getAddressId(Address address) throws SQLException {
+        try (PreparedStatement st = conn.prepareStatement(
+                "SELECT addressId FROM address WHERE address=? AND "
+                + "address2=? AND postalCode=? AND phone=? AND cityId=?");) {
+            st.setString(1, address.getAddress1());
+            st.setString(2, address.getAddress2());
+            st.setString(3, address.getPostalCode());
+            st.setString(4, address.getPhone());
+            st.setInt(5, address.getCityObj().getCityId());
+            result = st.executeQuery();
+            
+            return result.next() ? result.getInt("addressId") : 0;
+        }
+    }
+    
     public static int getAddressId(String addr, String addr2, String zip, String phone) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
                 "SELECT addressId FROM address WHERE address=? AND "
@@ -187,6 +211,14 @@ public class Query {
             st.setString(5, address.getPhone());
             st.setString(6, user.getUsername());
             st.setInt(   7, address.getAddressId());
+            st.executeUpdate();
+        }
+    }
+    
+    public static void deleteAddress(Address address) throws SQLException{
+        try (PreparedStatement st = conn.prepareStatement(
+                "DELETE FROM address WHERE addressId=?");) {
+            st.setInt(1, address.getAddressId());
             st.executeUpdate();
         }
     }

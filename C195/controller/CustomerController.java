@@ -12,14 +12,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,26 +28,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import lib.LocalDB;
 import lib.Query;
 import model.*;
 
 // TODO Add Customer Record
-// TODO Modify Customer Record
 // TODO Delete Customer Record
 // TODO Move CUSTOMER_LIST to appropriate external
 public class CustomerController implements Initializable {
-    public static final ObservableList<ObservableCustomer> CUSTOMER_LIST = FXCollections.observableArrayList();
-    @FXML private TableView<ObservableCustomer> customerTable = new TableView<>();
-    @FXML private TableColumn<Customer, String> nameColumn;
-    @FXML private TableColumn<Customer, String> phoneColumn;
-    @FXML private TableColumn<Customer, String> addressColumn;
-    @FXML private TableColumn<Customer, String> cityColumn;
-    @FXML private TableColumn<Customer, String> countryColumn;
+    @FXML private TableView<Customer> customerTable = new TableView<>(LocalDB.getLocalDB());
+    @FXML private TableColumn<Customer, String> customerColumn;
+    @FXML private TableColumn<Address, String> phoneColumn;
+    @FXML private TableColumn<Address, String> addressColumn;
+    @FXML private TableColumn<Address, String> zipColumn;
+    @FXML private TableColumn<City, String> cityColumn;
+    @FXML private TableColumn<City, String> countryColumn;
     @FXML private ToggleGroup radioGroup = new ToggleGroup();
     @FXML private RadioButton newRadio;
     @FXML private RadioButton editRadio;
     @FXML private RadioButton deleteRadio;
-    @FXML private VBox        customerBox;
     @FXML private TextField   nameField;
     @FXML private TextField   phoneField;
     @FXML private TextField   address1Field;
@@ -54,9 +54,9 @@ public class CustomerController implements Initializable {
     @FXML private TextField   cityNameField;
     @FXML private TextField   zipField;
     @FXML private TextField   countryField;
-    private int customerId, addressId, cityId;
+    private int               customerId, addressId, cityId;
     private enum NEDstate { NEW,EDIT,DELETE; }
-    private NEDstate state = NEDstate.NEW;
+    private NEDstate          state = NEDstate.NEW;
     
     
     public void getAppointmentsCalendar(ActionEvent e) throws IOException {
@@ -70,51 +70,110 @@ public class CustomerController implements Initializable {
     /* ===============================================================
      * (4025.01.05) - B: Add/Update/Delete DB records
      *
-     * On Submit, check for pre-existing country/city/address/customer.
+     * "Provide the ability to add, update, and delete customer records
+     * in the database, including name, address, and phone number."
+     *
+     * NOTICE: no add/edit/delete of city/country mentioned in rubric
+     * NOTICE: ERD uses phone as part of address; presents issues with
+     *  referential integrity. Ignored for this project.
+     *  -> new phone = new address
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-        switch(state){
-            case NEW:{
-                System.out.println("new submitted");
-                break;
-            }
-            case EDIT:{
-            /* *******************************************************
-               Using CUSTOMER_LIST.set() throws a NullPointerException
-               that appears to originate within the table listener. It
-               will not catch within this try-catch block.
-            
-               Use .remove() & .add() instead for now.
-               .add()ed element appears at bottom of list 
-               ******************************************************* */
-                try {
-                    Customer customer =  new CustomerBuilder()
-                        .setCustomerId(customerId)
-                        .setCustomerName(nameField.getText())
-                        .setAddressId(addressId)
-                        .setAddress1(address1Field.getText())
-                        .setAddress2(address2Field.getText())
-                        .setPostalCode(zipField.getText())
-                        .setPhone(phoneField.getText())
-                        .setCityId(cityId)
-                        .setCityName(cityNameField.getText())
-                        .setCountryName(countryField.getText())
-                    .createCustomer();
+        Customer customer =  new CustomerBuilder()
+            .setCustomerName(nameField.getText())
+            .setActive(1)
+            .setAddress1(address1Field.getText())
+            .setAddress2(address2Field.getText())
+            .setPostalCode(zipField.getText())
+            .setPhone(phoneField.getText())
+            .setCityName(cityNameField.getText())
+            .setCountryName(countryField.getText())
+            .createCustomer();
+        City city = customer.getAddressObj().getCityObj();
+        Address address = customer.getAddressObj();        
         
-                    Query.updateAddress(customer.getAddressObj(), C195.user);
+        // If City exists...
+        if (LocalDB.contains(city)) {
+            city.setCityId(LocalDB.getCityId(city));
+            
+            switch(state){
+                /* *******************************************************
+                                    ADD NEW CUSTOMER
+                ******************************************************* */
+                case NEW:{    
+                    // If Address exists...
+                    if (LocalDB.contains(address)) {
+                        int ID = LocalDB.getAddressId(address);
+                        address.setAddressId(ID);
+                    } else {
+                        Query.insertAddress(address, C195.user);
+                        address.setAddressId(Query.getAddressId(address));
+                        LocalDB.add(address);
+                    }
+                    
+                    Query.insertCustomer(customer, C195.user);
+                    customer.setCustomerId(Query.getCustomerId(customer.getCustomerName()));
+                    LocalDB.add(customer);
+                
+                    break;
+                }
+                case EDIT:{
+                /* *******************************************************
+                                    EDIT EXISTING CUSTOMER
+                   ******************************************************* */
+                    customer.setCustomerId(customerId);
+
+                    // If address has not changed...
+                    if (LocalDB.contains(address)) {
+                        address.setAddressId(LocalDB.getAddressId(address));
+                    } else {
+                        Query.insertAddress(address, C195.user);
+                        int ID = Query.getAddressId(address);
+                        address.setAddressId(ID);
+                        LocalDB.add(address);
+                    }
                     Query.updateCustomer(customer, C195.user);
 
-                    CUSTOMER_LIST.remove(customerTable.getSelectionModel().getSelectedIndex());
-                    CUSTOMER_LIST.add(new ObservableCustomer(customer));
-                } catch(NullPointerException ex) {
-                    System.out.println("ERROR: " + ex.getMessage());
+                    LocalDB.set(customerTable.getSelectionModel().getSelectedIndex(), customer);
+
+                    break;
                 }
-                break;
+                case DELETE:{
+                /* *******************************************************
+                                  DELETE EXISTING CUSTOMER
+                    ****************************************************** */
+                    customer = customerTable.getSelectionModel().getSelectedItem();
+                    // add verification popup    
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Delete Customer");
+                    alert.setContentText("Are you sure?");
+                    alert.showAndWait();
+                    if (alert.getResult().getButtonData().equals(OK_DONE)) {
+                        Query.deleteCustomer(customer);
+                        LocalDB.remove(customer);
+                        if (LocalDB.redundant(address)) {
+                            Query.deleteAddress(address);
+                            LocalDB.remove(address);
+                        }
+                    } else {
+                        return;
+                    }
+                    break;
+                }
             }
-            case DELETE:{
-                System.out.println("delete submitted");
-                break;
-            }
+            nameField.clear();
+            address1Field.clear();
+            address2Field.clear();
+            zipField.clear();
+            phoneField.clear();
+            cityNameField.clear();
+            countryField.clear();
+        } else {
+        // City doesn't exist in database
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid City/Country");
+            alert.setContentText("This City/Country is currently not available.");
+            alert.showAndWait();
         }
     }
     
@@ -150,45 +209,21 @@ public class CustomerController implements Initializable {
      * Add listener for New/Edit/Delete state
      * =============================================================== */
     @Override public void initialize(URL url, ResourceBundle rb) {
+        // Query for customers
         try {
-            // Query DB for Customer details
-            Query.getAllCustomers();
-
-            // build ObservableList of Customer objects
-            if (Query.getResult().next() == false) {
-                System.out.println("Empty CUSTOMER_LIST");
-            } else {
-                do {
-                    Customer customer =  new CustomerBuilder()
-                    .setCustomerId(Query.getResult().getInt("customerId"))
-                    .setCustomerName(Query.getResult().getString("customerName"))
-                    .setActive(Query.getResult().getInt("active"))
-                    .setAddressId(Query.getResult().getInt("addressId"))
-                    .setAddress1(Query.getResult().getString("address"))
-                    .setAddress2(Query.getResult().getString("address2"))
-                    .setPostalCode(Query.getResult().getString("postalCode"))
-                    .setPhone(Query.getResult().getString("phone"))
-                    .setCityId(Query.getResult().getInt("cityId"))
-                    .setCityName(Query.getResult().getString("city"))
-                    .setCountryName(Query.getResult().getString("country"))
-                .createCustomer();
-                
-                CUSTOMER_LIST.add( new ObservableCustomer(customer) );
-                } while(Query.getResult().next());
-            }
-            
-            // render Query results in TableView
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-            phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            addressColumn.setCellValueFactory(new PropertyValueFactory<>("address1"));
-            cityColumn.setCellValueFactory(new PropertyValueFactory<>("cityName"));
-            countryColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
-            
-            customerTable.setItems( CUSTOMER_LIST );
-            
-        } catch (SQLException ex) {
-            System.out.println("ERROR (Initialize): " + ex.getMessage());
+            LocalDB.loadCustomers();
+        } catch(SQLException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
         }
+        // render Query results in TableView
+        customerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address1"));
+        zipColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("cityName"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
+            
+        customerTable.setItems( LocalDB.getLocalDB() );
         
         
         /* ===============================================================
@@ -198,39 +233,33 @@ public class CustomerController implements Initializable {
          * succinct and readable code. It also allows one to maintain a
          * more consistently functional approach to development.
          * =============================================================== */
-        try {
-            customerTable.getSelectionModel().selectedItemProperty().addListener((obs, prev, next) -> {
+        customerTable.getSelectionModel().selectedItemProperty().addListener(
+            (ObservableValue<? extends Customer> obs, Customer prev, Customer next) -> {
                 customerId = next.getCustomerId();
                 nameField.setText(next.getCustomerName());
-                addressId = next.getAddressId();
-                phoneField.setText(next.getPhone());
-                address1Field.setText(next.getAddress1());
-                address2Field.setText(next.getAddress2());
-                zipField.setText(next.getPostalCode());
-                cityId = next.getCityId();
-                cityNameField.setText(next.getCityName());
-                countryField.setText(next.getCountryName());
-            });
-        } catch(Exception ex) {
-            System.out.println("ERROR (TableViewListener): " + ex.getMessage());
-        }
+                addressId = next.getAddressObj().getAddressId();
+                address1Field.setText(next.getAddressObj().getAddress1());
+                address2Field.setText(next.getAddressObj().getAddress2());
+                phoneField.setText(next.getAddressObj().getPhone());
+                zipField.setText(next.getAddressObj().getPostalCode());
+                cityId = next.getAddressObj().getCityObj().getCityId();
+                cityNameField.setText(next.getAddressObj().getCityObj().getCityName());
+                countryField.setText(next.getAddressObj().getCityObj().getCountryName());
+            }
+        );
+
+        newRadio.setToggleGroup(radioGroup);
+        editRadio.setToggleGroup(radioGroup);
+        deleteRadio.setToggleGroup(radioGroup);
         
-        try {
-            newRadio.setToggleGroup(radioGroup);
-            editRadio.setToggleGroup(radioGroup);
-            deleteRadio.setToggleGroup(radioGroup);
-        
-            radioGroup.selectedToggleProperty().addListener((obs, prev, next) -> {
-                if (next == editRadio) {
-                    state = NEDstate.EDIT;
-                } else if (next == deleteRadio) {
-                    state = NEDstate.DELETE;
-                } else if (next == newRadio) {
-                    state = NEDstate.NEW;
-                }
-            });
-        } catch(Exception ex) {
-            System.out.println("ERROR (RadioListener): " + ex.getMessage());
-        }
+        radioGroup.selectedToggleProperty().addListener((obs, prev, next) -> {
+            if (next == editRadio) {
+                state = NEDstate.EDIT;
+            } else if (next == deleteRadio) {
+                state = NEDstate.DELETE;
+            } else if (next == newRadio) {
+                state = NEDstate.NEW;
+            }
+        });
     }
 }

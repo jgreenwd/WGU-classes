@@ -13,17 +13,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: dodgerblue;">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" style="-fx-background-color: dodgerblue;">
          <children>
-            <TableView fx:id="customerTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="760.0" style="-fx-selection-bar: royalblue; -fx-selection-bar-non-focused: royalblue;">
+            <TableView fx:id="customerTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" style="-fx-selection-bar: royalblue; -fx-selection-bar-non-focused: royalblue;">
               <columns>
-                  <TableColumn fx:id="nameColumn" editable="false" maxWidth="120.0" minWidth="120.0" prefWidth="-1.0" resizable="false" text="Customer" />
-                  <TableColumn fx:id="phoneColumn" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Telephone" />
-                <TableColumn fx:id="addressColumn" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="-1.0" resizable="false" text="Address" />
-                  <TableColumn fx:id="cityColumn" editable="false" maxWidth="120.0" minWidth="120.0" prefWidth="-1.0" resizable="false" text="City" />
-                  <TableColumn fx:id="countryColumn" editable="false" maxWidth="90.0" minWidth="90.0" prefWidth="-1.0" resizable="false" text="Country" />
+                  <TableColumn fx:id="customerColumn" maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Customer" />
+                  <TableColumn fx:id="phoneColumn" maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Telephone" />
+                <TableColumn fx:id="addressColumn" maxWidth="300.0" minWidth="300.0" prefWidth="-1.0" resizable="false" text="Address" />
+                  <TableColumn fx:id="zipColumn" maxWidth="85.0" minWidth="85.0" prefWidth="-1.0" resizable="false" text="PostalCode" />
+                  <TableColumn fx:id="cityColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="-1.0" resizable="false" text="City" />
+                  <TableColumn fx:id="countryColumn" editable="false" maxWidth="85.0" minWidth="85.0" prefWidth="-1.0" resizable="false" text="Country" />
               </columns>
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />
@@ -121,7 +122,7 @@
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="countryField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="285.0" />
+                              <TextField fx:id="countryField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="285.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" top="5.0" />
