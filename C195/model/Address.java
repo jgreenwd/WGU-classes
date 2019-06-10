@@ -29,6 +29,14 @@ public class Address {
     public  City    getCityObj()                { return city; }
     public  void    setCityObj(City city)       { this.city = city; }
     
+    public boolean equals(Address addr) {
+        return this.address1 == addr.address1 &&
+               this.address2 == addr.address2 &&
+               this.postalCode == addr.postalCode &&
+               this.phone == addr.phone &&
+               this.city == addr.city;
+    }
+    
     
     public Address(City city) {
         this.city = city;

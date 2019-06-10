@@ -73,6 +73,7 @@ public class CustomerController implements Initializable {
         phoneField.clear();
         cityNameField.clear();
         countryField.clear();
+        radioGroup.selectToggle(newRadio);
     }
     
     
@@ -108,33 +109,26 @@ public class CustomerController implements Initializable {
             switch(state){
                 /* *******************************************************
                                     ADD NEW CUSTOMER
-                ******************************************************* */
+                   ******************************************************* */
                 case NEW:{
                     LocalDB.add(customer);
                     break;
                 }
-                case EDIT:{
+                
                 /* *******************************************************
                                     EDIT EXISTING CUSTOMER
                    ******************************************************* */
+                case EDIT:{
                     customer.setCustomerId(customerId);
-
-                    // If address has changed...
-//                    if (!LocalDB.contains(address)) {
-//                        Query.insertAddress(address, C195.user);
-//                        int ID = Query.getAddressId(address);
-//                        address.setAddressId(ID);
-//                    }
-                    Query.updateCustomer(customer, C195.user);
-
-                    LocalDB.set(customerTable.getSelectionModel().getSelectedIndex(), customer);
-
+                    int index = customerTable.getSelectionModel().getSelectedIndex();
+                    LocalDB.set(index, customer);
+                    
                     break;
                 }
-                case DELETE:{
                 /* *******************************************************
                                       DELETE  CUSTOMER
                     ****************************************************** */
+                case DELETE:{
                     customer = customerTable.getSelectionModel().getSelectedItem();
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -143,7 +137,6 @@ public class CustomerController implements Initializable {
                     alert.showAndWait();
                     
                     if (alert.getResult().getButtonData().equals(OK_DONE)) {
-                        System.out.print("CustID: "+ customerId + " AddrID: " + addressId + "\n");
                         LocalDB.remove(customer);
                     } else {
                         return;
@@ -240,10 +233,13 @@ public class CustomerController implements Initializable {
         radioGroup.selectedToggleProperty().addListener((obs, prev, next) -> {
             if (next == editRadio) {
                 state = NEDstate.EDIT;
+                customerId = customerTable.getSelectionModel().getSelectedItem().getCustomerId();
             } else if (next == deleteRadio) {
                 state = NEDstate.DELETE;
+                customerId = customerTable.getSelectionModel().getSelectedItem().getCustomerId();
             } else if (next == newRadio) {
                 state = NEDstate.NEW;
+                clearEntry();
             }
         });
     }

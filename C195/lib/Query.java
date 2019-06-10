@@ -11,44 +11,20 @@ import java.sql.PreparedStatement;
 import static lib.DBConnection.conn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import model.*;
-
 
 public class Query {
 
-    private static String query;
-    private static Statement stmt;
     private static ResultSet result;
     
-    public static void makeQuery(String q) {
-        query = q.toLowerCase();
-        
-        try {
-            stmt = conn.createStatement();
-            
-            // determine query execution
-            if (query.startsWith("select")) {
-                result = stmt.executeQuery(query);
-            } 
-            
-            if (query.startsWith("delete") || query.startsWith("insert") || query.startsWith("update")) {
-                stmt.executeUpdate(query);
-            }
-        } catch(SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-    }
-    
-    public static ResultSet getResult() {
-        return result;
-    }
-    
     /* ===============================================================
-     * Create static version of repeatedly used queries
+     * General Utility Methods
      *
+     * login(usr, pwd) - return boolean login credential validity
+     * getUser(name) - return User object for current User
+     * getAllCustomers() - general Query to populate local DB
+     * getResult() - return result for all Queries
      * =============================================================== */
-    
     public static boolean login(String usr, String pwd) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
             "SELECT CASE WHEN EXISTS(SELECT * FROM user WHERE userName=? AND password=?) "
@@ -64,7 +40,6 @@ public class Query {
         }
     }
     
-    // 
     public static User getUser(String name) throws SQLException {
         try(PreparedStatement st = conn.prepareStatement(
                 "SELECT userId, userName, password, active "
@@ -82,7 +57,6 @@ public class Query {
         }
     }
     
-    // Query DB for customer info & render results to table
     public static void getAllCustomers() throws SQLException {
         try {
             PreparedStatement st = conn.prepareStatement(
@@ -96,15 +70,22 @@ public class Query {
                 + "ORDER BY customer.customerId;");
             result = st.executeQuery();
         } catch(SQLException ex) {
-                System.out.println("Error (Query:GetAllCustomers): " + ex.getMessage());
+                System.out.println("ERROR: " + ex.getMessage());
         }
     }
     
+    public static ResultSet getResult() {
+        return result;
+    }
     
-    /* *******************************************************
-        Customer
-    
-       ******************************************************* */
+    /* ===============================================================
+     * Customer Query Methods
+     *
+     * getCustomerId(name) - return customerId
+     * insertCustomer(customer, user) - add new customer to remote DB
+     * updateCustomer(customer, user) - modify existing customer entry in DB
+     * deleteCustomer(customer, user) - delete customer entry from DB
+     * =============================================================== */
     public static int getCustomerId(String name) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
                 "SELECT customerId FROM customer WHERE customerName=?");) {
@@ -151,10 +132,14 @@ public class Query {
     }
     
     
-    /* *******************************************************
-        Address
-    
-       ******************************************************* */
+    /* ===============================================================
+     * Address Query Methods
+     *
+     * getAddressId(address) - return addressId
+     * insertAddress(address, user) - add new address to remote DB
+     * updateAddress(address, user) - modify existing address entry in DB
+     * deleteAddress(address, user) - delete address entry from DB
+     * =============================================================== */
     public static int getAddressId(Address address) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
                 "SELECT addressId FROM address WHERE address=? AND "
@@ -167,17 +152,6 @@ public class Query {
             result = st.executeQuery();
             
             return result.next() ? result.getInt("addressId") : 0;
-        }
-    }
-    
-    public static boolean isSingleton(Address address) throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement(
-                "SELECT COUNT(addressId) FROM customer WHERE addressId=?;");) {
-            st.setInt(1, address.getAddressId());
-            result = st.executeQuery();
-            result.first();
-            
-            return result.getInt("COUNT(addressId)") == 0;
         }
     }
     
@@ -221,5 +195,15 @@ public class Query {
         }
     }
     
+    public static boolean isSingleton(Address address) throws SQLException {
+        try (PreparedStatement st = conn.prepareStatement(
+                "SELECT COUNT(addressId) FROM customer WHERE addressId=?;");) {
+            st.setInt(1, address.getAddressId());
+            result = st.executeQuery();
+            result.first();
+            
+            return result.getInt("COUNT(addressId)") == 0;
+        }
+    }
     
 }

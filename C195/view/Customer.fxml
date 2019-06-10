@@ -22,7 +22,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="View">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#getAppointmentsCalendar" text="Calendar" />
+                    <MenuItem mnemonicParsing="false" onAction="#getAppointmentsCalendar" text="Appointments" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Entry">

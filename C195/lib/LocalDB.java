@@ -23,6 +23,12 @@ public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
     private static final List<City> CITIES = new ArrayList<>();
     
+    /* ===============================================================
+     * General Utility Methods
+     *
+     * init() - populate local copy of remote DB
+     * getLocalDB() - return LocalDB for rendering
+     * =============================================================== */
     public static final void init() throws SQLException {
         // Query DB for Customer details
         Query.getAllCustomers();
@@ -58,9 +64,17 @@ public class LocalDB {
         return CUSTOMER_LIST;
     }
     
+    
+    /* ===============================================================
+     * Customer Query Methods
+     *
+     * add(customer) - add customer entry to remote DB & LocalDB
+     * set(index, customer) - modify customer entry
+     * remove(customer) - delete customer entry
+     * =============================================================== */
     public static final void add(Customer customer) throws SQLException {
         Address address = customer.getAddressObj();
-        if (exists(address)) {
+        if (contains(address)) {
             address.setAddressId(getAddressId(address));
         } else {
             Query.insertAddress(address, C195.user);
@@ -72,8 +86,29 @@ public class LocalDB {
         CUSTOMER_LIST.add(customer);
     }
         
-    public static final void set(int index, Customer customer) {
-        CUSTOMER_LIST.set(index, customer);
+    public static final void set(int index, Customer customer) throws SQLException {
+        Address oldAddr = CUSTOMER_LIST.get(index).getAddressObj();
+        Address newAddr = customer.getAddressObj();
+        
+        // If address has changed...
+        if (!oldAddr.equals(newAddr)) {
+            if (contains(newAddr)) {
+                newAddr.setAddressId(getAddressId(newAddr));
+            } else {
+                Query.insertAddress(newAddr, C195.user);
+                int ID = Query.getAddressId(newAddr);
+                newAddr.setAddressId(ID);
+            }
+        }
+
+        Query.updateCustomer(customer, C195.user);
+        
+        if (Query.isSingleton(oldAddr)) {
+                Query.deleteAddress(oldAddr.getAddressId());
+        }
+        
+        CUSTOMER_LIST.remove(index);
+        CUSTOMER_LIST.add(customer);
     }
     
     public static final void remove(Customer customer) throws SQLException {
@@ -89,18 +124,17 @@ public class LocalDB {
         CUSTOMER_LIST.remove(customer);
     }
        
-    // Required to validate cities passed with no cityId
-    public static final boolean contains(City city) {
-        String ciName = city.getCityName();
-        String coName = city.getCountryName();
-        
-        return CITIES.stream().anyMatch((item) -> (
-                item.getCityName().equals(ciName) && 
-                item.getCountryName().equals(coName)));
-    }
     
-    // Required to validate cities passed with no cityId
-    public static final boolean exists(Address address) {
+    /* ===============================================================
+     * Address/City Utility Methods
+     *
+     * contains(address) - validate address exists in LocalDB
+     * contains(city) - validate city exists in LocalDB
+     * getAddressId(address) - return addressId stored in LocalDB
+     * getCityId(city) - return cityId stored in LocalDB
+     * =============================================================== */
+    // to validate addresses passed with no addressId
+    public static final boolean contains(Address address) {
         String addr1 = address.getAddress1();
         String addr2 = address.getAddress2();
         String zip   = address.getPostalCode();
@@ -111,6 +145,16 @@ public class LocalDB {
                 cust.getAddress2().equals(addr2) &&
                 cust.getPostalCode().equals(zip) &&
                 cust.getPhone().equals(phone)));
+    }
+        
+    // to validate cities passed with no cityId
+    public static final boolean contains(City city) {
+        String ciName = city.getCityName();
+        String coName = city.getCountryName();
+        
+        return CITIES.stream().anyMatch((item) -> (
+                item.getCityName().equals(ciName) && 
+                item.getCountryName().equals(coName)));
     }
     
     public static final int getAddressId(Address address) {
