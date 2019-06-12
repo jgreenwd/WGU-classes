@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +30,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lib.LocalDB;
 import model.*;
 
-// TODO clear: clears date & time info
 
 public class AppointmentController implements Initializable {
     @FXML private TableView<Appointment> appointmentTable = new TableView<>();
@@ -73,6 +70,11 @@ public class AppointmentController implements Initializable {
         typeField.clear();
         urlField.clear();
         radioGroup.selectToggle(newRadio);
+        hourStart.getSelectionModel().clearSelection();
+        minStart.getSelectionModel().clearSelection();
+        hourEnd.getSelectionModel().clearSelection();
+        minEnd.getSelectionModel().clearSelection();
+        datePicker.setValue(null);
     }
     
     public void displayCalendarWeekly() {
@@ -104,7 +106,7 @@ public class AppointmentController implements Initializable {
      * customer record in the database."
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-        System.out.println(minStart.getSelectionModel());
+        
     }
     
     /* ===============================================================
@@ -164,7 +166,8 @@ public class AppointmentController implements Initializable {
          * =============================================================== */
         appointmentTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Appointment> obs, Appointment prev, Appointment next) -> {
-                customerId = next.getCustomerId();
+                try {
+                    customerId = next.getCustomerId();
                 customerField.setText(next.getCustomerName());
                 titleField.setText(next.getTitle());
                 typeField.setText(next.getType());
@@ -174,7 +177,9 @@ public class AppointmentController implements Initializable {
                 hourEnd.setValue(next.getEnd().toString().substring(11,13));
                 minEnd.setValue(next.getEnd().toString().substring(14,16));
                 datePicker.setValue(next.getStart().toLocalDate());
-                ;
+                } catch (NullPointerException ex) {
+                    System.out.println("ERROR: "+ ex.getMessage());
+                }
             }
         );
         

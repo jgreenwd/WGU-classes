@@ -186,7 +186,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </HBox>
-                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="125.0" promptText="Date">
+                  <DatePicker fx:id="datePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="125.0" promptText="Date">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
