@@ -9,22 +9,27 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.collections.*?>
+<?import java.lang.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="940.0" style="-fx-background-color: dodgerblue;">
          <children>
             <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="940.0">
                <menus>
-                  <Menu mnemonicParsing="false" text="View">
+                  <Menu mnemonicParsing="false" text="Main">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#getAppointmentsCalendar" text="Customers" />
+                        <MenuItem mnemonicParsing="false" onAction="#getCustomerScreen" text="Customers" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#exitButtonPressed" text="Exit" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Entry">
@@ -40,20 +45,22 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Reports">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#generateReports" text="Generate" />
+                        <MenuItem mnemonicParsing="false" onAction="#generateReportAppointments" text="Appointment Types" />
+                        <MenuItem mnemonicParsing="false" onAction="#generateReportConsultantSchedules" text="Consultant Schedules" />
+                        <MenuItem mnemonicParsing="false" onAction="#generateReportCustomerSchedules" text="Customer Schedules" />
                      </items>
                   </Menu>
                </menus>
             </MenuBar>
-            <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" style="-fx-selection-bar: royalblue; -fx-selection-bar-non-focused: royalblue;">
+            <TableView fx:id="appointmentTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="900.0" style="-fx-selection-bar: royalblue; -fx-selection-bar-non-focused: royalblue; -fx-alignment: LEFT;">
               <columns>
-                  <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Customer" />
-                  <TableColumn maxWidth="175.0" minWidth="175.0" prefWidth="175.0" resizable="false" text="Title" />
-                <TableColumn maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Type" />
-                  <TableColumn maxWidth="170.0" minWidth="170.0" prefWidth="170.0" resizable="false" text="URL" />
-                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Start" />
-                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="End" />
-                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Date" />
+                  <TableColumn fx:id="customerColumn" maxWidth="150.0" minWidth="150.0" prefWidth="-1.0" resizable="false" style="-fx-alignment: center-left;" text="Customer" />
+                  <TableColumn fx:id="titleColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" style="-fx-alignment: center-left;" text="Title" />
+                <TableColumn fx:id="typeColumn" maxWidth="165.0" minWidth="165.0" prefWidth="165.0" resizable="false" style="-fx-alignment: center-left;" text="Type" />
+                  <TableColumn fx:id="urlColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" resizable="false" style="-fx-alignment: center-left;" text="URL" />
+                  <TableColumn fx:id="startColumn" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" resizable="false" style="-fx-alignment: center-left;" text="Start" />
+                  <TableColumn fx:id="endColumn" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" resizable="false" style="-fx-alignment: center-left;" text="End" />
+                  <TableColumn fx:id="dateColumn" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" resizable="false" style="-fx-alignment: center-left;" text="Date" />
               </columns>
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />
@@ -69,42 +76,117 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="titleField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="165.0" promptText="Title">
+                  <TextField fx:id="titleField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="92.0" promptText="Title">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="typeField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="80.0" promptText="Type">
+                  <TextField fx:id="typeField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="153.0" promptText="Type">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="urlField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="160.0" promptText="URL">
+                  <TextField fx:id="urlField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="140.0" promptText="URL">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </TextField>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="95.0">
                      <children>
-                        <ChoiceBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="40.0" />
+                        <ChoiceBox fx:id="hourStart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="45.0" >
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="01" />
+                                    <String fx:value="02" />
+                                    <String fx:value="03" />
+                                    <String fx:value="04" />
+                                    <String fx:value="05" />
+                                    <String fx:value="06" />
+                                    <String fx:value="07" />
+                                    <String fx:value="08" />
+                                    <String fx:value="09" />
+                                    <String fx:value="10" />
+                                    <String fx:value="11" />
+                                    <String fx:value="12" />
+                                    <String fx:value="13" />
+                                    <String fx:value="14" />
+                                    <String fx:value="15" />
+                                    <String fx:value="16" />
+                                    <String fx:value="17" />
+                                    <String fx:value="18" />
+                                    <String fx:value="19" />
+                                    <String fx:value="20" />
+                                    <String fx:value="21" />
+                                    <String fx:value="22" />
+                                    <String fx:value="23" />
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
                         <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="5.0" text=":" textFill="WHITE" />
-                        <ChoiceBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="40.0" />
-                     </children>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </HBox>
-                  <HBox layoutX="600.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="95.0">
-                     <children>
-                        <ChoiceBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="40.0" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="5.0" text=":" textFill="WHITE" />
-                        <ChoiceBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="40.0" />
+                        <ChoiceBox fx:id="minStart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="45.0" >
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="00" />
+                                    <String fx:value="15" />
+                                    <String fx:value="30" />
+                                    <String fx:value="45" />
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    
                      </children>
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </HBox>
-                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="104.0" promptText="Date">
+                  <HBox layoutX="600.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="95.0">
+                     <children>
+                        <ChoiceBox fx:id="hourEnd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="45.0" >
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="01" />
+                                    <String fx:value="02" />
+                                    <String fx:value="03" />
+                                    <String fx:value="04" />
+                                    <String fx:value="05" />
+                                    <String fx:value="06" />
+                                    <String fx:value="07" />
+                                    <String fx:value="08" />
+                                    <String fx:value="09" />
+                                    <String fx:value="10" />
+                                    <String fx:value="11" />
+                                    <String fx:value="12" />
+                                    <String fx:value="13" />
+                                    <String fx:value="14" />
+                                    <String fx:value="15" />
+                                    <String fx:value="16" />
+                                    <String fx:value="17" />
+                                    <String fx:value="18" />
+                                    <String fx:value="19" />
+                                    <String fx:value="20" />
+                                    <String fx:value="21" />
+                                    <String fx:value="22" />
+                                    <String fx:value="23" />
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="5.0" text=":" textFill="WHITE" />
+                        <ChoiceBox fx:id="minEnd" layoutX="105.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="45.0" >
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="00" />
+                                    <String fx:value="15" />
+                                    <String fx:value="30" />
+                                    <String fx:value="45" />
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="125.0" promptText="Date">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -160,12 +242,7 @@
                   </VBox>
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="40.0" prefWidth="290.0" text="Submit">
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="40.0" prefWidth="290.0" text="Exit">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets left="315.0" right="5.0" />
                      </HBox.margin>
                   </Button>
                </children>

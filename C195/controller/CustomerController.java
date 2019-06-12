@@ -28,13 +28,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lib.LocalDB;
-import lib.Query;
 import model.*;
 
 // TODO Refactor EDIT Customer Record
 
 public class CustomerController implements Initializable {
-    @FXML private TableView<Customer> customerTable = new TableView<>(LocalDB.getLocalDB());
+    @FXML private TableView<Customer> customerTable = new TableView<>();
     @FXML private TableColumn<Customer, String> customerColumn;
     @FXML private TableColumn<Address, String> phoneColumn;
     @FXML private TableColumn<Address, String> addressColumn;
@@ -57,12 +56,11 @@ public class CustomerController implements Initializable {
     private NEDstate          state = NEDstate.NEW;
     
     
-    public void getAppointmentsCalendar(ActionEvent e) throws IOException {
-//        Parent calendarParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
-//        Scene calendarScene = new Scene(calendarParent);
-//        C195.getPrimaryStage().setScene(calendarScene);
-//        C195.getPrimaryStage().show();
-        System.out.println("getAppointmentsCalendar pressed");
+    public void getAppointmentScreen(ActionEvent e) throws IOException {
+        Parent calendarParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
+        Scene calendarScene = new Scene(calendarParent);
+        C195.getPrimaryStage().setScene(calendarScene);
+        C195.getPrimaryStage().show();
     }
     
     public void clearEntry() {
@@ -74,6 +72,26 @@ public class CustomerController implements Initializable {
         cityNameField.clear();
         countryField.clear();
         radioGroup.selectToggle(newRadio);
+    }
+    
+    public void displayCalendarWeekly() {
+        System.out.println("Weekly Calendar");
+    }
+    
+    public void displayCalendarMonthly() {
+        System.out.println("Monthly Calendar");
+    }
+    
+    public void generateReportAppointments() {
+        System.out.println("Generate Reports: Appointments");
+    }
+    
+    public void generateReportConsultantSchedules() {
+        System.out.println("Generate Reports: Consultant Schedules");
+    }
+    
+    public void generateReportCustomerSchedules() {
+        System.out.println("Generate Reports: Customer Schedules");
     }
     
     
@@ -160,8 +178,7 @@ public class CustomerController implements Initializable {
     /* ===============================================================
      * *** Return to Login screen ***
      *
-     * Clear current user.
-     * Load Login screen.
+     * Clear current user. Load Login screen.
      * Use ResourceBundle to maintain I18N of Login screen on all viewings
      * =============================================================== */
     public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException, IOException {
@@ -190,7 +207,7 @@ public class CustomerController implements Initializable {
     @Override public void initialize(URL url, ResourceBundle rb) {
         // Query for customers
         try {
-            LocalDB.init();
+            LocalDB.initCustomer();
         } catch(SQLException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -202,7 +219,7 @@ public class CustomerController implements Initializable {
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("cityName"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
             
-        customerTable.setItems( LocalDB.getLocalDB() );
+        customerTable.setItems( LocalDB.getListCustomers() );
         
         
         /* ===============================================================

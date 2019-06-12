@@ -8,6 +8,7 @@ package lib;
 
 import c195.C195;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -21,15 +22,18 @@ import model.*;
 ******************************************************* */
 public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
+    private static final ObservableList<Appointment> APPOINTMENT_LIST = FXCollections.observableArrayList();
     private static final List<City> CITIES = new ArrayList<>();
     
     /* ===============================================================
      * General Utility Methods
      *
-     * init() - populate local copy of remote DB
-     * getLocalDB() - return LocalDB for rendering
+     * initCustomer() - populate local copy of customers
+     * getLocalCustomer() - return CUSTOMER_LIST for rendering
+     * initAppointment() - populate local copy of appointments
+     * getLocalAppointment() - return APPOINTMENT_LIST for rendering
      * =============================================================== */
-    public static final void init() throws SQLException {
+    public static final void initCustomer() throws SQLException {
         // Query DB for Customer details
         Query.getAllCustomers();
 
@@ -60,8 +64,50 @@ public class LocalDB {
         }
     }
     
-    public static final ObservableList<Customer> getLocalDB() {
+    public static final ObservableList<Customer> getListCustomers() {
         return CUSTOMER_LIST;
+    }
+    
+    public static final void initAppointment() throws SQLException {
+        // Query DB for Customer details
+        Query.getAllAppointments();
+
+        // build ObservableList of Customer objects
+        if (Query.getResult().next() == false) {
+            System.out.println("Empty ResultSet");
+        } else {
+            do {                       
+                Appointment appt = new AppointmentBuilder()
+                    .setId(Query.getResult().getInt("appointmentId"))
+                    .setCustomerObj(  get(Query.getResult().getInt("customerId"))  )
+                    .setTitle(Query.getResult().getString("title"))
+                    .setType(Query.getResult().getString("type"))
+                    .setUrl(Query.getResult().getString("url"))
+                    .setContact(Query.getResult().getString("contact"))
+                    .setStart(  convertDateTime(Query.getResult().getString("start"))  )
+                    .setEnd(  convertDateTime(Query.getResult().getString("end"))  )
+                    .setDescription(Query.getResult().getString("description"))
+                    .setLocation(Query.getResult().getString("location"))                    
+                .createAppointment();
+                APPOINTMENT_LIST.add( appt );
+                
+            } while(Query.getResult().next());
+        }
+    }
+    
+    public static final ObservableList<Appointment> getListAppointments() {
+        return APPOINTMENT_LIST;
+    }
+    
+    public static final LocalDateTime convertDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        
+        return LocalDateTime.of(year, month, day, hour, minute);
     }
     
     
@@ -72,6 +118,15 @@ public class LocalDB {
      * set(index, customer) - modify customer entry
      * remove(customer) - delete customer entry
      * =============================================================== */
+    public static final Customer get(int customerId) {
+        for(Customer cust: CUSTOMER_LIST) {
+            if (cust.getCustomerId() == customerId) {
+                return cust;
+            }
+        }
+        return null;
+    }
+    
     public static final void add(Customer customer) throws SQLException {
         Address address = customer.getAddressObj();
         if (contains(address)) {

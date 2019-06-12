@@ -7,25 +7,27 @@
 
 package model;
 
-import java.time.ZonedDateTime;
-import javafx.beans.property.SimpleIntegerProperty;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Appointment {
-    private final   SimpleIntegerProperty       appointmentId = new SimpleIntegerProperty();
+    private int                                 appointmentId;
     private final   SimpleStringProperty        title = new SimpleStringProperty();
     private final   SimpleStringProperty        description = new SimpleStringProperty();
     private final   SimpleStringProperty        location = new SimpleStringProperty();
     private final   SimpleStringProperty        contact = new SimpleStringProperty();
     private final   SimpleStringProperty        type = new SimpleStringProperty();
     private final   SimpleStringProperty        url = new SimpleStringProperty();
-    private final   Customer                    customer;
-    private final   User                        user;
-    private         ZonedDateTime               start;
-    private         ZonedDateTime               end;
+    private final   SimpleStringProperty        startTime = new SimpleStringProperty();
+    private final   SimpleStringProperty        endTime = new SimpleStringProperty();
+    private final   SimpleStringProperty        date = new SimpleStringProperty();
+    private         LocalDateTime               start;
+    private         LocalDateTime               end;
     
-    public int      getAppointmentId()          { return appointmentId.get(); }
-    public void     setAppointmentId(int ID)    { appointmentId.set(ID); }
+    public int      getAppointmentId()          { return appointmentId; }
+    public void     setAppointmentId(int ID)    { appointmentId = ID; }
     public String   getTitle()                  { return title.get(); }
     public void     setTitle(String title)      { this.title.set(title); }
     public String   getDescription()            { return description.get(); }
@@ -38,19 +40,49 @@ public class Appointment {
     public void     setType(String type)        { this.type.set(type); }
     public String   getUrl()                    { return url.get(); }
     public void     setUrl(String url)          { this.url.set(url); }
+    public LocalDateTime getStart()             { return start; }
+    public void     setStart(LocalDateTime strt){ this.start = strt; }
+    public LocalDateTime getEnd()               { return end; }
+    public void     setEnd(LocalDateTime end)   { this.end = end; }
+    public String   getStartTime()              { return this.startTime.get(); }
+    public String   getEndTime()                { return this.endTime.get(); }
+    public String   getDate()                   { return this.date.get(); }
+    
+    private         Customer                    customer;
+    public int      getCustomerId()             { return this.customer.getCustomerId(); }
+    public String   getCustomerName()           { return this.customer.getCustomerName(); }
+    public Customer getCustomerObj()            { return this.customer; }
+    public void     setCustomerObj(Customer c)  { this.customer = c; }
     
     
-    public ZonedDateTime getStart()             { return start; }
-    public void     setStart(ZonedDateTime start){ this.start = start; }
+    public Appointment() {
+        this.customer = new Customer();
+    }
     
-    public ZonedDateTime getEnd()               { return end; }
-    public void     setEnd(ZonedDateTime end)   { this.end = end; }
-    
-    public Appointment(int ID, Customer cust, User user, ZonedDateTime start, ZonedDateTime end) {
-        this.appointmentId.set(ID);
+    public Appointment(int apptId, Customer cust, LocalDateTime start, LocalDateTime end, 
+            String title, String type, String location, String contact, String url, String desc) {
+        this.appointmentId = apptId;
         this.customer = cust;
-        this.user = user;
         this.start = start;
         this.end = end;
+        this.title.set(title);
+        this.type.set(type);
+        this.location.set(location);
+        this.contact.set(contact);
+        this.url.set(url);
+        this.description.set(desc);
+        this.description.set(desc);
+        
+        this.startTime.set(start.toLocalTime().toString());
+        this.endTime.set(end.toLocalTime().toString());
+        this.date.set(start.toLocalDate().toString());
     }
+    
+    private void setDateAndTimes(LocalDateTime dateTime) {
+        LocalDate localDate = dateTime.toLocalDate();
+        this.date.set(localDate.toString());
+        
+        LocalTime localTime = dateTime.toLocalTime();
+    }
+
 }

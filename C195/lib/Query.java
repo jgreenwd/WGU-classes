@@ -60,7 +60,7 @@ public class Query {
     public static void getAllCustomers() throws SQLException {
         try {
             PreparedStatement st = conn.prepareStatement(
-            "SELECT customer.customerId, customerName, active, "
+                "SELECT customer.customerId, customerName, active, "
                 + "address.addressId, address, address2, postalCode, phone, "
                 + "country.countryId, country, city.cityId, city "
                 + "FROM country "
@@ -74,9 +74,24 @@ public class Query {
         }
     }
     
+    public static void getAllAppointments() throws SQLException {
+        try {
+            PreparedStatement st = conn.prepareStatement(
+                "SELECT appointmentId, customer.customerId, contact, "
+                + "title, type, url, start, end, description, location "
+                + "FROM customer JOIN appointment "
+                + "ON customer.customerId = appointment.customerId;");
+            
+            result = st.executeQuery();
+        } catch(SQLException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+    }
+    
     public static ResultSet getResult() {
         return result;
     }
+    
     
     /* ===============================================================
      * Customer Query Methods

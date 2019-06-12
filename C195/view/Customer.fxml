@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -19,10 +20,12 @@
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="940.0" style="-fx-background-color: dodgerblue;">
          <children>
             <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="940.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="View">
+               <menus>
+                <Menu mnemonicParsing="false" text="Main">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#getAppointmentsCalendar" text="Appointments" />
+                    <MenuItem mnemonicParsing="false" onAction="#getAppointmentScreen" text="Appointments" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#exitButtonPressed" text="Exit" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Entry">
@@ -30,7 +33,20 @@
                         <MenuItem mnemonicParsing="false" onAction="#clearEntry" text="Clear" />
                      </items>
                   </Menu>
-              </menus>
+                  <Menu mnemonicParsing="false" text="Calendar">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#displayCalendarWeekly" text="Weekly" />
+                        <MenuItem mnemonicParsing="false" onAction="#displayCalendarMonthly" text="Monthly" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Reports">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#generateReportAppointments" text="Appointment Types" />
+                        <MenuItem mnemonicParsing="false" onAction="#generateReportConsultantSchedules" text="Consultant Schedules" />
+                        <MenuItem mnemonicParsing="false" onAction="#generateReportCustomerSchedules" text="Customer Schedules" />
+                     </items>
+                  </Menu>
+               </menus>
             </MenuBar>
             <TableView fx:id="customerTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" style="-fx-selection-bar: royalblue; -fx-selection-bar-non-focused: royalblue;">
               <columns>
@@ -143,12 +159,7 @@
                   </VBox>
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="40.0" prefWidth="290.0" text="Submit">
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="40.0" prefWidth="290.0" text="Exit">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets left="310.0" right="5.0" />
                      </HBox.margin>
                   </Button>
                </children>

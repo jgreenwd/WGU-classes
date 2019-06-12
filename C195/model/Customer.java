@@ -11,8 +11,8 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Customer {
     private int                                 customerId;
-    private int                                 active;
     private final   SimpleStringProperty        customerName = new SimpleStringProperty();
+    private int                                 active;
     
     public  int     getCustomerId()             { return customerId; }
     public  void    setCustomerId(int ID)       { customerId = ID; }
