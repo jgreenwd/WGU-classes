@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.*;
@@ -112,19 +113,73 @@ public class LocalDB {
     
     
     /* ===============================================================
+     * Appointment Query Methods
+     *
+     * add(appointment) - add appointment entry to remote DB & LocalDB
+     * set(index, appointment) - modify appointment entry
+     * remove(appointment) - delete appointment entry
+     * =============================================================== */
+    public static final Appointment get(Appointment appt) {
+        return APPOINTMENT_LIST
+                .stream()
+                .filter(a -> a.getAppointmentId() == appt.getAppointmentId())
+                .findAny()
+                .get();
+    }
+    
+    public static final void add(Appointment appt) throws SQLException{
+        Query.insertAppointment(appt, C195.user);
+        System.out.println(appt.getAppointmentId());
+        appt.setAppointmentId(Query.getAppointmentId(appt));
+        APPOINTMENT_LIST.add(appt);
+    }
+    
+    public static final void set(int index, Appointment appt) throws SQLException {
+        APPOINTMENT_LIST.set(index, appt);
+    }
+    
+    public static final void remove(Appointment appt) throws SQLException {
+        Query.deleteAppointment(appt);
+        APPOINTMENT_LIST.remove(appt);
+    }
+    
+    
+    /* ===============================================================
      * Customer Query Methods
      *
      * add(customer) - add customer entry to remote DB & LocalDB
      * set(index, customer) - modify customer entry
      * remove(customer) - delete customer entry
      * =============================================================== */
+    
+    public static final boolean contains(Customer cust) {
+        return CUSTOMER_LIST
+                .stream()
+                .anyMatch(c-> c.getCustomerName().equals(cust.getCustomerName()));
+    }
+    
     public static final Customer get(int customerId) {
-        for(Customer cust: CUSTOMER_LIST) {
-            if (cust.getCustomerId() == customerId) {
-                return cust;
-            }
-        }
-        return null;
+        return CUSTOMER_LIST
+                .stream()
+                .filter(c -> c.getCustomerId() == customerId)
+                .findAny()
+                .get();
+    }
+    
+    public static final Customer get(String name) {
+        return CUSTOMER_LIST
+                .stream()
+                .filter(c -> c.getCustomerName().equals(name))
+                .findAny()
+                .get();
+    }
+    
+    public static final Customer get(Customer cust) {
+        return CUSTOMER_LIST
+                .stream()
+                .filter(c -> c.getCustomerName().equals(cust.getCustomerName()))
+                .findAny()
+                .get();
     }
     
     public static final void add(Customer customer) throws SQLException {

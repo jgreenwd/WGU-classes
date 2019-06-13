@@ -19,6 +19,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
@@ -53,7 +55,7 @@ public class AppointmentController implements Initializable {
     @FXML private ChoiceBox<String> hourEnd = new ChoiceBox<>();
     @FXML private ChoiceBox<String> minEnd = new ChoiceBox<>();
     @FXML private DatePicker        datePicker;
-    private int                     customerId;
+    private int                     customerId, appointmentId;
     private enum NEDstate { NEW,EDIT,DELETE; }
     private NEDstate                state = NEDstate.NEW;
     
@@ -106,7 +108,88 @@ public class AppointmentController implements Initializable {
      * customer record in the database."
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
+        Appointment appt = new Appointment();
+        Customer cust = LocalDB.get(customerField.getText());
         
+        try {
+            LocalDateTime time1 = LocalDateTime.of(
+                datePicker.getValue().getYear(),
+                datePicker.getValue().getMonth(),
+                datePicker.getValue().getDayOfMonth(),
+                Integer.parseInt(hourStart.getValue()),
+                Integer.parseInt(minStart.getValue())
+            );
+            
+            LocalDateTime time2 = LocalDateTime.of(
+                datePicker.getValue().getYear(),
+                datePicker.getValue().getMonth(),
+                datePicker.getValue().getDayOfMonth(),
+                Integer.parseInt(hourEnd.getValue()),
+                Integer.parseInt(minEnd.getValue())
+            );
+        
+            appt = new AppointmentBuilder()
+                .setCustomerObj(cust)
+                .setTitle(titleField.getText())
+                .setType(typeField.getText())
+                .setUrl(urlField.getText())
+                .setStart(time1)
+                .setEnd(time2)
+                .createAppointment();
+                    
+        } catch (NullPointerException ex) {
+            System.out.println("ERROR: "+ ex.getMessage());
+        }
+        
+        if (LocalDB.contains(cust)) {
+            switch(state){
+                /* *******************************************************
+                                    ADD NEW APPOINTMENT
+                   ******************************************************* */
+                case NEW:{
+                    LocalDB.add(appt);
+                    break;
+                }
+                
+                /* *******************************************************
+                                    EDIT EXISTING APPOINTMENT
+                   ******************************************************* */
+                case EDIT:{
+                    appt.setAppointmentId(appointmentId);
+                    int index = appointmentTable.getSelectionModel().getSelectedIndex();
+                    LocalDB.set(index, appt);
+                    
+                    break;
+                }
+                /* *******************************************************
+                                      DELETE APPOINTMENT
+                   ****************************************************** */
+                case DELETE:{
+                    appt = appointmentTable.getSelectionModel().getSelectedItem();
+                    
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Delete Appointment");
+                    alert.setContentText("Are you sure?");
+                    alert.showAndWait();
+                    
+                    if (alert.getResult().getButtonData().equals(OK_DONE)) {
+                        LocalDB.remove(appt);
+                    } else {
+                        return;
+                    }
+                    break;
+                }
+            }
+            
+            clearEntry();
+            
+        } else {
+        // Customer doesn't exist in database
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid Customer");
+            alert.setContentText("This Customer is not currently available.");
+            alert.showAndWait();
+        }
     }
     
     /* ===============================================================
@@ -167,31 +250,23 @@ public class AppointmentController implements Initializable {
         appointmentTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Appointment> obs, Appointment prev, Appointment next) -> {
                 try {
+                    appointmentId = next.getAppointmentId();
                     customerId = next.getCustomerId();
-                customerField.setText(next.getCustomerName());
-                titleField.setText(next.getTitle());
-                typeField.setText(next.getType());
-                urlField.setText(next.getUrl());
-                hourStart.setValue(next.getStart().toString().substring(11,13));
-                minStart.setValue(next.getStart().toString().substring(14,16));
-                hourEnd.setValue(next.getEnd().toString().substring(11,13));
-                minEnd.setValue(next.getEnd().toString().substring(14,16));
-                datePicker.setValue(next.getStart().toLocalDate());
+                    customerField.setText(next.getCustomerName());
+                    titleField.setText(next.getTitle());
+                    typeField.setText(next.getType());
+                    urlField.setText(next.getUrl());
+                    hourStart.setValue(next.getStart().toString().substring(11,13));
+                    minStart.setValue(next.getStart().toString().substring(14,16));
+                    hourEnd.setValue(next.getEnd().toString().substring(11,13));
+                    minEnd.setValue(next.getEnd().toString().substring(14,16));
+                    datePicker.setValue(next.getStart().toLocalDate());
+                    System.out.println(next.getAppointmentId());
                 } catch (NullPointerException ex) {
                     System.out.println("ERROR: "+ ex.getMessage());
                 }
             }
         );
-        
-//        String startHour = start.substring(11, 13);
-//        String startMinute = start.substring(14, 16);
-//        String endHour = start.substring(11, 13);
-//        String endMinute = start.substring(14, 16);
-//        LocalDate ldDate = LocalDate.of(year, month, day);
-//        comboHourStart.getSelectionModel().select(hour);
-
-//        comboMinStart.getSelectionModel().select(minute);
-//        comboMinEnd.getSelectionModel().select(minute);
         
         newRadio.setToggleGroup(radioGroup);
         editRadio.setToggleGroup(radioGroup);
@@ -200,13 +275,13 @@ public class AppointmentController implements Initializable {
         radioGroup.selectedToggleProperty().addListener((obs, prev, next) -> {
             if (next == editRadio) {
                 state = NEDstate.EDIT;
-//                customerId = customerTable.getSelectionModel().getSelectedItem().getCustomerId();
+                appointmentId = appointmentTable.getSelectionModel().getSelectedItem().getAppointmentId();
             } else if (next == deleteRadio) {
                 state = NEDstate.DELETE;
-//                customerId = customerTable.getSelectionModel().getSelectedItem().getCustomerId();
+                appointmentId = appointmentTable.getSelectionModel().getSelectedItem().getAppointmentId();
             } else if (next == newRadio) {
                 state = NEDstate.NEW;
-//                clearEntry();
+                clearEntry();
             }
         });
     }
