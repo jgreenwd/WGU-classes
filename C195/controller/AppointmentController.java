@@ -108,27 +108,28 @@ public class AppointmentController implements Initializable {
      * customer record in the database."
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-        Customer cust = LocalDB.get(customerField.getText());
-        Appointment appt = new AppointmentBuilder()
-            .setCustomerObj(cust)
-            .setTitle(titleField.getText())
-            .setType(typeField.getText())
-            .setUrl(urlField.getText())
-            .setStart(LocalDateTime.of(
-                datePicker.getValue().getYear(),
-                datePicker.getValue().getMonth(),
-                datePicker.getValue().getDayOfMonth(),
-                Integer.parseInt(hourStart.getValue()),
-                Integer.parseInt(minStart.getValue())))
-            .setEnd(LocalDateTime.of(
-                datePicker.getValue().getYear(),
-                datePicker.getValue().getMonth(),
-                datePicker.getValue().getDayOfMonth(),
-                Integer.parseInt(hourEnd.getValue()),
-                Integer.parseInt(minEnd.getValue())))
-            .createAppointment();
-        
-        if (LocalDB.contains(cust)) {
+        // if Valid customer
+        if (LocalDB.getId(customerField.getText()) > 0) {
+            Customer cust = LocalDB.get(customerField.getText());
+            Appointment appt = new AppointmentBuilder()
+                .setCustomerObj(cust)
+                .setTitle(titleField.getText())
+                .setType(typeField.getText())
+                .setUrl(urlField.getText())
+                .setStart(LocalDateTime.of(
+                    datePicker.getValue().getYear(),
+                    datePicker.getValue().getMonth(),
+                    datePicker.getValue().getDayOfMonth(),
+                    Integer.parseInt(hourStart.getValue()),
+                    Integer.parseInt(minStart.getValue())))
+                .setEnd(LocalDateTime.of(
+                    datePicker.getValue().getYear(),
+                    datePicker.getValue().getMonth(),
+                    datePicker.getValue().getDayOfMonth(),
+                    Integer.parseInt(hourEnd.getValue()),
+                    Integer.parseInt(minEnd.getValue())))
+                .createAppointment();
+            
             switch(state){
                 /* *******************************************************
                                     ADD NEW APPOINTMENT

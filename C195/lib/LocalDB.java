@@ -155,15 +155,20 @@ public class LocalDB {
     /* ===============================================================
      * Customer Query Methods
      *
+     * getId(name) - return customerId of name
+     * get(customerId) - return customer object w/ customerId
+     * get(name) - return customer object w/ name
      * add(customer) - add customer entry to remote DB & LocalDB
      * set(index, customer) - modify customer entry
      * remove(customer) - delete customer entry
      * =============================================================== */
     
-    public static final boolean contains(Customer cust) {
+    public static final int getId(String name) {
         return CUSTOMER_LIST
                 .stream()
-                .anyMatch(c-> c.getCustomerName().equals(cust.getCustomerName()));
+                .filter(c -> c.getCustomerName().equals(name))
+                .mapToInt(c -> c.getCustomerId())
+                .sum() | 0;
     }
     
     public static final Customer get(int customerId) {
@@ -178,14 +183,6 @@ public class LocalDB {
         return CUSTOMER_LIST
                 .stream()
                 .filter(c -> c.getCustomerName().equals(name))
-                .findAny()
-                .get();
-    }
-    
-    public static final Customer get(Customer cust) {
-        return CUSTOMER_LIST
-                .stream()
-                .filter(c -> c.getCustomerName().equals(cust.getCustomerName()))
                 .findAny()
                 .get();
     }

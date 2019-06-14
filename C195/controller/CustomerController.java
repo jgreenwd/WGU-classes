@@ -171,7 +171,7 @@ public class CustomerController implements Initializable {
             customerTable.setItems(LocalDB.getListCustomers());
             
         } else {
-        // City doesn't exist in database
+        // City/Country doesn't exist in database
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Invalid City/Country");
             alert.setContentText("This City/Country is currently not available.");
