@@ -9,6 +9,7 @@ package lib;
 import c195.C195;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -101,11 +102,28 @@ public class LocalDB {
     }
     
     public static final LocalDateTime convertDateTime(String dateTime) {
+        // Assumption: the timestamp from Mysql is in UTC
+        ZoneId timeZone = ZoneId.systemDefault();
+        
+        int zoneMod;
+        
+        // Assumption: the business operates somewhere between
+        // the hours of 8amGMT and 11pmGMT, so no change in day
+        // is needed
+        switch (timeZone.toString()) {
+            case "Europe/London":       { zoneMod = 1; } break;
+            case "America/New_York":    { zoneMod = -4; } break;
+            case "America/Chicago":     { zoneMod = -5; } break;
+            case "America/Denver":      { zoneMod = -6; } break;
+            case "America/Phoenix":     { zoneMod = -7; } break;
+            default:                    { zoneMod = 0; } break;
+        }
+        
         int year = Integer.parseInt(dateTime.substring(0, 4));
         int month = Integer.parseInt(dateTime.substring(5, 7));
         int day = Integer.parseInt(dateTime.substring(8, 10));
         
-        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int hour = zoneMod + Integer.parseInt(dateTime.substring(11, 13));
         int minute = Integer.parseInt(dateTime.substring(14, 16));
         
         return LocalDateTime.of(year, month, day, hour, minute);

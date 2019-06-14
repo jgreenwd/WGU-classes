@@ -53,7 +53,7 @@ public class LoginController implements Initializable {
             accessDbButton.setText(rb.getString("Access_Button"));
             exitButton.setText(rb.getString("Exit"));
         } catch(Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("ERROR: " + e.getMessage());
         }
     }
     
@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
         try {
             LogGen.log(loginUsername.getText(), validity);
         } catch (NullPointerException ex) {
-            System.out.println("Exception: " + ex.getMessage());
+            System.out.println("ERROR: " + ex.getMessage());
         }
         
     }
