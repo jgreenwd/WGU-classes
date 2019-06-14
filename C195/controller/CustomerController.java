@@ -88,12 +88,6 @@ public class CustomerController implements Initializable {
     }
     
     public void generateReportAppointments() {
-        System.out.println("LocalDateTime: " + LocalDateTime.now());
-        System.out.println("ZonedDateTime: " + ZonedDateTime.now());
-        System.out.println("ZoneId: " + ZoneId.systemDefault());
-        ZoneId timeZone = ZoneId.systemDefault();
-        
-        
         System.out.println("Generate Reports: Appointments");
     }
     

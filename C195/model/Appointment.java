@@ -7,9 +7,7 @@
 
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Appointment {
@@ -77,12 +75,4 @@ public class Appointment {
         this.endTime.set(end.toLocalTime().toString());
         this.date.set(start.toLocalDate().toString());
     }
-    
-    private void setDateAndTimes(LocalDateTime dateTime) {
-        LocalDate localDate = dateTime.toLocalDate();
-        this.date.set(localDate.toString());
-        
-        LocalTime localTime = dateTime.toLocalTime();
-    }
-
 }

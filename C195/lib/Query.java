@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import static lib.DBConnection.conn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import model.*;
 
 public class Query {
@@ -132,8 +133,8 @@ public class Query {
             st.setString(4, cust.getCityName()+", "+cust.getCountryName());
             st.setString(5, user.getUsername()); // supply User as contact
             st.setString(6, appt.getUrl());
-            st.setString(7, appt.getDate()+ " "+appt.getStartTime()+":00");
-            st.setString(8, appt.getDate()+ " "+appt.getEndTime()+":00");
+            st.setTimestamp(7, Timestamp.valueOf(appt.getStart()));
+            st.setTimestamp(8, Timestamp.valueOf(appt.getEnd()));
             st.setString(9, user.getUsername());
             st.setString(10, user.getUsername());
             st.setString(11, appt.getType());
@@ -151,8 +152,8 @@ public class Query {
             st.setString(2, appt.getTitle());
             st.setString(3, appt.getType());
             st.setString(4, appt.getUrl());
-            st.setString(5, appt.getDate()+ " "+appt.getStartTime()+":00");
-            st.setString(6, appt.getDate()+ " "+appt.getEndTime()+":00");
+            st.setTimestamp(5, Timestamp.valueOf(appt.getStart()));
+            st.setTimestamp(6, Timestamp.valueOf(appt.getEnd()));
             st.setString(7, user.getUsername());
             st.setInt(8, appt.getAppointmentId());
             st.executeUpdate();

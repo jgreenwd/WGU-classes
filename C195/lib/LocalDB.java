@@ -8,8 +8,6 @@ package lib;
 
 import c195.C195;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -17,23 +15,24 @@ import javafx.collections.ObservableList;
 import model.*;
 
 
-/* *******************************************************
-    Use a local copy of the DB to avoid expensive calls
-    to external resources.
-******************************************************* */
+/* *****************************************************************************
+    Use a local copy of the DB indexes to minimize expensive calls to external resources.
+   ***************************************************************************** */
 public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
     private static final ObservableList<Appointment> APPOINTMENT_LIST = FXCollections.observableArrayList();
     private static final List<City> CITIES = new ArrayList<>();
     
-    /* ===============================================================
+    
+    
+    /* =========================================================================
      * General Utility Methods
      *
-     * init() - populate local copy of Customers & Appointments
+     * init() - populate local copy of Customers & Appointments, set timezone
      * getLocalCustomer() - return CUSTOMER_LIST for rendering
      * getLocalAppointment() - return APPOINTMENT_LIST for rendering
      * convertDateTime(String) - convert input String to LocalDateTime
-     * =============================================================== */
+     * ========================================================================= */
     public static final void init() throws SQLException {
         CUSTOMER_LIST.clear();
         APPOINTMENT_LIST.clear();
@@ -67,10 +66,10 @@ public class LocalDB {
             } while(Query.getResult().next());
         }
         
-        // Query DB for Customer details
+        // Query DB for Appointment details
         Query.getAllAppointments();
 
-        // build ObservableList of Customer objects
+        // build ObservableList of Appointment objects
         if (Query.getResult().next() == false) {
             System.out.println("Empty ResultSet");
         } else {
@@ -82,8 +81,8 @@ public class LocalDB {
                     .setType(Query.getResult().getString("type"))
                     .setUrl(Query.getResult().getString("url"))
                     .setContact(Query.getResult().getString("contact"))
-                    .setStart(  convertDateTime(Query.getResult().getString("start"))  )
-                    .setEnd(  convertDateTime(Query.getResult().getString("end"))  )
+                    .setStart(Query.getResult().getTimestamp("start").toLocalDateTime())
+                    .setEnd(Query.getResult().getTimestamp("end").toLocalDateTime())
                     .setDescription(Query.getResult().getString("description"))
                     .setLocation(Query.getResult().getString("location"))                    
                 .createAppointment();
@@ -101,43 +100,16 @@ public class LocalDB {
         return APPOINTMENT_LIST;
     }
     
-    public static final LocalDateTime convertDateTime(String dateTime) {
-        // Assumption: the timestamp from Mysql is in UTC
-        ZoneId timeZone = ZoneId.systemDefault();
-        
-        int zoneMod;
-        
-        // Assumption: the business operates somewhere between
-        // the hours of 8amGMT and 11pmGMT, so no change in day
-        // is needed
-        switch (timeZone.toString()) {
-            case "Europe/London":       { zoneMod = 1; } break;
-            case "America/New_York":    { zoneMod = -4; } break;
-            case "America/Chicago":     { zoneMod = -5; } break;
-            case "America/Denver":      { zoneMod = -6; } break;
-            case "America/Phoenix":     { zoneMod = -7; } break;
-            default:                    { zoneMod = 0; } break;
-        }
-        
-        int year = Integer.parseInt(dateTime.substring(0, 4));
-        int month = Integer.parseInt(dateTime.substring(5, 7));
-        int day = Integer.parseInt(dateTime.substring(8, 10));
-        
-        int hour = zoneMod + Integer.parseInt(dateTime.substring(11, 13));
-        int minute = Integer.parseInt(dateTime.substring(14, 16));
-        
-        return LocalDateTime.of(year, month, day, hour, minute);
-    }
     
     
-    /* ===============================================================
+    /* =========================================================================
      * Appointment Query Methods
      *
      * getId(appointment) - get appointmentId if appointment in LocalDB
      * add(appointment) - add appointment entry to remote DB & LocalDB
      * set(index, appointment) - modify appointment entry
      * remove(appointment) - delete appointment entry
-     * =============================================================== */
+     * ========================================================================= */
     public static final Appointment getId(Appointment appt) {
         
         return APPOINTMENT_LIST
@@ -170,7 +142,8 @@ public class LocalDB {
     }
     
     
-    /* ===============================================================
+    
+    /* =========================================================================
      * Customer Query Methods
      *
      * getId(name) - return customerId of name
@@ -179,7 +152,7 @@ public class LocalDB {
      * add(customer) - add customer entry to remote DB & LocalDB
      * set(index, customer) - modify customer entry
      * remove(customer) - delete customer entry
-     * =============================================================== */
+     * ========================================================================= */
     
     public static final int getId(String name) {
         return CUSTOMER_LIST
@@ -267,14 +240,15 @@ public class LocalDB {
     }
        
     
-    /* ===============================================================
+    
+    /* =========================================================================
      * Address/City Utility Methods
      *
      * contains(address) - validate address exists in LocalDB
      * contains(city) - validate city exists in LocalDB
      * getAddressId(address) - return addressId stored in LocalDB
      * getCityId(city) - return cityId stored in LocalDB
-     * =============================================================== */
+     * ========================================================================= */
     // to validate addresses passed with no addressId
     public static final boolean contains(Address address) {
         String addr1 = address.getAddress1();
