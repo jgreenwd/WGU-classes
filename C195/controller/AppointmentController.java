@@ -108,38 +108,25 @@ public class AppointmentController implements Initializable {
      * customer record in the database."
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-        Appointment appt = new Appointment();
         Customer cust = LocalDB.get(customerField.getText());
-        
-        try {
-            LocalDateTime time1 = LocalDateTime.of(
+        Appointment appt = new AppointmentBuilder()
+            .setCustomerObj(cust)
+            .setTitle(titleField.getText())
+            .setType(typeField.getText())
+            .setUrl(urlField.getText())
+            .setStart(LocalDateTime.of(
                 datePicker.getValue().getYear(),
                 datePicker.getValue().getMonth(),
                 datePicker.getValue().getDayOfMonth(),
                 Integer.parseInt(hourStart.getValue()),
-                Integer.parseInt(minStart.getValue())
-            );
-            
-            LocalDateTime time2 = LocalDateTime.of(
+                Integer.parseInt(minStart.getValue())))
+            .setEnd(LocalDateTime.of(
                 datePicker.getValue().getYear(),
                 datePicker.getValue().getMonth(),
                 datePicker.getValue().getDayOfMonth(),
                 Integer.parseInt(hourEnd.getValue()),
-                Integer.parseInt(minEnd.getValue())
-            );
-        
-            appt = new AppointmentBuilder()
-                .setCustomerObj(cust)
-                .setTitle(titleField.getText())
-                .setType(typeField.getText())
-                .setUrl(urlField.getText())
-                .setStart(time1)
-                .setEnd(time2)
-                .createAppointment();
-                    
-        } catch (NullPointerException ex) {
-            System.out.println("ERROR: "+ ex.getMessage());
-        }
+                Integer.parseInt(minEnd.getValue())))
+            .createAppointment();
         
         if (LocalDB.contains(cust)) {
             switch(state){
@@ -183,6 +170,9 @@ public class AppointmentController implements Initializable {
             
             clearEntry();
             
+            // Refresh Display
+            appointmentTable.setItems(LocalDB.getListAppointments());
+            
         } else {
         // Customer doesn't exist in database
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -224,7 +214,7 @@ public class AppointmentController implements Initializable {
     @Override public void initialize(URL url, ResourceBundle rb) {
         // Query for customers
         try {
-            LocalDB.initAppointment();
+            LocalDB.init();
         } catch(SQLException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -249,21 +239,18 @@ public class AppointmentController implements Initializable {
          * =============================================================== */
         appointmentTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Appointment> obs, Appointment prev, Appointment next) -> {
-                try {
+                if (next != null) {
                     appointmentId = next.getAppointmentId();
                     customerId = next.getCustomerId();
                     customerField.setText(next.getCustomerName());
                     titleField.setText(next.getTitle());
                     typeField.setText(next.getType());
                     urlField.setText(next.getUrl());
-                    hourStart.setValue(next.getStart().toString().substring(11,13));
-                    minStart.setValue(next.getStart().toString().substring(14,16));
-                    hourEnd.setValue(next.getEnd().toString().substring(11,13));
-                    minEnd.setValue(next.getEnd().toString().substring(14,16));
+                    hourStart.setValue(next.getStartTime().substring(0,2));
+                    minStart.setValue(next.getStartTime().substring(3));
+                    hourEnd.setValue(next.getEndTime().substring(0,2));
+                    minEnd.setValue(next.getEndTime().substring(3));
                     datePicker.setValue(next.getStart().toLocalDate());
-                    System.out.println(next.getAppointmentId());
-                } catch (NullPointerException ex) {
-                    System.out.println("ERROR: "+ ex.getMessage());
                 }
             }
         );

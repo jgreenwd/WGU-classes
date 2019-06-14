@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.*;
@@ -29,12 +28,15 @@ public class LocalDB {
     /* ===============================================================
      * General Utility Methods
      *
-     * initCustomer() - populate local copy of customers
+     * init() - populate local copy of Customers & Appointments
      * getLocalCustomer() - return CUSTOMER_LIST for rendering
-     * initAppointment() - populate local copy of appointments
      * getLocalAppointment() - return APPOINTMENT_LIST for rendering
+     * convertDateTime(String) - convert input String to LocalDateTime
      * =============================================================== */
-    public static final void initCustomer() throws SQLException {
+    public static final void init() throws SQLException {
+        CUSTOMER_LIST.clear();
+        APPOINTMENT_LIST.clear();
+        
         // Query DB for Customer details
         Query.getAllCustomers();
 
@@ -63,13 +65,7 @@ public class LocalDB {
                 
             } while(Query.getResult().next());
         }
-    }
-    
-    public static final ObservableList<Customer> getListCustomers() {
-        return CUSTOMER_LIST;
-    }
-    
-    public static final void initAppointment() throws SQLException {
+        
         // Query DB for Customer details
         Query.getAllAppointments();
 
@@ -96,6 +92,10 @@ public class LocalDB {
         }
     }
     
+    public static final ObservableList<Customer> getListCustomers() {
+        return CUSTOMER_LIST;
+    }
+        
     public static final ObservableList<Appointment> getListAppointments() {
         return APPOINTMENT_LIST;
     }
@@ -115,32 +115,40 @@ public class LocalDB {
     /* ===============================================================
      * Appointment Query Methods
      *
+     * getId(appointment) - get appointmentId if appointment in LocalDB
      * add(appointment) - add appointment entry to remote DB & LocalDB
      * set(index, appointment) - modify appointment entry
      * remove(appointment) - delete appointment entry
      * =============================================================== */
-    public static final Appointment get(Appointment appt) {
+    public static final Appointment getId(Appointment appt) {
+        
         return APPOINTMENT_LIST
                 .stream()
-                .filter(a -> a.getAppointmentId() == appt.getAppointmentId())
+                .filter(a -> a.getCustomerObj() == appt.getCustomerObj())
+                .filter(a -> a.getContact().equals(appt.getContact()))
+                .filter(a -> a.getDate().equals(appt.getDate()))
+                .filter(a -> a.getStart() == appt.getStart())
+                .filter(a -> a.getEnd() == appt.getEnd())
                 .findAny()
                 .get();
     }
     
     public static final void add(Appointment appt) throws SQLException{
         Query.insertAppointment(appt, C195.user);
-        System.out.println(appt.getAppointmentId());
-        appt.setAppointmentId(Query.getAppointmentId(appt));
-        APPOINTMENT_LIST.add(appt);
+        
+        init();
     }
     
     public static final void set(int index, Appointment appt) throws SQLException {
-        APPOINTMENT_LIST.set(index, appt);
+        Query.updateAppointment(appt, C195.user);
+        
+        init();
     }
     
     public static final void remove(Appointment appt) throws SQLException {
         Query.deleteAppointment(appt);
-        APPOINTMENT_LIST.remove(appt);
+        
+        init();
     }
     
     
@@ -184,16 +192,20 @@ public class LocalDB {
     
     public static final void add(Customer customer) throws SQLException {
         Address address = customer.getAddressObj();
+        
+        // addressId is a FOREIGN KEY for Customer
+        // if the address already exists, get addressId
         if (contains(address)) {
             address.setAddressId(getAddressId(address));
         } else {
+        // if address does NOT exist, insert address, then get addressId
             Query.insertAddress(address, C195.user);
             address.setAddressId(Query.getAddressId(address));
         }
         
         Query.insertCustomer(customer, C195.user);
-        customer.setCustomerId(Query.getCustomerId(customer.getCustomerName()));
-        CUSTOMER_LIST.add(customer);
+        
+        init();
     }
         
     public static final void set(int index, Customer customer) throws SQLException {
@@ -217,11 +229,16 @@ public class LocalDB {
                 Query.deleteAddress(oldAddr.getAddressId());
         }
         
-        CUSTOMER_LIST.remove(index);
-        CUSTOMER_LIST.add(customer);
+        init();
     }
     
     public static final void remove(Customer customer) throws SQLException {
+        for(Appointment appt: APPOINTMENT_LIST) {
+            if(appt.getCustomerId() == customer.getCustomerId()){
+                Query.deleteAppointment(appt);
+            }
+        }
+        
         Address address = customer.getAddressObj();
         
         Query.deleteCustomer(customer);
@@ -230,8 +247,8 @@ public class LocalDB {
         if (Query.isSingleton(address)){
             Query.deleteAddress(address.getAddressId());
         }
-        
-        CUSTOMER_LIST.remove(customer);
+
+        init();
     }
        
     

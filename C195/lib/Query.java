@@ -57,7 +57,7 @@ public class Query {
         }
     }
     
-    public static void getAllCustomers() throws SQLException {
+    public static void getAllCustomers() {
         try {
             PreparedStatement st = conn.prepareStatement(
                 "SELECT customer.customerId, customerName, active, "
@@ -74,7 +74,7 @@ public class Query {
         }
     }
     
-    public static void getAllAppointments() throws SQLException {
+    public static void getAllAppointments() {
         try {
             PreparedStatement st = conn.prepareStatement(
                 "SELECT appointmentId, customer.customerId, contact, "
@@ -109,8 +109,8 @@ public class Query {
             st.setInt(1, appt.getCustomerId());
             st.setString(2, appt.getTitle());
             st.setString(3, appt.getType());
-            st.setString(4, appt.getDate()+" "+appt.getStartTime());
-            st.setString(5, appt.getDate()+" "+appt.getEndTime());
+            st.setString(4, "\""+appt.getDate()+" "+appt.getStartTime()+":00\"");
+            st.setString(5, "\""+appt.getDate()+" "+appt.getEndTime()+":00\"");
             st.setString(6, appt.getLocation());
             st.setString(7, appt.getContact());
             result = st.executeQuery();

@@ -31,6 +31,7 @@ import lib.LocalDB;
 import model.*;
 
 // TODO Refactor EDIT Customer Record
+// TODO update CUSTOMER_LIST management on Add/Edit/Delete
 
 public class CustomerController implements Initializable {
     @FXML private TableView<Customer> customerTable = new TableView<>();
@@ -151,7 +152,8 @@ public class CustomerController implements Initializable {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Delete Customer");
-                    alert.setContentText("Are you sure?");
+                    alert.setContentText("This will remove " +customer.getCustomerName()+ 
+                            " and "+ customer.getCustomerName()+"'s scheduled appointments. Are you sure?");
                     alert.showAndWait();
                     
                     if (alert.getResult().getButtonData().equals(OK_DONE)) {
@@ -164,6 +166,9 @@ public class CustomerController implements Initializable {
             }
             
             clearEntry();
+            
+            // Refresh Display
+            customerTable.setItems(LocalDB.getListCustomers());
             
         } else {
         // City doesn't exist in database
@@ -207,7 +212,7 @@ public class CustomerController implements Initializable {
     @Override public void initialize(URL url, ResourceBundle rb) {
         // Query for customers
         try {
-            LocalDB.initCustomer();
+            LocalDB.init();
         } catch(SQLException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -231,15 +236,17 @@ public class CustomerController implements Initializable {
          * =============================================================== */
         customerTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Customer> obs, Customer prev, Customer next) -> {
-                customerId = next.getCustomerId();
-                nameField.setText(next.getCustomerName());
-                addressId = next.getAddressObj().getAddressId();
-                address1Field.setText(next.getAddressObj().getAddress1());
-                address2Field.setText(next.getAddressObj().getAddress2());
-                phoneField.setText(next.getAddressObj().getPhone());
-                zipField.setText(next.getAddressObj().getPostalCode());
-                cityNameField.setText(next.getAddressObj().getCityObj().getCityName());
-                countryField.setText(next.getAddressObj().getCityObj().getCountryName());
+                if (next != null) {
+                    customerId = next.getCustomerId();
+                    nameField.setText(next.getCustomerName());
+                    addressId = next.getAddressObj().getAddressId();
+                    address1Field.setText(next.getAddressObj().getAddress1());
+                    address2Field.setText(next.getAddressObj().getAddress2());
+                    phoneField.setText(next.getAddressObj().getPhone());
+                    zipField.setText(next.getAddressObj().getPostalCode());
+                    cityNameField.setText(next.getAddressObj().getCityObj().getCityName());
+                    countryField.setText(next.getAddressObj().getCityObj().getCountryName());
+                }
             }
         );
 
