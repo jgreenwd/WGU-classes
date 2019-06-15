@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -58,6 +59,7 @@ public class AppointmentController implements Initializable {
     private int                     customerId, appointmentId;
     private enum NEDstate { NEW,EDIT,DELETE; }
     private NEDstate                state = NEDstate.NEW;
+
     
     public void getCustomerScreen(ActionEvent e) throws IOException {
         Parent customerParent = FXMLLoader.load((getClass().getResource("/view/Customer.fxml")));
@@ -100,16 +102,25 @@ public class AppointmentController implements Initializable {
     }
     
     
-    /* ===============================================================
+    /* =========================================================================
      * (4025.01.05) - B: Add/Update/Delete DB records
      *
      * "Provide the ability to add, update, and delete appointments, 
      * capturing the type of appointment and a link to the specific 
      * customer record in the database."
-     * =============================================================== */
+     * ========================================================================= */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-        // if Valid customer
-        if (LocalDB.getId(customerField.getText()) > 0) {
+        /* =====================================================================
+         * (4025.01.09) - F: Exception Control
+         *
+         * "Write exception controls to prevent each of the following..."
+         *   * "entering NONEXISTENT or invalid customer data"
+         *      - try-catch customer existence
+         * 
+         *   * "scheduling an appointment outside business hours"
+         *      - throws !isDuringBusinessHours()
+         * ===================================================================== */
+        try {
             Customer cust = LocalDB.get(customerField.getText());
             Appointment appt = new AppointmentBuilder()
                 .setCustomerObj(cust)
@@ -129,6 +140,10 @@ public class AppointmentController implements Initializable {
                     Integer.parseInt(hourEnd.getValue()),
                     Integer.parseInt(minEnd.getValue())))
                 .createAppointment();
+            
+            if (!appt.isDuringBusinessHours()) {
+                throw new IllegalArgumentException("Appointment time is outside regular business hours.");
+            }
             
             switch(state){
                 /* *******************************************************
@@ -157,7 +172,7 @@ public class AppointmentController implements Initializable {
                     
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Delete Appointment");
-                    alert.setContentText("Are you sure?");
+                    alert.setContentText("This will delete the appointment. Are you sure?");
                     alert.showAndWait();
                     
                     if (alert.getResult().getButtonData().equals(OK_DONE)) {
@@ -174,11 +189,15 @@ public class AppointmentController implements Initializable {
             // Refresh Display
             appointmentTable.setItems(LocalDB.getListAppointments());
             
-        } else {
-        // Customer doesn't exist in database
+        } catch (NoSuchElementException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Invalid Customer");
-            alert.setContentText("This Customer is not currently available.");
+            alert.setContentText("Customer not found.");
+            alert.showAndWait();
+        } catch (IllegalArgumentException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid appointment");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
     }

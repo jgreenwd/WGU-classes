@@ -8,6 +8,11 @@ package lib;
 
 import c195.C195;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -22,7 +27,6 @@ public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
     private static final ObservableList<Appointment> APPOINTMENT_LIST = FXCollections.observableArrayList();
     private static final List<City> CITIES = new ArrayList<>();
-    
     
     
     /* =========================================================================

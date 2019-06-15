@@ -19,13 +19,14 @@ public class Query {
     private static ResultSet result;
     public static ResultSet getResult() { return result; }
     
-    /* ===============================================================
-     * General Utility Methods
+    /* =========================================================================
+     * (4025.01.09) - F: Exception Control
      *
-     * login(usr, pwd) - return boolean login credential validity
-     * getUser(name) - return User object for current User
-     * getAllCustomers() - general Query to populate local DB
-     * =============================================================== */
+     * "Write exception controls to prevent each of the following...
+     *   * entering an incorrect username and password"
+     * 
+     * try-with-resources
+     * ========================================================================= */
     public static boolean login(String usr, String pwd) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
             "SELECT CASE WHEN EXISTS(SELECT * FROM user WHERE userName=? AND password=?) "
@@ -41,6 +42,12 @@ public class Query {
         }
     }
     
+    /* ===============================================================
+     * General Utility Methods
+     *
+     * getUser(name) - return User object for current User
+     * getAllCustomers() - general Query to populate local DB
+     * =============================================================== */
     public static void upcomingAppointment(User user) throws SQLException {
         try(PreparedStatement st = conn.prepareStatement(
             "SELECT start, customerId FROM appointment WHERE userId=?");) {

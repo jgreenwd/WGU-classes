@@ -8,6 +8,8 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Appointment {
@@ -23,6 +25,13 @@ public class Appointment {
     private final   SimpleStringProperty        date = new SimpleStringProperty();
     private         LocalDateTime               start;
     private         LocalDateTime               end;
+    
+    // operating hours: 8amGMT - 10pmGMT
+    // assume open 7 days per week
+    private final int                           openHour = 8; // GMT
+    private final int                           openMin  = 0;
+    private final int                           closeHour = 22;
+    private final int                           closeMin  = 0;
     
     public int      getAppointmentId()          { return appointmentId; }
     public void     setAppointmentId(int ID)    { appointmentId = ID; }
@@ -52,6 +61,19 @@ public class Appointment {
     public Customer getCustomerObj()            { return this.customer; }
     public void     setCustomerObj(Customer c)  { this.customer = c; }
     
+    public boolean  isDuringBusinessHours()     {
+        ZonedDateTime open = ZonedDateTime.of(start.getYear(), start.getMonthValue(), 
+                start.getDayOfMonth(), openHour, openMin, 0, 0, ZoneId.of("UTC"));
+        
+        ZonedDateTime close = ZonedDateTime.of(end.getYear(), end.getMonthValue(), 
+                end.getDayOfMonth(), closeHour, closeMin, 0, 0, ZoneId.of("UTC"));
+        
+        ZonedDateTime begin = this.start.atZone(ZoneId.systemDefault());
+        ZonedDateTime finish = this.end.atZone(ZoneId.systemDefault());
+        
+        return (begin.equals(open) || begin.isAfter(open)) &&
+               (finish.equals(close) || finish.isBefore(close));
+    }
     
     public Appointment() {
         this.customer = new Customer();

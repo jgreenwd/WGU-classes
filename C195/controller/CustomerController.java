@@ -11,6 +11,7 @@ import c195.C195;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -30,8 +31,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lib.LocalDB;
 import model.*;
 
-// TODO Refactor EDIT Customer Record
-// TODO update CUSTOMER_LIST management on Add/Edit/Delete
 
 public class CustomerController implements Initializable {
     @FXML private TableView<Customer> customerTable = new TableView<>();
@@ -121,8 +120,16 @@ public class CustomerController implements Initializable {
         Address address = customer.getAddressObj();        
         City city = address.getCityObj();
         
-        // If City exists...
-        if (LocalDB.contains(city)) {
+        
+        /* =====================================================================
+         * (4025.01.09) - F: Exception Control
+         *
+         * "Write exception controls to prevent each of the following...
+         *   * entering nonexistent or INVALID customer data
+         *
+         * try-catch valid customer city/country entry
+         * ===================================================================== */
+        try {
             city.setCityId(LocalDB.getCityId(city));
             
             switch(state){
@@ -170,7 +177,7 @@ public class CustomerController implements Initializable {
             // Refresh Display
             customerTable.setItems(LocalDB.getListCustomers());
             
-        } else {
+        } catch (SQLIntegrityConstraintViolationException ex) {
         // City/Country doesn't exist in database
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Invalid City/Country");

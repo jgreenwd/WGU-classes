@@ -31,7 +31,6 @@ import lib.LogGen;
 import lib.Query;
 import model.Appointment;
 
-// TODO: Add alert w/ test for appointment w/in 15 min of login
 
 public class LoginController implements Initializable {
     @FXML private Label loginPromptLabel;
