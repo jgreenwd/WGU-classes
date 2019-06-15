@@ -17,6 +17,7 @@ import model.*;
 public class Query {
 
     private static ResultSet result;
+    public static ResultSet getResult() { return result; }
     
     /* ===============================================================
      * General Utility Methods
@@ -24,7 +25,6 @@ public class Query {
      * login(usr, pwd) - return boolean login credential validity
      * getUser(name) - return User object for current User
      * getAllCustomers() - general Query to populate local DB
-     * getResult() - return result for all Queries
      * =============================================================== */
     public static boolean login(String usr, String pwd) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
@@ -38,6 +38,15 @@ public class Query {
             result = st.executeQuery();
         
             return result.next() ? result.getBoolean("valid") : false;
+        }
+    }
+    
+    public static void upcomingAppointment(User user) throws SQLException {
+        try(PreparedStatement st = conn.prepareStatement(
+            "SELECT start, customerId FROM appointment WHERE userId=?");) {
+            st.setInt(1, user.getUserID());
+            
+            result = st.executeQuery();
         }
     }
     
@@ -89,9 +98,7 @@ public class Query {
         }
     }
     
-    public static ResultSet getResult() {
-        return result;
-    }
+    
     
     
     /* ===============================================================

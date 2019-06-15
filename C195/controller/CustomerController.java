@@ -11,10 +11,6 @@ import c195.C195;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -270,5 +266,7 @@ public class CustomerController implements Initializable {
                 clearEntry();
             }
         });
+        
+        
     }
 }
