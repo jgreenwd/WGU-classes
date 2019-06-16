@@ -122,15 +122,15 @@ public class LocalDB {
                 .forEachOrdered(a -> list.add(a));
         
         for(Appointment ap : list) {
-            // don't compare the appointment to itself
-            if (ap.getAppointmentId() != appt.getAppointmentId()) {
-                    // if appt starts at the same time as ap...
-                if (appt.getStart().equals(ap.getStart())  ||
-                   // if appt starts after ap, but before it has ended...
-                   (appt.getStart().isAfter(ap.getStart()) && appt.getStart().isBefore(ap.getEnd())) ||
-                   // if appt starts before ap, but does not end before appt starts...
-                   (appt.getStart().isBefore(ap.getStart()) && appt.getEnd().isBefore(ap.getStart()))) {
-                   // then, there is a conflict
+            // if appt does not start & end before ap starts ... 
+            if (appt.getStart().isBefore(ap.getStart()) && !appt.getEnd().equals(ap.getStart())) {
+                if (!appt.getEnd().isBefore(ap.getStart())) {
+                    available = false;
+                }
+            }
+            // if appt does not start & end after ap ends ...
+            if (appt.getEnd().isAfter(ap.getEnd()) && !appt.getStart().equals(ap.getEnd())) {
+                if (!appt.getStart().isAfter(ap.getEnd())) {
                     available = false;
                 }
             }

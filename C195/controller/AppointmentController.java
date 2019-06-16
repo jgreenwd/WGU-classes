@@ -195,14 +195,6 @@ public class AppointmentController implements Initializable {
                     Integer.parseInt(minEnd.getValue())))
                 .createAppointment();
             
-            if (appt.getStart().isAfter(appt.getEnd())) {
-                throw new IllegalArgumentException("Appointment start time must be before end.");
-            }
-            
-            if (!appt.isDuringBusinessHours()) {
-                throw new IllegalArgumentException("Appointment time is outside regular business hours.");
-            }
-            
             if (!LocalDB.isAvailable(appt, C195.user) && state != NEDstate.DELETE) {
                 throw new IllegalArgumentException("Appointment time is unavailable.");
             }
