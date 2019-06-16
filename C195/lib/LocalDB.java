@@ -107,7 +107,6 @@ public class LocalDB {
      * Appointment Query Methods
      *
      * isAvailable(appt, user) - is there a time conflict for this user
-     * getId(appointment) - get appointmentId if appointment in LocalDB
      * add(appointment) - add appointment entry to remote DB & LocalDB
      * set(index, appointment) - modify appointment entry
      * remove(appointment) - delete appointment entry
@@ -140,19 +139,6 @@ public class LocalDB {
         return available;
     }
     
-    public static final Appointment getId(Appointment appt) {
-        
-        return APPOINTMENT_LIST
-                .stream()
-                .filter(a -> a.getCustomerObj() == appt.getCustomerObj())
-                .filter(a -> a.getContact().equals(appt.getContact()))
-                .filter(a -> a.getDate().equals(appt.getDate()))
-                .filter(a -> a.getStart() == appt.getStart())
-                .filter(a -> a.getEnd() == appt.getEnd())
-                .findAny()
-                .get();
-    }
-    
     public static final void add(Appointment appt) throws SQLException{
         Query.insertAppointment(appt, C195.user);
         
@@ -176,22 +162,12 @@ public class LocalDB {
     /* =========================================================================
      * Customer Query Methods
      *
-     * getId(name) - return customerId of name
      * get(customerId) - return customer object w/ customerId
      * get(name) - return customer object w/ name
      * add(customer) - add customer entry to remote DB & LocalDB
      * set(index, customer) - modify customer entry
      * remove(customer) - delete customer entry
      * ========================================================================= */
-    
-    public static final int getId(String name) {
-        return CUSTOMER_LIST
-                .stream()
-                .filter(c -> c.getCustomerName().equals(name))
-                .mapToInt(c -> c.getCustomerId())
-                .sum() | 0;
-    }
-    
     public static final Customer get(int customerId) {
         return CUSTOMER_LIST
                 .stream()
@@ -207,7 +183,7 @@ public class LocalDB {
                 .findAny()
                 .get();
     }
-    
+
     public static final void add(Customer customer) throws SQLException {
         Address address = customer.getAddressObj();
         
@@ -275,7 +251,6 @@ public class LocalDB {
      * Address/City Utility Methods
      *
      * contains(address) - validate address exists in LocalDB
-     * contains(city) - validate city exists in LocalDB
      * getAddressId(address) - return addressId stored in LocalDB
      * getCityId(city) - return cityId stored in LocalDB
      * ========================================================================= */
@@ -293,16 +268,6 @@ public class LocalDB {
                 cust.getPhone().equals(phone)));
     }
         
-    // to validate cities passed with no cityId
-    public static final boolean contains(City city) {
-        String ciName = city.getCityName();
-        String coName = city.getCountryName();
-        
-        return CITIES.stream().anyMatch((item) -> (
-                item.getCityName().equals(ciName) && 
-                item.getCountryName().equals(coName)));
-    }
-    
     public static final int getAddressId(Address address) {
         String addr1 = address.getAddress1();
         String addr2 = address.getAddress2();

@@ -20,6 +20,15 @@ public class Query {
     public static ResultSet getResult() { return result; }
     
     /* =========================================================================
+     * General Utility Queries
+     *
+     * login(user, password) - validate user login credentials against remote DB
+     * getUser(name) - return User object for current User
+     * getAllCustomers() - general Query to populate local DB
+     * getAllAppointments() - general Query to populate local DB
+     * ========================================================================= */
+    
+    /* =========================================================================
      * (4025.01.09) - F: Exception Control
      *
      * "Write exception controls to prevent each of the following...
@@ -42,13 +51,6 @@ public class Query {
         }
     }
     
-    /* ===============================================================
-     * General Utility Methods
-     *
-     * getUser(name) - return User object for current User
-     * getAllCustomers() - general Query to populate local DB
-     * getAllAppointments() - general Query to populate local DB
-     * =============================================================== */
     public static User getUser(String name) throws SQLException {
         try(PreparedStatement st = conn.prepareStatement(
                 "SELECT userId, userName, password, active "
@@ -98,34 +100,13 @@ public class Query {
     }
     
     
-    
-    
-    /* ===============================================================
+    /* =========================================================================
      * Appointment Query Methods
      *
-     * getAppointmentId(appt) - return appointmentId
      * insertAppointment(appointment, user) - add new appointment to remote DB
      * updateAppointment(appointment, user) - modify existing appointment entry in DB
      * deleteAppointment(appointment, user) - delete appointment entry from DB
-     * =============================================================== */
-    public static int getAppointmentId(Appointment appt) throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement(
-                "SELECT appointmentId FROM appointment WHERE customerId=? "
-                + "AND title=? AND type=? AND start=? AND end=? AND "
-                + "location=? AND contact=?"); ) {
-            st.setInt(1, appt.getCustomerId());
-            st.setString(2, appt.getTitle());
-            st.setString(3, appt.getType());
-            st.setString(4, "\""+appt.getDate()+" "+appt.getStartTime()+":00\"");
-            st.setString(5, "\""+appt.getDate()+" "+appt.getEndTime()+":00\"");
-            st.setString(6, appt.getLocation());
-            st.setString(7, appt.getContact());
-            result = st.executeQuery();
-            
-            return result.next() ? result.getInt("appointmentId") : 0;
-        }
-    }
-    
+     * ========================================================================= */
     public static void insertAppointment(Appointment appt, User user) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
                 "INSERT INTO appointment(customerId, title, description, location, "
@@ -175,24 +156,13 @@ public class Query {
     }
     
     
-    /* ===============================================================
+    /* =========================================================================
      * Customer Query Methods
      *
-     * getCustomerId(name) - return customerId
      * insertCustomer(customer, user) - add new customer to remote DB
      * updateCustomer(customer, user) - modify existing customer entry in DB
      * deleteCustomer(customer, user) - delete customer entry from DB
-     * =============================================================== */
-    public static int getCustomerId(String name) throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement(
-                "SELECT customerId FROM customer WHERE customerName=?");) {
-            st.setString(1, name);
-            result = st.executeQuery();
-            
-            return result.next() ? result.getInt("customerId") : 0;
-        }
-    }
-    
+     * ========================================================================= */
     public static void insertCustomer(Customer customer, User user) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
                 "INSERT INTO customer(customerName, addressId, active, "
@@ -229,7 +199,7 @@ public class Query {
     }
     
     
-    /* ===============================================================
+    /* =========================================================================
      * Address Query Methods
      *
      * getAddressId(address) - return addressId
@@ -237,7 +207,7 @@ public class Query {
      * updateAddress(address, user) - modify existing address entry in DB
      * deleteAddress(address, user) - delete address entry from DB
      * isSingleton(address) - return if any customers use this address
-     * =============================================================== */
+     * ========================================================================= */
     public static int getAddressId(Address address) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(
                 "SELECT addressId FROM address WHERE address=? AND "
