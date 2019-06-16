@@ -26,8 +26,10 @@ public class Appointment {
     private         LocalDateTime               start;
     private         LocalDateTime               end;
     
-    // operating hours: 8amGMT - 10pmGMT
-    // assume open 7 days per week
+    /*  I placed operating hours in the appointment class to make the business
+        hours test more readable, ie. appointment.isDuringBusinessHours()
+        operating hours: 8amGMT - 10pmGMT
+        assume open 7 days per week                                             */
     private final int                           openHour = 8; // GMT
     private final int                           openMin  = 0;
     private final int                           closeHour = 22;

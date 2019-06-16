@@ -61,6 +61,16 @@ public class AppointmentController implements Initializable {
     private NEDstate                state = NEDstate.NEW;
 
     
+    /* ===============================================================
+     * *** Menu Selections *** MAIN
+     *
+     * getCustomerScreen - 
+     * Change to customer screen.
+     *
+     * exitButtonPressed -
+     * Return to login screen. Use ResourceBundle to maintain I18N of 
+     * Login screen on all viewings
+     * =============================================================== */
     public void getCustomerScreen(ActionEvent e) throws IOException {
         Parent customerParent = FXMLLoader.load((getClass().getResource("/view/Customer.fxml")));
         Scene customerScene = new Scene(customerParent);
@@ -68,6 +78,25 @@ public class AppointmentController implements Initializable {
         C195.getPrimaryStage().show();
     }
     
+    public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException, IOException {
+        C195.user = null;
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
+        loader.setResources(C195.getResourceBundle());
+        
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        C195.getPrimaryStage().setTitle(C195.getResourceBundle().getString("Title"));
+        C195.getPrimaryStage().setScene(scene);
+        C195.getPrimaryStage().show();
+    }
+
+    
+    /* ===============================================================
+     * *** Menu Selections *** ENTRY
+     *
+     * clearEntry - clear all values in form
+     * =============================================================== */
     public void clearEntry() {
         customerField.clear();
         titleField.clear();
@@ -81,6 +110,15 @@ public class AppointmentController implements Initializable {
         datePicker.setValue(null);
     }
     
+    
+    /* ===============================================================
+     * *** Menu Selections *** CALENDAR
+     * (4025.01.07) - D: "Provide the ability to view the calendar by 
+     * month and by week."
+     *
+     * displayCalendarWeekly()
+     * displayCalendarMonthly()
+     * =============================================================== */
     public void displayCalendarWeekly() {
         System.out.println("Weekly Calendar");
     }
@@ -89,6 +127,16 @@ public class AppointmentController implements Initializable {
         System.out.println("Monthly Calendar");
     }
     
+    
+    /* ===============================================================
+     * *** Menu Selections *** REPORTS
+     * (4025.01.07) - I: "Provide the ability to generate each  of the 
+     * following reports:"
+     *
+     *   * "number of appointment types by month" - generateReportsAppointments() 
+     *   * "the schedule for each consultant" - generateReportConsultantSchedules()
+     *   * "one additional report of your choice" - generateReportCustomerSchedules()
+     * =============================================================== */
     public void generateReportAppointments() {
         System.out.println("Generate Reports: Appointments");
     }
@@ -119,6 +167,12 @@ public class AppointmentController implements Initializable {
          * 
          *   * "scheduling an appointment outside business hours"
          *      - throws !isDuringBusinessHours()
+         *
+         *   * "scheduling overlapping appointments"
+         *      - throws !isAppointmentTimeAvailable()
+         *      - only compares for current user, other users can have 
+         *        appointments at the same time
+         *      - uses contact for user
          * ===================================================================== */
         try {
             Customer cust = LocalDB.get(customerField.getText());
@@ -141,8 +195,16 @@ public class AppointmentController implements Initializable {
                     Integer.parseInt(minEnd.getValue())))
                 .createAppointment();
             
+            if (appt.getStart().isAfter(appt.getEnd())) {
+                throw new IllegalArgumentException("Appointment start time must be before end.");
+            }
+            
             if (!appt.isDuringBusinessHours()) {
                 throw new IllegalArgumentException("Appointment time is outside regular business hours.");
+            }
+            
+            if (!LocalDB.isAvailable(appt, C195.user) && state != NEDstate.DELETE) {
+                throw new IllegalArgumentException("Appointment time is unavailable.");
             }
             
             switch(state){
@@ -199,26 +261,12 @@ public class AppointmentController implements Initializable {
             alert.setTitle("Invalid appointment");
             alert.setContentText(ex.getMessage());
             alert.showAndWait();
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid appointment");
+            alert.setContentText("Required appointment details missing.");
+            alert.showAndWait();
         }
-    }
-    
-    /* ===============================================================
-     * *** Return to Login screen ***
-     *
-     * Clear current user. Load Login screen.
-     * Use ResourceBundle to maintain I18N of Login screen on all viewings
-     * =============================================================== */
-    public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException, IOException {
-        C195.user = null;
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
-        loader.setResources(C195.getResourceBundle());
-        
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        C195.getPrimaryStage().setTitle(C195.getResourceBundle().getString("Title"));
-        C195.getPrimaryStage().setScene(scene);
-        C195.getPrimaryStage().show();
     }
     
     
@@ -280,15 +328,17 @@ public class AppointmentController implements Initializable {
         deleteRadio.setToggleGroup(radioGroup);
         
         radioGroup.selectedToggleProperty().addListener((obs, prev, next) -> {
-            if (next == editRadio) {
-                state = NEDstate.EDIT;
-                appointmentId = appointmentTable.getSelectionModel().getSelectedItem().getAppointmentId();
-            } else if (next == deleteRadio) {
-                state = NEDstate.DELETE;
-                appointmentId = appointmentTable.getSelectionModel().getSelectedItem().getAppointmentId();
-            } else if (next == newRadio) {
-                state = NEDstate.NEW;
-                clearEntry();
+            if (next != null) {
+                if (next == editRadio) {
+                    state = NEDstate.EDIT;
+                    appointmentId = appointmentTable.getSelectionModel().getSelectedItem().getAppointmentId();
+                } else if (next == deleteRadio) {
+                    state = NEDstate.DELETE;
+                    appointmentId = appointmentTable.getSelectionModel().getSelectedItem().getAppointmentId();
+                } else if (next == newRadio) {
+                    state = NEDstate.NEW;
+                    clearEntry();
+                }
             }
         });
     }

@@ -42,9 +42,9 @@ public class LoginController implements Initializable {
     /* =========================================================================
      * (4025.01.08) - A: Internationalize Login form
      *
-     * Create a log-in form that can determine the user’s location and 
+     * "Create a log-in form that can determine the user’s location and 
      * translate log-in and error control messages (e.g., “The username 
-     * and password did not match.”) into two languages.
+     * and password did not match.”) into two languages."
      * ========================================================================= */
     
     // Grab appropriate login text from ResourcesBundle rb

@@ -8,11 +8,6 @@ package lib;
 
 import c195.C195;
 import java.sql.SQLException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -21,7 +16,10 @@ import model.*;
 
 
 /* *****************************************************************************
-    Use a local copy of the DB indexes to minimize expensive calls to external resources.
+    With the understanding that this project is an exercise in making SQL queries
+    to a remote DataBase, I have tried to use a local copy of the DB indexes to 
+    minimize expensive calls to external resources. List refreshes (use of init()) 
+    go against this, but ensure accurate information is displayed.
    ***************************************************************************** */
 public class LocalDB {
     private static final ObservableList<Customer> CUSTOMER_LIST = FXCollections.observableArrayList();
@@ -32,10 +30,9 @@ public class LocalDB {
     /* =========================================================================
      * General Utility Methods
      *
-     * init() - populate local copy of Customers & Appointments, set timezone
+     * init() - populate local copy of Customers & Appointments
      * getLocalCustomer() - return CUSTOMER_LIST for rendering
      * getLocalAppointment() - return APPOINTMENT_LIST for rendering
-     * convertDateTime(String) - convert input String to LocalDateTime
      * ========================================================================= */
     public static final void init() throws SQLException {
         CUSTOMER_LIST.clear();
@@ -109,11 +106,40 @@ public class LocalDB {
     /* =========================================================================
      * Appointment Query Methods
      *
+     * isAvailable(appt, user) - is there a time conflict for this user
      * getId(appointment) - get appointmentId if appointment in LocalDB
      * add(appointment) - add appointment entry to remote DB & LocalDB
      * set(index, appointment) - modify appointment entry
      * remove(appointment) - delete appointment entry
      * ========================================================================= */
+    public static final boolean isAvailable(Appointment appt, User user) {
+        boolean available = true;
+        
+        // Select all the elements assigned to this user
+        ArrayList<Appointment> list = new ArrayList<>();
+        APPOINTMENT_LIST
+                .stream()
+                .filter(a -> a.getContact().equals(user.getUsername()))
+                .forEachOrdered(a -> list.add(a));
+        
+        for(Appointment ap : list) {
+            // don't compare the appointment to itself
+            if (ap.getAppointmentId() != appt.getAppointmentId()) {
+                    // if appt starts at the same time as ap...
+                if (appt.getStart().equals(ap.getStart())  ||
+                   // if appt starts after ap, but before it has ended...
+                   (appt.getStart().isAfter(ap.getStart()) && appt.getStart().isBefore(ap.getEnd())) ||
+                   // if appt starts before ap, but does not end before appt starts...
+                   (appt.getStart().isBefore(ap.getStart()) && appt.getEnd().isBefore(ap.getStart()))) {
+                   // then, there is a conflict
+                    available = false;
+                }
+            }
+        }
+        
+        return available;
+    }
+    
     public static final Appointment getId(Appointment appt) {
         
         return APPOINTMENT_LIST

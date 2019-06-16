@@ -47,16 +47,8 @@ public class Query {
      *
      * getUser(name) - return User object for current User
      * getAllCustomers() - general Query to populate local DB
+     * getAllAppointments() - general Query to populate local DB
      * =============================================================== */
-    public static void upcomingAppointment(User user) throws SQLException {
-        try(PreparedStatement st = conn.prepareStatement(
-            "SELECT start, customerId FROM appointment WHERE userId=?");) {
-            st.setInt(1, user.getUserID());
-            
-            result = st.executeQuery();
-        }
-    }
-    
     public static User getUser(String name) throws SQLException {
         try(PreparedStatement st = conn.prepareStatement(
                 "SELECT userId, userName, password, active "
@@ -181,6 +173,8 @@ public class Query {
             st.executeUpdate();
         }
     }
+    
+    
     /* ===============================================================
      * Customer Query Methods
      *
@@ -242,6 +236,7 @@ public class Query {
      * insertAddress(address, user) - add new address to remote DB
      * updateAddress(address, user) - modify existing address entry in DB
      * deleteAddress(address, user) - delete address entry from DB
+     * isSingleton(address) - return if any customers use this address
      * =============================================================== */
     public static int getAddressId(Address address) throws SQLException {
         try (PreparedStatement st = conn.prepareStatement(

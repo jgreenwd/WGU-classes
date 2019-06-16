@@ -56,6 +56,16 @@ public class CustomerController implements Initializable {
     private NEDstate          state = NEDstate.NEW;
     
     
+    /* ===============================================================
+     * *** Menu Selections *** MAIN
+     *
+     * getAppointmentScreen - 
+     * Change to appointment screen.
+     *
+     * exitButtonPressed -
+     * Return to login screen. Use ResourceBundle to maintain I18N of 
+     * Login screen on all viewings
+     * =============================================================== */
     public void getAppointmentScreen(ActionEvent e) throws IOException {
         Parent calendarParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
         Scene calendarScene = new Scene(calendarParent);
@@ -63,6 +73,25 @@ public class CustomerController implements Initializable {
         C195.getPrimaryStage().show();
     }
     
+    public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException, IOException {
+        C195.user = null;
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
+        loader.setResources(C195.getResourceBundle());
+        
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        C195.getPrimaryStage().setTitle(C195.getResourceBundle().getString("Title"));
+        C195.getPrimaryStage().setScene(scene);
+        C195.getPrimaryStage().show();
+    }
+
+    
+    /* ===============================================================
+     * *** Menu Selections *** ENTRY
+     *
+     * clearEntry - clear all values in form
+     * =============================================================== */
     public void clearEntry() {
         nameField.clear();
         address1Field.clear();
@@ -74,6 +103,15 @@ public class CustomerController implements Initializable {
         radioGroup.selectToggle(newRadio);
     }
     
+    
+    /* ===============================================================
+     * *** Menu Selections *** CALENDAR
+     * (4025.01.07) - D: "Provide the ability to view the calendar by 
+     * month and by week."
+     *
+     * displayCalendarWeekly()
+     * displayCalendarMonthly()
+     * =============================================================== */
     public void displayCalendarWeekly() {
         System.out.println("Weekly Calendar");
     }
@@ -82,6 +120,16 @@ public class CustomerController implements Initializable {
         System.out.println("Monthly Calendar");
     }
     
+    
+    /* ===============================================================
+     * *** Menu Selections *** REPORTS
+     * (4025.01.07) - I: "Provide the ability to generate each  of the 
+     * following reports:"
+     *
+     *   * "number of appointment types by month" - generateReportsAppointments() 
+     *   * "the schedule for each consultant" - generateReportConsultantSchedules()
+     *   * "one additional report of your choice" - generateReportCustomerSchedules()
+     * =============================================================== */
     public void generateReportAppointments() {
         System.out.println("Generate Reports: Appointments");
     }
@@ -186,26 +234,6 @@ public class CustomerController implements Initializable {
         }
     }
     
-    
-    /* ===============================================================
-     * *** Return to Login screen ***
-     *
-     * Clear current user. Load Login screen.
-     * Use ResourceBundle to maintain I18N of Login screen on all viewings
-     * =============================================================== */
-    public void exitButtonPressed(ActionEvent e) throws ClassNotFoundException, SQLException, IOException {
-        C195.user = null;
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
-        loader.setResources(C195.getResourceBundle());
-        
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        C195.getPrimaryStage().setTitle(C195.getResourceBundle().getString("Title"));
-        C195.getPrimaryStage().setScene(scene);
-        C195.getPrimaryStage().show();
-    }
-
     
     /* ===============================================================
      * (4025.01.05) - B: Add/Update/Delete DB records
