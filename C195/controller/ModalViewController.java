@@ -33,8 +33,8 @@ public class ModalViewController {
                 LocalDB.getAllAppointments()
                         .stream()
                         .filter(a -> a.getContact().equals(C195.user.getUsername()))
-                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()))
-                        .filter(a -> a.getStart().isBefore(LocalDateTime.now().plusWeeks(1)))
+                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()) &&
+                                     a.getStart().isBefore(LocalDateTime.now().plusWeeks(1)))
                         .sorted(Comparator.comparing(Appointment::getStart))
                         .forEachOrdered(a -> modalDataArea.appendText(
                                 a.getCustomerName() + "\t" + a.getStartTime() + 
@@ -53,8 +53,8 @@ public class ModalViewController {
                 LocalDB.getAllAppointments()
                         .stream()
                         .filter(a -> a.getContact().equals(C195.user.getUsername()))
-                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()))
-                        .filter(a -> a.getStart().isBefore(LocalDateTime.now().plusMonths(1)))
+                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()) &&
+                                     a.getStart().isBefore(LocalDateTime.now().plusMonths(1)))
                         .sorted(Comparator.comparing(Appointment::getStart))
                         .forEachOrdered(a -> modalDataArea.appendText(
                                 a.getCustomerName() + "\t" + a.getStartTime() + 
@@ -103,8 +103,8 @@ public class ModalViewController {
                 
                 LocalDB.getAllAppointments()
                         .stream()
-                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()))
-                        .filter(a -> a.getStart().isBefore(LocalDateTime.now().plusWeeks(1)))
+                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()) &&
+                                     a.getStart().isBefore(LocalDateTime.now().plusWeeks(1)))
                         .sorted(Comparator.comparing(Appointment::getContact)
                         .thenComparing(Appointment::getStart))
                         .forEachOrdered(a -> modalDataArea.appendText(
@@ -124,8 +124,8 @@ public class ModalViewController {
                 
                 LocalDB.getAllAppointments()
                         .stream()
-                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()))
-                        .filter(a -> a.getStart().isBefore(LocalDateTime.now().plusWeeks(1)))
+                        .filter(a -> a.getStart().isAfter(LocalDateTime.now()) && 
+                                     a.getStart().isBefore(LocalDateTime.now().plusWeeks(1)))
                         .sorted(Comparator.comparing(Appointment::getCustomerName)
                         .thenComparing(Appointment::getStart))
                         .forEachOrdered(a -> modalDataArea.appendText(

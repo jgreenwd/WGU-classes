@@ -19,6 +19,13 @@ import javafx.stage.Stage;
 import lib.DBConnection;
 import model.*;
 
+
+/* FUTURE TODO:
+    Explore use of Optionals to eliminate null checks.
+    Refactor reports to be more functional
+    Explore use of a TreeMap with Observable types for LocalDB instead of ObservableList?
+*/
+
 public class C195 extends Application {
     // global variables for stage reuse
     public static Stage primaryStage = new Stage();   
