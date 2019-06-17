@@ -67,9 +67,9 @@ public class CustomerController implements Initializable {
      * Login screen on all viewings
      * =============================================================== */
     public void getAppointmentScreen(ActionEvent e) throws IOException {
-        Parent calendarParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
-        Scene calendarScene = new Scene(calendarParent);
-        C195.getPrimaryStage().setScene(calendarScene);
+        Parent appointmentParent = FXMLLoader.load((getClass().getResource("/view/Appointment.fxml")));
+        Scene appointmentScene = new Scene(appointmentParent);
+        C195.getPrimaryStage().setScene(appointmentScene);
         C195.getPrimaryStage().show();
     }
     
@@ -104,6 +104,20 @@ public class CustomerController implements Initializable {
     }
     
     
+    // Select which report/calendar to display
+    public void displaySecondaryStage(String args) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/ModalView.fxml"));
+        Parent calendarParent = loader.load();
+        Scene calendarScene = new Scene(calendarParent);
+        ModalViewController controller = loader.getController();
+        
+        controller.load(args);
+        
+        C195.getSecondaryStage().setScene(calendarScene);
+        C195.getSecondaryStage().show();
+    }
+    
     /* ===============================================================
      * *** Menu Selections *** CALENDAR
      * (4025.01.07) - D: "Provide the ability to view the calendar by 
@@ -112,12 +126,13 @@ public class CustomerController implements Initializable {
      * displayCalendarWeekly()
      * displayCalendarMonthly()
      * =============================================================== */
-    public void displayCalendarWeekly() {
-        System.out.println("Weekly Calendar");
+    
+    public void displayCalendarWeekly() throws IOException {
+        displaySecondaryStage("weekly");
     }
     
-    public void displayCalendarMonthly() {
-        System.out.println("Monthly Calendar");
+    public void displayCalendarMonthly() throws IOException {
+        displaySecondaryStage("monthly");
     }
     
     
@@ -130,16 +145,16 @@ public class CustomerController implements Initializable {
      *   * "the schedule for each consultant" - generateReportConsultantSchedules()
      *   * "one additional report of your choice" - generateReportCustomerSchedules()
      * =============================================================== */
-    public void generateReportAppointments() {
-        System.out.println("Generate Reports: Appointments");
+    public void generateReportAppointments() throws IOException {
+        displaySecondaryStage("appointments");
     }
     
-    public void generateReportConsultantSchedules() {
-        System.out.println("Generate Reports: Consultant Schedules");
+    public void generateReportConsultantSchedules() throws IOException {
+        displaySecondaryStage("consultants");
     }
     
-    public void generateReportCustomerSchedules() {
-        System.out.println("Generate Reports: Customer Schedules");
+    public void generateReportCustomerSchedules() throws IOException {
+        displaySecondaryStage("customers");
     }
     
     
@@ -223,7 +238,7 @@ public class CustomerController implements Initializable {
             clearEntry();
             
             // Refresh Display
-            customerTable.setItems(LocalDB.getListCustomers());
+            customerTable.setItems(LocalDB.getAllCustomers());
             
         } catch (SQLIntegrityConstraintViolationException ex) {
         // City/Country doesn't exist in database
@@ -259,7 +274,7 @@ public class CustomerController implements Initializable {
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("cityName"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
             
-        customerTable.setItems( LocalDB.getListCustomers() );
+        customerTable.setItems( LocalDB.getAllCustomers() );
         
         
         /* ===============================================================

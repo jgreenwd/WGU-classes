@@ -93,11 +93,11 @@ public class LocalDB {
         }
     }
     
-    public static final ObservableList<Customer> getListCustomers() {
+    public static final ObservableList<Customer> getAllCustomers() {
         return CUSTOMER_LIST;
     }
         
-    public static final ObservableList<Appointment> getListAppointments() {
+    public static final ObservableList<Appointment> getAllAppointments() {
         return APPOINTMENT_LIST;
     }
     

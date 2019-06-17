@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
     // Render login form and set current User
     public void accessButtonPressed(ActionEvent e) throws IOException, ClassNotFoundException, SQLException, NullPointerException {
         boolean validity = false;
-        if (Query.login(loginUsername.getText(), loginPassword.getText())) {
+        if (Query.login(loginUsername.getText().trim(), loginPassword.getText().trim())) {
             C195.user = Query.getUser(loginUsername.getText());
             validity = true;
             Parent customerParent = FXMLLoader.load((getClass().getResource("/view/Customer.fxml")));
@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
             
             // filter for appointments with current user
             // filter for appointments starting between now and now+15 min
-            LocalDB.getListAppointments()
+            LocalDB.getAllAppointments()
                     .stream()
                     .filter((temp) -> (temp.getContact().equals(C195.user.getUsername())))
                     .filter((temp) -> (

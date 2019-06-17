@@ -21,7 +21,8 @@ import model.*;
 
 public class C195 extends Application {
     // global variables for stage reuse
-    public static Stage primaryStage = new Stage();    
+    public static Stage primaryStage = new Stage();   
+    public static Stage secondaryStage = new Stage();
     public static ResourceBundle rb;
     public static User user;
     
@@ -62,5 +63,6 @@ public class C195 extends Application {
     }
 
     public static Stage getPrimaryStage() { return primaryStage; }
+    public static Stage getSecondaryStage() { return secondaryStage; }
     public static ResourceBundle getResourceBundle() { return rb; }
 }

@@ -26,6 +26,7 @@ public class Query {
      * getUser(name) - return User object for current User
      * getAllCustomers() - general Query to populate local DB
      * getAllAppointments() - general Query to populate local DB
+     * getWeeklyAppointments - get appointments for the next 7 days for current user
      * ========================================================================= */
     
     /* =========================================================================

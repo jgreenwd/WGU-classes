@@ -61,7 +61,7 @@ public class AppointmentController implements Initializable {
     private NEDstate                state = NEDstate.NEW;
 
     
-    /* ===============================================================
+    /* =========================================================================
      * *** Menu Selections *** MAIN
      *
      * getCustomerScreen - 
@@ -70,7 +70,7 @@ public class AppointmentController implements Initializable {
      * exitButtonPressed -
      * Return to login screen. Use ResourceBundle to maintain I18N of 
      * Login screen on all viewings
-     * =============================================================== */
+     * ========================================================================= */
     public void getCustomerScreen(ActionEvent e) throws IOException {
         Parent customerParent = FXMLLoader.load((getClass().getResource("/view/Customer.fxml")));
         Scene customerScene = new Scene(customerParent);
@@ -92,11 +92,11 @@ public class AppointmentController implements Initializable {
     }
 
     
-    /* ===============================================================
+    /* =========================================================================
      * *** Menu Selections *** ENTRY
      *
      * clearEntry - clear all values in form
-     * =============================================================== */
+     * ========================================================================= */
     public void clearEntry() {
         customerField.clear();
         titleField.clear();
@@ -111,24 +111,43 @@ public class AppointmentController implements Initializable {
     }
     
     
-    /* ===============================================================
+    // Select which report/calendar to display
+    public void displaySecondaryStage(String args) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/ModalView.fxml"));
+        Parent calendarParent = loader.load();
+        Scene calendarScene = new Scene(calendarParent);
+        ModalViewController controller = loader.getController();
+        
+        controller.load(args);
+        
+        C195.getSecondaryStage().setScene(calendarScene);
+        C195.getSecondaryStage().show();
+    }
+    
+    /* =========================================================================
      * *** Menu Selections *** CALENDAR
      * (4025.01.07) - D: "Provide the ability to view the calendar by 
      * month and by week."
      *
      * displayCalendarWeekly()
      * displayCalendarMonthly()
-     * =============================================================== */
-    public void displayCalendarWeekly() {
-        System.out.println("Weekly Calendar");
+     *
+     * NOTICE: There is no specification that the calendar needs to be a 
+     * TableView. I chose to use a sorted text list within a TextArea. This has 
+     * the added benefit of being able to directly copy and paste the output.
+     * ========================================================================= */
+    
+    public void displayCalendarWeekly() throws IOException {
+        displaySecondaryStage("weekly");
     }
     
-    public void displayCalendarMonthly() {
-        System.out.println("Monthly Calendar");
+    public void displayCalendarMonthly() throws IOException {
+        displaySecondaryStage("monthly");
     }
     
     
-    /* ===============================================================
+    /* =========================================================================
      * *** Menu Selections *** REPORTS
      * (4025.01.07) - I: "Provide the ability to generate each  of the 
      * following reports:"
@@ -136,17 +155,17 @@ public class AppointmentController implements Initializable {
      *   * "number of appointment types by month" - generateReportsAppointments() 
      *   * "the schedule for each consultant" - generateReportConsultantSchedules()
      *   * "one additional report of your choice" - generateReportCustomerSchedules()
-     * =============================================================== */
-    public void generateReportAppointments() {
-        System.out.println("Generate Reports: Appointments");
+     * ========================================================================= */
+    public void generateReportAppointments() throws IOException {
+        displaySecondaryStage("appointments");
     }
     
-    public void generateReportConsultantSchedules() {
-        System.out.println("Generate Reports: Consultant Schedules");
+    public void generateReportConsultantSchedules() throws IOException {
+        displaySecondaryStage("consultants");
     }
     
-    public void generateReportCustomerSchedules() {
-        System.out.println("Generate Reports: Customer Schedules");
+    public void generateReportCustomerSchedules() throws IOException {
+        displaySecondaryStage("customers");
     }
     
     
@@ -241,7 +260,7 @@ public class AppointmentController implements Initializable {
             clearEntry();
             
             // Refresh Display
-            appointmentTable.setItems(LocalDB.getListAppointments());
+            appointmentTable.setItems(LocalDB.getAllAppointments());
             
         } catch (NoSuchElementException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -262,7 +281,7 @@ public class AppointmentController implements Initializable {
     }
     
     
-    /* ===============================================================
+    /* =========================================================================
      * (4025.01.05) - B: Add/Update/Delete DB records
      *
      * Query DB for appointment info & render results to table
@@ -270,7 +289,7 @@ public class AppointmentController implements Initializable {
      * Add listener for list selection
      * - populate form on selection
      * Add listener for New/Edit/Delete state
-     * =============================================================== */
+     * ========================================================================= */
     @Override public void initialize(URL url, ResourceBundle rb) {
         // Query for customers
         try {
@@ -287,16 +306,16 @@ public class AppointmentController implements Initializable {
         endColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         
-        appointmentTable.setItems( LocalDB.getListAppointments() );
+        appointmentTable.setItems( LocalDB.getAllAppointments() );
         
         
-        /* ===============================================================
+        /* =====================================================================
          * (4025.01.06) - G: Use Lambdas
          *
          * Justification: Using a lambda to add a listener creates more
          * succinct and readable code. It also allows a more consistently
          * functional approach to development.
-         * =============================================================== */
+         * ===================================================================== */
         appointmentTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Appointment> obs, Appointment prev, Appointment next) -> {
                 if (next != null) {
