@@ -170,18 +170,19 @@ public class CustomerController implements Initializable {
      *  -> new phone = new address
      * =============================================================== */
     public void submitButtonPressed(ActionEvent e) throws SQLException {
-        Customer customer =  new CustomerBuilder()
-            .setCustomerName(nameField.getText())
-            .setActive(1)
-            .setAddress1(address1Field.getText())
-            .setAddress2(address2Field.getText())
-            .setPostalCode(zipField.getText())
-            .setPhone(phoneField.getText())
-            .setCityName(cityNameField.getText())
-            .setCountryName(countryField.getText())
+        try {
+            Customer customer =  new CustomerBuilder()
+                .setCustomerName(nameField.getText())
+                .setActive(1)
+                .setAddress1(address1Field.getText())
+                .setAddress2(address2Field.getText())
+                .setPostalCode(zipField.getText())
+                .setPhone(phoneField.getText())
+                .setCityName(cityNameField.getText())
+                .setCountryName(countryField.getText())
             .createCustomer();
-        Address address = customer.getAddressObj();        
-        City city = address.getCityObj();
+            Address address = customer.getAddressObj();        
+            City city = address.getCityObj();
         
         
         /* =====================================================================
@@ -192,59 +193,65 @@ public class CustomerController implements Initializable {
          *
          * try-catch valid customer city/country entry
          * ===================================================================== */
-        try {
-            city.setCityId(LocalDB.getCityId(city));
+            try {
+                city.setCityId(LocalDB.getCityId(city));
             
-            switch(state){
-                /* *******************************************************
-                                    ADD NEW CUSTOMER
-                   ******************************************************* */
-                case NEW:{
-                    LocalDB.add(customer);
-                    break;
-                }
-                
-                /* *******************************************************
-                                    EDIT EXISTING CUSTOMER
-                   ******************************************************* */
-                case EDIT:{
-                    customer.setCustomerId(customerId);
-                    int index = customerTable.getSelectionModel().getSelectedIndex();
-                    LocalDB.set(index, customer);
-                    
-                    break;
-                }
-                /* *******************************************************
-                                      DELETE  CUSTOMER
-                    ****************************************************** */
-                case DELETE:{
-                    customer = customerTable.getSelectionModel().getSelectedItem();
-
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Delete Customer");
-                    alert.setContentText("This will remove " +customer.getCustomerName()+ 
-                            " and "+ customer.getCustomerName()+"'s scheduled appointments. Are you sure?");
-                    alert.showAndWait();
-                    
-                    if (alert.getResult().getButtonData().equals(OK_DONE)) {
-                        LocalDB.remove(customer);
-                    } else {
-                        return;
+                switch(state){
+                    /* *******************************************************
+                                        ADD NEW CUSTOMER
+                       ******************************************************* */
+                    case NEW:{
+                        LocalDB.add(customer);
+                        break;
                     }
-                    break;
+                
+                    /* *******************************************************
+                                        EDIT EXISTING CUSTOMER
+                       ******************************************************* */
+                    case EDIT:{
+                        customer.setCustomerId(customerId);
+                        int index = customerTable.getSelectionModel().getSelectedIndex();
+                        LocalDB.set(index, customer);
+                    
+                        break;
+                    }
+                    /* *******************************************************
+                                          DELETE  CUSTOMER
+                       ****************************************************** */
+                    case DELETE:{
+                        customer = customerTable.getSelectionModel().getSelectedItem();
+
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Delete Customer");
+                        alert.setContentText("This will remove " +customer.getCustomerName()+ 
+                            " and "+ customer.getCustomerName()+"'s scheduled appointments. Are you sure?");
+                        alert.showAndWait();
+                    
+                        if (alert.getResult().getButtonData().equals(OK_DONE)) {
+                            LocalDB.remove(customer);
+                        } else {
+                            return;
+                        }
+                        break;
+                    }
                 }
+            
+                clearEntry();
+            
+                // Refresh Display
+                customerTable.setItems(LocalDB.getAllCustomers());
+            
+            } catch (SQLIntegrityConstraintViolationException ex) {
+            // City/Country doesn't exist in database
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Invalid City/Country");
+                alert.setContentText("This City/Country is currently not available.");
+                alert.showAndWait();
             }
-            
-            clearEntry();
-            
-            // Refresh Display
-            customerTable.setItems(LocalDB.getAllCustomers());
-            
-        } catch (SQLIntegrityConstraintViolationException ex) {
-        // City/Country doesn't exist in database
+        } catch (IllegalArgumentException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Invalid City/Country");
-            alert.setContentText("This City/Country is currently not available.");
+            alert.setTitle("Invalid Customer Entry");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
     }

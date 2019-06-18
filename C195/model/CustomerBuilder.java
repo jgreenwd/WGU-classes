@@ -43,6 +43,11 @@ public class CustomerBuilder {
     }
     
     public Customer createCustomer() {
+        if (this.customerName.isEmpty()) throw new IllegalArgumentException("Customer Name is Required.");
+        if (this.address1.isEmpty()) throw new IllegalArgumentException("Address Line 1 is Required.");
+        if (this.postalCode.isEmpty()) throw new IllegalArgumentException("Postal Code is Required.");
+        if (this.phone.isEmpty()) throw new IllegalArgumentException("Phone Number is Required.");
+        
         return new Customer(customerId, active, customerName, 
             new Address(addressId, address1, address2, postalCode, phone,
                 new City(cityId, cityName, countryName)
