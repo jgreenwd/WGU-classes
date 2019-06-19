@@ -10,6 +10,7 @@ import c195.C195;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.*;
@@ -115,15 +116,19 @@ public class LocalDB {
         boolean available = true;
         
         // Select all the elements assigned to this user
-        ArrayList<Appointment> list = new ArrayList<>();
-        APPOINTMENT_LIST
+        List<Appointment> list = APPOINTMENT_LIST
                 .stream()
                 .filter(a -> a.getContact().equals(user.getUsername()))
-                .forEachOrdered(a -> list.add(a));
+                .filter(a -> a.getAppointmentId() != appt.getAppointmentId())
+                .collect(Collectors.toList());
         
         for(Appointment ap : list) {
             // if appt starts or ends at the same time as ap
-            if (appt.getStart().equals(ap.getStart()) || appt.getEnd().equals(ap.getEnd())) {
+            if ((appt.getStart().equals(ap.getStart()) || appt.getEnd().equals(ap.getEnd()))) {
+                available = false;
+            }
+            // if appt is within timeframe of ap
+            if (appt.getStart().isAfter(ap.getStart()) && appt.getEnd().isBefore(ap.getEnd())) {
                 available = false;
             }
             // if appt does not start & end before ap starts ... 
@@ -134,11 +139,8 @@ public class LocalDB {
             if (appt.getStart().isBefore(ap.getEnd()) && appt.getEnd().isAfter(ap.getEnd())) {
                 available = false;
             }
-            if (appt.getStart().isAfter(ap.getStart()) && appt.getEnd().isBefore(ap.getEnd())) {
-                available = false;
-            }
+            
         }
-        
         return available;
     }
     

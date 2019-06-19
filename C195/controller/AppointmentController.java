@@ -98,6 +98,7 @@ public class AppointmentController implements Initializable {
      * clearEntry - clear all values in form
      * ========================================================================= */
     public void clearEntry() {
+        appointmentId = 0;
         customerField.clear();
         titleField.clear();
         typeField.clear();
@@ -213,8 +214,9 @@ public class AppointmentController implements Initializable {
                     Integer.parseInt(hourEnd.getValue()),
                     Integer.parseInt(minEnd.getValue())))
                 .createAppointment();
+            appt.setAppointmentId(appointmentId);  
             
-            if (!LocalDB.isAvailable(appt, C195.user) && state != NEDstate.DELETE) {
+            if (state != NEDstate.DELETE && !LocalDB.isAvailable(appt, C195.user)) {
                 throw new IllegalArgumentException("Appointment time is unavailable.");
             }
             
@@ -226,23 +228,18 @@ public class AppointmentController implements Initializable {
                     LocalDB.add(appt);
                     break;
                 }
-                
                 /* *******************************************************
                                     EDIT EXISTING APPOINTMENT
                    ******************************************************* */
-                case EDIT:{
-                    appt.setAppointmentId(appointmentId);
+                case EDIT:{   
                     int index = appointmentTable.getSelectionModel().getSelectedIndex();
                     LocalDB.set(index, appt);
-                    
                     break;
                 }
                 /* *******************************************************
                                       DELETE APPOINTMENT
                    ****************************************************** */
                 case DELETE:{
-                    appt = appointmentTable.getSelectionModel().getSelectedItem();
-                    
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Delete Appointment");
                     alert.setContentText("This will delete the appointment. Are you sure?");
@@ -319,7 +316,7 @@ public class AppointmentController implements Initializable {
         appointmentTable.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends Appointment> obs, Appointment prev, Appointment next) -> {
                 if (next != null) {
-                    appointmentId = next.getAppointmentId();
+                    if (state != NEDstate.NEW) appointmentId = next.getAppointmentId();
                     customerId = next.getCustomerId();
                     customerField.setText(next.getCustomerName());
                     titleField.setText(next.getTitle());
