@@ -1,0 +1,449 @@
+Beef, brisket, flat half, separable lean and fat, trimmed to 1/8" fat, choice, raw (1 steak / 434.0 grams): 78.6408, 0.5208, 96.131, 1206.52
+Turkey, retail parts, drumstick, meat and skin, cooked, roasted (1 drumstick / 275.0 grams): 77.5775, 0.0, 25.7675, 173.7324451060661
+Fast foods, submarine sandwich, turkey, roast beef and ham on white bread with lettuce and tomato (12 inch sub / 413.0 grams): 44.0258, 84.0868, 9.9946, 602.98
+Cheese, mozzarella, nonfat (1 cup, shredded / 113.0 grams): 35.821, 3.955, 0.0, 7.994115976331346
+Gravy, au jus, canned (1 can / 298.0 grams): 3.576, 7.45, 0.596, 8.773438917602562
+Bread stuffing, bread, dry mix (1 package (6 oz) / 170.0 grams): 18.7, 129.54, 5.78, 656.2
+Soup, beef and mushroom, low sodium, chunk style (1 cup / 251.0 grams): 10.793, 24.0458, 5.773, 68.00000000000001
+Teff, uncooked (1 cup / 193.0 grams): 25.669, 141.1409, 4.5934, 708.31
+Cookies, oatmeal, prepared from recipe, with raisins (1 oz / 28.35 grams): 1.8428, 19.3914, 4.5927, 123.3225
+Puddings, banana, dry mix, regular, with added oil (1 package (3.12 oz) / 88.0 grams): 0.0, 77.792, 4.4, 29.998642857144432
+Corn flour, masa, enriched, white (1 cup / 114.0 grams): 9.6444, 87.3126, 4.2066, 413.82
+Onions, young green, tops only (1 stalk / 12.0 grams): 0.1164, 0.6888, 0.0564, 0.3488571428556497
+Cheese, caraway (1 oz / 28.35 grams): 7.1385, 8.2782, 0.8675, 106.5960
+Cheese, cottage, lowfat, 1% milkfat (1 cup (not packed) / 226.0 grams): 28.0014, 2.3052, 6.1472, 162.7200
+Cheese, limburger (1 box / 113.0 grams): 22.6565, 30.7925, 0.5537, 369.5100
+Cheese, parmesan, grated (1 oz / 28.35 grams): 8.0571, 7.8926, 3.9435, 119.0700
+Cheese, swiss (1 cup, shredded / 108.0 grams): 29.1168, 33.4692, 1.5552, 424.4400
+Cheese spread, pasteurized process, American (1 jar (5 oz) / 128.0 grams): 21.0048, 27.1744, 11.1744, 371.2000
+Eggnog (1 cup / 254.0 grams): 11.5570, 10.6426, 20.4470, 223.5200
+Dessert topping, powdered (1.5 oz / 43.0 grams): 2.1070, 17.1656, 22.5922, 248.1100
+Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D (1 cup / 244.0 grams): 8.0520, 4.8312, 11.7120, 122.0000
+Milk, nonfat, fluid, protein fortified, with added vitamin A and vitamin D (fat free and skim) (1 quart / 984.0 grams): 38.9664, 2.4600, 54.7104, 403.4400
+Milk, canned, condensed, sweetened (1 cup / 306.0 grams): 24.2046, 26.6220, 166.4640, 982.2600
+Milk, human, mature, fluid (1 cup / 246.0 grams): 2.5338, 10.7748, 16.9494, 172.2000
+Whey, sweet, dried (1 cup / 145.0 grams): 18.7485, 1.5515, 107.9670, 511.8500
+Egg, whole, raw, fresh (1 extra large / 56.0 grams): 7.0336, 5.3256, 0.4032, 80.0800
+Egg, whole, cooked, poached (1 large / 50.0 grams): 6.2550, 4.7350, 0.3550, 71.5000
+Egg, goose, whole, fresh, raw (1 egg / 144.0 grams): 19.9728, 19.1088, 1.9440, 266.4000
+Milk, canned, evaporated, with added vitamin A (.5 cup / 126.0 grams): 8.5806, 9.5256, 12.6504, 168.8400
+Cheese sauce, prepared from recipe (1 cup / 243.0 grams): 25.1019, 36.2556, 13.3164, 478.7100
+Egg, white, dried (1 oz / 28.0 grams): 22.7080, 0.0000, 2.1840, 106.9600
+Parmesan cheese topping, fat free (1 tablespoon / 5.0 grams): 2.0000, 0.2500, 2.0000, 18.5000
+KRAFT BREAKSTONE'S Reduced Fat Sour Cream (2 tbsp / 31.0 grams): 1.3950, 3.7200, 2.0150, 47.1200
+Cream substitute, flavored, powdered (4 tsp / 12.0 grams): 0.0816, 2.5764, 9.0504, 57.8400
+Yogurt, fruit, low fat, 9 grams protein per 8 ounce, fortified with vitamin D (1 container (6 oz) / 170.0 grams): 6.7660, 1.9550, 31.6880, 168.3000
+Protein supplement, milk based, Muscle Milk Light, powder (2 scoop / 50.0 grams): 25.0000, 6.0000, 11.0000, 198.0000
+Yogurt, frozen, flavors not chocolate, nonfat milk, with low-calorie sweetener (.5 cup / 68.0 grams): 2.9920, 0.5440, 13.3960, 70.7200
+Fat free ice cream, no sugar added, flavors other than chocolate (.5 cup / 68.0 grams): 2.9988, 0.0000, 18.9992, 87.7200
+Yogurt, Greek, plain, nonfat (1 container / 170.0 grams): 17.3230, 0.6630, 6.1200, 100.3000
+Cheese, mexican, queso cotija (2 tsp / 5.0 grams): 1.0000, 1.5000, 0.1985, 18.3000
+Yogurt, Greek, strawberry, lowfat (1 container (5.3 oz) / 150.0 grams): 12.2550, 3.8550, 17.8350, 154.5000
+Yogurt, Greek, plain, whole milk (100 grams): 9.0000, 5.0000, 3.9800, 97.0000
+Cream, half and half, lowfat (100 grams): 3.3300, 5.0000, 3.3300, 72.0000
+Spices, cardamom (1 tbsp, ground / 5.8 grams): 0.6241, 0.3886, 3.9713, 18.0380
+Spices, cumin seed (1 tbsp, whole / 6.0 grams): 1.0686, 1.3362, 2.6544, 22.5000
+Spices, mace, ground (1 tbsp / 5.3 grams): 0.3556, 1.7161, 2.6765, 25.1750
+Spices, pepper, black (1 tsp, whole / 2.9 grams): 0.3013, 0.0945, 1.8545, 7.2790
+Spices, sage, ground (1 tbsp / 2.0 grams): 0.2126, 0.2550, 1.2146, 6.3000
+Salt, table (1 tbsp / 18.0 grams): 0.0000, 0.0000, 0.0000, 0.0000
+Horseradish, prepared (1 tbsp / 15.0 grams): 0.1770, 0.1035, 1.6935, 7.2000
+Seasoning mix, dry, sazon, coriander & annatto (.25 tsp / 1.0 grams): 0.0000, 0.0000, 0.0000, 0.0000
+Babyfood, meat, pork, strained (1 jar / 71.0 grams): 9.9400, 5.0410, 0.0000, 88.0400
+Babyfood, meat, turkey, strained (1 jar Beech-Nut Stage 1 (2.5 oz) / 71.0 grams): 8.1650, 4.4020, 0.9940, 78.8100
+Babyfood, GERBER, 3rd Foods, apple, mango and kiwi (100 grams): 0.4700, 0.0000, 12.8800, 53.0000
+Babyfood, dinner, beef noodle, strained (1 jar Gerber Second Food (4 oz) / 113.0 grams): 2.7572, 2.5538, 9.2434, 71.1900
+Babyfood, dinner, beef with vegetables (1 jar Beech-Nut Stage 2 (4 oz) / 113.0 grams): 2.2939, 7.8309, 7.1868, 108.4800
+Babyfood, dinner, chicken soup, strained (1 jar Beech-Nut Stage 2 (4 oz) / 113.0 grams): 1.8080, 1.9210, 8.1360, 56.5000
+Babyfood, dinner, turkey and rice, strained (1 jar Gerber Second Food (4 oz) / 113.0 grams): 2.5651, 1.4012, 8.9722, 58.7600
+Babyfood, green beans, dices, toddler (1 jar / 128.0 grams): 1.5360, 0.2560, 7.2960, 37.1200
+Babyfood, vegetables, sweet potatoes, junior (1 jar Beech-Nut Stage 3 (6 oz) / 170.0 grams): 1.8700, 0.1700, 23.8000, 102.0000
+Babyfood, vegetables, corn, creamed, junior (1 jar / 170.0 grams): 2.3800, 0.6800, 27.6250, 110.5000
+Babyfood, fruit, pears, strained (1 jar / 113.0 grams): 0.3390, 0.2260, 12.2040, 47.4600
+Babyfood, pears, dices, toddler (1 jar Gerber / 128.0 grams): 0.3840, 0.1280, 17.4080, 72.9600
+Babyfood, fruit, apple and raspberry, strained (1 jar / 113.0 grams): 0.2260, 0.2260, 17.6280, 65.5400
+Babyfood, peaches, dices, toddler (1 jar Gerber / 128.0 grams): 0.6400, 0.2560, 15.1040, 65.2800
+Babyfood, apple-cranberry juice (1 fl oz / 31.2 grams): 0.0000, 0.0062, 3.5849, 14.3520
+Babyfood, juice, orange and pineapple (1 jar / 127.0 grams): 0.6350, 0.1270, 14.8590, 60.9600
+Babyfood, cereal, mixed, with applesauce and bananas, junior (1 jar / 170.0 grams): 2.0400, 0.6800, 31.2800, 141.1000
+Babyfood, cereal, with egg yolks, strained (1 jar / 113.0 grams): 2.1470, 2.0340, 7.9100, 57.6300
+Babyfood, cereal, rice, with bananas, dry (.5 oz / 15.0 grams): 1.3050, 0.6300, 11.9850, 60.6000
+Babyfood, cherry cobbler, junior (1 oz / 28.35 grams): 0.0851, 0.0284, 5.4432, 22.1130
+Babyfood, dessert, fruit pudding, pineapple, strained (1 jar / 113.0 grams): 1.4690, 0.3390, 22.9390, 91.5300
+Babyfood, juice, apple and cherry (1 jar / 127.0 grams): 0.1270, 0.2540, 12.5730, 52.0700
+Babyfood, vegetables, mix vegetables strained (1 jar / 113.0 grams): 1.1300, 0.5650, 9.3225, 40.6800
+Babyfood, beverage, GERBER GRADUATE FRUIT SPLASHERS (8 oz / 227.0 grams): 0.0000, 0.0000, 16.7980, 70.3700
+Babyfood, cereal, oatmeal, prepared with whole milk (1 oz / 28.35 grams): 1.4175, 1.1623, 4.3376, 32.8860
+Infant formula, NESTLE, GOOD START SUPREME, with iron, ready-to-feed (1 fl oz / 30.5 grams): 0.4422, 1.0278, 2.2539, 20.1300
+Infant formula, MEAD JOHNSON, ENFAMIL, LIPIL, with iron, liquid concentrate, with ARA and DHA (1 fl oz / 31.3 grams): 0.8639, 2.1785, 4.4884, 41.0030
+Infant formula, MEAD JOHNSON, PREGESTIMIL, with iron, powder, not reconstituted (1 scoop / 8.8 grams): 1.2320, 2.4640, 4.6464, 45.6720
+Infant formula, MEAD JOHNSON, ENFAMIL, LIPIL, ready-to-feed, with ARA and DHA (1 serving 100 ml / 106.0 grams): 1.4628, 3.7100, 6.8264, 69.9600
+Infant formula, MEAD JOHNSON, ENFAMIL, NUTRAMIGEN, LIPIL, with iron, liquid concentrate not reconstituted, with ARA and DHA (1 fl oz / 31.6 grams): 1.1155, 2.1267, 4.1459, 39.8160
+Infant formula, MEAD JOHNSON, ENFAMIL, PROSOBEE, LIPIL, liquid concentrate, not reconstituted, with ARA and DHA (1 fl oz / 31.3 grams): 0.9985, 2.2254, 4.2505, 41.0030
+Infant formula, MEAD JOHNSON, NEXT STEP, PROSOBEE, LIPIL, ready to feed, with ARA and DHA (1 serving 100 ml / 103.0 grams): 2.2042, 2.9973, 8.3327, 69.0100
+Infant formula, NESTLE, GOOD START ESSENTIALS SOY, with iron, ready-to-feed (1 fl oz / 30.5 grams): 0.4971, 1.0065, 2.1868, 19.8250
+Infant formula, PBM PRODUCTS, store brand, liquid concentrate, not reconstituted (1 fl oz / 31.4 grams): 0.9106, 2.1980, 4.3646, 40.8200
+Infant formula, ABBOTT NUTRITION, SIMILAC, NEOSURE, powder, with ARA and DHA (1 fl oz / 30.5 grams): 4.3981, 8.6406, 15.7837, 158.6000
+Infant formula, ABBOTT NUTRITION, SIMILAC, ISOMIL, ADVANCE with iron, ready-to-feed (1 fl oz / 30.5 grams): 0.4911, 1.0949, 2.0435, 20.1300
+Infant Formula, MEAD JOHNSON, ENFAMIL GENTLEASE LIPIL, with iron, prepared from powder (1 fl oz / 30.5 grams): 0.4636, 1.0675, 1.9489, 19.2150
+Infant formula, MEAD JOHNSON, ENFAMIL, Enfagrow, Soy, Toddler ready-to-feed (5 fl oz / 152.0 grams): 3.2984, 4.3928, 11.6128, 98.8000
+Infant formula, GERBER, GOOD START 2, PROTECT PLUS, ready-to-feed (5 fl oz / 152.0 grams): 2.1888, 5.1224, 11.2328, 100.3200
+Babyfood, Snack, GERBER, GRADUATES, LIL CRUNCHIES, baked whole grain corn snack (18 piece / 7.0 grams): 0.0000, 1.9999, 4.3113, 35.2100
+Salad dressing, sesame seed dressing, regular (1 cup / 245.0 grams): 7.5950, 110.7400, 21.0700, 1085.3500
+Salad dressing, mayonnaise, soybean and safflower oil, with salt (1 cup / 220.0 grams): 2.4200, 174.6800, 5.9400, 1577.4000
+Oil, wheat germ (1 tablespoon / 13.6 grams): 0.0000, 13.6000, 0.0000, 120.2240
+Margarine, regular, hard, soybean (hydrogenated) (1 stick / 113.0 grams): 1.0170, 90.9650, 1.0170, 812.4700
+Salad dressing, italian dressing, commercial, regular, without salt (1 cup / 235.0 grams): 0.8930, 66.6695, 24.5105, 686.2000
+Oil, safflower, salad or cooking, linoleic, (over 70%) (1 tbsp / 13.6 grams): 0.0000, 13.6000, 0.0000, 120.2240
+Fat, mutton tallow (1 cup / 205.0 grams): 0.0000, 205.0000, 0.0000, 1849.1000
+Salad dressing, blue or roquefort cheese dressing, commercial, regular (1 cup / 245.0 grams): 3.3565, 125.1950, 11.6865, 1185.8000
+Shortening industrial, lard and vegetable oil (1 cup / 205.0 grams): 0.0000, 205.0000, 0.0000, 1845.0000
+Oil, nutmeg butter (1 tbsp / 13.6 grams): 0.0000, 13.6000, 0.0000, 120.2240
+Oil, sunflower, high oleic (70% and over) (1 tbsp / 14.0 grams): 0.0000, 14.0000, 0.0000, 123.7600
+Fish oil, menhaden, fully hydrogenated (1 tbsp / 12.5 grams): 0.0000, 12.5000, 0.0000, 112.7500
+Animal fat, bacon grease (1 tsp / 4.3 grams): 0.0000, 4.2785, 0.0000, 38.5710
+Margarine, regular, 80% fat, composite, tub, without salt (1 cup / 227.0 grams): 0.4994, 181.9859, 1.7025, 1618.5100
+Margarine-like, vegetable oil spread, fat-free, tub (1 cup / 233.0 grams): 0.2330, 7.0832, 10.1122, 102.5200
+Salad dressing, mayonnaise, light (1 tablespoon / 15.0 grams): 0.0555, 3.3330, 1.3845, 35.7000
+Oil, industrial, soy, refined, for woks and light frying (1 tbsp / 13.6 grams): 0.0000, 13.6000, 0.0000, 120.2240
+Oil, industrial, palm kernel (hydrogenated), confection fat, intermediate grade product (1 tbsp / 13.6 grams): 0.0000, 13.6000, 0.0000, 120.2240
+Shortening, industrial, soy (partially hydrogenated ) and corn for frying (1 cup / 205.0 grams): 0.0000, 205.0000, 0.0000, 1812.2000
+Margarine-like spread, SMART BEAT Smart Squeeze (1 tablespoon / 14.0 grams): 0.0000, 0.2940, 0.9940, 6.5800
+Margarine-like spread, BENECOL Light Spread (1 tablespoon (1 NLEA serving) / 14.0 grams): 0.0000, 5.4194, 0.7994, 49.9800
+Margarine-like vegetable-oil spread, stick/tub/bottle, 60% fat, with added vitamin D (1 tbsp / 14.0 grams): 0.0840, 8.2838, 0.0000, 74.9000
+Salad dressing, honey mustard, regular (2 tbsp / 30.0 grams): 0.2610, 12.2490, 6.9990, 139.2000
+Chicken, broilers or fryers, meat and skin and giblets and neck, raw (1 chicken / 1046.0 grams): 191.7318, 155.1218, 1.3598, 2227.9800
+Chicken, broilers or fryers, meat and skin, cooked, roasted (1 unit (yield from 1 lb ready-to-cook chicken) / 178.0 grams): 48.5940, 24.2080, 0.0000, 425.4200
+Chicken, broilers or fryers, skin only, cooked, fried, flour (.5 chicken, skin only / 56.0 grams): 10.6904, 23.8448, 5.2304, 281.1200
+Chicken, heart, all classes, raw (1 heart / 6.1 grams): 0.9486, 0.5691, 0.0433, 9.3330
+Chicken, broilers or fryers, light meat, meat and skin, cooked, stewed (.5 chicken, bone removed / 150.0 grams): 39.2100, 14.9550, 0.0000, 301.5000
+Chicken, broilers or fryers, light meat, meat only, cooked, roasted (.5 chicken, bone and skin removed / 107.0 grams): 33.0737, 4.8257, 0.0000, 185.1100
+Chicken, broilers or fryers, back, meat and skin, cooked, fried, batter (.5 back, bone removed / 120.0 grams): 26.3640, 26.2920, 12.3000, 397.2000
+Chicken, broilers or fryers, breast, meat and skin, raw (.5 breast, bone removed / 145.0 grams): 30.2325, 13.4125, 0.0000, 249.4000
+Chicken, broilers or fryers, breast, meat only, cooked, stewed (.5 breast, bone and skin removed / 95.0 grams): 27.5310, 2.8785, 0.0000, 143.4500
+Chicken, broilers or fryers, dark meat, drumstick, meat only, cooked, roasted (1 drumstick with skin / 105.0 grams): 25.4520, 5.9850, 0.0000, 162.7500
+Chicken, broilers or fryers, leg, meat only, cooked, fried (1 leg, bone and skin removed / 94.0 grams): 26.6772, 8.7608, 0.6110, 195.5200
+Chicken, broilers or fryers, neck, meat only, cooked, fried (1 neck, bone and skin removed / 22.0 grams): 5.9114, 2.6136, 0.3894, 50.3800
+Chicken, broilers or fryers, thigh, meat only, cooked, fried (1 thigh, bone and skin removed / 52.0 grams): 14.6536, 5.3560, 0.6136, 113.3600
+Chicken, broilers or fryers, wing, meat only, raw (1 wing, bone and skin removed / 29.0 grams): 6.3713, 1.0266, 0.0000, 36.5400
+Chicken, roasting, meat only, raw (1 unit (yield from 1 lb ready-to-cook chicken) / 209.0 grams): 42.4897, 5.6430, 0.0000, 231.9900
+Chicken, stewing, meat and skin, and giblets and neck, raw (1 chicken / 905.0 grams): 158.1940, 176.6560, 1.7195, 2271.5500
+Chicken, stewing, light meat, meat only, raw (.5 chicken, bone and skin removed / 130.0 grams): 30.0300, 5.4730, 0.0000, 178.1000
+Chicken, capons, giblets, raw (1 giblets / 115.0 grams): 21.0220, 5.9570, 1.6330, 149.5000
+Duck, wild, breast, meat only, raw (.5 breast, bone and skin removed / 83.0 grams): 16.4755, 3.5275, 0.0000, 102.0900
+Pheasant, raw, meat and skin (1 unit (yield from 1 lb ready-to-eat pheasant) / 371.0 grams): 84.2170, 34.4659, 0.0000, 671.5100
+Squab, (pigeon), meat only, raw (1 unit (yield from 1 lb ready-to-cook squab) / 251.0 grams): 43.9250, 18.8250, 0.0000, 356.4200
+Turkey, whole, giblets, raw (1 giblets / 157.0 grams): 28.5426, 7.9913, 0.1099, 194.6800
+Turkey from whole, neck, meat only, raw (1 lb / 453.0 grams): 74.7903, 27.3612, 0.0000, 566.2500
+Turkey from whole, dark meat, meat only, raw (1 serving / 85.0 grams): 18.0880, 2.1250, 0.1275, 91.8000
+Turkey, all classes, wing, meat and skin, cooked, roasted (1 wing, bone removed / 186.0 grams): 50.9268, 23.1198, 0.0000, 425.9400
+Turkey, young hen, skin only, cooked, roasted (.5 turkey, skin only / 196.0 grams): 37.2988, 87.1220, 0.0000, 944.7200
+Turkey roast, boneless, frozen, seasoned, light and dark meat, raw (1 box (net weight, 2.5 lb) / 1134.0 grams): 199.5840, 24.9480, 72.5760, 1360.8000
+Chicken, cornish game hens, meat and skin, raw (.5 bird / 168.0 grams): 28.8120, 23.5536, 0.0000, 336.0000
+Duck, young duckling, domesticated, White Pekin, breast, meat and skin, boneless, cooked, roasted (3 oz / 85.0 grams): 20.8250, 9.2225, 0.0000, 171.7000
+Chicken breast tenders, breaded, cooked, microwaved (4 pieces / 62.0 grams): 10.1370, 7.9918, 10.8872, 156.2400
+USDA Commodity, Chicken, canned, meat only, with broth (1 can (5 oz) / 142.0 grams): 31.8222, 6.6598, 0.3266, 188.8600
+Chicken, broilers or fryers, back, meat and skin, cooked, rotisserie, original seasoning (1 serving (3 oz) / 85.0 grams): 19.7455, 15.8015, 0.0255, 221.0000
+Chicken, broiler, rotisserie, BBQ, back meat and skin (1 back / 182.0 grams): 36.9278, 34.3252, 0.7280, 456.8200
+Emu, ground, cooked, pan-broiled (1 patty (yield from 135.8 g raw meat) / 109.0 grams): 30.9887, 5.0685, 0.0000, 177.6700
+Emu, outside drum, raw (1 outside drum / 422.0 grams): 97.3976, 2.0256, 0.0000, 434.6600
+Ostrich, inside strip, raw (1 serving (cooked from 4 oz raw) / 85.0 grams): 20.1365, 2.4395, 0.0000, 107.9500
+Ostrich, tenderloin, raw (1 serving (cooked from 4 oz raw) / 85.0 grams): 18.7595, 2.7115, 0.0000, 104.5500
+Ground turkey, fat free, patties, broiled (1 patty / 85.0 grams): 24.6415, 2.1080, 0.0000, 117.3000
+Chicken, broilers or fryers, dark meat, thigh, meat only, cooked, braised (1 thigh with skin / 129.0 grams): 31.6695, 11.1327, 0.0000, 227.0400
+Chicken, dark meat, drumstick, meat only, with added solution, cooked, braised (1 drumstick with skin / 106.0 grams): 24.3694, 6.7098, 0.0000, 157.9400
+Chicken, dark meat, drumstick, meat and skin, with added solution, raw (1 drumstick with skin / 143.0 grams): 25.7829, 11.7832, 0.0000, 208.7800
+Turkey from whole, light meat, meat only, with added solution, raw (4 oz / 114.0 grams): 24.5556, 1.8924, 0.0000, 115.1400
+Turkey, whole, meat only, with added solution, raw (1 bird / 5717.0 grams): 1193.1379, 136.6363, 8.0038, 6002.8500
+Turkey, retail parts, wing, meat only, raw (1 wing / 518.0 grams): 116.4464, 12.8982, 0.0000, 580.1600
+Turkey, back, from whole bird, meat only, with added solution, roasted (1 back / 949.0 grams): 255.9453, 19.7392, 0.0000, 1205.2300
+Turkey, thigh, from whole bird, meat only, with added solution, roasted (1 thigh / 327.0 grams): 85.3470, 19.6200, 0.0000, 516.6600
+Turkey, retail parts, drumstick, meat and skin, cooked, roasted (1 drumstick / 275.0 grams): 77.5775, 25.7675, 0.0000, 541.7500
+Turkey, back, from whole bird, meat and skin, with added solution, roasted (1 back / 949.0 grams): 244.8420, 107.8064, 0.0000, 1945.4500
+Soup, bean with pork, canned, condensed (1 can 11.5 oz / 326.0 grams): 19.1688, 14.4092, 55.3222, 420.5400
+CAMPBELL'S Red and White, Broccoli Cheese Soup, condensed (1 serving 1/2 cup / 124.0 grams): 1.9964, 4.5012, 12.0032, 100.4400
+Soup, chicken and vegetable, canned, ready-to-serve (1 cup / 255.0 grams): 5.0235, 1.8615, 11.9340, 84.1500
+Soup, lentil with ham, canned, ready-to-serve (1 can (20 oz) / 567.0 grams): 21.2058, 6.3504, 46.2672, 317.5200
+Soup, onion, canned, condensed (1 can (10.5 oz) / 298.0 grams): 9.1188, 4.2316, 19.9064, 137.0800
+CAMPBELL'S Red and White, Chicken Alphabet Soup, condensed (.5 cup / 126.0 grams): 2.9988, 1.4994, 11.9952, 70.5600
+Soup, chunky vegetable, canned, ready-to-serve (1 cup / 230.0 grams): 2.6220, 0.8280, 18.1700, 89.7000
+Soup, chicken broth cubes, dry (1 cube / 4.8 grams): 0.7008, 0.2256, 1.1280, 9.5040
+Gravy, au jus, canned (1 can / 298.0 grams): 3.5760, 0.5960, 7.4500, 47.6800
+Gravy, mushroom, dry, powder (1 cup (8 fl oz) / 21.0 grams): 2.1000, 0.8400, 13.5786, 68.8800
+USDA Commodity, spaghetti sauce, meatless, canned (100 grams): 1.2000, 0.9000, 8.7000, 48.0000
+Soup, tomato bisque, canned, condensed (1 can (11 oz), undiluted / 312.0 grams): 5.4912, 6.0840, 57.6264, 299.5200
+Soup, stock, beef, home-prepared (1 cup / 240.0 grams): 4.7280, 0.2160, 2.8800, 31.2000
+Soup, shark fin, restaurant-prepared (1 cup / 216.0 grams): 6.9120, 4.3200, 8.2080, 99.3600
+Soup, chicken broth, ready-to-serve (1 cup / 249.0 grams): 1.5936, 0.5229, 1.0956, 14.9400
+CAMPBELL'S Red and White, 25% Less Sodium Tomato Soup, condensed (1 serving 1/2 cup / 124.0 grams): 1.9964, 0.0000, 20.0012, 90.5200
+PREGO Pasta, Chunky Garden Mushroom Supreme Italian Sauce, ready-to-serve (1 serving 1/2 cup / 130.0 grams): 2.0020, 3.0030, 13.0000, 89.7000
+Soup, clam chowder, new england, canned, prepared with equal volume low fat (2%) milk (1 serving 1 cup / 252.0 grams): 8.1648, 5.0904, 18.7992, 153.7200
+PREGO Pasta, Tomato, Basil and Garlic Italian Sauce, ready-to-serve (1 serving 1/2 cup / 125.0 grams): 2.0000, 2.5000, 12.0000, 80.0000
+Soup, oyster stew, canned, prepared with equal volume milk (1 can (10.5 oz), prepared / 595.0 grams): 14.9345, 19.2780, 23.7405, 327.2500
+Sauce, sweet and sour, prepared-from-recipe (100 grams): 1.8400, 0.5800, 16.7200, 79.0000
+Gravy, CAMPBELL'S, beef, fat free (.25 cup / 59.0 grams): 0.9971, 0.0000, 2.9972, 14.7500
+Gravy, CAMPBELL'S, chicken, microwavable (.25 cup / 60.0 grams): 0.0000, 3.0000, 3.0000, 40.2000
+CAMPBELL'S Red and White, Cream of Broccoli Soup, condensed (1 serving 1/2 cup / 124.0 grams): 1.9964, 4.9972, 12.0032, 90.5200
+CAMPBELL'S Red and White, Cream of Shrimp Soup, condensed (1 serving 1/ 2 cup / 124.0 grams): 3.0008, 6.0016, 7.9980, 100.4400
+CAMPBELL'S Red and White, GOLDFISH Pasta with Chicken in Chicken Broth, condensed (1 serving 1/2 cup / 126.0 grams): 2.9988, 2.0034, 11.9952, 79.3800
+CAMPBELL'S Red and White, New England Clam Chowder, condensed (1 serving 1/2 cup / 126.0 grams): 3.9942, 2.4948, 13.0032, 89.4600
+CAMPBELL'S CHUNKY Soups, Baked Potato with Steak & Cheese Soup (1 cup / 245.0 grams): 8.0115, 9.9960, 20.9965, 200.9000
+CAMPBELL'S CHUNKY Soups, Fajita Chicken with Rice & Beans Soup (1 cup / 245.0 grams): 7.0070, 1.4945, 23.0055, 129.8500
+CAMPBELL'S CHUNKY, HEALTHY REQUEST Chicken Noodle Soup (1 cup / 245.0 grams): 7.2765, 2.3765, 14.4060, 100.4500
+CAMPBELL'S CHUNKY Soups, Hearty Beef Barley Soup (1 can / 527.0 grams): 15.2303, 4.8484, 47.3246, 295.1200
+CAMPBELL'S CHUNKY Soups, Manhattan Clam Chowder (1 cup / 245.0 grams): 4.9980, 3.5035, 19.0120, 127.4000
+CAMPBELL'S CHUNKY Soups, Savory Chicken with White & Wild Rice Soup (1 cup / 245.0 grams): 7.0070, 2.0090, 18.0075, 110.2500
+Soup, oyster stew, canned, prepared with equal volume water (1 can (10.5 oz), prepared / 586.0 grams): 5.0982, 9.3174, 9.9034, 140.6400
+Soup, tomato beef with noodle, canned, prepared with equal volume water (1 can (10.75 oz), prepared / 593.0 grams): 10.5554, 10.1403, 50.0492, 332.0800
+Soup, vegetable with beef broth, canned, prepared with equal volume water (1 can (10.5 oz), prepared / 586.0 grams): 7.0906, 4.5708, 31.3510, 193.3800
+Soup, onion, dry, mix, prepared with water (1 serving 1 cup / 230.0 grams): 0.7360, 0.0230, 6.3710, 27.6000
+Soup, chicken noodle, dry, mix, prepared with water (1 cup / 245.0 grams): 2.0580, 1.3475, 8.9915, 56.3500
+Soup, beef mushroom, canned, prepared with equal volume water (1 can (10.75 oz), prepared / 593.0 grams): 14.0541, 7.2939, 15.4180, 177.9000
+CAMPBELL'S Soup on the Go, Vegetable with Mini Round Noodles Soup (1 container / 305.0 grams): 2.0130, 0.4880, 21.0145, 100.6500
+CAMPBELL'S Soup on the Go, Vegetable Beef Soup (1 container / 305.0 grams): 2.9890, 1.0065, 10.0040, 61.0000
+PACE, Picante Sauce (2 tbsp / 32.0 grams): 0.0000, 0.0000, 2.0000, 8.0000
+SMART SOUP, Santa Fe Corn Chowder (10 oz 1 pouch / 283.0 grams): 5.6600, 2.0093, 31.6960, 155.6500
+Sauce, pesto, ready-to-serve, shelf stable (.25 cup / 61.0 grams): 3.0500, 25.8762, 3.7454, 259.8600
+Sauce, cheese sauce mix, dry (100 grams): 7.6800, 18.3300, 60.5200, 438.0000
+Soup, chicken with star-shaped pasta, canned, condensed, single brand (1 package yields / 298.0 grams): 6.8540, 4.1720, 21.1580, 149.0000
+Sauce, cheese, ready-to-serve (.25 cup / 63.0 grams): 4.2273, 8.3727, 4.3029, 109.6200
+Sauce, alfredo mix, dry (100 grams): 15.3200, 36.3500, 36.5200, 535.0000
+Soup, cream of mushroom, low sodium, ready-to-serve, canned (1 can (10.75 oz) / 305.0 grams): 3.0500, 11.2850, 13.8165, 161.6500
+Soup, beef and mushroom, low sodium, chunk style (1 cup / 251.0 grams): 10.7930, 5.7730, 24.0458, 173.1900
+HEALTHY REQUEST, Cream of Celery Soup, condensed (1 serving 1/2 cup / 124.0 grams): 1.0044, 1.9964, 12.0032, 69.4400
+Gravy, CAMPBELL'S, au jus (.25 cup / 59.0 grams): 0.9971, 0.0000, 0.0000, 4.7200
+Blood sausage (4 slices / 100.0 grams): 14.6000, 34.5000, 1.2900, 379.0000
+Brotwurst, pork, beef, link (1 link / 70.0 grams): 10.0100, 19.4600, 2.0860, 226.1000
+Frankfurter, turkey (1 frankfurter / 45.0 grams): 5.5035, 7.7805, 1.7145, 100.3500
+Ham and cheese spread (1 oz / 28.35 grams): 4.5870, 5.2533, 0.6464, 69.4575
+USDA Commodity, luncheon meat, canned (1 can / 830.0 grams): 145.2500, 105.9910, 8.6320, 1568.7000
+Pate, liver, not specified, canned (1 oz / 28.35 grams): 4.0257, 7.9380, 0.4253, 90.4365
+Pork sausage, link/patty, unprepared (1 link / 25.0 grams): 3.8475, 6.2000, 0.2325, 72.0000
+Salami, dry or hard, pork (1 package (4 oz) / 113.0 grams): 25.5154, 38.1036, 1.8080, 459.9100
+Sausage, Vienna, canned, chicken, beef, pork (7 sausages (drained contents from can, net wt 4 oz) / 113.0 grams): 11.8650, 21.9220, 2.9380, 259.9000
+OSCAR MAYER, Ham (chopped with natural juice) (1 serving (1 slice) / 28.0 grams): 4.5640, 3.1220, 1.0220, 50.4000
+Frankfurter, beef, pork, and turkey, fat free (1 frank 1 NLEA serving / 57.0 grams): 7.1250, 0.9063, 6.3897, 62.1300
+Salami, pork, beef, less sodium (3.527 oz / 100.0 grams): 15.0100, 30.5000, 15.3800, 396.0000
+Bacon and beef sticks (1 oz / 28.0 grams): 8.1480, 12.3760, 0.2240, 144.7600
+Sausage, turkey, hot, smoked (2 oz / 56.0 grams): 8.4280, 4.9000, 2.6040, 88.4800
+Bologna, pork, turkey and beef (1 oz / 28.35 grams): 3.2773, 8.2924, 1.8881, 95.2560
+Frankfurter, beef, heated (1 package / 451.0 grams): 52.7219, 132.4136, 11.9966, 1452.2200
+Beef sausage, fresh, cooked (1 serving / 43.0 grams): 7.8303, 12.0314, 0.1505, 142.7600
+Frankfurter, meat and poultry, cooked, grilled (1 frankfurter / 48.0 grams): 5.1216, 12.6864, 2.5152, 144.9600
+Meatballs, frozen, Italian style (3 oz / 85.0 grams): 12.2400, 18.8785, 6.8510, 243.1000
+Cereals ready-to-eat, POST, ALPHA-BITS (1 cup (1 NLEA serving for adults) / 30.0 grams): 3.0000, 1.3800, 24.0900, 116.7000
+Cereals ready-to-eat, POST, COCOA PEBBLES (.75 cup (1 NLEA serving) / 29.0 grams): 1.3920, 1.1890, 24.8530, 115.1300
+Cereals ready-to-eat, POST Bran Flakes (.75 cup (1 NLEA serving) / 30.0 grams): 2.9700, 0.6300, 24.1500, 98.4000
+Cereals ready-to-eat, POST, GRAPE-NUTS Flakes (.75 cup (1 NLEA serving) / 29.0 grams): 2.7260, 1.0730, 23.7800, 109.0400
+Cereals ready-to-eat, GENERAL MILLS, Honey Nut CHEX (.75 cup (1 NLEA serving) / 32.0 grams): 2.0160, 0.6400, 27.7344, 120.0000
+Cereals ready-to-eat, KELLOGG, KELLOGG'S SPECIAL K (1 cup (1 NLEA serving) / 31.0 grams): 5.5149, 0.5549, 22.7540, 116.8700
+Cereals ready-to-eat, POST, Honey Nut Shredded Wheat (1 cup (1 NLEA serving) / 59.0 grams): 5.0150, 1.7110, 49.3240, 220.0700
+Cereals, corn grits, white, regular and quick, enriched, cooked with water, without salt (1 cup / 257.0 grams): 4.3947, 1.1822, 37.9332, 182.4700
+Cereals, CREAM OF WHEAT, regular (10 minute), cooked with water, without salt (1 cup (1 serving) / 251.0 grams): 3.6144, 0.5271, 26.4052, 125.5000
+Cereals, oats, regular and quick, unenriched, cooked with water (includes boiling and microwaving), without salt (.75 cup / 175.0 grams): 4.4450, 2.6600, 21.0000, 124.2500
+Cereals, oats, instant, fortified, with raisins and spice, prepared with water (1 packet, prepared / 158.0 grams): 3.1284, 1.5010, 28.2978, 139.0400
+Cereals ready-to-eat, POST, Shredded Wheat, original spoon-size (1 cup (1 NLEA serving) / 49.0 grams): 5.7820, 1.0290, 39.8860, 171.9900
+Cereals, CREAM OF RICE, cooked with water, with salt (1 cup / 244.0 grams): 2.1960, 0.2440, 28.0600, 126.8800
+Cereals ready-to-eat, KELLOGG, KELLOGG'S Low Fat Granola without Raisins (.5 cup (1 NLEA serving) / 49.0 grams): 4.2630, 2.7930, 39.6410, 190.6100
+Cereals ready-to-eat, QUAKER, QUAKER OAT CINNAMON LIFE (.75 cup (1 NLEA serving) / 32.0 grams): 2.9248, 1.3120, 25.2864, 119.6800
+Cereals, QUAKER, Instant Oatmeal, fruit and cream variety, dry (1 packet / 35.0 grams): 2.9050, 2.2295, 26.3970, 132.6500
+Cereals ready-to-eat, GENERAL MILLS, OATMEAL CRISP, Hearty Raisin (1 cup (1 NLEA serving) / 62.0 grams): 5.2700, 2.3498, 50.0960, 230.6400
+Cereals ready-to-eat, GENERAL MILLS, FROSTED CHEERIOS (.75 cup (1 NLEA serving) / 27.0 grams): 2.4300, 1.2663, 21.5460, 101.5200
+Cereals ready-to-eat, KELLOGG, KELLOGG'S Low Fat Granola with Raisins (.667 cup (1 NLEA serving) / 60.0 grams): 5.4000, 3.1200, 48.0600, 228.6000
+Cereals ready-to-eat, KELLOGG, KELLOGG'S SMART START Strong Heart Antioxidants Cereal (1 cup (1 NLEA serving) / 50.0 grams): 3.7500, 0.7500, 43.4000, 185.5000
+Cereals ready-to-eat, QUAKER, MOTHER'S Cinnamon Oat Crunch (1 cup (1 NLEA serving) / 60.0 grams): 6.3600, 2.7360, 47.8740, 229.2000
+Cereals ready-to-eat, KELLOGG, KELLOGG'S, RAISIN BRAN CRUNCH (1 cup (1 NLEA serving) / 53.0 grams): 3.4927, 0.9487, 44.9970, 187.6200
+Cereals ready-to-eat, KASHI GOLEAN (1 cup (1 NLEA serving) / 52.0 grams): 12.9428, 1.1440, 34.9388, 161.7200
+Cereals, QUAKER, Instant Grits, Redeye Gravy & Country Ham flavor, dry (1 packet (1 NLEA serving) / 28.0 grams): 2.7524, 0.4424, 21.2408, 95.7600
+Cereals ready-to-eat, KASHI ORGANIC PROMISE, STRAWBERRY FIELDS (1 cup (1 NLEA serving) / 55.0 grams): 5.1700, 0.3850, 45.9250, 196.9000
+Cereals, MALT-O-MEAL, Farina Hot Wheat Cereal, dry (3 tbsp (1 NLEA serving) / 35.0 grams): 3.6680, 0.1715, 27.0200, 127.7500
+Cereals ready-to-eat, RALSTON Enriched Wheat Bran flakes (1 cup / 42.0 grams): 4.2882, 1.4112, 33.5034, 130.2000
+Cereals, MALT-O-MEAL, chocolate, prepared with water, without salt (1 serving (3 T dry cereal plus 1 cup water) / 268.0 grams): 3.6716, 0.2680, 24.7096, 125.9600
+Cereals ready-to-eat, POST GREAT GRAINS Cranberry Almond Crunch (.75 cup (1 NLEA serving) / 48.0 grams): 4.2720, 2.8320, 36.7680, 184.3200
+Cereals, KASHI GO LEAN Hot Cereal, Creamy TRULY VANILLA, dry (1 packet (1 NLEA serving) / 40.0 grams): 8.9160, 2.1200, 24.4360, 144.0000
+Cereals, CREAM OF WHEAT, 1 minute cook time, dry (3 tablespoon (1 serving) / 33.0 grams): 3.8841, 0.4851, 23.9679, 118.4700
+Cereals ready-to-eat, GENERAL MILLS, 25% Less Sugar TRIX (1 cup / 28.0 grams): 1.5120, 1.1200, 23.9400, 107.2400
+Cereals ready-to-eat, GENERAL MILLS, Chocolate CHEX (.75 cup (1 NLEA serving) / 32.0 grams): 1.5360, 2.6848, 25.9488, 131.8400
+Cereals ready-to-eat, KASHI Honey Sunshine (.75 cup (1 NLEA serving) / 30.0 grams): 2.3400, 1.2270, 24.6000, 99.6000
+Cereals ready-to-eat, KELLOGG'S FROSTED MINI-WHEATS LITTLE BITES, chocolate (1 cup (1 NLEA serving) / 56.0 grams): 4.7600, 1.9040, 45.5840, 198.2400
+Cereals, QUAKER, Instant Oatmeal, fruit and cream, variety of flavors, reduced sugar (1 packet / 33.0 grams): 3.3528, 2.4618, 23.6181, 124.0800
+Cereals ready-to-eat, KELLOGG'S RICE KRISPIES, Gluten Free (1 cup (1 NLEA serving) / 30.0 grams): 2.3400, 0.6900, 24.7200, 111.3000
+Cereals ready-to-eat, POST, HONEY BUNCHES OF OATS, with real strawberries (.75 cup (1 NLEA serving) / 31.0 grams): 2.0770, 1.5190, 25.8230, 123.6900
+Cereals ready-to-eat, MALT-O-MEAL, CHOCOLATE MARSHMALLOW MATEYS (.75 cup (1 NLEA serving) / 30.0 grams): 1.0500, 1.1010, 26.4540, 117.6000
+Cereals, oats, instant, fortified, maple and brown sugar, dry (1 packet / 43.0 grams): 3.9775, 2.0339, 32.9681, 158.2400
+Cereals, QUAKER, Instant Oatmeal, Cinnamon Swirl, high fiber (1 packet (1 NLEA serving) / 45.0 grams): 3.9555, 2.1600, 34.0515, 164.7000
+Cereals ready-to-eat, KELLOGG, KELLOGG'S RAISIN BRAN, Cinnamon Almond (1.25 cup (1 NLEA serving) / 58.0 grams): 4.2920, 1.6820, 47.0902, 201.2600
+Cereals ready-to-eat, KASHI GOLEAN Vanilla Graham Clusters (1 Cup (1 NLEA serving) / 51.0 grams): 10.9650, 1.3209, 35.7459, 168.3000
+Acerola, (west indian cherry), raw (1 cup / 98.0 grams): 0.3920, 0.2940, 7.5362, 31.3600
+Apples, dehydrated (low moisture), sulfured, uncooked (1 cup / 60.0 grams): 0.7920, 0.3480, 56.1180, 207.6000
+Apple juice, frozen concentrate, unsweetened, undiluted, without added ascorbic acid (1 can (6 fl oz) / 211.0 grams): 1.0761, 0.7807, 86.5100, 350.2600
+Apricots, canned, extra light syrup pack, with skin, solids and liquids (1 cup, halves / 247.0 grams): 1.4820, 0.2470, 30.8750, 121.0300
+Apricots, dried, sulfured, stewed, without added sugar (1 cup, halves / 250.0 grams): 3.0000, 0.4500, 55.3750, 212.5000
+Bananas, dehydrated, or banana powder (1 cup / 100.0 grams): 3.8900, 1.8100, 88.2800, 346.0000
+Blueberries, wild, frozen (1 cup, frozen / 140.0 grams): 0.0000, 0.2240, 19.3900, 79.8000
+Cherimoya, raw (1 fruit without skin and seeds / 235.0 grams): 3.6895, 1.5980, 41.6185, 176.2500
+Cherries, sweet, canned, water pack, solids and liquids (1 cup, pitted / 248.0 grams): 1.9096, 0.3224, 29.1648, 114.0800
+Cranberries, dried, sweetened (.25 cup / 40.0 grams): 0.0680, 0.4360, 33.1200, 123.2000
+Elderberries, raw (1 cup / 145.0 grams): 0.9570, 0.7250, 26.6800, 105.8500
+Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, water pack, solids and liquids (1 cup / 237.0 grams): 0.9954, 0.1185, 20.1687, 75.8400
+Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, light syrup, solids and liquids (1 cup / 252.0 grams): 0.8568, 0.1764, 38.1528, 146.1600
+Grapefruit, raw, pink and red, California and Arizona (1 cup sections, with juice / 230.0 grams): 1.1500, 0.2300, 22.2870, 85.1000
+Grapefruit juice, white, canned or bottled, unsweetened (1 cup / 247.0 grams): 1.4326, 0.2470, 19.5871, 83.9800
+Grapes, american type (slip skin), raw (1 cup / 92.0 grams): 0.5796, 0.3220, 15.7780, 61.6400
+Guava sauce, cooked (1 cup / 238.0 grams): 0.7616, 0.3332, 22.5624, 85.6800
+Lemon juice, raw (1 lemon yields / 48.0 grams): 0.1680, 0.1152, 3.3120, 10.5600
+Litchis, raw (1 cup / 190.0 grams): 1.5770, 0.8360, 31.4070, 125.4000
+Mangosteen, canned, syrup pack (1 cup / 216.0 grams): 0.8856, 1.2528, 38.6856, 157.6800
+Oheloberries, raw (1 cup / 140.0 grams): 0.5320, 0.3080, 9.5760, 39.2000
+Oranges, raw, with peel (1 cup / 170.0 grams): 2.2100, 0.5100, 26.3500, 107.1000
+Orange juice, frozen concentrate, unsweetened, undiluted (1 cup / 262.0 grams): 6.2880, 0.6550, 92.1978, 387.7600
+Tangerine juice, canned, sweetened (1 cup / 249.0 grams): 1.2450, 0.4980, 29.8800, 124.5000
+Peaches, canned, water pack, solids and liquids (1 cup, halves or slices / 244.0 grams): 1.0736, 0.1464, 14.9084, 58.5600
+Peaches, dehydrated (low-moisture), sulfured, stewed (1 cup / 242.0 grams): 4.8642, 1.0164, 82.6188, 321.8600
+Pears, canned, juice pack, solids and liquids (1 cup, halves / 248.0 grams): 0.8432, 0.1736, 32.0912, 124.0000
+Pear nectar, canned, without added ascorbic acid (1 cup / 250.0 grams): 0.2750, 0.0250, 39.4000, 150.0000
+Pineapple, canned, heavy syrup pack, solids and liquids (1 cup, crushed, sliced, or chunks / 254.0 grams): 0.8890, 0.2794, 51.3080, 198.1200
+Plantains, cooked (1 cup, mashed / 200.0 grams): 1.5800, 0.3600, 62.3000, 232.0000
+Prickly pears, raw (1 cup / 149.0 grams): 1.0877, 0.7599, 14.2593, 61.0900
+Pummelo, raw (1 fruit without refuse / 609.0 grams): 4.6284, 0.2436, 58.5858, 231.4200
+Raspberries, frozen, red, sweetened (1 package (10 oz) / 284.0 grams): 1.9880, 0.4544, 74.2944, 292.5200
+Soursop, raw (1 fruit (7" x 5-1/4" dia) / 625.0 grams): 6.2500, 1.8750, 105.2500, 412.5000
+Fruit salad, (pineapple and papaya and banana and guava), tropical, canned, heavy syrup, solids and liquids (1 cup / 257.0 grams): 1.0537, 0.2570, 57.4652, 221.0200
+Pineapple, canned, juice pack, drained (1 cup, chunks / 181.0 grams): 0.9231, 0.1991, 28.1636, 108.6000
+Apple juice, canned or bottled, unsweetened, with added ascorbic acid (1 cup / 248.0 grams): 0.2480, 0.3224, 28.0240, 114.0800
+Apple juice, frozen concentrate, unsweetened, undiluted, with added ascorbic acid (1 can (6 fl oz) / 211.0 grams): 1.0761, 0.7807, 86.5100, 350.2600
+Dates, medjool (1 date, pitted / 24.0 grams): 0.4344, 0.0360, 17.9928, 66.4800
+USDA Commodity, mixed fruit (peaches, pears, grapes), canned, light syrup, drained (100 grams): 0.4600, 0.1000, 14.6500, 57.0000
+USDA Commodity pears, canned, juice pack, drained (100 grams): 0.3400, 0.1900, 12.9100, 51.0000
+Nance, frozen, unsweetened (1 cup without pits, thawed / 112.0 grams): 0.7392, 1.2992, 19.0064, 81.7600
+Apples, raw, fuji, with skin (1 medium / 192.0 grams): 0.3840, 0.3456, 29.2224, 120.9600
+Fruit juice smoothie, BOLTHOUSE FARMS, BERRY BOOST (1 cup / 252.0 grams): 1.5876, 0.0504, 27.4680, 115.9200
+Lemon juice from concentrate, bottled, CONCORD (1 tbsp / 15.0 grams): 0.0600, 0.0105, 0.8055, 3.6000
+Pork, fresh, carcass, separable lean and fat, raw (1 lb / 453.6 grams): 63.0958, 159.0775, 0.0000, 1705.5360
+Pork, fresh, leg (ham), whole, separable lean and fat, cooked, roasted (1 cup, diced / 135.0 grams): 36.2205, 23.7735, 0.0000, 368.5500
+Pork, fresh, leg (ham), shank half, separable lean and fat, cooked, roasted (1 roast / 2900.0 grams): 752.8400, 389.1800, 0.0000, 6728.0000
+Pork, fresh, loin, whole, separable lean only, cooked, braised (3 oz / 85.0 grams): 24.2845, 7.7520, 0.0000, 173.4000
+Pork, fresh, loin, blade (chops), bone-in, separable lean only, cooked, braised (1 chop / 206.0 grams): 57.7212, 23.2574, 0.0000, 457.3200
+Pork, fresh, loin, center loin (chops), bone-in, separable lean only, cooked, braised (1 chop / 187.0 grams): 56.4740, 14.6982, 0.0000, 374.0000
+Pork, fresh, loin, center rib (chops), bone-in, separable lean only, cooked, braised (1 chop / 187.0 grams): 54.2861, 17.4284, 0.0000, 388.9600
+Pork, fresh, loin, sirloin (chops), bone-in, separable lean only, cooked, braised (1 chop / 180.0 grams): 55.8000, 12.4200, 0.0000, 351.0000
+Pork, fresh, loin, top loin (roasts), boneless, separable lean and fat, cooked, roasted (1 roast / 848.0 grams): 224.2960, 74.7936, 0.0000, 1628.1600
+Pork, fresh, shoulder, whole, separable lean only, cooked, roasted (1 cup, diced / 135.0 grams): 34.1955, 18.2790, 0.0000, 310.5000
+Pork, fresh, shoulder, (Boston butt), blade (steaks), separable lean and fat, cooked, braised (1 steak without refuse (Yield from 1 cooked steak, with refuse, weighing 249g) / 185.0 grams): 46.3795, 32.7265, 0.0000, 493.9500
+Pork, fresh, spareribs, separable lean and fat, cooked, braised (1 piece, cooked, excluding refuse (yield from 1 lb raw meat with refuse) / 177.0 grams): 51.4362, 53.6310, 0.0000, 702.6900
+Pork, fresh, variety meats and by-products, ears, frozen, cooked, simmered (1 unit, cooked (yield from 1 lb raw meat) / 422.0 grams): 67.3090, 45.5760, 0.8440, 700.5200
+Pork, fresh, variety meats and by-products, liver, raw (4 oz / 113.0 grams): 24.1707, 4.1245, 2.7911, 151.4200
+Pork, fresh, variety meats and by-products, spleen, cooked, braised (3 oz / 85.0 grams): 23.9700, 2.7200, 0.0000, 126.6500
+Pork, cured, feet, pickled (1 lb / 453.6 grams): 52.7537, 45.4507, 0.0454, 635.0400
+Pork, cured, ham, patties, unheated (1 patty / 65.0 grams): 8.3070, 18.3235, 1.0985, 204.7500
+Pork, cured, salt pork, raw (8 oz / 227.0 grams): 11.4635, 182.7350, 0.0000, 1697.9600
+Pork, fresh, variety meats and by-products, tail, raw (4 oz / 113.0 grams): 20.0575, 37.8550, 0.0000, 427.1400
+Pork, cured, ham, boneless, extra lean and regular, unheated (1 cup / 140.0 grams): 25.5640, 11.7460, 3.1920, 226.8000
+Pork, fresh, backribs, separable lean and fat, raw (3 oz / 85.0 grams): 16.2095, 13.8805, 0.0000, 190.4000
+Pork, fresh, loin, center rib (chops), boneless, separable lean only, cooked, braised (3 oz / 85.0 grams): 23.7575, 8.6190, 0.0000, 179.3500
+Pork, fresh, loin, country-style ribs, separable lean only, cooked, braised (3 oz / 85.0 grams): 23.5790, 12.1210, 0.0000, 209.9500
+Pork, fresh, loin, sirloin (chops), boneless, separable lean only, cooked, broiled (1 chop / 159.0 grams): 45.4740, 6.9324, 0.0000, 255.9900
+Pork, fresh, loin, top loin (roasts), boneless, separable lean and fat, raw (1 roast / 2195.0 grams): 468.4130, 182.8435, 0.0000, 3643.7000
+USDA Commodity, pork, cured, ham, boneless, cooked, unheated (1 oz boneless / 28.35 grams): 4.9442, 1.7464, 0.1956, 37.7055
+HORMEL Canadian Style Bacon (1 serving / 56.0 grams): 9.4528, 2.7664, 1.0472, 68.3200
+Pork, cured, ham -- water added, rump, bone-in, separable lean only, heated, roasted (1 roast rump / 2970.0 grams): 635.8770, 105.7320, 25.8390, 3593.7000
+Pork, cured, ham with natural juices, rump, bone-in, separable lean only, heated, roasted (1 roast rump / 2673.0 grams): 645.2622, 113.6025, 12.8304, 3662.0100
+Pork, cured, ham and water product, shank, bone-in, separable lean only, heated, roasted (1 roast shank / 3204.0 grams): 694.9476, 142.5780, 40.3704, 4229.2800
+Pork, cured, ham and water product, shank, bone-in, unheated, separable lean only (3 oz / 85.0 grams): 14.9005, 3.5530, 1.0200, 96.0500
+Pork, cured, ham, slice, bone-in, separable lean only, heated, pan-broil (1 slice / 366.0 grams): 99.4788, 14.9694, 2.7084, 541.6800
+Pork, cured, ham and water product, shank, bone-in, separable lean and fat, unheated (1 lb shank / 453.6 grams): 64.7741, 90.7200, 6.4411, 1102.2480
+Pork, cured, ham -- water added, slice, bone-in, separable lean and fat, heated, pan-broil (1 slice / 436.0 grams): 90.6880, 38.0628, 6.7144, 723.7600
+Pork, cured, ham with natural juices, rump, bone-in, separable lean and fat, heated, roasted (1 roast rump / 2673.0 grams): 600.6231, 250.9947, 16.0380, 4731.2100
+Pork, cured, ham, rump, bone-in, separable lean only, unheated (1 lb / 453.6 grams): 110.9506, 13.2451, 1.4515, 567.0000
+Pork, fresh, spareribs, separable lean and fat, cooked, roasted (3 oz / 85.0 grams): 17.7565, 26.2310, 0.0000, 306.8500
+Pork, fresh, loin, top loin (chops), boneless, separable lean and fat, with added solution, raw (1 chop / 146.0 grams): 28.3970, 14.9796, 0.0000, 249.6600
+Pork, Leg Cap Steak, boneless, separable lean and fat, raw (1 piece / 231.0 grams): 49.9884, 7.8309, 0.0000, 284.1300
+Pork, ground, 96% lean / 4% fat, raw (4 oz / 113.0 grams): 23.8430, 4.5200, 0.2373, 136.7300
+Pork loin, fresh, backribs, bone-in, cooked-roasted, lean only (1 ribs / 878.0 grams): 212.0370, 154.9670, 0.0000, 2238.9000
+Pork, fresh, loin, blade (chops or roasts), boneless, separable lean and fat only, raw (1 chop / 176.0 grams): 36.1504, 13.9744, 1.3376, 276.3200
+Amaranth leaves, raw (1 cup / 28.0 grams): 0.6888, 0.0924, 1.1256, 6.4400
+Asparagus, raw (1 spear, large (7-1/4" to 8-1/2") / 20.0 grams): 0.4400, 0.0240, 0.7760, 4.0000
+Balsam-pear (bitter gourd), pods, raw (1 balsam-pear / 124.0 grams): 1.2400, 0.2108, 4.5880, 21.0800
+Lima beans, immature seeds, cooked, boiled, drained, without salt (1 cup / 170.0 grams): 11.5770, 0.5440, 40.1880, 209.1000
+Mung beans, mature seeds, sprouted, cooked, stir-fried (1 cup / 124.0 grams): 5.3320, 0.2604, 13.1316, 62.0000
+Beans, snap, green, canned, regular pack, solids and liquids (1 can total can contents / 423.0 grams): 3.0456, 0.7191, 13.8321, 63.4500
+Beets, cooked, boiled, drained (2 beets (2" dia, sphere) / 100.0 grams): 1.6800, 0.1800, 9.9600, 44.0000
+Broccoli, cooked, boiled, drained, without salt (1 stalk, small (5" long) / 140.0 grams): 3.3320, 0.5740, 10.0520, 49.0000
+Brussels sprouts, cooked, boiled, drained, without salt (.5 cup / 78.0 grams): 1.9890, 0.3900, 5.5380, 28.0800
+Cabbage, raw (1 cup, chopped / 89.0 grams): 1.1392, 0.0890, 5.1620, 22.2500
+Cabbage, kimchi (1 cup / 150.0 grams): 1.6500, 0.7500, 3.6000, 22.5000
+Carrots, canned, regular pack, drained solids (1 cup, mashed / 228.0 grams): 1.4592, 0.4332, 12.6312, 57.0000
+Celeriac, raw (1 cup / 156.0 grams): 2.3400, 0.4680, 14.3520, 65.5200
+Chayote, fruit, cooked, boiled, drained, without salt (1 cup (1" pieces) / 160.0 grams): 0.9920, 0.7680, 8.1440, 38.4000
+Collards, cooked, boiled, drained, without salt (1 cup, chopped / 190.0 grams): 5.1490, 1.3680, 10.7350, 62.7000
+Corn, sweet, yellow, canned, cream style, regular pack (1 can (303 x 406) / 482.0 grams): 8.3868, 2.0244, 87.3866, 347.0400
+Corn with red and green peppers, canned, solids and liquids (1 cup / 227.0 grams): 5.2891, 1.2485, 41.2459, 170.2500
+Yardlong bean, raw (1 cup slices / 91.0 grams): 2.5480, 0.3640, 7.5985, 42.7700
+Dandelion greens, raw (1 cup, chopped / 55.0 grams): 1.4850, 0.3850, 5.0600, 24.7500
+Garlic, raw (3 cloves / 9.0 grams): 0.5724, 0.0450, 2.9754, 13.4100
+Hyacinth-beans, immature seeds, raw (1 cup / 80.0 grams): 1.6800, 0.1600, 7.3520, 36.8000
+Kale, cooked, boiled, drained, without salt (1 cup, chopped / 130.0 grams): 2.4700, 0.5200, 7.3190, 36.4000
+Kohlrabi, cooked, boiled, drained, without salt (1 cup slices / 165.0 grams): 2.9700, 0.1815, 11.0385, 47.8500
+Lettuce, butterhead (includes boston and bibb types), raw (1 leaf, large / 15.0 grams): 0.2025, 0.0330, 0.3345, 1.9500
+Mountain yam, hawaii, cooked, steamed, without salt (1 cup, cubes / 145.0 grams): 2.5085, 0.1160, 29.0000, 118.9000
+Mushrooms, shiitake, dried (4 mushrooms / 15.0 grams): 1.4370, 0.1485, 11.3055, 44.4000
+New Zealand spinach, raw (1 cup, chopped / 56.0 grams): 0.8400, 0.1120, 1.4000, 7.8400
+Onions, dehydrated flakes (.25 cup / 14.0 grams): 1.2530, 0.0644, 11.6592, 48.8600
+Onions, young green, tops only (1 stalk / 12.0 grams): 0.1164, 0.0564, 0.6888, 3.2400
+Peas, edible-podded, raw (1 cup, whole / 63.0 grams): 1.7640, 0.1260, 4.7565, 26.4600
+Peas, green, canned, seasoned, solids and liquids (1 cup / 227.0 grams): 7.0143, 0.6129, 20.9975, 113.5000
+Peas and carrots, frozen, cooked, boiled, drained, without salt (1 package (10 oz) yields / 278.0 grams): 8.5902, 1.1676, 28.1336, 133.4400
+Peppers, sweet, green, frozen, chopped, unprepared (1 package (10 oz) / 284.0 grams): 3.0672, 0.5964, 12.6380, 56.8000
+Potatoes, flesh and skin, raw (1 Potato medium (2-1/4" to 3-1/4" dia) / 213.0 grams): 4.3665, 0.1917, 37.2537, 164.0100
+Potatoes, french fried, crinkle or regular cut, salt added in processing, frozen, oven-heated (10 strip / 69.0 grams): 1.7319, 3.5397, 18.9750, 114.5400
+Potatoes, microwaved, cooked in skin, flesh, without salt (1 potato (2-1/3" x 4-3/4") / 156.0 grams): 3.2760, 0.1560, 36.3168, 156.0000
+Potatoes, mashed, dehydrated, flakes without milk, dry form (1 cup / 60.0 grams): 5.0040, 0.2460, 48.7020, 212.4000
+Potatoes, scalloped, dry mix, unprepared (1 package (5.5 oz) / 156.0 grams): 12.1212, 7.1604, 115.3308, 558.4800
+Potatoes, o'brien, frozen, unprepared (100 grams): 1.8300, 0.1400, 17.4700, 76.0000
+Potatoes, french fried, cottage-cut, salt not added in processing, frozen, as purchased (1 package (9 oz) / 255.0 grams): 6.1710, 14.7390, 61.1490, 390.1500
+Potato salad, home-prepared (1 cup / 250.0 grams): 6.7000, 20.5000, 27.9250, 357.5000
+Pumpkin pie mix, canned (1 cup / 270.0 grams): 2.9430, 0.3510, 71.2530, 280.8000
+Rutabagas, cooked, boiled, drained, without salt (1 cup, mashed / 240.0 grams): 2.2320, 0.4320, 16.4160, 72.0000
+Sesbania flower, raw (1 cup flowers / 20.0 grams): 0.2560, 0.0080, 1.3460, 5.4000
+Spinach, cooked, boiled, drained, without salt (1 cup / 180.0 grams): 5.3460, 0.4680, 6.7500, 41.4000
+Squash, summer, crookneck and straightneck, frozen, unprepared (1 cup slices / 130.0 grams): 1.0790, 0.1820, 6.2400, 26.0000
+Squash, summer, zucchini, italian style, canned (1 cup / 227.0 grams): 2.3381, 0.2497, 15.5495, 65.8300
+Squash, winter, hubbard, raw (1 cup, cubes / 116.0 grams): 2.3200, 0.5800, 10.0920, 46.4000
+Succotash, (corn and limas), canned, with whole kernel corn, solids and liquids (1 cup / 255.0 grams): 6.6300, 1.2495, 35.6490, 160.6500
+Sweet potato, cooked, baked in skin, flesh, without salt (1 large / 180.0 grams): 3.6180, 0.2700, 37.2780, 162.0000
+Taro leaves, raw (1 cup / 28.0 grams): 1.3944, 0.2072, 1.8760, 11.7600
+Tomatoes, red, ripe, cooked (2 medium / 246.0 grams): 2.3370, 0.2706, 9.8646, 44.2800
+Tomato products, canned, sauce (1 cup / 245.0 grams): 2.9400, 0.7350, 13.0095, 58.8000
+Turnips, cooked, boiled, drained, without salt (1 cup, mashed / 230.0 grams): 1.6330, 0.1840, 11.6380, 50.6000
+Turnip greens and turnips, frozen, unprepared (1 package (10 oz) / 284.0 grams): 6.9864, 0.5396, 9.6276, 59.6400
+Vinespinach, (basella), raw (100 grams): 1.8000, 0.3000, 3.4000, 19.0000
+Winged bean leaves, raw (100 grams): 5.8500, 1.1000, 14.1000, 74.0000
+Borage, raw (1 cup (1" pieces) / 89.0 grams): 1.6020, 0.6230, 2.7234, 18.6900
+Kale, scotch, raw (1 cup, chopped / 67.0 grams): 1.8760, 0.4020, 5.5744, 28.1400
+Shallots, freeze-dried (.25 cup / 3.6 grams): 0.4428, 0.0180, 2.9052, 12.5280
+Beans, pinto, mature seeds, sprouted, raw (100 grams): 5.2500, 0.9000, 11.6000, 62.0000
+Seaweed, agar, dried (100 grams): 6.2100, 0.3000, 80.8800, 306.0000
+Potatoes, microwaved, cooked in skin, flesh and skin, without salt (1 potato (2-3/4" dia by 4-3/4" long) / 202.0 grams): 4.9288, 0.2020, 48.9648, 212.1000
+Chrysanthemum leaves, raw (1 cup, chopped / 51.0 grams): 1.7136, 0.2856, 1.5351, 12.2400
+Balsam-pear (bitter gourd), leafy tips, cooked, boiled, drained, with salt (1 cup / 58.0 grams): 2.0880, 0.1160, 3.5728, 18.5600
+Mung beans, mature seeds, sprouted, cooked, boiled, drained, with salt (1 cup / 124.0 grams): 2.5172, 0.1116, 4.4640, 23.5600
+Beans, snap, green, canned, no salt added, solids and liquids (1 can (303 x 406) / 439.0 grams): 3.5120, 0.4390, 15.3650, 65.8500
+Beets, cooked, boiled. drained, with salt (2 beets (2" dia, sphere) / 100.0 grams): 1.6800, 0.1800, 9.9600, 44.0000
+Broccoli, cooked, boiled, drained, with salt (1 stalk, small (5" long) / 140.0 grams): 3.3320, 0.5740, 10.0520, 49.0000
+Cabbage, common (danish, domestic, and pointed types), stored, raw (1 head / 908.0 grams): 10.9868, 1.6344, 48.7596, 217.9200
+Carrots, canned, no salt added, solids and liquids (1 can (303 x 406) / 454.0 grams): 2.6786, 0.6356, 24.3344, 104.4200
+Chayote, fruit, cooked, boiled, drained, with salt (1 cup (1" pieces) / 160.0 grams): 0.9920, 0.7680, 7.2000, 35.2000
+Corn, sweet, yellow, frozen, kernels, cut off cob, boiled, drained, with salt (1 package (10 oz) yields / 284.0 grams): 7.2420, 1.9028, 53.1364, 224.3600
+Eggplant, cooked, boiled, drained, with salt (1 cup (1" cubes) / 99.0 grams): 0.8217, 0.2277, 8.0586, 32.6700
+Kale, frozen, cooked, boiled, drained, with salt (1 cup, chopped / 130.0 grams): 3.6920, 0.6370, 6.7990, 39.0000
+Mustard greens, cooked, boiled, drained, with salt (1 cup, chopped / 140.0 grams): 3.5840, 0.6580, 6.3140, 36.4000
+Onions, frozen, whole, cooked, boiled, drained, with salt (1 cup / 210.0 grams): 1.4910, 0.1050, 12.8310, 54.6000
+Peas, mature seeds, sprouted, cooked, boiled, drained, with salt (100 grams): 7.0500, 0.5100, 17.0800, 98.0000
+Peppers, sweet, red, cooked, boiled, drained, without salt (.5 cup, chopped / 68.0 grams): 0.6256, 0.1360, 4.5560, 19.0400
+Potatoes, boiled, cooked in skin, flesh, with salt (1 potato (2-1/2" dia, sphere) / 136.0 grams): 2.5432, 0.1360, 27.3768, 118.3200
+Potatoes, french fried, all types, salt not added in processing, frozen, oven-heated (10 strip / 74.0 grams): 1.9684, 3.8628, 21.2454, 127.2800
+Purslane, cooked, boiled, drained, with salt (1 cup / 115.0 grams): 1.7135, 0.2185, 4.0825, 20.7000
+Squash, summer, all varieties, cooked, boiled, drained, with salt (1 cup slices / 180.0 grams): 1.6380, 0.5580, 7.7580, 36.0000
+Squash, winter, acorn, cooked, boiled, mashed, with salt (1 cup, mashed / 245.0 grams): 1.6415, 0.1960, 21.5355, 83.3000
+Swamp cabbage (skunk cabbage), cooked, boiled, drained, with salt (1 cup, chopped / 98.0 grams): 2.0384, 0.2352, 3.6260, 19.6000
+Taro, tahitian, cooked, with salt (1 cup slices / 137.0 grams): 5.6992, 0.9316, 9.3845, 60.2800
