@@ -7,6 +7,7 @@
 from datetime import time
 from enum import Enum
 
+
 class Package:
     def __init__(self, Id = None, addr = None, city = None, state = None, zip = None, notes = None):
         self.ID = Id
