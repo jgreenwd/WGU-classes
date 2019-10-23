@@ -24,7 +24,6 @@ class HashTable:
 
         return (id_cubed_mod_length + (311 - weight_cubed_mod_length)) % self.length
 
-
     def insert(self, args):
         """ insert(args) into HashTable"""
         # 1. generate hash -> index
@@ -46,7 +45,6 @@ class HashTable:
                     return True
             self.table[index].append(value)
             return True
-
 
     def search(self, args):
         """ return reference to object matching hash & ID """
