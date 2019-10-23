@@ -12,7 +12,6 @@ class HashTable:
     #   1st axis = Table
     #   2nd axis = Buckets
     #   3rd axis = [Key/Value] entries in each bucket
-
     def __init__(self, length=64):
         self.length = length
         self.table = [None] * self.length
