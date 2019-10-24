@@ -12,8 +12,9 @@ class KeyValuePair:
 
 
 class HashTable:
-    #   1st axis = Buckets
-    #   2rd axis = List of KeyValuePairs  in each bucket, see insert() # 3.a.
+    #   Table is a 2-axis array
+    #   1st axis = buckets
+    #   2rd axis = List of KeyValuePairs in each bucket, see insert() # 3.a.
     def __init__(self, length=64):
         self.buckets = [None] * length
 
@@ -33,18 +34,15 @@ class HashTable:
         index = self._generate_hash(key)
 
         # 3. check for collision & assign pair to index
-        # - a. if empty, insert
+        # - a. if empty, insert as list
         if self.buckets[index] is None:
             self.buckets[index] = list([kvp])
-            return True
         # - b. else check for update or insertion
         else:
             for item in self.buckets[index]:
                 if item.key == key:
                     item.value = args
-                    return True
             self.buckets[index].append(kvp)
-            return True
 
     def search(self, key):
         """ return reference to object matching hash & key """
@@ -56,5 +54,3 @@ class HashTable:
                     return item
 
         return None
-
-
