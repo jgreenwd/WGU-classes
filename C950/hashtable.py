@@ -18,6 +18,9 @@ class HashTable:
     def __init__(self, length=64):
         self.buckets = [None] * length
 
+    def __len__(self):
+        return len(self.buckets)
+
     def _generate_hash(self, key):
         total = 0
         for char in str(key):
