@@ -21,7 +21,7 @@ class HashTable:
     def _generate_hash(self, key):
         total = 0
         for char in str(key):
-            total += ord(char)
+            total += ord(char) ** 2
 
         return total % len(self.buckets)
 
@@ -37,12 +37,15 @@ class HashTable:
         # - a. if empty, insert as list
         if self.buckets[index] is None:
             self.buckets[index] = list([kvp])
+            return True
         # - b. else check for update or insertion
         else:
             for item in self.buckets[index]:
                 if item.key == key:
                     item.value = args
+                    return True
             self.buckets[index].append(kvp)
+            return True
 
     def search(self, key):
         """ return reference to object matching hash & key """
