@@ -9,18 +9,18 @@ from enum import Enum
 
 
 class Package:
-    def __init__(self, id=None, location=None, notes=None):
+    def __init__(self, id=None, location=None, deadline=None, weight=None, notes=None):
         self.ID = id
         self.location = location
-        self.weight = 0.0
+        self.weight = weight
         self.notes = notes
-        self.deadline = time()
+        self.deadline = deadline
         self.status = Status(0)
 
     def __str__(self):
         return ("ID: " + self.ID +
                 "\tWeight: " + "{:4.1f}".format(self.weight) +
-                "\tExpected Delivery: " + self.deadline.strftime("%H:%M") +
+                "\tDelivery By: " + self.deadline.strftime("%H:%M") +
                 "\tStatus: " + self.status.name +
                 "\t\tAddress: " + str(self.location))
 
