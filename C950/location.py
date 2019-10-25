@@ -12,13 +12,28 @@ class Location:
         self.state = state
         self.zip = zipcode
         self.neighbors = []
-        self.deliveries = []
+        self.packages = []
 
     def add_neighbor(self, neighbor):
         self.neighbors.append(neighbor)
 
     def add_package(self, package):
-        self.deliveries.append(package)
+        self.packages.append(package)
 
     def __str__(self):
         return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
+
+    def __eq__(self, other):
+        return (self.address == other.address and
+                self.city == other.city and
+                self.state == other.state and
+                self.zip == other.zip)
+
+    def __lt__(self, other):
+        return (self.address < other.address and
+                self.city == other.city and
+                self.state == other.state and
+                self.zip == other.zip)
+
+    def __hash__(self):
+        return hash(str(self))
