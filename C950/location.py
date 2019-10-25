@@ -6,11 +6,11 @@
 
 
 class Location:
-    def __init__(self, addr, city, state, zip):
-        self.addr = addr
+    def __init__(self, address, city, state, zipcode):
+        self.address = address
         self.city = city
         self.state = state
-        self.zip = zip
+        self.zip = zipcode
         self.neighbors = []
         self.deliveries = []
 
@@ -21,4 +21,4 @@ class Location:
         self.deliveries.append(package)
 
     def __str__(self):
-        return self.addr + "\t" + self.city + "\t" + self.state + "\t" + self.zip
+        return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
