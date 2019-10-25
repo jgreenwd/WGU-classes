@@ -9,12 +9,9 @@ from enum import Enum
 
 
 class Package:
-    def __init__(self, id=None, addr=None, city=None, state=None, zip=None, notes=None):
+    def __init__(self, id=None, location=None, notes=None):
         self.ID = id
-        self.addr = addr
-        self.city = city
-        self.state = state
-        self.zip = zip
+        self.location = location
         self.weight = 0.0
         self.notes = notes
         self.deadline = time()
@@ -25,7 +22,7 @@ class Package:
                 "\tWeight: " + "{:4.1f}".format(self.weight) +
                 "\tExpected Delivery: " + self.deadline.strftime("%H:%M") +
                 "\tStatus: " + self.status.name +
-                "\t\tAddress: " + self.addr + "\t" + self.city + "\t" + self.state + "\t" + self.zip)
+                "\t\tAddress: " + str(self.location))
 
 
 class Status(Enum):
