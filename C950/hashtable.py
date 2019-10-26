@@ -17,16 +17,17 @@ class HashTable:
     #   2rd axis = List of KeyValuePairs in each bucket, see insert() # 3.a.
     def __init__(self, length=64):
         self.buckets = [None] * length
+        self.length = length
 
     def __len__(self):
-        return len(self.buckets)
+        return self.length
 
     def _generate_hash(self, key):
         total = 0
         for char in str(key):
             total += ord(char) ** 2
 
-        return total % len(self.buckets)
+        return total % self.length
 
     def insert(self, key, args):
         """ insert(args) into HashTable"""
