@@ -19,6 +19,7 @@ class Location:
 
     def add_package(self, package):
         self.packages.append(package)
+        self.packages.sort()
 
     def __str__(self):
         return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
