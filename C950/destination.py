@@ -5,7 +5,7 @@
 # Mentor: Rebekah McBride
 
 
-class Location:
+class Destination:
     def __init__(self, address, city, state, zipcode):
         self.address = address
         self.city = city
