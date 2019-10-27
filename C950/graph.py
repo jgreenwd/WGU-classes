@@ -5,28 +5,6 @@
 # Mentor: Rebekah McBride
 
 
-class Vertex:
-    def __init__(self, node, mass):
-        self.node = node
-        self.adjacent = {}
-        self.mass = mass
-
-    def __str__(self):
-        return self.node
-
-    def add_neighbor(self, neighbor, weight=0):
-        self.adjacent[neighbor] = weight
-
-    def get_connections(self):
-        return self.adjacent.keys()
-
-    def get_node(self):
-        return self.node
-
-    def get_weight(self, neighbor):
-        return self.adjacent[neighbor]
-
-
 class Graph:
     def __init__(self):
         self._index = 0
@@ -49,8 +27,8 @@ class Graph:
             return result
         raise StopIteration
 
-    def add_vertex(self, vertex, mass=0):
-        self.vertices.add(Vertex(vertex, mass))
+    def add_vertex(self, vertex):
+        self.vertices.add(vertex)
 
     def get_vertex(self, vertex):
         for item in list(self.vertices):
