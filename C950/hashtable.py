@@ -3,7 +3,7 @@
 # Jeremy Greenwood
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
-
+#TODO: insert auto size management for self.buckets length
 
 class KeyValuePair:
     def __init__(self, key, value):
