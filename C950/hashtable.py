@@ -18,9 +18,21 @@ class HashTable:
     def __init__(self, length=64):
         self.buckets = [None] * length
         self.length = length
+        self._index = 0
 
     def __len__(self):
         return self.length
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        iterable = self.buckets
+        if self._index < len(iterable):
+            result = iterable[self._index]
+            self._index += 1
+            return result
+        raise StopIteration
 
     def _generate_hash(self, key):
         total = 0
