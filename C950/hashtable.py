@@ -3,13 +3,6 @@
 # Jeremy Greenwood
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
-# TODO: insert auto size management for self.buckets length
-
-
-class KeyValuePair:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
 
 
 class HashTable:
@@ -17,9 +10,14 @@ class HashTable:
     #   1st axis = buckets
     #   2rd axis = List of KeyValuePairs in each bucket, see insert() # 3.a.
     def __init__(self, length=64):
-        self.buckets = [None] * length
+        self.buckets = []
         self.length = length
         self._index = 0
+        for i in range(self.length):
+            self.buckets.append([])
+
+    def __contains__(self, item):
+        return item in self.buckets
 
     def __len__(self):
         return self.length
@@ -36,33 +34,37 @@ class HashTable:
         raise StopIteration
 
     def _generate_hash(self, key):
-        total = 0
-        for char in str(key):
-            total += ord(char) ** 2
+        h1 = 17
+        h2 = 13
+        string = str(key)
+        for i in range(0,len(string),2):
+            h1 *= ord(string[i]) ** 3
 
-        return total % self.length
+        for i in range(1, len(string),2):
+            h2 += ord(string[i]) ** 2
 
-    def insert(self, key, args):
+        return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
+
+    def insert(self, args):
         """ insert(args) into HashTable"""
-        # 1. create K/V pair from package (wrap the object)
-        kvp = KeyValuePair(key, args)
+        # 1. generate hash from supplied key components (determine which bucket to put object in)
+        index = self._generate_hash(args)
 
-        # 2. generate hash from supplied key components (determine which bucket to put object in)
-        index = self._generate_hash(key)
-
-        # 3. check for collision & assign pair to index
+        # 2. check for collision & assign pair to index
         # - a. if empty, insert as list
-        if self.buckets[index] is None:
-            self.buckets[index] = list([kvp])
-            return True
+
+        bucket = self.buckets[index]
+        bucket.append(args)
+
+        #     return True
         # - b. else check for update or insertion
-        else:
-            for item in self.buckets[index]:
-                if item.key == key:
-                    item.value = args
-                    return True
-            self.buckets[index].append(kvp)
-            return True
+        # else:
+        #     for item in self.buckets[index]:
+        #         if item.key == :
+        #             item.value = args
+        #             return True
+        #     self.buckets[index].append(kvp)
+        #     return True
 
     def search(self, key):
         """ return reference to object matching hash & key """
