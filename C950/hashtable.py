@@ -6,14 +6,15 @@
 
 
 class HashTable:
+    #   Chaining Hash Table:
     #   Table is a 2-axis array
-    #   1st axis = buckets
-    #   2rd axis = List of KeyValuePairs in each bucket, see insert() # 3.a.
+    #   1st axis = List of buckets
+    #   2rd axis = List of items in each bucket
     def __init__(self, length=64):
         self.buckets = []
         self.length = length
         self._index = 0
-        for i in range(self.length):
+        for i in range(length):
             self.buckets.append([])
 
     def __contains__(self, item):
@@ -47,30 +48,16 @@ class HashTable:
 
     def insert(self, args):
         """ insert(args) into HashTable"""
-        # 1. generate hash from supplied key components (determine which bucket to put object in)
         index = self._generate_hash(args)
-
-        # 2. check for collision & assign pair to index
-        # - a. if empty, insert as list
 
         bucket = self.buckets[index]
         bucket.append(args)
-
-        #     return True
-        # - b. else check for update or insertion
-        # else:
-        #     for item in self.buckets[index]:
-        #         if item.key == :
-        #             item.value = args
-        #             return True
-        #     self.buckets[index].append(kvp)
-        #     return True
 
     def search(self, key):
         """ return reference to object matching hash & key """
         index = self._generate_hash(key)
 
-        if self.buckets[index] is not None:
+        if len(self.buckets[index]) > 0:
             for item in self.buckets[index]:
                 if item.key == key:
                     return item
