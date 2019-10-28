@@ -4,18 +4,17 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
+from vertex import Vertex
 
-class Destination:
-    def __init__(self, address, city, state, zipcode):
+
+class Destination(Vertex):
+    def __init__(self, address, city=None, state=None, zipcode=None):
+        Vertex.__init__(self, address)
         self.address = address
         self.city = city
         self.state = state
         self.zip = zipcode
-        self.neighbors = []
         self.packages = []
-
-    def add_neighbor(self, neighbor):
-        self.neighbors.append(neighbor)
 
     def add_package(self, package):
         self.packages.append(package)
@@ -25,15 +24,12 @@ class Destination:
         return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
 
     def __eq__(self, other):
-        return (self.address == other.address and
-                self.city == other.city and
-                self.state == other.state and
-                self.zip == other.zip)
+        if other is not None:
+            return (self.address == other.address and
+                    self.zip == other.zip)
 
     def __lt__(self, other):
         return (self.address < other.address and
-                self.city == other.city and
-                self.state == other.state and
                 self.zip == other.zip)
 
     def __hash__(self):
