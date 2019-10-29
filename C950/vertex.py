@@ -13,7 +13,7 @@ class Vertex:
     def __str__(self):
         return str(self.id)
 
-    def add_neighbor(self, neighbor, weight=0):
+    def add_edge(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
 
     def get_connections(self):
