@@ -32,16 +32,17 @@ class HashTable:
             result = iterable[self._index]
             self._index += 1
             return result
+        self._index = 0
         raise StopIteration
 
     def _generate_hash(self, key):
         h1 = 17
         h2 = 13
         string = str(key)
-        for i in range(0,len(string),2):
+        for i in range(0, len(string), 2):
             h1 *= ord(string[i]) ** 3
 
-        for i in range(1, len(string),2):
+        for i in range(1, len(string), 2):
             h2 += ord(string[i]) ** 2
 
         return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
