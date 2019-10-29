@@ -48,14 +48,14 @@ class HashTable:
         return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
 
     def insert(self, args):
-        """ insert(args) into HashTable"""
+        """ Insert(args) into HashTable. """
         index = self._generate_hash(args)
 
         bucket = self.buckets[index]
         bucket.append(args)
 
     def search(self, key):
-        """ return reference to object matching hash & key """
+        """ Return reference to object matching key or None. """
         index = self._generate_hash(key)
 
         if len(self.buckets[index]) > 0:
