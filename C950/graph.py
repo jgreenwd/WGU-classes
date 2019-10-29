@@ -25,6 +25,7 @@ class Graph:
             result = iterable[self._index]
             self._index += 1
             return result
+        self._index = 0
         raise StopIteration
 
     def add_vertex(self, vertex):
