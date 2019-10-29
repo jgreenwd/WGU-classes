@@ -8,17 +8,13 @@ from vertex import Vertex
 
 
 class Destination(Vertex):
-    def __init__(self, address, city=None, state=None, zipcode=None):
+    def __init__(self, address, city=None, state=None, zip=None):
         Vertex.__init__(self, address)
         self.address = address
         self.city = city
         self.state = state
-        self.zip = zipcode
+        self.zip = zip
         self.packages = []
-
-    def add_package(self, package):
-        self.packages.append(package)
-        self.packages.sort()
 
     def __str__(self):
         return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
@@ -34,3 +30,7 @@ class Destination(Vertex):
 
     def __hash__(self):
         return hash(str(self))
+
+    def add_package(self, package):
+        self.packages.append(package)
+        self.packages.sort()
