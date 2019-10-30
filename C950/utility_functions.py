@@ -66,6 +66,8 @@ def build_graph_and_hashtable(source1, source2, source3):
     table = HashTable(64)
 
     # ------- Create Destination Vertices and add Package -------
+    HUB = Destination("HUB", "Salt Lake City", "UT", "84107")
+    locales.add_vertex(HUB)
     for line in source1:
         # separate items on each line of CSV file
         temp = line.split(',')
@@ -85,6 +87,7 @@ def build_graph_and_hashtable(source1, source2, source3):
 
         # add Package to HashTable
         table.insert(p)
+        HUB.add_package(p)
 
         # add Package to its Destination
         if loc in locales:
@@ -117,5 +120,7 @@ def build_graph_and_hashtable(source1, source2, source3):
             # add edge & weight given those two vertices
             tmp[i].add_edge(loc, get_weight(matrix, index_1, index_2))
         i += 1
+
+    print(HUB.adjacent)
 
     return locales, table
