@@ -51,9 +51,7 @@ class Graph:
         i = 0
         while i < len(self.vertices):
             tmp = list(self.vertices)
-            for j, loc in enumerate(self.vertices):
-                if i == j:
-                    continue
+            for loc in self.vertices:
                 # find index for both graph vertices
                 index_1 = self._get_index(tmp[i])
                 index_2 = self._get_index(loc)
