@@ -40,11 +40,11 @@ class Graph:
         return None
 
     def generate_edges(self, index_source, weight_source):
-        self.indices = [None] * len(self.vertices)
+        self.indices = [None] * len(index_source)
         for index, line in enumerate(index_source):
             self.indices[index] = line
 
-        self.weights = [[]] * len(self.vertices)
+        self.weights = [[]] * len(weight_source)
         for index, line in enumerate(weight_source):
             self.weights[index] = [float(i) for i in line.split('\t')]
 
