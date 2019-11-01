@@ -9,6 +9,13 @@ from vertex import Vertex
 
 class Destination(Vertex):
     def __init__(self, address, city=None, state=None, zip=None):
+        """ Create Destination Object.
+
+        :param address: string of street address
+        :param city: string of city
+        :param state: string of state
+        :param zip: integer of zip code
+        """
         Vertex.__init__(self, address)
         self.address = address
         self.city = city
@@ -33,14 +40,14 @@ class Destination(Vertex):
         return hash(str(self))
 
     def add_package(self, package):
-        """ Append package to self's list of packages & sort list by deadline """
+        """ Append package to vertex's list of packages & sort list by deadline. """
         self.packages.append(package)
         self.packages.sort()
 
     def is_visited(self):
-        """ Return self.visited as Bool """
+        """ Return Vertex's visited status as Bool. """
         return self.visited
 
     def visit(self):
-        """ Set self.visited to True (False by default) """
+        """ Set Vertex.visited to True (False by default). """
         self.visited = True
