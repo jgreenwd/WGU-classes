@@ -7,10 +7,14 @@
 
 class HashTable:
     #   Chaining Hash Table:
-    #   Table is a 2-axis array
-    #   1st axis = List of buckets
-    #   2rd axis = List of items in each bucket
+    #   - Table is a 2-axis array
+    #   - 1st axis = List of buckets
+    #   - 2rd axis = List of items in each bucket
     def __init__(self, length=64):
+        """ Create HashTable Object.
+
+        :param length: number of buckets to create in the table
+        """
         self.buckets = []
         self.length = length
         self._index = 0
@@ -36,6 +40,7 @@ class HashTable:
         raise StopIteration
 
     def _generate_hash(self, key):
+        # Generate Hash value from key for indexing HashTable.
         h1 = 17
         h2 = 13
         string = str(key)
@@ -48,7 +53,7 @@ class HashTable:
         return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
 
     def insert(self, args):
-        """ Insert(args) into HashTable. """
+        """ Insert args into HashTable. """
         index = self._generate_hash(args)
 
         bucket = self.buckets[index]
