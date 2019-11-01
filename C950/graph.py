@@ -7,6 +7,7 @@
 
 class Graph:
     def __init__(self):
+        """ Create Graph Object. """
         self._index = 0
         self.vertices = set()
         self.indices = []
@@ -31,15 +32,22 @@ class Graph:
         raise StopIteration
 
     def add_vertex(self, vertex):
+        """ Add vertex to Set() of Vertices. """
         self.vertices.add(vertex)
 
     def get_vertex(self, vertex):
+        """ Return reference to vertex. """
         for item in list(self.vertices):
             if item == vertex:
                 return item
         return None
 
     def generate_edges(self, index_source, weight_source):
+        """ Add edges & weights to/from all Vertices within the Graph.
+
+        :param index_source: ordered List() of Vertex() names & zips
+        :param weight_source: ordered 2D-List() of Vertex() edge weights
+        """
         self.indices = [None] * len(index_source)
         for index, line in enumerate(index_source):
             self.indices[index] = line
@@ -60,21 +68,12 @@ class Graph:
             i += 1
 
     def _get_weight(self, vert1, vert2):
-        """ Return float found at intersection of both vertices.
-
-            matrix = 2D list of floats
-            vert1 = int index of first axis
-            vert2 = int index of second axis
-        """
+        """ Return weight of edge between both vertices as float. """
         low, high = sorted([vert1, vert2])
         return self.weights[high][low]
 
     def _get_index(self, location):
-        """ Return index of target in list or -1.
-
-            indices = ordinal list of address names
-            location = target search value
-        """
+        """ Return index of location in list or -1. """
         index = 0
         search = location.address + " " + location.zip
         for item in self.indices:
