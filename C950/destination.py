@@ -15,6 +15,7 @@ class Destination(Vertex):
         self.state = state
         self.zip = zip
         self.packages = []
+        self.visited = False
 
     def __str__(self):
         return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
@@ -34,3 +35,9 @@ class Destination(Vertex):
     def add_package(self, package):
         self.packages.append(package)
         self.packages.sort()
+
+    def is_visited(self):
+        return self.visited
+
+    def visit(self):
+        self.visited = True
