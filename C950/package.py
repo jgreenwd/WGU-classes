@@ -9,8 +9,17 @@ from enum import Enum
 
 
 class Package:
-    def __init__(self, id=None, deadline=None, weight=None, notes=None):
+    def __init__(self, id=None, address=None, deadline=None, weight=None, notes=None):
+        """ Create Package() object.
+
+        :param id: integer value representing unique package
+        :param address: string value representing street address
+        :param deadline: time object representing expected delivery time
+        :param weight: float value of package mass
+        :param notes: string value of delivery notes
+        """
         self.ID = id
+        self.address = address
         self.weight = weight
         self.notes = notes
         self.deadline = deadline
