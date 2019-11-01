@@ -52,7 +52,7 @@ class Package:
 
     def get_status(self):
         """ Return Package delivery Status. """
-        return self.status
+        return self.status.name
 
 
 class Status(Enum):
