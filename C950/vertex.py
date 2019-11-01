@@ -7,6 +7,9 @@
 
 class Vertex:
     def __init__(self, node):
+        """ Create Vertex Object.
+
+        :param node: object placed at Vertex """
         self.id = node
         self.adjacent = {}
 
@@ -14,13 +17,13 @@ class Vertex:
         return str(self.id)
 
     def add_edge(self, neighbor, weight=0):
-        """ Add weighted edge from self to neighbor """
+        """ Add weighted edge from self to neighbor. """
         self.adjacent[neighbor] = weight
 
     def get_connections(self):
-        """ Return dict keys of all connections to this Vertex """
+        """ Return dict keys of all connections to this Vertex. """
         return self.adjacent.keys()
 
     def get_weight(self, neighbor):
-        """ Return weight of edge from self to neighbor as float """
+        """ Return weight of edge from self to neighbor as float. """
         return self.adjacent[neighbor]
