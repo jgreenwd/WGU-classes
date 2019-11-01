@@ -33,11 +33,14 @@ class Destination(Vertex):
         return hash(str(self))
 
     def add_package(self, package):
+        """ Append package to self's list of packages & sort list by deadline """
         self.packages.append(package)
         self.packages.sort()
 
     def is_visited(self):
+        """ Return self.visited as Bool """
         return self.visited
 
     def visit(self):
+        """ Set self.visited to True (False by default) """
         self.visited = True
