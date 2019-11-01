@@ -51,9 +51,10 @@ class Route(Graph):
         # 8. Find the Destination closest to the current vertex
         # --------------------
         # 9. Repeat until no vertices remain in sorted list
-        print(len(self.order))
+        # 10. Return to starting vertex
+
         while None in self.order:
-            # save reference to the last place visited in List()
+            # save reference to the last place visited in tmp List() to be able to .remove() it later
             prev = current
 
             if i == len(self.order) // 2:
@@ -64,3 +65,6 @@ class Route(Graph):
             current = self.order[i]
             tmp.remove(prev)
             i += 1
+        
+        # return to starting vertex
+        self.order.append(start)
