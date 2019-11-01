@@ -34,6 +34,26 @@ class Package:
     def __lt__(self, other):
         return self.deadline < other.deadline
 
+    def load(self):
+        """ Set status to Loading. """
+        self.status = Status(1)
+
+    def delay(self):
+        """ Set status to Delayed. """
+        self.status = Status(2)
+
+    def ofd(self):
+        """ Set status to Out For Delivery. """
+        self.status = Status(3)
+
+    def deliver(self):
+        """ Set status to Delivered. """
+        self.status = Status(4)
+
+    def get_status(self):
+        """ Return Package delivery Status. """
+        return self.status
+
 
 class Status(Enum):
     IN_ROUTE = 0
