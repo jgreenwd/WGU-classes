@@ -22,7 +22,6 @@ class Destination(Vertex):
         self.state = state
         self.zip = zip
         self.packages = []
-        self.visited = False
 
     def __str__(self):
         return self.address + "\t" + self.city + "\t" + self.state + "\t" + self.zip
@@ -43,11 +42,3 @@ class Destination(Vertex):
         """ Append package to vertex's list of packages & sort list by deadline. """
         self.packages.append(package)
         self.packages.sort()
-
-    def is_visited(self):
-        """ Return Vertex's visited status as Bool. """
-        return self.visited
-
-    def visit(self):
-        """ Set Vertex.visited to True (False by default). """
-        self.visited = True
