@@ -22,6 +22,7 @@ class Package:
         self.weight = weight
         self.notes = notes
         self.deadline = deadline
+        self.time_of_delivery = ""
         self.status = Status(0)
 
     def __str__(self):
@@ -51,7 +52,10 @@ class Package:
 
     def get_status(self):
         """ Return Package delivery Status. """
-        return self.status.name
+        if self.status.value == 4:
+            return self.status.name + ": " + self.time_of_delivery
+        else:
+            return self.status.name
 
 
 class Status(Enum):
