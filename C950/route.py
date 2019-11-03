@@ -81,7 +81,7 @@ class Route(Graph):
         self._rate_of_travel = rate
 
     def set_start_time(self, time):
-        """ Set the time at which the vehicle will leave the HUB.
+        """ Set the time when the vehicle will leave the HUB.
 
         :param time: expects datetime() value
         """
@@ -99,7 +99,8 @@ class Route(Graph):
         """ Return next node to be visited in Cycle.
 
             CAUTION: This method advances the internal index to the next node. Every
-            invocation of the method will return a different value.
+            invocation of the method will return a different value until the last
+            value is reached.
         """
         if self._index < len(self.order) - 1:
             self._index += 1
