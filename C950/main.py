@@ -11,6 +11,7 @@ from route import Route
 from copy import deepcopy
 from vertex import Vertex
 
+# TODO: refactor SIMULATE ROUTE section to remove redundancies and simplify
 
 if __name__ == '__main__':
     # --------------- ESTABLISH PARAMETERS -----------------
