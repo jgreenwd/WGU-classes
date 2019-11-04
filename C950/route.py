@@ -7,6 +7,8 @@
 from graph import Graph
 from datetime import time
 
+# TODO: optimize path algorithm
+
 
 class Route(Graph):
     def __init__(self):
@@ -62,7 +64,8 @@ class Route(Graph):
             # save reference to the last place visited in tmp List() to be able to .remove() it later
             prev = current
 
-            if i == len(self.order) // 2:
+            # +1 pushes index to the middle on odd numbered list lengths
+            if i == len(self.order) // 2 + 1:
                 self.order[i] = self._find_midpoint(start, sorted(list(self.vertices), key=lambda i: i.get_weight(start)))
             else:
                 self.order[i] = self._find_next(current, tmp)
