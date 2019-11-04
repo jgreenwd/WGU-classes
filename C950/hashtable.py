@@ -4,7 +4,6 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
-import copy
 
 class HashTable:
     #   Chaining Hash Table:
