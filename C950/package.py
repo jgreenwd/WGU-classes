@@ -34,6 +34,13 @@ class Package:
     def __lt__(self, other):
         return self.deadline < other.deadline
 
+    def __eq__(self, other):
+        return self.ID == other.ID
+
+    def in_route(self):
+        """ Set status to In_Route. """
+        self.status = Status(0)
+
     def delay(self):
         """ Set status to Delayed. """
         self.status = Status(1)
