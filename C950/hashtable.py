@@ -4,26 +4,35 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
+import copy
 
-class Graph:
-    def __init__(self):
-        """ Create Graph Object. """
+class HashTable:
+    #   Chaining Hash Table:
+    #   - Table is a 2-axis array
+    #   - 1st axis = List of buckets
+    #   - 2rd axis = List of items in each bucket
+    def __init__(self, length=64):
+        """ Create HashTable Object.
+
+        :param length: number of buckets to create in the table
+        """
+        self.buckets = []
+        self.length = length
         self._index = 0
-        self.vertices = set()
-        self.indices = []
-        self.weights = []
+        for i in range(length):
+            self.buckets.append([])
 
-    def __contains__(self, vertex):
-        return vertex in self.vertices
+    def __contains__(self, item):
+        return item in self.buckets
 
     def __len__(self):
-        return len(self.vertices)
+        return self.length
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        iterable = list(self.vertices)
+        iterable = self.buckets
         if self._index < len(iterable):
             result = iterable[self._index]
             self._index += 1
@@ -31,53 +40,32 @@ class Graph:
         self._index = 0
         raise StopIteration
 
-    def add_vertex(self, vertex):
-        """ Add vertex to Set() of Vertices. """
-        self.vertices.add(vertex)
+    def _generate_hash(self, key):
+        # Generate Hash value from key for indexing HashTable.
+        h1 = 17
+        h2 = 13
+        string = str(key)
+        for i in range(0, len(string), 2):
+            h1 *= ord(string[i]) ** 3
 
-    def get_vertex(self, vertex):
-        """ Return reference to vertex. """
-        for item in list(self.vertices):
-            if item == vertex:
-                return item
+        for i in range(1, len(string), 2):
+            h2 += ord(string[i]) ** 2
+
+        return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
+
+    def insert(self, args):
+        """ Insert args into HashTable. """
+        index = self._generate_hash(args)
+
+        bucket = self.buckets[index]
+        bucket.append(args)
+
+    def search(self, key):
+        """ Return reference to object matching key or None. """
+        index = self._generate_hash(key)
+
+        if len(self.buckets[index]) > 0:
+            for item in self.buckets[index]:
+                if item == key:
+                    return item
         return None
-
-    def generate_edges(self, index_source, weight_source):
-        """ Add edges & weights to/from all Vertices within the Graph.
-
-        :param index_source: ordered List() of Vertex() names & zips
-        :param weight_source: ordered 2D-List() of Vertex() edge weights
-        """
-        self.indices = [None] * len(index_source)
-        for index, line in enumerate(index_source):
-            self.indices[index] = line
-
-        self.weights = [[]] * len(weight_source)
-        for index, line in enumerate(weight_source):
-            self.weights[index] = [float(i) for i in line.split('\t')]
-
-        i = 0
-        while i < len(self.vertices):
-            tmp = list(self.vertices)
-            for loc in self.vertices:
-                # find index for both graph vertices
-                index_1 = self._get_index(tmp[i])
-                index_2 = self._get_index(loc)
-                # add edge & weight given those two vertices
-                tmp[i].add_edge(loc, self._get_weight(index_1, index_2))
-            i += 1
-
-    def _get_weight(self, vert1, vert2):
-        """ Return weight of edge between both vertices as float. """
-        low, high = sorted([vert1, vert2])
-        return self.weights[high][low]
-
-    def _get_index(self, location):
-        """ Return index of location in list or -1. """
-        index = 0
-        search = location.address + " " + location.zip
-        for item in self.indices:
-            if search == item:
-                return index
-            index += 1
-        return -1
