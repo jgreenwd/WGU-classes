@@ -4,9 +4,6 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
-from datetime import time
-from destination import Destination
-
 
 class DeliveryController:
     def __init__(self, route, rate):
