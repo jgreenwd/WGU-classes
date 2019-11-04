@@ -8,10 +8,9 @@ import utility_functions as utils
 from datetime import datetime, timedelta, time
 from destination import Destination
 from route import Route
-from copy import deepcopy
-from vertex import Vertex
+from package import Package, Status
+from event import DeliveryController
 
-# TODO: refactor SIMULATE ROUTE section to remove redundancies and simplify
 # TODO: handle address change exception for Package 9
 
 if __name__ == '__main__':
@@ -138,105 +137,69 @@ if __name__ == '__main__':
             print("Invalid entry")
 
     # initialize variables used to track delivery progress
-    truck1_current_node = routes[0].get_current_node()
-    truck1_next_node = routes[0].get_current_node()
-    truck1_event_time = routes[0].get_start_time()
-    truck1_time_until_next_event = truck1_current_node.get_weight(truck1_next_node) / RATE_OF_TRAVEL
-    truck1_distance_traveled = 0
-
-    truck2_current_node = routes[1].get_current_node()
-    truck2_next_node = routes[1].get_current_node()
-    truck2_event_time = routes[1].get_start_time()
-    truck2_time_until_next_event = truck2_current_node.get_weight(truck2_next_node) / RATE_OF_TRAVEL
-    truck2_distance_traveled = 0
-
-    truck3_current_node = routes[2].get_current_node()
-    truck3_next_node = routes[2].get_current_node()
-    truck3_event_time = routes[2].get_start_time()
-    truck3_time_until_next_event = truck3_current_node.get_weight(truck3_next_node) / RATE_OF_TRAVEL
-    truck3_distance_traveled = 0
+    truck1 = DeliveryController(routes[0], RATE_OF_TRAVEL)
+    truck2 = DeliveryController(routes[1], RATE_OF_TRAVEL)
+    truck3 = DeliveryController(routes[2], RATE_OF_TRAVEL)
 
     time_iter = datetime(1, 1, 1, 8, 0, 0)
     while time_iter.time() <= user_time_input.time():
         # if user_time_input is reached, print delivery status and end sim
         if time_iter.time() == user_time_input.time():
-            utils.current_delivery_status(table)
+            utils.get_delivery_status(table)
             break
 
         # at 8:00 Truck1 departs, set packages OUT_FOR_DELIVERY
-        if time_iter.time() == routes[0].get_start_time().time():
-            for loc in routes[0].order:
-                for package in loc.packages:
-                    package.ofd()
-            truck1_current_node = routes[0].get_current_node()
-            truck1_next_node = routes[0].get_next_node()
-            truck1_event_time = routes[0].get_start_time()
-            truck1_time_until_next_event = truck1_current_node.get_weight(truck1_next_node) / RATE_OF_TRAVEL
-            truck1_distance_traveled += truck1_current_node.get_weight(truck1_next_node)
+        if time_iter.time() == truck1.event_time.time():
+            truck1.start_route()
 
         # at 9:05 Truck2 departs, load DELAYED packages and set all as OUT_FOR_DELIVERY
-        if time_iter.time() == routes[1].get_start_time().time():
-            for loc in routes[1].order:
-                for package in loc.packages:
-                    package.ofd()
-            truck2_current_node = routes[1].get_current_node()
-            truck2_next_node = routes[1].get_next_node()
-            truck2_event_time = routes[1].get_start_time()
-            truck2_time_until_next_event = truck2_current_node.get_weight(truck2_next_node) / RATE_OF_TRAVEL
-            truck2_distance_traveled += truck2_current_node.get_weight(truck2_next_node)
+        if time_iter.time() == truck2.event_time.time():
+            truck2.start_route()
 
         # at 12:00 Truck3 departs, load all other packages and set all as OUT_FOR_DELIVERY
-        if time_iter.time() == routes[2].get_start_time().time():
-            for loc in routes[2].order:
-                for package in loc.packages:
-                    package.ofd()
-            truck3_current_node = routes[2].get_current_node()
-            truck3_next_node = routes[2].get_next_node()
-            truck3_event_time = routes[2].get_start_time()
-            truck3_time_until_next_event = truck3_current_node.get_weight(truck3_next_node) / RATE_OF_TRAVEL
-            truck3_distance_traveled += truck3_current_node.get_weight(truck3_next_node)
+        if time_iter.time() == truck3.event_time.time():
+            truck3.start_route()
 
-        # --------------------------------------------------------------------
-        # if time to next delivery has elapsed, 1.) mark packages as delivered
-        # 2.) set current location, 3.) get destination, 4.) calculate travel
-        # duration to destination, & 5.) calculate arrival time
-        # --------------------------------------------------------------------
-        # TRUCK 1
-        if time_iter.time() == (truck1_event_time + timedelta(hours=truck1_time_until_next_event)).time():
-            for package in truck1_next_node.packages:
-                package.deliver()
-                package.time_of_delivery = str(time_iter.time())
-            truck1_event_time = time_iter
-            truck1_current_node = routes[0].get_current_node()
-            truck1_next_node = routes[0].get_next_node()
-            truck1_time_until_next_event = truck1_current_node.get_weight(truck1_next_node) / RATE_OF_TRAVEL
-            truck1_distance_traveled += truck1_current_node.get_weight(truck1_next_node)
+        # at 10:20 address correction occurs for Package.ID 9
+        # if time_iter.time() == datetime(1, 1, 1, 10, 20, 0).time():
+        #     p = Package("9", "300 State St", utils.convert_time("EOD"), 2, "Wrong address listed")
+            # query for package & get reference
+            # p = table.search(p)
+            # if p.get_status() != Status(2):
+            #     p.delay()
+                # retrieve package from where it was first delivered
+                # routes[2].add_vertex(p.address)
 
-        # TRUCK 2
-        if time_iter.time() == (truck2_event_time + timedelta(hours=truck2_time_until_next_event)).time():
-            for package in routes[1].get_current_node().packages:
-                package.deliver()
-                package.time_of_delivery = str(time_iter.time())
-            truck2_event_time = time_iter
-            truck2_current_node = truck2_next_node
-            truck2_next_node = routes[1].get_next_node()
-            truck2_time_until_next_event = truck2_current_node.get_weight(truck2_next_node) / RATE_OF_TRAVEL
-            truck2_distance_traveled += truck2_current_node.get_weight(truck2_next_node)
+                # enter new address & get reference
+                # loc = Destination("410 S State St", "Salt Lake City", "UT", "84111")
+                # loc = graph.get_vertex(loc)
 
-        # TRUCK 3
-        if time_iter.time() == (truck3_event_time + timedelta(hours=truck3_time_until_next_event)).time():
-            for package in routes[2].get_current_node().packages:
-                package.deliver()
-                package.time_of_delivery = str(time_iter.time())
-            truck3_event_time = time_iter
-            truck3_current_node = truck3_next_node
-            truck3_next_node = routes[2].get_next_node()
-            truck3_time_until_next_event = truck3_current_node.get_weight(truck3_next_node) / RATE_OF_TRAVEL
-            truck3_distance_traveled += truck3_current_node.get_weight(truck3_next_node)
+                # p2 = Package("9", loc, utils.convert_time("EOD"), 5)
+                # deliver to new address
+                # routes[2].add_vertex(p2.address)
+                # routes[2].generate_edges(verts, edges)
+                # routes[2].create_cycle(HUB)
+                # p_index = 0
+                # p2_index = 0
+                # for i, loc in enumerate(routes[2].order):
+                #     if loc == p.address:
+                #         p_index = i
+                #     if loc == p2.address:
+                #         p2_index = i
+                # if p2_index < p_index:
+                #     routes[2].order[p2_index], routes[2].order[p_index] =\
+                #         routes[2].order[p_index], routes[2].order[p2_index]
+
+        if time_iter.time() == (truck1.event_time + timedelta(hours=truck1.wait_time)).time():
+            truck1.make_delivery(time_iter)
+        if time_iter.time() == (truck2.event_time + timedelta(hours=truck2.wait_time)).time():
+            truck2.make_delivery(time_iter)
+        if time_iter.time() == (truck3.event_time + timedelta(hours=truck3.wait_time)).time():
+            truck3.make_delivery(time_iter)
 
         # increment current_time by 1 second throughout delivery sim
         time_iter += timedelta(seconds=1)
 
     print("Truck 1: {:4.1f}\nTruck 2: {:4.1f}\nTruck 3: {:4.1f}\nTotal Miles Traveled: {:5.1f}".
-          format(truck1_distance_traveled, truck2_distance_traveled, truck3_distance_traveled,
-                 truck1_distance_traveled + truck2_distance_traveled + truck3_distance_traveled))
+          format(truck1.get_total_distance(), truck2.get_total_distance(), truck3.get_total_distance(),
+                 truck1.get_total_distance() + truck2.get_total_distance() + truck3.get_total_distance()))
