@@ -4,6 +4,8 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
+import copy
+
 
 class Vertex:
     def __init__(self, node):
@@ -26,4 +28,6 @@ class Vertex:
 
     def get_weight(self, neighbor):
         """ Return weight of edge from self to neighbor as float. """
+        if self == neighbor:
+            return 0.0
         return self.adjacent[neighbor]
