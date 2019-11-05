@@ -5,6 +5,7 @@
 # Mentor: Rebekah McBride
 
 from vertex import Vertex
+from copy import copy
 
 
 class Destination(Vertex):
@@ -42,3 +43,10 @@ class Destination(Vertex):
         """ Append package to vertex's list of packages & sort list by deadline. """
         self.packages.append(package)
         self.packages.sort()
+
+    def get_nearest_neighbor(self):
+        """ Return List() of closest vertices. """
+        min_key = min(self.adjacent, key=self.adjacent.get)
+
+        # use min/max to order vertices for set() comparison
+        return max(self, min_key), min(self, min_key), self.get_weight(min_key)
