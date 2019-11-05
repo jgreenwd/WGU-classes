@@ -63,6 +63,9 @@ class Graph:
                 # find index for both graph vertices
                 index_1 = self._get_index(tmp[i])
                 index_2 = self._get_index(loc)
+                # no self loops
+                if index_1 == index_2:
+                    continue
                 # add edge & weight given those two vertices
                 tmp[i].add_edge(loc, self._get_weight(index_1, index_2))
             i += 1
