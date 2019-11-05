@@ -12,7 +12,7 @@ class Graph:
         self.vertices = set()
         self.indices = []
         self.weights = []
-        self.adjacency_list = []
+        self._adjacency_list = []
 
     def __contains__(self, vertex):
         return vertex in self.vertices
