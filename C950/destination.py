@@ -45,7 +45,7 @@ class Destination(Vertex):
         self.packages.sort()
 
     def get_nearest_neighbor(self):
-        """ Return List() of closest vertices. """
+        """ Return Tuple() of least weighted edge. """
         min_key = min(self.adjacent, key=self.adjacent.get)
 
         # use min/max to order vertices for set() comparison
