@@ -8,10 +8,12 @@ import utility_functions as utils
 from datetime import datetime, timedelta, time
 from destination import Destination
 from route import Route
-from package import Package, Status
 from event import DeliveryController
 
 # TODO: handle address change exception for Package 9
+# TODO: optimize path generation algorithm & package sorting
+# TODO: utilize list comprehensions to reduce use of nested for-loops
+
 
 if __name__ == '__main__':
     # --------------- ESTABLISH PARAMETERS -----------------
@@ -148,15 +150,15 @@ if __name__ == '__main__':
             utils.get_delivery_status(table)
             break
 
-        # at 8:00 Truck1 departs, set packages OUT_FOR_DELIVERY
+        # at 8:00 Truck1 departs, includes all packages in BUNDLED
         if time_iter.time() == truck1.event_time.time():
             truck1.start_route()
 
-        # at 9:05 Truck2 departs, load DELAYED packages and set all as OUT_FOR_DELIVERY
+        # at 9:05 Truck2 departs, includes all packages in DELAYED and TRUCK2_REQUIRED
         if time_iter.time() == truck2.event_time.time():
             truck2.start_route()
 
-        # at 12:00 Truck3 departs, load all other packages and set all as OUT_FOR_DELIVERY
+        # at 12:00 Truck3 departs, includes all other packages
         if time_iter.time() == truck3.event_time.time():
             truck3.start_route()
 
