@@ -4,7 +4,7 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
-import copy
+from edge import Edge
 
 
 class Vertex:
@@ -28,6 +28,13 @@ class Vertex:
 
     def get_weight(self, neighbor):
         """ Return weight of edge from self to neighbor as float. """
+
         if self == neighbor:
             return 0.0
         return self.adjacent[neighbor]
+
+    def _get_nearest_neighbor(self):
+        """ Return Tuple() of least weighted edge. """
+        min_key = min(self.adjacent, key=self.adjacent.get)
+        result = sorted([self, min_key], key=lambda x: x.address)
+        return Edge(result[0], result[1], self.get_weight(min_key))
