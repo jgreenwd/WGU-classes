@@ -66,6 +66,10 @@ class Route(Graph):
         """ Set route as finished. """
         self._finished = True
 
+    def finished(self):
+        """ Return route completion status. """
+        return self._finished
+
     def create_cycle(self, start):
         """ Place delivery destinations in order to minimize time & distance.
 
