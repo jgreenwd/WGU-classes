@@ -22,7 +22,7 @@ class Package:
         self.weight = weight
         self.notes = notes
         self.deadline = deadline
-        self.time_of_delivery = ""
+        self._time_of_delivery = ""
         self.status = Status(0)
 
     def __str__(self):
@@ -49,14 +49,15 @@ class Package:
         """ Set status to Out For Delivery. """
         self.status = Status(2)
 
-    def deliver(self):
+    def deliver(self, delivery_time):
         """ Set status to Delivered. """
         self.status = Status(3)
+        self._time_of_delivery = str(delivery_time.time())
 
     def get_status(self):
         """ Return Package delivery Status. """
         if self.status == Status(3):
-            return self.status.name + ": " + self.time_of_delivery
+            return self.status.name + ": " + self._time_of_delivery
         else:
             return self.status.name
 
