@@ -14,6 +14,7 @@ class Route(Graph):
         Graph.__init__(self)
         self.order = []
         self._start_time = time()
+        self._starting_vertex = None
         self.delivery_time = time()
         self._rate_of_travel = 0
         self._index = 0
@@ -62,11 +63,12 @@ class Route(Graph):
 
         :param start: Starting Vertex for the Graph cycle
         """
+        self._starting_vertex = start
         verts = self._vertices.copy()
         edges = self._adjacency_list.copy()
 
         # starting vertex
-        current_vertex = start
+        current_vertex = self._starting_vertex
         current_edge = None
 
         # Nearest neighbor
@@ -79,6 +81,8 @@ class Route(Graph):
                     self.order.append(current_edge)
             current_vertex.visited = True
             current_vertex = current_edge.get_next_start()
+            if current_vertex.visited:
+                current_vertex = start
             edges.remove(current_edge)
             verts.remove(current_vertex)
             i += 1
@@ -91,7 +95,7 @@ class Route(Graph):
                 self.order.append(current_edge)
 
         # order heads and tails to connect in sequence
-        current_vertex = start
+        current_vertex = self._starting_vertex
         for edge in self.order:
             if edge.prev_node is not current_vertex:
                 edge.flip()
