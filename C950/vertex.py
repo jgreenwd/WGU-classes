@@ -4,37 +4,23 @@
 # Student ID#: 000917613
 # Mentor: Rebekah McBride
 
-from edge import Edge
-
 
 class Vertex:
-    def __init__(self, node):
+    def __init__(self, data):
         """ Create Vertex Object.
 
-        :param node: object placed at Vertex """
-        self.id = node
-        self.adjacent = {}
+        :param data: object placed at Vertex """
+        self.data = data
+        self.visited = False
 
     def __str__(self):
-        return str(self.id)
+        return str(self.data)
 
-    def add_edge(self, neighbor, weight=0):
-        """ Add weighted edge from self to neighbor. """
-        self.adjacent[neighbor] = weight
+    def __lt__(self, other):
+        return self.data < other.data
 
-    def get_connections(self):
-        """ Return dict keys of all connections to this Vertex. """
-        return self.adjacent.keys()
+    def __eq__(self, other):
+        return self.data == other.data
 
-    def get_weight(self, neighbor):
-        """ Return weight of edge from self to neighbor as float. """
-
-        if self == neighbor:
-            return 0.0
-        return self.adjacent[neighbor]
-
-    def _get_nearest_neighbor(self):
-        """ Return Tuple() of least weighted edge. """
-        min_key = min(self.adjacent, key=self.adjacent.get)
-        result = sorted([self, min_key], key=lambda x: x.address)
-        return Edge(result[0], result[1], self.get_weight(min_key))
+    def __hash__(self):
+        return hash(str(self))
