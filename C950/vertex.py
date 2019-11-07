@@ -10,17 +10,17 @@ class Vertex:
         """ Create Vertex Object.
 
         :param data: object placed at Vertex """
-        self.data = data
+        self._data = data
         self.visited = False
 
     def __str__(self):
-        return str(self.data)
+        return str(self._data)
 
     def __lt__(self, other):
-        return self.data < other.data
+        return self._data < other.data
 
     def __eq__(self, other):
-        return self.data == other.data
+        return self._data == other.data
 
     def __hash__(self):
         return hash(str(self))
