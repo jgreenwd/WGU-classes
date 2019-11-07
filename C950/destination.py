@@ -5,7 +5,6 @@
 # Mentor: Rebekah McBride
 
 from vertex import Vertex
-from copy import copy
 
 
 class Destination(Vertex):
