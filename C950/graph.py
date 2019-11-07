@@ -127,6 +127,13 @@ class Graph:
                 return candidate
         return None
 
+    def del_vertex(self, vertex):
+        """ Remove vertex from Set() of Vertices.
+
+        :param vertex: Vertex() object """
+        if vertex in self._vertices:
+            self._vertices.remove(vertex)
+
     def generate_edges(self, index_source, weight_source):
         """ Add edges & weights to/from all Vertices within the Graph.
 
