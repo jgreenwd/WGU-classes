@@ -16,7 +16,7 @@ class Route(Graph):
         self._start_time = time()
         self._starting_vertex = None
         self.delivery_time = time()
-        self._rate_of_travel = 0
+        self.rate_of_travel = 0
         self._index = 0
         self._finished = False
 
@@ -24,7 +24,7 @@ class Route(Graph):
         """ Set the average speed of delivery vehicle in MPH.
 
         :param rate: float of the vehicle speed """
-        self._rate_of_travel = rate
+        self.rate_of_travel = rate
 
     def set_start_time(self, time):
         """ Set the time when the vehicle will leave the HUB.
