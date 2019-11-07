@@ -18,7 +18,7 @@ class Route(Graph):
         self.delivery_time = time()
         self._rate_of_travel = 0
         self._index = 0
-        self.finished = False
+        self._finished = False
 
     def set_rate_of_travel(self, rate):
         """ Set the average speed of delivery vehicle in MPH.
@@ -36,6 +36,10 @@ class Route(Graph):
     def get_start_time(self):
         """ Return time when the delivery vehicle leaves the HUB. """
         return self._start_time
+
+    def get_starting_node(self):
+        """ Return starting Vertex(). """
+        return self._starting_vertex
 
     def get_current_node(self):
         """ Return most recent node visited in Cycle. """
@@ -57,6 +61,10 @@ class Route(Graph):
             return self.order[self._index]
         else:
             return self.order[len(self.order) - 1]
+
+    def finish_route(self):
+        """ Set route as finished. """
+        self._finished = True
 
     def create_cycle(self, start):
         """ Place delivery destinations in order to minimize time & distance.
