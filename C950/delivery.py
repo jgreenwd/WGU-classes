@@ -37,7 +37,7 @@ class DeliveryController:
         :param current_time: datetime of time of delivery
         """
         # if returning to the beginning, mark route as finished
-        if self._route.get_next_node() == self._route.order[0].prev_node:
+        if self._route.get_next_node() == self._route._starting_vertex:
             self._route.finished = True
 
         # deliver packages at current address and advance
