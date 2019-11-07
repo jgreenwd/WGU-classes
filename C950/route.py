@@ -7,8 +7,6 @@
 from graph import Graph
 from datetime import time
 
-# TODO: optimize path algorithm
-
 
 class Route(Graph):
     def __init__(self):
@@ -19,63 +17,7 @@ class Route(Graph):
         self.delivery_time = time()
         self._rate_of_travel = 0
         self._index = 0
-
-    def _find_midpoint(self, start, vert_list):
-        # return list member farthest from starting vertex
-        return sorted(vert_list, key=lambda i: i.get_weight(start))[len(vert_list) - 1]
-
-    def _find_next(self, current, vert_list):
-        # return list member closest to current vertex
-        return sorted(vert_list, key=lambda i: i.get_weight(current))[1]
-
-    def create_cycle(self, start):
-        """ Place delivery destinations in order to minimize time & distance.
-
-        :param start: Starting Vertex for the Graph cycle
-        """
-        self.order = [None] * len(self.vertices)
-
-        # place starting point at 0th index
-        self.order[0] = start
-
-        # cast Set() of vertices as List() and order by distance/weight from starting point
-        tmp = sorted(list(self.vertices), key=lambda i: i.get_weight(start))
-
-        # ALGORITHM EXPLAINED:
-        # 1. Find the Destination farthest from the starting vertex
-        #   - this will be midpoint of the cycle
-        # 2. Find the Destination closest to the starting vertex
-        # ----- Repeat -------
-        # 3. Travel to that vertex
-        # 4. Find the Destination closest to the current vertex
-        # --------------------
-        # 5. Repeat until arrival at middle index (midpoint from #1)
-        # 6. Find the Destination closest to the midpoint
-        # ----- Repeat -------
-        # 7. Travel to that vertex
-        # 8. Find the Destination closest to the current vertex
-        # --------------------
-        # 9. Repeat until no vertices remain in sorted list
-        # 10. Return to starting vertex
-
-        current = tmp[0]
-        i = 1
-        while None in self.order:
-            # save reference to the last place visited in tmp List() to be able to .remove() it later
-            prev = current
-
-            # +1 pushes index to the middle on odd numbered list lengths
-            if i == len(self.order) // 2 + 1:
-                self.order[i] = self._find_midpoint(start, sorted(list(self.vertices), key=lambda i: i.get_weight(start)))
-            else:
-                self.order[i] = self._find_next(current, tmp)
-
-            current = self.order[i]
-            tmp.remove(prev)
-            i += 1
-
-        # return to starting vertex
-        self.order.append(start)
+        self.finished = False
 
     def set_rate_of_travel(self, rate):
         """ Set the average speed of delivery vehicle in MPH.
@@ -96,10 +38,14 @@ class Route(Graph):
 
     def get_current_node(self):
         """ Return most recent node visited in Cycle. """
-        return self.order[self._index]
+        return self.order[self._index].prev_node
 
     def get_next_node(self):
-        """ Return next node to be visited in Cycle.
+        """ Return next node to be visited in Cycle. """
+        return self.order[self._index].next_node
+
+    def get_next_edge(self):
+        """ Return next edge to be visited in Cycle.
 
             CAUTION: This method advances the internal index to the next node. Every
             invocation of the method will return a different value until the last
@@ -110,3 +56,43 @@ class Route(Graph):
             return self.order[self._index]
         else:
             return self.order[len(self.order) - 1]
+
+    def create_cycle(self, start):
+        """ Place delivery destinations in order to minimize time & distance.
+
+        :param start: Starting Vertex for the Graph cycle
+        """
+        verts = self._vertices.copy()
+        edges = self._adjacency_list.copy()
+
+        # starting vertex
+        current_vertex = start
+        current_edge = None
+
+        # Nearest neighbor
+        i = 0
+        while len(self.order) < len(self._vertices) - 1:
+            neighbor = self._get_nearest_neighbor(edges, current_vertex)
+            for edge in edges:
+                if current_vertex in edge and neighbor in edge:
+                    current_edge = edge
+                    self.order.append(current_edge)
+            current_vertex.visited = True
+            current_vertex = current_edge.get_next_start()
+            edges.remove(current_edge)
+            verts.remove(current_vertex)
+            i += 1
+
+        # add edge returning to starting vertex
+        neighbors = self._get_neighbors(current_vertex)
+        for edge in neighbors:
+            if current_vertex in edge and start in edge:
+                current_edge = edge
+                self.order.append(current_edge)
+
+        # order heads and tails to connect in sequence
+        current_vertex = start
+        for edge in self.order:
+            if edge.prev_node is not current_vertex:
+                edge.flip()
+            current_vertex = edge.next_node
