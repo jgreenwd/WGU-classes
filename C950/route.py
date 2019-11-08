@@ -50,17 +50,15 @@ class Route(Graph):
         return self.order[self._index].next_node
 
     def get_next_edge(self):
-        """ Return next edge to be visited in Cycle.
+        """ Move pointer to next edge to be visited in Cycle.
 
             CAUTION: This method advances the internal index to the next node. Every
             invocation of the method will return a different value until the last
             value is reached.
         """
-        if self._index < len(self.order) - 1:
+        if self._index < len(self.order) -1:
             self._index += 1
-            return self.order[self._index]
-        else:
-            return self.order[len(self.order) - 1]
+        return self.order[self._index]
 
     def finish_route(self):
         """ Set route as finished. """
