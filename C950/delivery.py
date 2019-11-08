@@ -26,6 +26,8 @@ class DeliveryController:
             node = edge.next_node
             for package in node.packages:
                 package.ofd()
+        # mark time for first delivery to execute
+        self.event_time += timedelta(hours=self._current_edge.weight / self._route.rate_of_travel)
 
     def make_delivery(self, current_time):
         """ Mark packages as DELIVERED, set current_node, advance next_node.
@@ -35,16 +37,17 @@ class DeliveryController:
         # advance mileage to destination
         self.total_mileage += self._current_edge.weight
 
-        # update time of next delivery event
-        self.event_time = current_time + timedelta(hours=self._current_edge.weight / self._route.rate_of_travel)
-
         # mark packages at vertex as delivered
         for package in self._route.get_next_node().packages:
             package.deliver(self.event_time)
 
         # advance to next edge
-        try:
-            self._current_edge = self._route.get_next_edge()
-        except AttributeError:
-            self.total_mileage -= self._current_edge.weight
+        self._current_edge = self._route.get_next_edge()
+
+        # update time of next delivery event
+        self.event_time = current_time + timedelta(hours=self._current_edge.weight / self._route.rate_of_travel)
+
+        # if route is complete, mark finished
+        if self._current_edge == self._route.order[len(self._route.order) - 1]:
+            self.total_mileage += self._current_edge.weight
             self._route.finish_route()
