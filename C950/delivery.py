@@ -38,10 +38,6 @@ class DeliveryController:
         # update time of next delivery event
         self.event_time = current_time + timedelta(hours=self._current_edge.weight / self._route.rate_of_travel)
 
-        print("({:5.5} to {:5.5}) : {}/{}miles".format(str(self._current_edge.prev_node),
-                                                       str(self._current_edge.next_node), self._current_edge.weight,
-                                                       self.total_mileage))
-
         # mark packages at vertex as delivered
         for package in self._route.get_next_node().packages:
             package.deliver(self.event_time)
