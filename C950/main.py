@@ -8,11 +8,10 @@ import utility_functions as utils
 from datetime import datetime, timedelta, time
 from destination import Destination
 from route import Route
-from event import DeliveryController
+from delivery import DeliveryController
 
 # TODO: handle address change exception for Package 9
 # TODO: optimize path generation algorithm & package sorting
-# TODO: utilize list comprehensions to reduce use of nested for-loops
 
 
 if __name__ == '__main__':
@@ -45,7 +44,7 @@ if __name__ == '__main__':
     data = utils.load_file("WGUPS Package File.csv")
 
     # Retrieve Vertex Labels & Edge Weights
-    verts = utils.load_file("vertices.txt")
+    vertices = utils.load_file("vertices.txt")
     edges = utils.load_file("matrix.tsv")
 
     # build HashTable() // Graph() // Route()
@@ -68,7 +67,7 @@ if __name__ == '__main__':
         route.set_rate_of_travel(RATE_OF_TRAVEL)
         # add HUB to each Route
         route.add_vertex(HUB)
-        # set time trucks leave HUB
+        # set time each truck leaves HUB
         if i == 0:
             route.set_start_time(TRUCK1_DEPARTURE)
         elif i == 1:
@@ -78,20 +77,22 @@ if __name__ == '__main__':
     # ------------------------------------------------------
 
 
-    # -------------------- SORT PACKAGES -------------------
-    # handle exceptions from notes
+    # -------------------- LOAD PACKAGES -------------------
+    # add locations to Route from HashTable
     for bucket in table:
         if len(bucket) > 0:
             for package in bucket:
                 loc = graph.get_vertex(package.address)
                 if package.ID in BUNDLED or loc in routes[0]:
                     routes[0].add_vertex(loc)
-                    if loc in routes[2].vertices:
-                        routes[2].vertices.remove(loc)
+                    if loc in routes[2]:
+                        routes[2].del_vertex(loc)
                 elif package.ID in TRUCK2_REQUIRED or package.ID in DELAYED or loc in routes[1]:
                     routes[1].add_vertex(loc)
-                    if loc in routes[2].vertices:
-                        routes[2].vertices.remove(loc)
+                    if loc in routes[2]:
+                        routes[2].del_vertex(loc)
+                elif package.ID in ADDRESS_CHANGE:
+                    routes[2].add_vertex(loc)
                 else:
                     routes[2].add_vertex(loc)
 
@@ -100,9 +101,9 @@ if __name__ == '__main__':
     removals = []
 
     # group destinations by .zip code & delivery .deadline
-    for location in routes[2].vertices:
+    for location in routes[2]:
         zone = int(location.zip)
-        if len(location.packages) == 0:     # <- SKIP THE HUB
+        if len(location.packages) == 0:  # <- SKIP THE HUB
             continue
 
         # Packages in each bucket are sorted by deadline, so just check the first one for earliest.
@@ -120,11 +121,11 @@ if __name__ == '__main__':
 
     # Remove reference to vertices from truck3 that have been moved to trucks 1 & 2
     for item in removals:
-        routes[2].vertices.remove(item)
+        routes[2].del_vertex(item)
 
     # using a list of vertices - txt file - and 2D list of edge weights - tsv file, generate edges
     for route in routes:
-        route.generate_edges(verts, edges)
+        route.generate_edges(vertices, edges)
         route.create_cycle(HUB)
     # ------------------------------------------------------
 
@@ -139,9 +140,9 @@ if __name__ == '__main__':
             print("Invalid entry")
 
     # initialize variables used to track delivery progress
-    truck1 = DeliveryController(routes[0], RATE_OF_TRAVEL)
-    truck2 = DeliveryController(routes[1], RATE_OF_TRAVEL)
-    truck3 = DeliveryController(routes[2], RATE_OF_TRAVEL)
+    truck1 = DeliveryController(routes[0])
+    truck2 = DeliveryController(routes[1])
+    truck3 = DeliveryController(routes[2])
 
     time_iter = datetime(1, 1, 1, 8, 0, 0)
     while time_iter.time() <= user_time_input.time():
@@ -151,15 +152,15 @@ if __name__ == '__main__':
             break
 
         # at 8:00 Truck1 departs, includes all packages in BUNDLED
-        if time_iter.time() == truck1.event_time.time():
+        if time_iter.time() == routes[0].get_start_time().time():
             truck1.start_route()
 
-        # at 9:05 Truck2 departs, includes all packages in DELAYED and TRUCK2_REQUIRED
-        if time_iter.time() == truck2.event_time.time():
+        # at 9:05 Truck2 departs, includes all packages marked DELAYED and TRUCK2_REQUIRED
+        if time_iter.time() == routes[1].get_start_time().time():
             truck2.start_route()
 
-        # at 12:00 Truck3 departs, includes all other packages
-        if time_iter.time() == truck3.event_time.time():
+        # at 12:00 Truck3 departs including all other packages
+        if time_iter.time() == routes[2].get_start_time().time():
             truck3.start_route()
 
         # at 10:20 address correction occurs for Package.ID 9
@@ -192,16 +193,18 @@ if __name__ == '__main__':
                 #     routes[2].order[p2_index], routes[2].order[p_index] =\
                 #         routes[2].order[p_index], routes[2].order[p2_index]
 
-        if time_iter.time() == (truck1.event_time + timedelta(hours=truck1.wait_time)).time():
+        # if time for a delivery, execute .make_delivery(time)
+        if not routes[0].finished() and time_iter.time() == truck1.event_time.time():
             truck1.make_delivery(time_iter)
-        if time_iter.time() == (truck2.event_time + timedelta(hours=truck2.wait_time)).time():
+
+        if not routes[1].finished() and time_iter.time() == truck2.event_time.time():
             truck2.make_delivery(time_iter)
-        if time_iter.time() == (truck3.event_time + timedelta(hours=truck3.wait_time)).time():
+
+        if not routes[2].finished() and time_iter.time() == truck3.event_time.time():
             truck3.make_delivery(time_iter)
 
         # increment current_time by 1 second throughout delivery sim
         time_iter += timedelta(seconds=1)
 
-    print("Truck 1: {:4.1f}\nTruck 2: {:4.1f}\nTruck 3: {:4.1f}\nTotal Miles Traveled: {:5.1f}".
-          format(truck1.get_total_distance(), truck2.get_total_distance(), truck3.get_total_distance(),
-                 truck1.get_total_distance() + truck2.get_total_distance() + truck3.get_total_distance()))
+    print("Truck 1: {:4.1f}\nTotal Miles Traveled: {:5.1f}".
+          format(truck1.total_mileage, truck1.total_mileage))
