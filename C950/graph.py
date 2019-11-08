@@ -93,9 +93,11 @@ class Graph:
 
         :param iterable: adjacency list of Edge()s
         :param vertex: point of origin"""
-        minimum = 100
 
+        # get list of adjacent edges
         neighbors = self._get_neighbors(vertex)
+
+        # filter list of edges by visited status
         output = []
         for edge in neighbors:
             if edge.next_node is not vertex:
@@ -104,13 +106,41 @@ class Graph:
             elif edge.prev_node is not vertex:
                 if not edge.prev_node.visited:
                     output.append(edge)
+
+        # sort candidate edges by weight
         output = sorted(output, key=lambda x: x.weight)
+
+        # test for ties in weight
+        if len(output) > 1:
+            if output[0].weight == output[1].weight:
+                # select a winner from ties
+                self._look_ahead(vertex, output)
 
         if output[0].prev_node == vertex:
             neighbor = output[0].next_node
         else:
             neighbor = output[0].prev_node
         return neighbor
+
+    def _look_ahead(self,vertex, tied_edge_weights):
+        """ Return shorter path when 2 edges are equal.
+
+        :param tied_edge_weights: sorted list of Edge()s"""
+        # select all edges with tied weight
+        candidates = list(filter(lambda x: x.weight == tied_edge_weights[0].weight, tied_edge_weights))
+
+        # find all neighbors for the candidate vertex - insert as tuple(vertex, neighbors)
+        for i, candidate in enumerate(candidates):
+            if candidate.prev_node == vertex:
+                candidates[i] = (self._get_neighbors(candidate.next_node), candidate.next_node)
+            else:
+                candidates[i] = (self._get_neighbors(candidate.prev_node), candidate.prev_node)
+
+        # determine weight for candidate vertex's nearest neighbor
+        for i, candidate in enumerate(candidates):
+            candidates[i] = (candidate[1], (self._get_weight(self._get_index(vertex), self._get_index(self._get_nearest_neighbor(*candidate)))))
+
+        return min(candidates, key=lambda x: x[1])
 
     def add_vertex(self, vertex):
         """ Add vertex to Set() of Vertices.
