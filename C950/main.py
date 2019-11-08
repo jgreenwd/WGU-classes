@@ -11,7 +11,6 @@ from route import Route
 from delivery import DeliveryController
 
 # TODO: handle address change exception for Package 9
-# TODO: tweak algorithm for priority or read-ahead - all 10:30's by 10:30
 
 
 if __name__ == '__main__':
