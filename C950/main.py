@@ -11,7 +11,7 @@ from route import Route
 from delivery import DeliveryController
 
 # TODO: handle address change exception for Package 9
-# TODO: optimize path generation algorithm & package sorting
+# TODO: tweak algorithm for priority or read-ahead - all 10:30's by 10:30
 
 
 if __name__ == '__main__':
@@ -91,8 +91,6 @@ if __name__ == '__main__':
                     routes[1].add_vertex(loc)
                     if loc in routes[2]:
                         routes[2].del_vertex(loc)
-                elif package.ID in ADDRESS_CHANGE:
-                    routes[2].add_vertex(loc)
                 else:
                     routes[2].add_vertex(loc)
 
@@ -163,36 +161,6 @@ if __name__ == '__main__':
         if time_iter.time() == routes[2].get_start_time().time():
             truck3.start_route()
 
-        # at 10:20 address correction occurs for Package.ID 9
-        # if time_iter.time() == datetime(1, 1, 1, 10, 20, 0).time():
-        #     p = Package("9", "300 State St", utils.convert_time("EOD"), 2, "Wrong address listed")
-            # query for package & get reference
-            # p = table.search(p)
-            # if p.get_status() != Status(2):
-            #     p.delay()
-                # retrieve package from where it was first delivered
-                # routes[2].add_vertex(p.address)
-
-                # enter new address & get reference
-                # loc = Destination("410 S State St", "Salt Lake City", "UT", "84111")
-                # loc = graph.get_vertex(loc)
-
-                # p2 = Package("9", loc, utils.convert_time("EOD"), 5)
-                # deliver to new address
-                # routes[2].add_vertex(p2.address)
-                # routes[2].generate_edges(verts, edges)
-                # routes[2].create_cycle(HUB)
-                # p_index = 0
-                # p2_index = 0
-                # for i, loc in enumerate(routes[2].order):
-                #     if loc == p.address:
-                #         p_index = i
-                #     if loc == p2.address:
-                #         p2_index = i
-                # if p2_index < p_index:
-                #     routes[2].order[p2_index], routes[2].order[p_index] =\
-                #         routes[2].order[p_index], routes[2].order[p2_index]
-
         # if time for a delivery, execute .make_delivery(time)
         if not routes[0].finished() and time_iter.time() == truck1.event_time.time():
             truck1.make_delivery(time_iter)
@@ -206,5 +174,6 @@ if __name__ == '__main__':
         # increment current_time by 1 second throughout delivery sim
         time_iter += timedelta(seconds=1)
 
-    print("Truck 1: {:4.1f}\nTotal Miles Traveled: {:5.1f}".
-          format(truck1.total_mileage, truck1.total_mileage))
+    print("Truck 1: {:4.1f}\nTruck 2: {:4.1f}\nTruck 3: {:4.1f}\n------------\nTotal Miles Traveled: {:5.1f}".
+          format(truck1.total_mileage, truck2.total_mileage, truck3.total_mileage,
+                 truck1.total_mileage + truck2.total_mileage + truck3.total_mileage))
