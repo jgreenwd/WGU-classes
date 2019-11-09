@@ -43,6 +43,7 @@ class HashTable:
         # Generate Hash value from key for indexing HashTable.
         h1 = 17
         h2 = 13
+        print(key)
         string = str(key)
         for i in range(0, len(string), 2):
             h1 *= ord(string[i]) ** 3
