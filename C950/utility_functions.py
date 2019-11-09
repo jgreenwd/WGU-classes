@@ -80,42 +80,26 @@ def build_destination_graph(source):
     return locales
 
 
-def print_all_delivery_status(table):
-    """ Display Package() info for all packages.
-
-    :param table: HashTable of Packages()"""
-    print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
-    for bucket in table:
-        if len(bucket) > 0:
-            for package in bucket:
-                print("{:2} {:4.1f} \t{:20.20}  {:18.16} {}\t{}\t{:24}".format(
-                    package.ID,
-                    package.weight,
-                    package.address.address,
-                    package.address.city,
-                    package.address.zip,
-                    package.deadline,
-                    package.get_status()
-                ))
-    print()
+def mode_query(mode_dict):
+    # single package or all packages
+    while True:
+        try:
+            user_mode_input = mode_dict[input('Display information for a (S)ingle package or (A)ll packages? ')[0].upper()]
+            break
+        except KeyError:
+            print("Invalid entry. Please try again.")
+    return user_mode_input
 
 
-def print_single_delivery_status(table, package):
-    """ Display delivery information for individual package.
-
-    :param package: Package() """
-    print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
-    p = table.search(package)
-    print("{:2} {:4.1f} \t{:20.20}  {:18.16} {}\t{}\t{:24}".format(
-        p.ID,
-        p.weight,
-        p.address.address,
-        p.address.city,
-        p.address.zip,
-        p.deadline,
-        p.get_status()
-    ))
-    print()
+def stop_time_query():
+    # when to stop execution
+    while True:
+        try:
+            user_time_input = convert_time(input('Enter time in HH:MM format: '))
+            break
+        except ValueError:
+            print("Invalid entry. Please try again.")
+    return user_time_input
 
 
 def build_package_query(table):
@@ -139,23 +123,39 @@ def build_package_query(table):
             print("Package not found. Try again. ")
 
 
-def mode_query(mode_dict):
-    # single package or all packages
-    while True:
-        try:
-            user_mode_input = mode_dict[input('Display information for a (S)ingle package or (A)ll packages? ')[0].upper()]
-            break
-        except KeyError:
-            print("Invalid entry. Please try again.")
-    return user_mode_input
+def print_single_delivery_status(table, package):
+    """ Display delivery information for individual package.
+
+    :param package: Package() """
+    print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
+    p = table.search(package)
+    print("{:2} {:4.1f} \t{:20.20}  {:18.16} {}\t{}\t{:24}".format(
+        p.ID,
+        p.weight,
+        p.address.address,
+        p.address.city,
+        p.address.zip,
+        p.deadline,
+        p.get_status()
+    ))
+    print()
 
 
-def stop_time_query():
-    # when to stop execution
-    while True:
-        try:
-            user_time_input = convert_time(input('Enter time in HH:MM format: '))
-            break
-        except ValueError:
-            print("Invalid entry. Please try again.")
-    return user_time_input
+def print_all_delivery_status(table):
+    """ Display Package() info for all packages.
+
+    :param table: HashTable of Packages()"""
+    print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
+    for bucket in table:
+        if len(bucket) > 0:
+            for package in bucket:
+                print("{:2} {:4.1f} \t{:20.20}  {:18.16} {}\t{}\t{:24}".format(
+                    package.ID,
+                    package.weight,
+                    package.address.address,
+                    package.address.city,
+                    package.address.zip,
+                    package.deadline,
+                    package.get_status()
+                ))
+    print()
