@@ -17,9 +17,9 @@ class Destination(Vertex):
         :param zip: integer of zip code
         """
         Vertex.__init__(self, address)
-        self.address = address.upper()
-        self.city = city.upper()
-        self.state = state.upper()
+        self.address = address
+        self.city = city
+        self.state = state
         self.zip = zip
         self.packages = []
 
