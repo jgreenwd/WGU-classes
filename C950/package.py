@@ -5,6 +5,7 @@
 # Mentor: Rebekah McBride
 
 from enum import Enum
+from datetime import time
 
 
 class Package:
@@ -26,16 +27,20 @@ class Package:
         self.status = Status(0)
 
     def __str__(self):
-        return ("ID: " + self.ID +
-                "\tWeight: " + "{:4.1f}".format(self.weight) +
-                "\tDelivery By: " + self.deadline.strftime("%H:%M") +
-                "\tStatus: " + self.status.name)
+        # return ("ID: " + self.ID +
+        #         "\tWeight: " + "{:4.1f}".format(self.weight) +
+        #         "\tDelivery By: " + self.deadline.strftime("%H:%M") +
+        #         "\tStatus: " + self.status.name)
+        return "ID: " + self.ID
 
     def __lt__(self, other):
         return self.deadline < other.deadline
 
     def __eq__(self, other):
         return self.ID == other.ID
+
+    def __hash__(self):
+        return str(self.ID)
 
     def in_route(self):
         """ Set status to In_Route. """
@@ -49,7 +54,7 @@ class Package:
         """ Set status to Out For Delivery. """
         self.status = Status(2)
 
-    def deliver(self, delivery_time):
+    def deliver(self, delivery_time=""):
         """ Set status to Delivered. """
         self.status = Status(3)
         self._time_of_delivery = str(delivery_time.time())
