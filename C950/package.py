@@ -27,11 +27,7 @@ class Package:
         self.status = Status(0)
 
     def __str__(self):
-        # return ("ID: " + self.ID +
-        #         "\tWeight: " + "{:4.1f}".format(self.weight) +
-        #         "\tDelivery By: " + self.deadline.strftime("%H:%M") +
-        #         "\tStatus: " + self.status.name)
-        return "ID: " + self.ID
+        return "ID: {:2.2}\tWeight: {:4.1f}".format(self.ID, self.weight)
 
     def __lt__(self, other):
         return self.deadline < other.deadline
