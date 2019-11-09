@@ -11,7 +11,7 @@ def load_file(filename):
     result = []
     if fin.readable():
         for line in fin:
-            result.append(line.strip())
+            result.append(line.upper().strip())
 
     fin.close()
 
@@ -39,9 +39,9 @@ def build_package_table(source):
         temp = line.split(',')
 
         loc = Destination(
-            temp[1],                        # - address
-            temp[2],                        # - city
-            temp[3],                        # - state
+            temp[1].upper(),                # - address
+            temp[2].upper(),                # - city
+            temp[3].upper(),                # - state
             temp[4]                         # - zip
         )
 
@@ -80,11 +80,10 @@ def build_destination_graph(source):
     return locales
 
 
-def current_delivery_status(table):
+def print_all_delivery_status(table):
     """ Display Package() info for all packages.
 
-    :param table: HashTable of Packages()
-    """
+    :param table: HashTable of Packages()"""
     print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
     for bucket in table:
         if len(bucket) > 0:
@@ -99,3 +98,64 @@ def current_delivery_status(table):
                     package.get_status()
                 ))
     print()
+
+
+def print_single_delivery_status(table, package):
+    """ Display delivery information for individual package.
+
+    :param package: Package() """
+    print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
+    p = table.search(package)
+    print("{:2} {:4.1f} \t{:20.20}  {:18.16} {}\t{}\t{:24}".format(
+        p.ID,
+        p.weight,
+        p.address.address,
+        p.address.city,
+        p.address.zip,
+        p.deadline,
+        p.get_status()
+    ))
+    print()
+
+
+def build_package_query(table):
+    while True:
+        try:
+            id = input("Enter the package ID to beginning tracking: ")
+            address = input("Street address: ").upper()
+            city = input("City: ").upper()
+            state = input("State: ").upper()
+            zip = input("Zip code: ")
+            deadline = input("Delivery deadline (HH:MM): ")
+            weight = float(input("Package weight: "))
+            location = Destination(address, city, state, zip)
+            package = Package(id, location, convert_time(deadline), weight, None)
+            package = table.search(package)
+            if package is not None:
+                return package
+            else:
+                raise NameError
+        except NameError:
+            print("Package not found. Try again. ")
+
+
+def mode_query(mode_dict):
+    # single package or all packages
+    while True:
+        try:
+            user_mode_input = mode_dict[input('Display information for a (S)ingle package or (A)ll packages? ')[0].upper()]
+            break
+        except KeyError:
+            print("Invalid entry. Please try again.")
+    return user_mode_input
+
+
+def stop_time_query():
+    # when to stop execution
+    while True:
+        try:
+            user_time_input = convert_time(input('Enter time in HH:MM format: '))
+            break
+        except ValueError:
+            print("Invalid entry. Please try again.")
+    return user_time_input
