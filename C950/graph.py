@@ -1,20 +1,22 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
 # WGU C950 - Data Structures and Algorithms II
 # Performance Assessment: NHP1
-# Jeremy Greenwood
-# Student ID#: 000917613
-# Mentor: Rebekah McBride
+
+# TODO: refactor get nearest neighbor - with sorted list, can just return
+#       1st element that isn't visited, assuming no ties; also iterable is broken
 
 from edge import Edge
 
 
 class Graph:
-    def __init__(self):
+    def __init__(self, indices, weights):
         """ Create Graph Object. """
-        self._index = 0
         self._vertices = set()
-        self._adjacency_list = []
-        self._indices = []
-        self._weights = []
+        self._adjacency_list = set()
+        self._index = 0
+        self._indices = indices
+        self._weights = weights
 
     def __contains__(self, vertex):
         return vertex in self._vertices
@@ -34,35 +36,74 @@ class Graph:
         self._index = 0
         raise StopIteration
 
-    def _get_index(self, location):
+    def set_index_source(self, index_source):
+        """ Add List of index sources.
+
+        :param index_source: List """
+        self._indices = index_source
+
+    def set_weight_source(self, weight_source):
+        """ Add List of weight sources.
+
+        :param weight_source: List """
+        self._weights = weight_source
+
+    def add_vertex(self, vertex1):
+        """ Add vertex to Set of Vertices.
+
+        :param vertex: Vertex """
+        self._vertices.add(vertex1)
+
+        for vertex2 in self._vertices:
+            self._add_edge(vertex1, vertex2)
+
+    def get_vertex(self, vertex):
+        """ Return reference to vertex.
+
+        # :param vertex: Vertex  """
+        for candidate in self._vertices:
+            if candidate == vertex:
+                return candidate
+        return None
+
+    def del_vertex(self, vertex):
+        """ Remove vertex from Set of Vertices.
+
+        :param vertex: Vertex """
+        if vertex in self._vertices:
+            self._vertices.remove(vertex)
+
+    def _get_index(self, vertex):
         """ Return index of location in list or -1.
 
-        :param location: Vertex object """
+        :param vertex: Vertex """
+        if len(self._indices) == 0:
+            raise UnboundLocalError
+
         index = 0
-        search = location.address + " " + location.zip
+        search = vertex.address + " " + vertex.zip
         for item in self._indices:
             if search == item:
                 return index
             index += 1
         return -1
 
-    def _get_weight(self, vert1, vert2):
-        """ Return weight of edge between both vertex indices as float.
+    def _get_weight(self, index1, index2):
+        """ Return weight of edge between both indices as float.
 
-        :param vert1: index of 1st vertex
-        :param vert2: index of 2nd vertex"""
-        low, high = sorted([vert1, vert2])
+        :param index1: integer
+        :param index2: integer """
+        low, high = sorted([index1, index2])
         return self._weights[high][low]
 
-    def _add_edge(self, vert1, vert2):
-        """ Add an edge to the Graph() between vert1 and vert2.
+    def _add_edge(self, vertex1, vertex2):
+        """ Add an edge to the Graph between vertexA and vertexB.
 
-        :param vert1: Vertex to be joined...
-        :param vert2: ... Vertex joined to
-        """
+        :param vertex1: Vertex
+        :param vertex2: Vertex """
         # find indexes for both vertices
-        index_1 = self._get_index(vert1)
-        index_2 = self._get_index(vert2)
+        index_1 = self._get_index(vertex1)
+        index_2 = self._get_index(vertex2)
 
         # do not add self-loops
         if index_1 == index_2:
@@ -70,45 +111,51 @@ class Graph:
 
         # find the weight for this edge
         weight = self._get_weight(index_1, index_2)
-        edge = Edge(vert1, vert2, weight)
+        edge = Edge(vertex1, vertex2, weight)
 
         if edge not in self._adjacency_list:
-            self._adjacency_list.append(edge)
+            self._adjacency_list.add(edge)
 
     def _get_edge(self, edge):
-        """ Return reference to Edge() object or None. """
+        """ Return reference to Edge object or None.
+
+        :param edge: Edge """
         for candidate in self._adjacency_list:
             if candidate == edge:
                 return candidate
         return None
 
-    def _get_neighbors(self, vertex):
-        """ Return Edge()s where Vertex() param appears.
+    def _del_edge(self, edge):
+        """ Remove edge from List of Edges
+        
+        :param edge: Edge """
+        if edge in self._adjacency_list:
+            self._adjacency_list.remove(edge)
 
-        :param vertex: point of origin """
+    def _get_neighbors(self, vertex):
+        """ Return Edges connected to vertex.
+
+        :param vertex: Vertex """
         return [edge for edge in self._adjacency_list if vertex in edge]
 
     def _get_nearest_neighbor(self, iterable, vertex):
-        """ Return Vertex() with least weight respective to param.
+        """ Return Vertex with least weight respective to vertex.
 
-        :param iterable: adjacency list of Edge()s
-        :param vertex: point of origin"""
+        :param iterable: List
+        :param vertex: Vertex """
 
-        # get list of adjacent edges
-        neighbors = self._get_neighbors(vertex)
+        # get list of adjacent edges, sorted by weight
+        neighbors = sorted(self._get_neighbors(vertex), key=lambda x: x.weight)
 
         # filter list of edges by visited status
         output = []
         for edge in neighbors:
-            if edge.next_node is not vertex:
+            if edge.prev_node is vertex:
                 if not edge.next_node.visited:
                     output.append(edge)
-            elif edge.prev_node is not vertex:
+            elif edge.next_node is vertex:
                 if not edge.prev_node.visited:
                     output.append(edge)
-
-        # sort candidate edges by weight
-        output = sorted(output, key=lambda x: x.weight)
 
         # test for ties in weight
         if len(output) > 1:
@@ -123,9 +170,9 @@ class Graph:
         return neighbor
 
     def _look_ahead(self,vertex, tied_edge_weights):
-        """ Return shorter path when 2 edges are equal.
+        """ Return shortest path when multiple edges are equal.
 
-        :param tied_edge_weights: sorted list of Edge()s"""
+        :param tied_edge_weights: List of Edges"""
         # select all edges with tied weight
         candidates = list(filter(lambda x: x.weight == tied_edge_weights[0].weight, tied_edge_weights))
 
@@ -142,33 +189,11 @@ class Graph:
 
         return min(candidates, key=lambda x: x[1])
 
-    def add_vertex(self, vertex):
-        """ Add vertex to Set() of Vertices.
-
-        :param vertex: Vertex() object """
-        self._vertices.add(vertex)
-
-    def get_vertex(self, vertex):
-        """ Return reference to vertex.
-
-        :param vertex: Vertex() object w/ same address & zip """
-        for candidate in list(self._vertices):
-            if candidate == vertex:
-                return candidate
-        return None
-
-    def del_vertex(self, vertex):
-        """ Remove vertex from Set() of Vertices.
-
-        :param vertex: Vertex() object """
-        if vertex in self._vertices:
-            self._vertices.remove(vertex)
-
     def generate_edges(self, index_source, weight_source):
         """ Add edges & weights to/from all Vertices within the Graph.
 
-        :param index_source: ordered List() of Vertex() names & zips
-        :param weight_source: ordered 2D-List() of Vertex() edge weights
+        :param index_source: List of Vertex
+        :param weight_source: List of float
         """
         self._indices = [line for line in index_source]
         for index, line in enumerate(index_source):
