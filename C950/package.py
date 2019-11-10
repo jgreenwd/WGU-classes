@@ -1,8 +1,7 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
 # WGU C950 - Data Structures and Algorithms II
 # Performance Assessment: NHP1
-# Jeremy Greenwood
-# Student ID#: 000917613
-# Mentor: Rebekah McBride
 
 from enum import Enum
 
@@ -11,11 +10,11 @@ class Package:
     def __init__(self, id=None, address=None, deadline=None, weight=None, notes=None):
         """ Create Package() object.
 
-        :param id: integer value representing unique package
-        :param address: string value representing street address
-        :param deadline: time object representing expected delivery time
-        :param weight: float value of package mass
-        :param notes: string value of delivery notes
+        :param id: Integer
+        :param address: String
+        :param deadline: datetime.time
+        :param weight: Float
+        :param notes: String
         """
         self.ID = id
         self.address = address
@@ -49,8 +48,10 @@ class Package:
         """ Set status to Out For Delivery. """
         self.status = Status(2)
 
-    def deliver(self, delivery_time=""):
-        """ Set status to Delivered. """
+    def deliver(self, delivery_time=None):
+        """ Set status to Delivered.
+
+        :param delivery_time: datetime.time """
         self.status = Status(3)
         self._time_of_delivery = str(delivery_time.time())
 
