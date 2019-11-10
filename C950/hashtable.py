@@ -44,16 +44,16 @@ class HashTable:
 
         :param key: String-able """
         # Generate Hash value from key for indexing HashTable.
-        h1 = 17
-        h2 = 13
+        h1 = 13
+        h2 = 17
         string = str(key)
         for i in range(0, len(string), 2):
-            h1 *= ord(string[i]) ** 3
+            h1 += ord(string[i])
 
         for i in range(1, len(string), 2):
-            h2 += ord(string[i]) ** 2
+            h2 += ord(string[i])
 
-        return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
+        return ((h1 % self.length) - h2 ** 3) % self.length
 
     def insert(self, obj):
         """ Insert object into HashTable.
