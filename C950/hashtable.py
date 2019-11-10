@@ -1,20 +1,20 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
 # WGU C950 - Data Structures and Algorithms II
 # Performance Assessment: NHP1
-# Jeremy Greenwood
-# Student ID#: 000917613
-# Mentor: Rebekah McBride
 
 
 class HashTable:
-    #   Chaining Hash Table:
+    # Chaining Hash Table:
     #   - Table is a 2-axis array
     #   - 1st axis = List of buckets
     #   - 2rd axis = List of items in each bucket
+    # Length is declared at creation and immutable. If it changes, the hash value in
+    # _generate_hash() will no longer be able to retrieve values previously insert()ed.
     def __init__(self, length=64):
         """ Create HashTable Object.
 
-        :param length: number of buckets to create in the table
-        """
+        :param length: Integer """
         self.buckets = []
         self.length = length
         self._index = 0
@@ -40,6 +40,9 @@ class HashTable:
         raise StopIteration
 
     def _generate_hash(self, key):
+        """ Return Integer for index in HashTable.
+
+        :param key: String-able """
         # Generate Hash value from key for indexing HashTable.
         h1 = 17
         h2 = 13
@@ -52,15 +55,19 @@ class HashTable:
 
         return ((h1 - 311) % self.length * (127 - h2 * 311) % self.length) % self.length
 
-    def insert(self, args):
-        """ Insert args into HashTable. """
-        index = self._generate_hash(args)
+    def insert(self, obj):
+        """ Insert object into HashTable.
+
+        :param obj: Object """
+        index = self._generate_hash(obj)
 
         bucket = self.buckets[index]
-        bucket.append(args)
+        bucket.append(obj)
 
     def search(self, key):
-        """ Return reference to object matching key or None. """
+        """ Return reference to object matching key or None.
+
+        :param key: String-able """
         index = self._generate_hash(key)
 
         if len(self.buckets[index]) > 0:
@@ -68,3 +75,15 @@ class HashTable:
                 if item == key:
                     return item
         return None
+
+    def remove(self, obj):
+        """ Remove object from HashTable; Return Boolean of success.
+
+        :param obj: Object """
+        index = self._generate_hash(obj)
+
+        if len(self.buckets[index]) > 0:
+            if obj in self.buckets[index]:
+                self.buckets[index].remove(obj)
+                return True
+        return False
