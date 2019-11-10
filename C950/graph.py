@@ -36,18 +36,7 @@ class Graph:
         self._index = 0
         raise StopIteration
 
-    def set_index_source(self, index_source):
-        """ Add List of index sources.
-
-        :param index_source: List """
-        self._indices = index_source
-
-    def set_weight_source(self, weight_source):
-        """ Add List of weight sources.
-
-        :param weight_source: List """
-        self._weights = weight_source
-
+# -------------------- Vertex Manipulation --------------------
     def add_vertex(self, vertex1):
         """ Add vertex to Set of Vertices.
 
@@ -72,30 +61,13 @@ class Graph:
         :param vertex: Vertex """
         if vertex in self._vertices:
             self._vertices.remove(vertex)
+            # can not manipulate Set() while in use; reference a copy
+            tmp = self._adjacency_list.copy()
+            for edge in tmp:
+                if vertex in edge:
+                    self._adjacency_list.remove(edge)
 
-    def _get_index(self, vertex):
-        """ Return index of location in list or -1.
-
-        :param vertex: Vertex """
-        if len(self._indices) == 0:
-            raise UnboundLocalError
-
-        index = 0
-        search = vertex.address + " " + vertex.zip
-        for item in self._indices:
-            if search == item:
-                return index
-            index += 1
-        return -1
-
-    def _get_weight(self, index1, index2):
-        """ Return weight of edge between both indices as float.
-
-        :param index1: integer
-        :param index2: integer """
-        low, high = sorted([index1, index2])
-        return self._weights[high][low]
-
+# --------------------  Edge Manipulation  --------------------
     def _add_edge(self, vertex1, vertex2):
         """ Add an edge to the Graph between vertexA and vertexB.
 
@@ -131,6 +103,30 @@ class Graph:
         :param edge: Edge """
         if edge in self._adjacency_list:
             self._adjacency_list.remove(edge)
+
+# --------------------  Support Functions  --------------------
+    def _get_index(self, vertex):
+        """ Return index of location in list or -1.
+
+        :param vertex: Vertex """
+        if len(self._indices) == 0:
+            raise UnboundLocalError
+
+        index = 0
+        search = vertex.address + " " + vertex.zip
+        for item in self._indices:
+            if search == item:
+                return index
+            index += 1
+        return -1
+
+    def _get_weight(self, index1, index2):
+        """ Return weight of edge between both indices as float.
+
+        :param index1: integer
+        :param index2: integer """
+        low, high = sorted([index1, index2])
+        return self._weights[high][low]
 
     def _get_neighbors(self, vertex):
         """ Return Edges connected to vertex.
@@ -188,25 +184,3 @@ class Graph:
             candidates[i] = (candidate[1], (self._get_weight(self._get_index(vertex), self._get_index(self._get_nearest_neighbor(*candidate)))))
 
         return min(candidates, key=lambda x: x[1])
-
-    def generate_edges(self, index_source, weight_source):
-        """ Add edges & weights to/from all Vertices within the Graph.
-
-        :param index_source: List of Vertex
-        :param weight_source: List of float
-        """
-        self._indices = [line for line in index_source]
-        for index, line in enumerate(index_source):
-            self._indices[index] = line
-
-        self._weights = [[]] * len(weight_source)
-        for index, line in enumerate(weight_source):
-            self._weights[index] = [float(i) for i in line.split('\t')]
-
-        # is this possible non-quadratically?
-        i = 0
-        while i < len(self._vertices):
-            tmp = list(self._vertices)
-            for loc in self._vertices:
-                self._add_edge(tmp[i], loc)
-            i += 1
