@@ -11,7 +11,7 @@ class Package:
         """ Create Package() object.
 
         :param id: Integer
-        :param address: String
+        :param address: Location
         :param deadline: datetime.time
         :param weight: Float
         :param notes: String
@@ -34,7 +34,7 @@ class Package:
         return self.ID == other.ID
 
     def __hash__(self):
-        return str(self.ID)
+        return hash(str(self))
 
     def in_route(self):
         """ Set status to In_Route. """
