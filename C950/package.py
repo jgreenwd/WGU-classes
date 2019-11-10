@@ -31,7 +31,7 @@ class Package:
         return self.deadline < other.deadline
 
     def __eq__(self, other):
-        return self.ID == other.ID
+        return str(self) == other
 
     def __hash__(self):
         return hash(str(self))
