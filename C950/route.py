@@ -1,34 +1,32 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
 # WGU C950 - Data Structures and Algorithms II
 # Performance Assessment: NHP1
-# Jeremy Greenwood
-# Student ID#: 000917613
-# Mentor: Rebekah McBride
 
 from graph import Graph
 from datetime import time
 
 
 class Route(Graph):
-    def __init__(self):
+    def __init__(self, indices, weights):
         """ Create Route Object. """
-        Graph.__init__(self)
+        Graph.__init__(self, indices, weights)
         self.order = []
-        self._start_time = time()
-        self._starting_vertex = None
-        self.delivery_time = time()
         self.rate_of_travel = 0
-        self._index = 0
+        self.package_count = 0
+        self._starting_vertex = None
+        self._start_time = time()
+        self.delivery_time = time()
         self._finished = False
+        self._index = 0
 
     def set_rate_of_travel(self, rate):
         """ Set the average speed of delivery vehicle in MPH.
-
         :param rate: float of the vehicle speed """
         self.rate_of_travel = rate
 
     def set_start_time(self, time):
         """ Set the time when the vehicle will leave the HUB.
-
         :param time: expects datetime() value
         """
         self._start_time = time
@@ -36,10 +34,6 @@ class Route(Graph):
     def get_start_time(self):
         """ Return time when the delivery vehicle leaves the HUB. """
         return self._start_time
-
-    def get_starting_node(self):
-        """ Return starting Vertex(). """
-        return self._starting_vertex
 
     def get_current_node(self):
         """ Return most recent node visited in Cycle. """
@@ -51,7 +45,6 @@ class Route(Graph):
 
     def get_next_edge(self):
         """ Move pointer to next edge to be visited in Cycle.
-
             CAUTION: This method advances the internal index to the next node. Every
             invocation of the method will return a different value until the last
             value is reached.
@@ -70,7 +63,6 @@ class Route(Graph):
 
     def create_cycle(self, start):
         """ Place delivery destinations in order to minimize time & distance.
-
         :param start: Starting Vertex for the Graph cycle
         """
         self._starting_vertex = start
