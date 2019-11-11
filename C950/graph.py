@@ -37,14 +37,14 @@ class Graph:
         raise StopIteration
 
 # -------------------- Vertex Manipulation --------------------
-    def add_vertex(self, vertex1):
+    def add_vertex(self, vertex):
         """ Add vertex to Set of Vertices.
 
         :param vertex: Vertex """
-        self.vertices.add(vertex1)
+        self.vertices.add(vertex)
 
         for vertex2 in self.vertices:
-            self._add_edge(vertex1, vertex2)
+            self._add_edge(vertex, vertex2)
 
     def get_vertex(self, vertex):
         """ Return reference to vertex.
