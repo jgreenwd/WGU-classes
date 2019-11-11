@@ -44,20 +44,24 @@ class Package:
         """ Set status to Delayed. """
         self.status = Status(1)
 
+    def load(self):
+        """ Set status to Loading. """
+        self.status = Status(2)
+
     def ofd(self):
         """ Set status to Out For Delivery. """
-        self.status = Status(2)
+        self.status = Status(3)
 
     def deliver(self, delivery_time=None):
         """ Set status to Delivered.
 
         :param delivery_time: datetime.time """
-        self.status = Status(3)
+        self.status = Status(4)
         self._time_of_delivery = str(delivery_time.time())
 
     def get_status(self):
         """ Return Package delivery Status. """
-        if self.status == Status(3):
+        if self.status == Status(4):
             return self.status.name + ": " + self._time_of_delivery
         else:
             return self.status.name
@@ -66,5 +70,6 @@ class Package:
 class Status(Enum):
     IN_ROUTE = 0
     DELAYED = 1
-    OUT_FOR_DELIVERY = 2
-    DELIVERED = 3
+    LOADING = 2
+    OUT_FOR_DELIVERY = 3
+    DELIVERED = 4
