@@ -12,23 +12,23 @@ from edge import Edge
 class Graph:
     def __init__(self, indices, weights):
         """ Create Graph Object. """
-        self._vertices = set()
-        self._adjacency_list = set()
+        self.vertices = set()
+        self.adjacency_list = set()
         self._index = 0
         self._indices = indices
         self._weights = weights
 
     def __contains__(self, vertex):
-        return vertex in self._vertices
+        return vertex in self.vertices
 
     def __len__(self):
-        return len(self._vertices)
+        return len(self.vertices)
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        iterable = list(self._vertices)
+        iterable = list(self.vertices)
         if self._index < len(iterable):
             result = iterable[self._index]
             self._index += 1
@@ -41,16 +41,16 @@ class Graph:
         """ Add vertex to Set of Vertices.
 
         :param vertex: Vertex """
-        self._vertices.add(vertex1)
+        self.vertices.add(vertex1)
 
-        for vertex2 in self._vertices:
+        for vertex2 in self.vertices:
             self._add_edge(vertex1, vertex2)
 
     def get_vertex(self, vertex):
         """ Return reference to vertex.
 
         # :param vertex: Vertex  """
-        for candidate in self._vertices:
+        for candidate in self.vertices:
             if candidate == vertex:
                 return candidate
         return None
@@ -59,13 +59,13 @@ class Graph:
         """ Remove vertex from Set of Vertices.
 
         :param vertex: Vertex """
-        if vertex in self._vertices:
-            self._vertices.remove(vertex)
+        if vertex in self.vertices:
+            self.vertices.remove(vertex)
             # can not manipulate Set() while in use; reference a copy
-            tmp = self._adjacency_list.copy()
+            tmp = self.adjacency_list.copy()
             for edge in tmp:
                 if vertex in edge:
-                    self._adjacency_list.remove(edge)
+                    self.adjacency_list.remove(edge)
 
 # --------------------  Edge Manipulation  --------------------
     def _add_edge(self, vertex1, vertex2):
@@ -85,14 +85,14 @@ class Graph:
         weight = self._get_weight(index_1, index_2)
         edge = Edge(vertex1, vertex2, weight)
 
-        if edge not in self._adjacency_list:
-            self._adjacency_list.add(edge)
+        if edge not in self.adjacency_list:
+            self.adjacency_list.add(edge)
 
     def _get_edge(self, edge):
         """ Return reference to Edge object or None.
 
         :param edge: Edge """
-        for candidate in self._adjacency_list:
+        for candidate in self.adjacency_list:
             if candidate == edge:
                 return candidate
         return None
@@ -101,8 +101,8 @@ class Graph:
         """ Remove edge from List of Edges
         
         :param edge: Edge """
-        if edge in self._adjacency_list:
-            self._adjacency_list.remove(edge)
+        if edge in self.adjacency_list:
+            self.adjacency_list.remove(edge)
 
 # --------------------  Support Functions  --------------------
     def _get_index(self, vertex):
@@ -132,7 +132,7 @@ class Graph:
         """ Return Edges connected to vertex.
 
         :param vertex: Vertex """
-        return [edge for edge in self._adjacency_list if vertex in edge]
+        return [edge for edge in self.adjacency_list if vertex in edge]
 
     def _get_nearest_neighbor(self, vertex, iterable=None):
         """ Return Vertex with least weight respective to vertex.
