@@ -134,7 +134,7 @@ class Graph:
         :param vertex: Vertex """
         return [edge for edge in self._adjacency_list if vertex in edge]
 
-    def _get_nearest_neighbor(self, iterable, vertex):
+    def _get_nearest_neighbor(self, vertex, iterable=None):
         """ Return Vertex with least weight respective to vertex.
 
         :param iterable: List
@@ -154,7 +154,7 @@ class Graph:
                     output.append(edge)
 
         # test for ties in weight
-        if len(output) > 1:
+        if len(output) > 1 and iterable is not None:
             if output[0].weight == output[1].weight:
                 # select a winner from ties
                 self._look_ahead(vertex, output)
