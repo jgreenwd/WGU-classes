@@ -18,7 +18,7 @@ class HashTable:
         self.buckets = []
         self.length = length
         self._index = 0
-        for i in range(length):
+        for i in range(4 * length // 3):
             self.buckets.append([])
 
     def __contains__(self, item):
