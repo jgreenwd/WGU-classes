@@ -17,7 +17,7 @@ One alternative would have been to use [Dijkstra's algorithm](https://en.wikiped
 
 Another alternative would have been to use [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search). Again, this would have been more likely to produce more efficient results, and the implementation would have again increased in complexity. Primarily, BFS differs from Nearest Neighbor in that it reads ahead before offering a solution by use of a queue. Nearest Neighbor simply compares the weight of the remaining unvisited edges and returns the lowest. In theory, BFS could also result in visiting the same vertex multiple times in order to complete the path. In practice, this is easily avoided.
 
-## Algorithm Overview - B, D
+## Algorithm Overview - B, D, K
 My implementation of Nearest Neighbor works as follows:
 ```
   empty list of edges_to_traverse
@@ -52,6 +52,7 @@ I made use of a weighted __Graph__ structure to organize the delivery locations.
 
 I attempted to use self-adjusting data structures throughout, most notably when adding and removing __Vertex__, __Location__, and __Edge__ members. As an example, whenever a __Vertex__ is added to a __Graph__, an __Edge__ is generated connecting it to every other __Vertex__. This is an O(n) operation that results in all instances of __Graph__ being complete. This ensures that every __Graph__ has a complete adjacency list to work with. Unfortunately, it does create added overhead and a larger program footprint.
 
-
-
 Maintenance is rendered somewhat easier by extracting complex functions and methods to utility_functions.py and to other class files.
+
+## Annotations - J
+If I were to do this assignment again, the biggest change would be my __Route__ class. I chose to develop it as a child class of __Graph__. I now see redundancies that could have been eliminated by merging __Route__ and __DeliveryController__. I also think this might make the interface slightly less cumbersome. I also question the use of a separate __Edge__ class. I think the same results could have been achieved with a simpler implementation.
