@@ -2,7 +2,7 @@ Jeremy Greenwood --- ID#: 000917613
 
 WGU C950 - Data Structures and Algorithms II ---Performance Assessment: NHP1
 
-## Algorithm Selection - A, I.1, I.3
+## Algorithm Selection - A, I
 To start with, I attempted to utilize a graph traversal algorithm based on the following:
 1. The ultimate goal is to return to the starting vertex. It must produce a cycle.
 2. The vertex farthest from the starting vertex should be the "apex" of the cycle.
