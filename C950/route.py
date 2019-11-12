@@ -86,3 +86,15 @@ class Route(Graph):
                 current_vertex = start
             edges.remove(current_edge)
             verts.remove(current_vertex)
+
+        # find final edge returning to HUB and append
+        for edge in edges:
+            if current_vertex in edge and self._starting_vertex in edge:
+                self.order.append(edge)
+
+        # set edge end vertices to match adjoining vertices (aka A-B, B-C, C-D...)
+        current_vertex = self._starting_vertex
+        for edge in self.order:
+            if edge.prev_node is not current_vertex:
+                edge.swap_nodes()
+            current_vertex = edge.next_node
