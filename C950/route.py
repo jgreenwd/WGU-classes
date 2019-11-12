@@ -5,6 +5,7 @@
 
 from graph import Graph
 from datetime import time
+from functools import reduce
 
 
 class Route(Graph):
@@ -66,35 +67,35 @@ class Route(Graph):
 
         :param start: Vertex """
         self._starting_vertex = start
-        verts = self.vertices.copy()
-        edges = self.adjacency_list.copy()
 
-        # starting vertex
+        edges = self.adjacency_list.copy()
+        unvisited = self.vertices.copy()
+        for vertex in unvisited:
+            vertex.visited = False
+
         current_vertex = self._starting_vertex
         current_edge = None
 
-        # Nearest neighbor
-        while len(self.order) < len(self.vertices) - 1:
-            neighbor = self._get_nearest_neighbor(current_vertex, edges)
+        while len(unvisited) > 1:
+            candidate = self._get_nearest_neighbor(current_vertex)
+            if candidate == current_vertex:
+                break
             for edge in edges:
-                if current_vertex in edge and neighbor in edge:
+                if candidate in edge and current_vertex in edge:
                     current_edge = edge
-                    self.order.append(current_edge)
+            self.order.append(current_edge)
             current_vertex.visited = True
-            current_vertex = current_edge.get_next_start()
-            if current_vertex.visited:
-                current_vertex = start
-            edges.remove(current_edge)
-            verts.remove(current_vertex)
+            unvisited.remove(current_vertex)
+            current_vertex = candidate
 
-        # find final edge returning to HUB and append
+        # return to HUB
         for edge in edges:
             if current_vertex in edge and self._starting_vertex in edge:
                 self.order.append(edge)
 
-        # set edge end vertices to match adjoining vertices (aka A-B, B-C, C-D...)
+        # link corresponding vertex ends to each other (aka A-B, B-C, C-D...)
         current_vertex = self._starting_vertex
         for edge in self.order:
-            if edge.prev_node is not current_vertex:
+            if not edge.prev_node is current_vertex:
                 edge.swap_nodes()
             current_vertex = edge.next_node
