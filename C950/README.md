@@ -22,7 +22,7 @@ Another alternative would have been to use [Breadth-First Search](https://en.wik
 ### B
 My implementation of Nearest Neighbor works as follows:
 ```
-  list of edges_to_visit
+  empty list of edges_to_traverse
   
   set all vertices as unvisited
     
@@ -30,10 +30,22 @@ My implementation of Nearest Neighbor works as follows:
   current_edge = None
   
   while unvisited vertices remain
-      find_nearest_neighbor() for current_vertex
+      visit current_vertex
+      find_nearest_neighbor() of current_vertex
       current_edge = edge( current_vertex and nearest_neighbor )
-      add current_edge to edges_to_visit
-      mark current_vertex as visited
-      current_vertex = next_vertex
+      add current_edge to edges_to_traverse
+      
+  return edges_to_visit
 ```
 
+This runs in O(n) time with O(n) space complexity.
+
+I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a vertex, edge, or location is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
+```        
+  for candidate in container:
+      if candidate == search_value:
+          return candidate
+      return None
+```
+
+This issue is mostly negated when searching for packages, via the use of a hash table for package storage. This has a theoretical access time of O(1) for each element. Since I chose to implement a chaining hash table, the actual time is slightly higher. This is a result of collisions produced from the method I used to generate the hash value. I attempted to use the built-in hash function from Python. Unfortunately, I was not able to get consistent results while using it.
