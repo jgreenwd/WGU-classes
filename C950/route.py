@@ -63,20 +63,19 @@ class Route(Graph):
 
     def create_cycle(self, start):
         """ Place delivery destinations in order to minimize time & distance.
-        :param start: Starting Vertex for the Graph cycle
-        """
+
+        :param start: Vertex """
         self._starting_vertex = start
-        verts = self._vertices.copy()
-        edges = self._adjacency_list.copy()
+        verts = self.vertices.copy()
+        edges = self.adjacency_list.copy()
 
         # starting vertex
         current_vertex = self._starting_vertex
         current_edge = None
 
         # Nearest neighbor
-        i = 0
-        while len(self.order) < len(self._vertices) - 1:
-            neighbor = self._get_nearest_neighbor(edges, current_vertex)
+        while len(self.order) < len(self.vertices) - 1:
+            neighbor = self._get_nearest_neighbor(current_vertex, edges)
             for edge in edges:
                 if current_vertex in edge and neighbor in edge:
                     current_edge = edge
@@ -87,18 +86,3 @@ class Route(Graph):
                 current_vertex = start
             edges.remove(current_edge)
             verts.remove(current_vertex)
-            i += 1
-
-        # add edge returning to starting vertex
-        neighbors = self._get_neighbors(current_vertex)
-        for edge in neighbors:
-            if current_vertex in edge and start in edge:
-                current_edge = edge
-                self.order.append(current_edge)
-
-        # order heads and tails to connect in sequence
-        current_vertex = self._starting_vertex
-        for edge in self.order:
-            if edge.prev_node is not current_vertex:
-                edge.flip()
-            current_vertex = edge.next_node
