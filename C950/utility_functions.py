@@ -74,8 +74,8 @@ def parse_delivery_input(source, indices, weights):
     return graph, table
 
 
-def mode_query(mode_dict):
-    # single package or all packages
+def mode_query(mode_dict, table):
+    # single package or all packages?
     while True:
         try:
             user_mode_input = mode_dict[input('Display information for a (S)ingle package or (A)ll packages? ')[0].upper()]
@@ -83,37 +83,36 @@ def mode_query(mode_dict):
         except KeyError:
             print("Invalid entry. Please try again.")
 
-    # when to stop execution
-    if user_mode_input == 0:
+    if user_mode_input == 1:
         # if all packages
         while True:
+            # query for time to end simulation
             try:
                 user_time_input = convert_time(input('Enter time in HH:MM format: '))
                 break
             except ValueError:
                 print("Invalid entry. Please try again.")
+        package = None
     else:
         # if single package
-        user_time_input = datetime(1,1,1,20,0,0)
+        while True:
+            try:
+                identify = input("Enter the package ID to beginning tracking: ")
+                weight = float(input("Package weight: "))
+                package = table.search("ID: {:2.2}\tWeight: {:4.1f}".format(identify, weight))
+                if package is not None:
+                    break
+                else:
+                    raise NameError
+            except NameError:
+                print("Package not found. Try again. ")
+            except ValueError:
+                print("Invalid entry. Please try again.")
 
-    return user_mode_input, user_time_input
+        # end simulation at closing time
+        user_time_input = datetime(1, 1, 1, 20, 0, 0)
 
-
-def build_package_query(table):
-    """ Query user for single package.
-
-    :param table: HashTable """
-    while True:
-        try:
-            id = input("Enter the package ID to beginning tracking: ")
-            weight = float(input("Package weight: "))
-            package = table.search("ID: {:2.2}\tWeight: {:4.1f}".format(id, float(weight)))
-            if package is not None:
-                return package
-            else:
-                raise NameError
-        except NameError:
-            print("Package not found. Try again. ")
+    return user_mode_input, user_time_input, package
 
 
 def print_single_delivery_status(table, package):
