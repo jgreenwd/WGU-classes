@@ -56,8 +56,9 @@ class Package:
         """ Set status to Delivered.
 
         :param delivery_time: datetime.time """
-        self.status = Status(4)
-        self._time_of_delivery = str(delivery_time.time())
+        if self.status != Status(4):
+            self.status = Status(4)
+            self._time_of_delivery = str(delivery_time.time())
 
     def get_status(self):
         """ Return Package delivery Status. """
