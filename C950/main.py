@@ -10,6 +10,9 @@ from route import Route
 from package import Status
 from delivery import DeliveryController
 
+# TODO: finish implementing delivery change implementation
+#       move delivery change to delivery controller
+
 
 if __name__ == '__main__':
     # --------------- ESTABLISH PARAMETERS -----------------
@@ -47,8 +50,8 @@ if __name__ == '__main__':
                        'ID: 36\tWeight: 88.0', 'ID: 38\tWeight:  9.0']
     DELAYED = ['ID: 6 \tWeight: 88.0', 'ID: 25\tWeight:  7.0',
                'ID: 28\tWeight:  7.0', 'ID: 32\tWeight:  1.0']
-    BUNDLED = ["ID: 13	Weight:  2.0", "ID: 14	Weight: 88.0", "ID: 15	Weight:  4.0",
-               "ID: 16	Weight: 88.0", "ID: 19	Weight: 37.0", "ID: 20	Weight: 37.0"]
+    BUNDLED = ["ID: 13\tWeight:  2.0", "ID: 14\tWeight: 88.0", "ID: 15\tWeight:  4.0",
+               "ID: 16\tWeight: 88.0", "ID: 19\tWeight: 37.0", "ID: 20\tWeight: 37.0"]
 
     # Given the key for each exception, find the delivery address, add to appropriate route
     for package_key in BUNDLED:
@@ -115,12 +118,12 @@ if __name__ == '__main__':
     # Gather user input: when to stop the simulation and read delivery Status()
     # single package or all packages
     modes = {'S': 0, 'A': 1}
-    user_mode, user_time = utils.mode_query(modes)
+    user_mode, user_time, single_package = utils.mode_query(modes, table)
 
     # initialize variables used to track delivery progress
-    truck2 = DeliveryController(routes[0])
-    truck1 = DeliveryController(routes[1])
-    truck3 = DeliveryController(routes[2])
+    truck2 = DeliveryController(routes[0], table)
+    truck1 = DeliveryController(routes[1], table)
+    truck3 = DeliveryController(routes[2], table)
 
     time_iter = datetime(1, 1, 1, 8, 0, 0)
     while time_iter.time() <= user_time.time():
@@ -134,36 +137,39 @@ if __name__ == '__main__':
 
         # at 8:00 Truck2 departs, includes all packages in BUNDLED
         if time_iter.time() == routes[0].get_start_time().time():
-            truck2.start_route(table)
+            truck2.start_route()
 
         # at 9:05 Truck1 departs, includes all packages marked DELAYED and TRUCK2_REQUIRED
         if time_iter.time() == routes[1].get_start_time().time():
-            truck1.start_route(table)
+            truck1.start_route()
 
         # at 10:00 Truck3 departs including all other packages (Truck2 has returned by then)
         if time_iter.time() == routes[2].get_start_time().time():
-            truck3.start_route(table)
+            truck3.start_route()
 
         # at 10:20 Address for Package.ID 9 changes
         if time_iter.time() == datetime(1,1,1,10,20,0).time():
             new_location = Location("410 S State St".upper(), "Salt Lake City".upper(), "UT".upper(), "84111")
             new_location = graph.get_vertex(new_location)
             package = table.search("ID: 9 	Weight:  2.0")
+            if package.get_status() == Status(4):
+                print() # retrieve delivered package
+            else:
+                print() # reroute delivery
             old_location = package.address
             package.address = new_location
             new_location.add_package_key(str(package))
             old_location.del_package_key("ID: 9 	Weight:  2.0")
-            print(str(package))
 
         # if time for a delivery, execute .make_delivery(time)
         if not routes[0].finished() and time_iter.time() == truck2.event_time.time():
-            truck2.make_delivery(time_iter, table)
+            truck2.make_delivery(time_iter)
 
         if not routes[1].finished() and time_iter.time() == truck1.event_time.time():
-            truck1.make_delivery(time_iter, table)
+            truck1.make_delivery(time_iter)
 
         if not routes[2].finished() and time_iter.time() == truck3.event_time.time():
-            truck3.make_delivery(time_iter, table)
+            truck3.make_delivery(time_iter)
 
         # increment current_time by 1 second throughout delivery sim
         time_iter += timedelta(seconds=1)
