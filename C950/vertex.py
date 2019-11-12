@@ -1,15 +1,14 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
 # WGU C950 - Data Structures and Algorithms II
 # Performance Assessment: NHP1
-# Jeremy Greenwood
-# Student ID#: 000917613
-# Mentor: Rebekah McBride
 
 
 class Vertex:
     def __init__(self, data):
         """ Create Vertex Object.
 
-        :param data: object placed at Vertex """
+        :param data: Object """
         self._data = data
         self.visited = False
 
