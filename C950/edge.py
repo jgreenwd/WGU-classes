@@ -1,14 +1,16 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
 # WGU C950 - Data Structures and Algorithms II
 # Performance Assessment: NHP1
-# Jeremy Greenwood
-# Student ID#: 000917613
-# Mentor: Rebekah McBride
 
 
 class Edge:
-    # in lieu of traditional Node: node w/ 2 pointers
-    # use 2 Nodes with 1 edge between them
     def __init__(self, vertex1, vertex2, weight):
+        """ Create Edge Object.
+
+        :param vertex1: Vertex
+        :param vertex2: Vertex
+        :param weight: float """
         self.weight = weight
         self.prev_node = vertex1
         self.next_node = vertex2
@@ -35,7 +37,7 @@ class Edge:
             return self.next_node
         return None
 
-    def flip(self):
+    def swap_nodes(self):
         """ Swap node positions. """
         tmp = self.prev_node
         self.prev_node = self.next_node
