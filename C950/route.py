@@ -5,7 +5,6 @@
 
 from graph import Graph
 from datetime import time
-from functools import reduce
 
 
 class Route(Graph):
