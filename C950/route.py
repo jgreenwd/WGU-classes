@@ -5,6 +5,7 @@
 
 from graph import Graph
 from datetime import time
+from edge import Edge
 
 
 class Route(Graph):
@@ -98,3 +99,27 @@ class Route(Graph):
             if not edge.prev_node is current_vertex:
                 edge.swap_nodes()
             current_vertex = edge.next_node
+
+    def alter_course(self, add_vert):
+        """ Replace Vertex and recalculate order.
+
+        :param del_vert: Vertex
+        :param add_vert: Vertex """
+        # simplest solution: insert new vertex before returning to HUB
+        last_idx = len(self.order) - 1
+
+        # from index, determine previous vertex and next vertex
+        prev_vert = self.order[last_idx].prev_node
+        next_vert = self.order[last_idx].next_node
+        front_edge = Edge(prev_vert, add_vert, self._get_weight(self._get_index(prev_vert), self._get_index(add_vert)))
+        back_edge = Edge(add_vert, next_vert, self._get_weight(self._get_index(add_vert), self._get_index(next_vert)))
+
+        # order the edge's vertices
+        if front_edge.prev_node is not prev_vert:
+            front_edge.swap_nodes()
+        if back_edge.next_node is not next_vert:
+            back_edge.swap_nodes()
+
+        # insert new edges
+        self.order[last_idx] = front_edge
+        self.order.append(back_edge)
