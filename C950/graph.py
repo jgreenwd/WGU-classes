@@ -7,6 +7,7 @@
 #       1st element that isn't visited, assuming no ties; also iterable is broken
 
 from edge import Edge
+from location import Location
 
 
 class Graph:
@@ -137,13 +138,13 @@ class Graph:
     def _get_nearest_neighbor(self, vertex, iterable=None):
         """ Return Vertex with least weight respective to vertex.
 
-        :param iterable: List
-        :param vertex: Vertex """
+        :param vertex: Vertex
+        :param iterable: List """
 
         # get list of adjacent edges, sorted by weight
-        neighbors = sorted(self._get_neighbors(vertex), key=lambda x: x.weight)
+        neighbors = sorted(list(iterable), key=lambda x: float(x.weight))
 
-        # filter list of edges by visited status
+        # filter list of edges by visited status (aka availability)
         output = []
         for edge in neighbors:
             if edge.prev_node is vertex:
@@ -153,11 +154,12 @@ class Graph:
                 if not edge.prev_node.visited:
                     output.append(edge)
 
+        # TODO: establish base case for recursive look-ahead
         # test for ties in weight
-        if len(output) > 1 and iterable is not None:
-            if output[0].weight == output[1].weight:
+        # if len(output) > 1 and iterable is not None:
+        #     if output[0].weight == output[1].weight:
                 # select a winner from ties
-                self._look_ahead(vertex, output)
+                # return self._look_ahead(vertex, output)
 
         if output[0].prev_node == vertex:
             neighbor = output[0].next_node
@@ -165,22 +167,30 @@ class Graph:
             neighbor = output[0].prev_node
         return neighbor
 
-    def _look_ahead(self,vertex, tied_edge_weights):
+    def _look_ahead(self, vertex, tied_edge_weights):
         """ Return shortest path when multiple edges are equal.
 
-        :param tied_edge_weights: List of Edges"""
+        :param vertex: Vertex
+        :param tied_edge_weights: List """
         # select all edges with tied weight
         candidates = list(filter(lambda x: x.weight == tied_edge_weights[0].weight, tied_edge_weights))
 
         # find all neighbors for the candidate vertex - insert as tuple(vertex, neighbors)
         for i, candidate in enumerate(candidates):
             if candidate.prev_node == vertex:
-                candidates[i] = (self._get_neighbors(candidate.next_node), candidate.next_node)
+                candidates[i] = (candidate.next_node, self._get_neighbors(candidate.next_node))
             else:
-                candidates[i] = (self._get_neighbors(candidate.prev_node), candidate.prev_node)
+                candidates[i] = (candidate.prev_node, self._get_neighbors(candidate.prev_node))
 
-        # determine weight for candidate vertex's nearest neighbor
+        # determine weight for each candidate vertex's nearest neighbor
         for i, candidate in enumerate(candidates):
-            candidates[i] = (candidate[1], (self._get_weight(self._get_index(vertex), self._get_index(self._get_nearest_neighbor(*candidate)))))
+            vertex_a = candidate[0]
+            vertex_b = self._get_nearest_neighbor(vertex_a, self.vertices)
+            index_1 = self._get_index(vertex_a)
+            index_2 = self._get_index(vertex_b)
+            weight = self._get_weight(index_1, index_2)
 
+            candidates[i] = (vertex_a, weight)
+
+        # return neighbor with closest next-neighbor
         return min(candidates, key=lambda x: x[1])
