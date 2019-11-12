@@ -21,4 +21,19 @@ Another alternative would have been to use [Breadth-First Search](https://en.wik
 ## Algorithm Overview
 ### B
 My implementation of Nearest Neighbor works as follows:
-1. Identify the collections of vertices and edges in the graph.
+```
+  list of edges_to_visit
+  
+  set all vertices as unvisited
+    
+  current_vertex = starting_vertex
+  current_edge = None
+  
+  while unvisited vertices remain
+      find_nearest_neighbor() for current_vertex
+      current_edge = edge( current_vertex and nearest_neighbor )
+      add current_edge to edges_to_visit
+      mark current_vertex as visited
+      current_vertex = next_vertex
+```
+
