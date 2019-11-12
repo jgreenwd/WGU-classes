@@ -45,6 +45,7 @@ class Location(Vertex):
 
         :param package_key: String """
         self._package_keys.append(package_key)
+        self._package_keys.sort()
 
     def get_package_keys(self):
         """ Return List of package keys at Location. """
