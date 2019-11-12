@@ -149,17 +149,9 @@ if __name__ == '__main__':
 
         # at 10:20 Address for Package.ID 9 changes
         if time_iter.time() == datetime(1,1,1,10,20,0).time():
-            new_location = Location("410 S State St".upper(), "Salt Lake City".upper(), "UT".upper(), "84111")
-            new_location = graph.get_vertex(new_location)
+            location = Location("410 S State St".upper(), "Salt Lake City".upper(), "UT".upper(), "84111")
             package = table.search("ID: 9 	Weight:  2.0")
-            if package.get_status() == Status(4):
-                print() # retrieve delivered package
-            else:
-                print() # reroute delivery
-            old_location = package.address
-            package.address = new_location
-            new_location.add_package_key(str(package))
-            old_location.del_package_key("ID: 9 	Weight:  2.0")
+            truck1.alter_delivery(package, location, graph)
 
         # if time for a delivery, execute .make_delivery(time)
         if not routes[0].finished() and time_iter.time() == truck2.event_time.time():
