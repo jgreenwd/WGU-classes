@@ -82,33 +82,32 @@ def mode_query(mode_dict):
             break
         except KeyError:
             print("Invalid entry. Please try again.")
-    return user_mode_input
 
-
-def stop_time_query():
     # when to stop execution
-    while True:
-        try:
-            user_time_input = convert_time(input('Enter time in HH:MM format: '))
-            break
-        except ValueError:
-            print("Invalid entry. Please try again.")
-    return user_time_input
+    if user_mode_input == 0:
+        # if all packages
+        while True:
+            try:
+                user_time_input = convert_time(input('Enter time in HH:MM format: '))
+                break
+            except ValueError:
+                print("Invalid entry. Please try again.")
+    else:
+        # if single package
+        user_time_input = datetime(1,1,1,20,0,0)
+
+    return user_mode_input, user_time_input
 
 
 def build_package_query(table):
+    """ Query user for single package.
+
+    :param table: HashTable """
     while True:
         try:
             id = input("Enter the package ID to beginning tracking: ")
-            address = input("Street address: ").upper()
-            city = input("City: ").upper()
-            state = input("State: ").upper()
-            zip = input("Zip code: ")
-            deadline = input("Delivery deadline (HH:MM): ")
             weight = float(input("Package weight: "))
-            location = Location(address, city, state, zip)
-            package = Package(id, location, convert_time(deadline), weight, None)
-            package = table.search(package)
+            package = table.search("ID: {:2.2}\tWeight: {:4.1f}".format(id, float(weight)))
             if package is not None:
                 return package
             else:
@@ -120,7 +119,8 @@ def build_package_query(table):
 def print_single_delivery_status(table, package):
     """ Display delivery information for individual package.
 
-    :param package: Package() """
+    :param table: HashTable
+    :param package: Package """
     print("ID\tWgt \tAddress\t\t\t\t  City\t\t\t\t Zip\tDeliver-By\tStatus")
     p = table.search(package)
     print("{:2} {:4.1f} \t{:20.20}  {:18.16} {}\t{}\t{:24}".format(
