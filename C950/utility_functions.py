@@ -38,7 +38,7 @@ def convert_time(args):
 def parse_delivery_input(source, indices, weights):
     """ Given List() of string input, Return HashTable() of Package()s. """
     graph = Graph(indices, weights)
-    table = HashTable(64)
+    table = HashTable(len(source))
 
     for line in source:
         # separate items on each line of CSV file
