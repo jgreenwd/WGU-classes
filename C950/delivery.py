@@ -59,12 +59,12 @@ class DeliveryController:
         :param package: Package
         :param location: Vertex
         :param graph: Graph """
-        # get reference to location param's actual object in Route()
 
         # remove package_key from old location
         old_location = package.address                          # get address
         old_location = self._route.get_vertex(old_location)     # get obj reference
         old_location.del_package_key(str(package))              # alter keys
+
 
         # add package_key to new location
         package.address = location                              # update address
@@ -74,4 +74,4 @@ class DeliveryController:
         if package.get_status() == Status(4):
             print('retrieve')  # retrieve delivered package
         else:
-            print('reroute')  # reroute delivery
+            self._route.alter_course(new_location)
