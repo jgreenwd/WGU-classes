@@ -61,12 +61,13 @@ class Graph:
 
         :param vertex: Vertex """
         if vertex in self.vertices:
-            self.vertices.remove(vertex)
             # can not manipulate Set() while in use; reference a copy
             tmp = self.adjacency_list.copy()
             for edge in tmp:
                 if vertex in edge:
                     self.adjacency_list.remove(edge)
+            self.vertices.remove(vertex)
+
 
 # --------------------  Edge Manipulation  --------------------
     def _add_edge(self, vertex1, vertex2):
@@ -135,62 +136,28 @@ class Graph:
         :param vertex: Vertex """
         return [edge for edge in self.adjacency_list if vertex in edge]
 
-    def _get_nearest_neighbor(self, vertex, iterable=None):
+    def _get_nearest_neighbor(self, vertex):
         """ Return Vertex with least weight respective to vertex.
 
         :param vertex: Vertex
         :param iterable: List """
 
-        # get list of adjacent edges, sorted by weight
-        neighbors = sorted(list(iterable), key=lambda x: float(x.weight))
+        # get list of adjacent edges, filter by visited, sorted by weight
+        candidates = filter(lambda x: self._get_other_vertex(x, vertex), self.adjacency_list)
+        neighbors = sorted(list(candidates), key=lambda x: float(x.weight))
 
-        # filter list of edges by visited status (aka availability)
-        output = []
-        for edge in neighbors:
-            if edge.prev_node is vertex:
-                if not edge.next_node.visited:
-                    output.append(edge)
-            elif edge.next_node is vertex:
-                if not edge.prev_node.visited:
-                    output.append(edge)
-
-        # TODO: establish base case for recursive look-ahead
-        # test for ties in weight
-        # if len(output) > 1 and iterable is not None:
-        #     if output[0].weight == output[1].weight:
-                # select a winner from ties
-                # return self._look_ahead(vertex, output)
-
-        if output[0].prev_node == vertex:
-            neighbor = output[0].next_node
-        else:
-            neighbor = output[0].prev_node
-        return neighbor
-
-    def _look_ahead(self, vertex, tied_edge_weights):
-        """ Return shortest path when multiple edges are equal.
-
-        :param vertex: Vertex
-        :param tied_edge_weights: List """
-        # select all edges with tied weight
-        candidates = list(filter(lambda x: x.weight == tied_edge_weights[0].weight, tied_edge_weights))
-
-        # find all neighbors for the candidate vertex - insert as tuple(vertex, neighbors)
-        for i, candidate in enumerate(candidates):
-            if candidate.prev_node == vertex:
-                candidates[i] = (candidate.next_node, self._get_neighbors(candidate.next_node))
+        if len(neighbors) > 0:
+            if neighbors[0].prev_node == vertex:
+                return neighbors[0].next_node
             else:
-                candidates[i] = (candidate.prev_node, self._get_neighbors(candidate.prev_node))
+                return neighbors[0].prev_node
 
-        # determine weight for each candidate vertex's nearest neighbor
-        for i, candidate in enumerate(candidates):
-            vertex_a = candidate[0]
-            vertex_b = self._get_nearest_neighbor(vertex_a, self.vertices)
-            index_1 = self._get_index(vertex_a)
-            index_2 = self._get_index(vertex_b)
-            weight = self._get_weight(index_1, index_2)
-
-            candidates[i] = (vertex_a, weight)
-
-        # return neighbor with closest next-neighbor
-        return min(candidates, key=lambda x: x[1])
+    def _get_other_vertex(self, edge, vertex):
+        """ Return the other vertex. """
+        if vertex in edge:
+            if edge.prev_node == vertex:
+                if not edge.next_node.visited:
+                    return edge.next_node
+            else:
+                if not edge.prev_node.visited:
+                    return edge.prev_node
