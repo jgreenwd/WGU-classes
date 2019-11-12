@@ -2,8 +2,7 @@ Jeremy Greenwood --- ID#: 000917613
 
 WGU C950 - Data Structures and Algorithms II ---Performance Assessment: NHP1
 
-## Algorithm Selection
-### A, I.1, I.3
+## Algorithm Selection - A, I.1, I.3
 To start with, I attempted to utilize a graph traversal algorithm based on the following:
 1. The ultimate goal is to return to the starting vertex. It must produce a cycle.
 2. The vertex farthest from the starting vertex should be the "apex" of the cycle.
@@ -18,8 +17,7 @@ One alternative would have been to use [Dijkstra's algorithm](https://en.wikiped
 
 Another alternative would have been to use [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search). Again, this would have been more likely to produce more efficient results, and the implementation would have again increased in complexity. Primarily, BFS differs from Nearest Neighbor in that it reads ahead before offering a solution by use of a queue. Nearest Neighbor simply compares the weight of the remaining unvisited edges and returns the lowest. In theory, BFS could also result in visiting the same vertex multiple times in order to complete the path. In practice, this is easily avoided.
 
-## Algorithm Overview
-### B
+## Algorithm Overview - B, D
 My implementation of Nearest Neighbor works as follows:
 ```
   empty list of edges_to_traverse
@@ -40,7 +38,7 @@ My implementation of Nearest Neighbor works as follows:
 
 This runs in O(n) time with O(n) space complexity.
 
-I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a vertex, edge, or location is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
+I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a __Vertex__, __Edge__, or __Location__ object is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
 ```        
   for candidate in container:
       if candidate == search_value:
@@ -48,4 +46,8 @@ I have tried to minimize the use of nested loops where possible, to minimize ine
       return None
 ```
 
-This issue is mostly negated when searching for packages, via the use of a hash table for package storage. This has a theoretical access time of O(1) for each element. Since I chose to implement a chaining hash table, the actual time is slightly higher. This is a result of collisions produced from the method I used to generate the hash value. I attempted to use the built-in hash function from Python. Unfortunately, I was not able to get consistent results while using it.
+This issue is mostly negated when searching for __Packages__, via the use of a __HashTable__ for __Package__ storage. This has a theoretical access time of O(1) for each element. Since I chose to implement a chaining __HashTable__, the actual time is slightly higher. This is a result of collisions produced from the method I used to generate the hash value. I attempted to use the built-in hash function from Python. Unfortunately, I was not able to get consistent results while using it.
+
+My implementation of a __Graph__ structure uses __Sets__ as containers for __Vertex__ and __Edge__ members. My initial thought was that each __Vertex__ should be unique and will only appear once in the __Graph__. I assumed the same for the edges. This proved problematic when I later needed to revisit the same __Vertex__.
+
+I attempted to use self-adjusting data structures throughout, most notably when adding and removing __Vertex__, __Location__, and __Edge__ members. As an example, whenever a __Vertex__ is added to a __Graph__, an __Edge__ is generated connecting it to every other __Vertex__. This is an O(n) operation that results in all instances of __Graph__ being complete.
