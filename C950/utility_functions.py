@@ -1,8 +1,13 @@
+# Jeremy Greenwood ----- ID#: 000917613
+# Mentor: Rebekah McBride
+# WGU C950 - Data Structures and Algorithms II
+# Performance Assessment: NHP1
+
 from graph import Graph
 from datetime import datetime, time
 from package import Package
 from hashtable import HashTable
-from destination import Destination
+from location import Location
 
 
 def load_file(filename):
@@ -30,20 +35,28 @@ def convert_time(args):
         return datetime.strptime(args[:-3], "%H:%M").time()
 
 
-def build_package_table(source):
+def parse_delivery_input(source, indices, weights):
     """ Given List() of string input, Return HashTable() of Package()s. """
+    graph = Graph(indices, weights)
     table = HashTable(64)
 
     for line in source:
         # separate items on each line of CSV file
         temp = line.split(',')
 
-        loc = Destination(
+        loc = Location(
             temp[1].upper(),                # - address
             temp[2].upper(),                # - city
             temp[3].upper(),                # - state
             temp[4]                         # - zip
         )
+
+        if loc in graph:
+            # if location present, get reference
+            loc = graph.get_vertex(loc)
+        else:
+            # else add location
+            graph.add_vertex(loc)
 
         p = Package(
             temp[0],                        # ID
@@ -55,29 +68,10 @@ def build_package_table(source):
         # add Package to HashTable
         table.insert(p)
 
-    return table
+        # add package key to Location
+        loc.add_package_key(str(p))
 
-
-# Creates duplication of effort from build_package_table(), (parsing the same data twice)
-# but allows separation of Graph() creation from Package() creation. Implementation
-# becomes overly cumbersome when they are combined.
-def build_destination_graph(source):
-    """ Return Graph() of Destination()s from List() of string input. """
-    locales = Graph()
-
-    for line in source:
-        temp = line.split(',')
-
-        loc = Destination(
-            temp[1],  # - address
-            temp[2],  # - city
-            temp[3],  # - state
-            temp[4]  # - zip
-        )
-
-        locales.add_vertex(loc)
-
-    return locales
+    return graph, table
 
 
 def mode_query(mode_dict):
@@ -112,7 +106,7 @@ def build_package_query(table):
             zip = input("Zip code: ")
             deadline = input("Delivery deadline (HH:MM): ")
             weight = float(input("Package weight: "))
-            location = Destination(address, city, state, zip)
+            location = Location(address, city, state, zip)
             package = Package(id, location, convert_time(deadline), weight, None)
             package = table.search(package)
             if package is not None:
