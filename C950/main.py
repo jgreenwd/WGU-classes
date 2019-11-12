@@ -115,13 +115,7 @@ if __name__ == '__main__':
     # Gather user input: when to stop the simulation and read delivery Status()
     # single package or all packages
     modes = {'S': 0, 'A': 1}
-    user_mode = utils.mode_query(modes)
-
-    # if searching for single package, query user for package info
-    if user_mode == 0:
-        single_package = utils.build_package_query(table)
-
-    user_time = utils.stop_time_query()
+    user_mode, user_time = utils.mode_query(modes)
 
     # initialize variables used to track delivery progress
     truck2 = DeliveryController(routes[0])
@@ -149,6 +143,17 @@ if __name__ == '__main__':
         # at 10:00 Truck3 departs including all other packages (Truck2 has returned by then)
         if time_iter.time() == routes[2].get_start_time().time():
             truck3.start_route(table)
+
+        # at 10:20 Address for Package.ID 9 changes
+        if time_iter.time() == datetime(1,1,1,10,20,0).time():
+            new_location = Location("410 S State St".upper(), "Salt Lake City".upper(), "UT".upper(), "84111")
+            new_location = graph.get_vertex(new_location)
+            package = table.search("ID: 9 	Weight:  2.0")
+            old_location = package.address
+            package.address = new_location
+            new_location.add_package_key(str(package))
+            old_location.del_package_key("ID: 9 	Weight:  2.0")
+            print(str(package))
 
         # if time for a delivery, execute .make_delivery(time)
         if not routes[0].finished() and time_iter.time() == truck2.event_time.time():
