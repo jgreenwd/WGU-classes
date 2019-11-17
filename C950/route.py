@@ -67,26 +67,55 @@ class Route(Graph):
 
         :param start: Vertex """
         self._starting_vertex = start
+        # B1. LOGIC COMMENTS - Utilizing Nearest Neighbor
 
-        edges = self.adjacency_list.copy()
+        # 1. INITIALIZE ALL VERTICES AS UNVISITED
+        # O(n) -> Each vertex is initialized within a for-loop. This requires
+        # 1 assignment operation per vertex, regardless of the size of the graph
         unvisited = self.vertices.copy()
+        edges = self.adjacency_list.copy()
         for vertex in unvisited:
             vertex.visited = False
 
+        # 2. SELECT AN INITIAL VERTEX
+        # O(1) -> Every call of create_cycle() will execute this exactly once.
         current_vertex = self._starting_vertex
         current_edge = None
 
         while len(unvisited) > 1:
+            # 3. FIND THE NEAREST, UNVISITED NEIGHBOR TO THE CURRENT VERTEX
+            # This occurs within the graph._get_nearest_neighbor() method. The method
+            # itself operates in O(n) time, performing 2 comparison operations per vertex:
+            #     1. is it visited?
+            #     2. is the weight lower than the current minimum?
             candidate = self._get_nearest_neighbor(current_vertex)
             if candidate == current_vertex:
                 break
+            # This loop is necessitated by my implementation of a separate Edge class.
+            # It does increase the amount of overhead required and its use should probably
+            # be re-examined in the future. It executes 1 comparison per edge, which has
+            # a worst-case runtime of O(n)
             for edge in edges:
                 if candidate in edge and current_vertex in edge:
                     current_edge = edge
             self.order.append(current_edge)
+            # 4A. MARK CURRENT VERTEX AS VISITED AND ...
             current_vertex.visited = True
             unvisited.remove(current_vertex)
+            # 4B. ... SET NEAREST NEIGHBOR AS CURRENT VERTEX
             current_vertex = candidate
+            # 5. REPEAT UNTIL ALL VERTICES ARE VISITED
+            # if length of unvisited is 0, then all vertices are visited
+
+            # RESULT: O(n) + O(1) + O(n)( O(n) + O(1) + O(n) + O(1) + O(1) + O(1) + O(1) )
+            # = O(n) + O(n) * (2 * O(n))
+            # = O(n) + O(n) * O(n)
+            # = O(n) + O(n)^2 
+            # = O(n)^2
+
+        # The following code serves to make the result conform to necessary formatting
+        # criteria necessary to retrieve consistently useful results from my implementation.
+        # It does not increase the runtime complexity of the algorithm, nor the space complexity.
 
         # return to HUB
         for edge in edges:
