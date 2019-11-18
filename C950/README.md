@@ -29,9 +29,9 @@ A brief description of Nearest Neighbor:
   Choose an initial value for current_vertex                    O(n)
   
   While unvisited vertices remain                               O(n)
-      find the nearest, unvisited neighbor of current_vertex        O(n)
-      mark current_vertex as visited                                O(1)
-      set nearest neighbor as current_vertex                        O(1)
+      find the nearest, unvisited neighbor of current_vertex      - O(n)
+      mark current_vertex as visited                              - O(1)
+      set nearest neighbor as current_vertex                      - O(1)
       
 ```
 
@@ -72,7 +72,7 @@ The algorithm may suffer performance degradation when handling large datasets. T
 I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a __Vertex__, __Edge__, or __Location__ object is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
 ```        
   for candidate in container:                                   O(n)
-      if candidate == search_value:                                 O(1)
+      if candidate == search_value:                               - O(1)
           return candidate
       return None
 ```
@@ -93,7 +93,7 @@ generate hash (target value)                                    O(1)
 
 read table [hash value]                                         O(1)
 if length of table[hash value] is greater than 1                O(1)
-    linear search for target value                                  O(n)
+    linear search for target value                                - O(n)
 ```
 Linear search stands to increase access time. In practice the increase is negligible. The actual amount of increase is dictated by the size of the bucket at the hashed index. With adequately implemented hash functions, the bucket will have a functional maximum of 3. While still technically O(n), the result is returned much faster than O(n) would typically imply.
 
