@@ -2,7 +2,8 @@ Jeremy Greenwood --- ID#: 000917613
 
 WGU C950 - Data Structures and Algorithms II ---Performance Assessment: NHP1
 
-## Algorithm Selection - A, B1, I
+## Algorithm Selection
+### A
 To start with, I attempted to utilize a graph traversal algorithm based on the following:
 1. The ultimate goal is to return to the starting vertex. It must produce a cycle.
 2. The vertex farthest from the starting vertex should be the "apex" of the cycle.
@@ -11,14 +12,17 @@ To start with, I attempted to utilize a graph traversal algorithm based on the f
 
 This produced somewhat satisfactory results. Unfortunately, it was unable to meet the delivery deadline specifications. This was primarily due to the assumption that the distribution of weights in the path would be even. In order to make this algorithm work, a more effective package sorting algorithm would need to be used to assign vertices to each cycle. This sorting algorithm is beyond the scope of this project and was not pursued further.
 
-Instead, I proceeded to utilize Nearest Neighbor to generate the cycles. It has the benefits of being straight-forward to implement and a known track record for producing acceptable results. The drawback is that the results are not guaranteed to be the most efficient. 
+Instead, I proceeded to utilize Nearest Neighbor to generate the cycles. It has the benefits of being straight-forward to implement and a known track record for producing acceptable results. The drawback is that the results are not guaranteed to be the most efficient.
 
 One alternative would have been to use [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). This would have been more likely to produce more efficient results, but the implementiation would have increased in complexity. The two algorithms are similar in the early stages. The principle difference is that Dijkstra's algorithm works towards a known endpoint, finding the shortest path. Nearest Neighbor works away from a starting point with no real consideration for the end point.
 
 Another alternative would have been to use [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search). Again, this would have been more likely to produce more efficient results, and the implementation would have again increased in complexity. Primarily, BFS differs from Nearest Neighbor in that it reads ahead before offering a solution by use of a queue. Nearest Neighbor simply compares the weight of the remaining unvisited edges and returns the lowest. In theory, BFS could also result in visiting the same vertex multiple times in order to complete the path. In practice, this is easily avoided.
 
 ## Algorithm Overview - B, D, K
-Comments regarding my implementation of Nearest Neighbor can be found in route.py within the create_cycle() method, starting on line 70. A brief description of Nearest Neighbor follows:
+### B1
+Comments regarding my implementation of Nearest Neighbor can be found in route.py within the create_cycle() method, starting on line 70. 
+
+A brief description of Nearest Neighbor follows:
 ```
   Initialize all vertices as unvisited
     
@@ -31,8 +35,22 @@ Comments regarding my implementation of Nearest Neighbor can be found in route.p
       
 ```
 
-This runs in O(n) time with O(n) space complexity.
+### B2
+The host environment for this program is a single workstation. As such, no communication protocol is necessary for data exchange.
 
+### B3
+This runs in O(n)^2 time with O(n) space complexity. More detailed analysis is available in route.py, starting at line 74.
+
+The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)^2.
+```
+n(n-1)/2
+= (1/2) * n * (n-1)
+= n(n-1)
+= n^2 - n
+< n^2
+```
+
+### B4
 I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a __Vertex__, __Edge__, or __Location__ object is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
 ```        
   for candidate in container:
@@ -45,7 +63,8 @@ This issue is mostly negated when searching for __Packages__, via the use of a _
 
 I made use of a weighted __Graph__ structure to organize the delivery locations. My implementation of __Graph__ uses __Sets__ as containers for __Vertex__ and __Edge__ members. My initial thought was that each __Vertex__ should be unique and will only appear once in the __Graph__. I assumed the same for the edges. This proved problematic when I later needed to revisit the same __Vertex__. The use of __Set__ may also have the added issue of affecting scalability; many operations performed on __Vertex__ and __Edge__ require a cast to __List__. By itself, this is insignificant. However, at large scales, the cumulative effect of this and the lack of direct access to elements could negatively affect performance.
 
-I attempted to use self-adjusting data structures throughout, most notably when adding and removing __Vertex__, __Location__, and __Edge__ members. As an example, whenever a __Vertex__ is added to a __Graph__, an __Edge__ is generated connecting it to every other __Vertex__. This is an O(n) operation that results in all instances of __Graph__ being complete. This ensures that every __Graph__ has a complete adjacency list to work with. Unfortunately, it does create added overhead and a larger program footprint.
+### B6
+I attempted to use self-adjusting data structures throughout, most notably when adding and removing __Vertex__, __Location__, and __Edge__ members. As an example, whenever a __Vertex__ is added to a __Graph__, an __Edge__ is generated connecting it to every other __Vertex__. This is an O(n) operation that results in all instances of __Graph__ being complete graphs. This ensures that every __Graph__ has a complete adjacency list to work with. Unfortunately, it does create added overhead and a larger program footprint. 
 
 Maintenance is rendered somewhat easier by extracting complex functions and methods to utility_functions.py and to other class files.
 
