@@ -24,14 +24,14 @@ Comments regarding my implementation of Nearest Neighbor can be found in route.p
 
 A brief description of Nearest Neighbor:
 ```
-  Initialize all vertices as unvisited
+  Initialize all vertices as unvisited                          O(n)
     
-  Choose an initial value for current_vertex
+  Choose an initial value for current_vertex                    O(n)
   
-  While unvisited vertices remain
-      find the nearest, unvisited neighbor of current_vertex
-      mark current_vertex as visited
-      set nearest neighbor as current_vertex
+  While unvisited vertices remain                               O(n)
+      find the nearest, unvisited neighbor of current_vertex        O(n)
+      mark current_vertex as visited                                O(1)
+      set nearest neighbor as current_vertex                        O(1)
       
 ```
 
@@ -59,7 +59,6 @@ It will be necessary for facility personnel to generate and supply the TXT and T
 This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More detailed analysis is available in route.py, starting at line 74.
 
 The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<sup>2</sup>.
-
 > <br>n(n-1)/2
 > <br>= (1/2) * n * (n-1)
 > <br>= n(n-1)
@@ -72,8 +71,8 @@ The algorithm may suffer performance degradation when handling large datasets. T
 ### B5
 I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a __Vertex__, __Edge__, or __Location__ object is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
 ```        
-  for candidate in container:
-      if candidate == search_value:
+  for candidate in container:                                   O(n)
+      if candidate == search_value:                                 O(1)
           return candidate
       return None
 ```
@@ -90,15 +89,15 @@ Maintenance is rendered somewhat easier by extracting complex functions and meth
 ### K - HashTable
 Access time: Theoretically, access time of O(1) is possible. In practice, actual access time is slightly higher. This is a result of collisions generated with the _generate_hash() function.
 ```
-generate hash (target value)                      O(1)
+generate hash (target value)                                    O(1)
 
-read table [hash value]                           O(1)
-if length of table[hash value] is greater than 1
-    linear search for target value                O(n)
+read table [hash value]                                         O(1)
+if length of table[hash value] is greater than 1                O(1)
+    linear search for target value                                  O(n)
 ```
 Linear search stands to increase access time. In practice the increase is negligible. The actual amount of increase is dictated by the size of the bucket at the hashed index. With adequately implemented hash functions, the bucket will have a functional maximum of 3. While still technically O(n), the result is returned much faster than O(n) would typically imply.
 
-Memory requirements: The __HashTable__ at declaration accepts an integer representing table capacity (default value of 64). At creation, memory is allocated for 133% of capacity, giving a load factor of 75%. This equates roughly to O(n) memory requirements. If capacity is known, memory requirements will remain O(n). If the load factor changes, memory requirements can potentially negatively affect performance by increasing access time. This occurs as a byproduct of the hash function's use of capacity in determining hash values. For optimal efficiency, it is necessary for the user to have a reasonable approximation of needed capacity before deploying to production.
+Memory requirements: The __HashTable__ at declaration accepts an integer representing table capacity (default value of 64). At creation, memory is allocated for 133% of capacity, giving a load factor of 75%. This equates roughly to O(n) space complexity. If capacity is known, space complexity will remain O(n). If the load factor changes, memory requirements can potentially negatively affect performance by increasing access time. This occurs as a byproduct of the hash function's use of capacity in determining hash values. For optimal efficiency, it is necessary for the user to have a reasonable approximation of needed capacity before deploying to production.
 
 Bandwidth: The application operates on a single workstation and does not require bandwidth for network communication.
 
