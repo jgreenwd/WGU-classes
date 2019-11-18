@@ -36,7 +36,22 @@ A brief description of Nearest Neighbor:
 ```
 
 ### B2
-The host environment for this program is a single workstation. As such, no communication protocol is necessary for data exchange.
+The host environment for this program is a single workstation. 
+
+Input data is constrained to the following:
+  1. CSV file of daily package details. Each item below should be separated with a comma. Each package listing should be followed with a new-line character.
+    a. Package ID
+    b. Street address
+    c. City
+    d. State Abbreviation
+    e. Five-digit Postal Code
+    f. Delivery deadline in
+    g. Package weight in pounds
+    h. Notes for package delivery exceptions
+  2. TXT file of delivery addresses. Addresses consist of street address and a five-digit postal code. State and city are omitted. The address and postal code are separated by whitespace. The postal code should be the last 5 characters for each entry. Each entry should be separated by a new-line character. It is important that this list be ordered and coincide with the ordering for the following TSV file.
+  3. TSV file of floating point data, representing distances between street addresses. The rows and columns each represent a different address. The order for rows and columns should be identical, ie. row A represents the same address as column A, row B is the same as column B, etc. The intersection of each row and column represents the distance between the respective addresses, ie. row A intersecting column A is 0.0 (same point), row A intersecting column B is some positive float (distance between those 2 points). Each datapoint should be separated by a tab character. Each entry should end with a new-line character. It is not necessary for any data to be entered after the point of mutual intersection on each line. Any data entered after such simply be ignored.
+
+Program output is rendered on-screen at the workstation. In this scenario, it is unnecessary to provide any export functionality.
 
 ### B3
 This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More detailed analysis is available in route.py, starting at line 74.
