@@ -18,11 +18,11 @@ One alternative would have been to use [Dijkstra's algorithm](https://en.wikiped
 
 Another alternative would have been to use [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search). Again, this would have been more likely to produce more efficient results, and the implementation would have again increased in complexity. Primarily, BFS differs from Nearest Neighbor in that it reads ahead before offering a solution by use of a queue. Nearest Neighbor simply compares the weight of the remaining unvisited edges and returns the lowest. In theory, BFS could also result in visiting the same vertex multiple times in order to complete the path. In practice, this is easily avoided.
 
-## Algorithm Overview - B, D, K
+## Algorithm Overview
 ### B1
 Comments regarding my implementation of Nearest Neighbor can be found in route.py within the create_cycle() method, starting on line 70. 
 
-A brief description of Nearest Neighbor follows:
+A brief description of Nearest Neighbor:
 ```
   Initialize all vertices as unvisited
     
@@ -39,9 +39,9 @@ A brief description of Nearest Neighbor follows:
 The host environment for this program is a single workstation. As such, no communication protocol is necessary for data exchange.
 
 ### B3
-This runs in O(n)^2 time with O(n) space complexity. More detailed analysis is available in route.py, starting at line 74.
+This runs in O(n)<superscript>2</superscript> time with O(n) space complexity. More detailed analysis is available in route.py, starting at line 74.
 
-The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)^2.
+The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<superscript>2</superscript>.
 ```
 n(n-1)/2
 = (1/2) * n * (n-1)
