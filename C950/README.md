@@ -4,11 +4,11 @@ WGU C950 - Data Structures and Algorithms II ---Performance Assessment: NHP1
 
 ## Algorithm Selection
 ### A
-To start with, I attempted to utilize a graph traversal algorithm based on the following:
+Initially, I attempted to devise a graph traversal algorithm based on the following:
 1. The ultimate goal is to return to the starting vertex. It must produce a cycle.
 2. The vertex farthest from the starting vertex should be the "apex" of the cycle.
 3. Utilize the [Nearest Neighbor algorithm](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm) to select each succeeding vertex until the apex is reached (mid-point of the traversal).
-4. Once at the apex, continue using nearest neighbor, starting from the apex.
+4. Once at the apex, continue using nearest neighbor, starting from the apex, eventually returning to the point of origin.
 
 This produced somewhat satisfactory results. Unfortunately, it was unable to meet the delivery deadline specifications. This was primarily due to the assumption that the distribution of weights in the path would be even. In order to make this algorithm work, a more effective package sorting algorithm would need to be used to assign vertices to each cycle. This sorting algorithm is beyond the scope of this project and was not pursued further.
 
@@ -52,6 +52,8 @@ Input data is constrained to the following:
   3. TSV file of floating point data, representing distances between street addresses. The rows and columns each represent a different address. The order for rows and columns should be identical, ie. row A represents the same address as column A, row B is the same as column B, etc. The intersection of each row and column represents the distance between the respective addresses, ie. row A intersecting column A is 0.0 (same point), row A intersecting column B is some positive float (distance between those 2 points). Each datapoint should be separated by a tab character. Each entry should end with a new-line character. It is not necessary for any data to be entered after the point of mutual intersection on each line. Any data entered after such simply be ignored.
 
 Program output is rendered on-screen at the workstation. In this scenario, it is unnecessary to provide any export functionality.
+
+It will be necessary for facility personnel to generate and supply the TXT and TSV files daily. This could be automated before production. However, at present, we lack sufficient information to devise an implementation strategy for such automation.
 
 ### B3
 This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More detailed analysis is available in route.py, starting at line 74.
