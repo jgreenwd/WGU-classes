@@ -10,7 +10,10 @@ from edge import Edge
 
 class Route(Graph):
     def __init__(self, indices, weights):
-        """ Create Route Object. """
+        """ Create Route Object. 
+        
+        :param indices: List
+        :param weights: List """
         Graph.__init__(self, indices, weights)
         self.order = []
         self.rate_of_travel = 0
@@ -23,13 +26,12 @@ class Route(Graph):
 
     def set_rate_of_travel(self, rate):
         """ Set the average speed of delivery vehicle in MPH.
-        :param rate: float of the vehicle speed """
+        :param rate: float """
         self.rate_of_travel = rate
 
     def set_start_time(self, time):
         """ Set the time when the vehicle will leave the HUB.
-        :param time: expects datetime() value
-        """
+        :param time: datetime.time """
         self._start_time = time
 
     def get_start_time(self):
@@ -68,6 +70,7 @@ class Route(Graph):
         :param start: Vertex """
         self._starting_vertex = start
         # B1. LOGIC COMMENTS - Utilizing Nearest Neighbor
+        # B3. SPACE-TIME AND BIG-O
 
         # 1. INITIALIZE ALL VERTICES AS UNVISITED
         # O(n) -> Each vertex is initialized within a for-loop. This requires
@@ -130,9 +133,8 @@ class Route(Graph):
             current_vertex = edge.next_node
 
     def alter_course(self, add_vert):
-        """ Replace Vertex and recalculate order.
+        """ Insert Vertex at end of all other deliveries, but before returning to HUB.
 
-        :param del_vert: Vertex
         :param add_vert: Vertex """
         # simplest solution: insert new vertex before returning to HUB
         last_idx = len(self.order) - 1
