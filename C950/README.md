@@ -39,9 +39,9 @@ A brief description of Nearest Neighbor:
 The host environment for this program is a single workstation. As such, no communication protocol is necessary for data exchange.
 
 ### B3
-This runs in O(n)<superscript>2</superscript> time with O(n) space complexity. More detailed analysis is available in route.py, starting at line 74.
+This runs in O(n)<sup>2</sup> time with O(n) space complexity. More detailed analysis is available in route.py, starting at line 74.
 
-The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<superscript>2</superscript>.
+The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<sup>2</sup>.
 ```
 n(n-1)/2
 = (1/2) * n * (n-1)
