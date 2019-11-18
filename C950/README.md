@@ -43,11 +43,11 @@ This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More 
 
 The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<sup>2</sup>.
 
-> n(n-1)/2
-> = (1/2) * n * (n-1)
-> = n(n-1)
-> = n<sup>2</sup> - n
-> < n<sup>2</sup>
+> <br>n(n-1)/2
+> <br>= (1/2) * n * (n-1)
+> <br>= n(n-1)
+> <br>= n<sup>2</sup> - n
+> <br>< n<sup>2</sup>
 
 ### B4
 I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a __Vertex__, __Edge__, or __Location__ object is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
