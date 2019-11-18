@@ -39,16 +39,15 @@ A brief description of Nearest Neighbor:
 The host environment for this program is a single workstation. As such, no communication protocol is necessary for data exchange.
 
 ### B3
-This runs in O(n)<sup>2</sup> time with O(n) space complexity. More detailed analysis is available in route.py, starting at line 74.
+This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More detailed analysis is available in route.py, starting at line 74.
 
 The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<sup>2</sup>.
-```
-n(n-1)/2
-= (1/2) * n * (n-1)
-= n(n-1)
-= n^2 - n
-< n^2
-```
+
+> n(n-1)/2
+> = (1/2) * n * (n-1)
+> = n(n-1)
+> = n<sup>2</sup> - n
+> < n<sup>2</sup>
 
 ### B4
 I have tried to minimize the use of nested loops where possible, to minimize inefficiencies. The biggest inefficiencies occur when access to a __Vertex__, __Edge__, or __Location__ object is needed. This has resulted in several methods that operate in O(n) time, but which could theoretically operate in O(1).
