@@ -87,6 +87,23 @@ I attempted to use self-adjusting data structures throughout, most notably when 
 
 Maintenance is rendered somewhat easier by extracting complex functions and methods to utility_functions.py and to other class files. The interface for the __Route__ class could benefit by being integrated and merged with __DeliveryController__.
 
+### K - HashTable
+Access time: Theoretically, access time of O(1) is possible. In practice, actual access time is slightly higher. This is a result of collisions generated with the _generate_hash() function.
+```
+generate hash (target value)                      O(1)
+
+read table [hash value]                           O(1)
+if length of table[hash value] is greater than 1
+    linear search for target value                O(n)
+```
+Linear search does stand to increase access time. In practice the increase is negligible. The actual amount of increase is dictated by the size of the bucket at the hashed index. With adequately implemented hash functions, the bucket will have a functional maximum of 3. While still technically O(n), the result is returned much faster than O(n) would imply.
+
+Memory requirements: The HashTable at declaration accepts an integer representing table capacity (default value of 64). At creation, memory is allocated for 133% of capacity, giving a load factor of 75%. This equates roughly to O(n) memory requirements. If capacity is known, memory requirements will remain O(n). If the load factor changes, memory requirements can potentially negatively affect performance by increasing access time. This occurs as a byproduct of the hash function's use of capacity in determining hash values.
+
+For maximum benefit, it is necessary for the user to have a reasonable approximation of needed capacity before deploying to production.
+
+Bandwidth: The application operates on a single workstation and does not require bandwidth for network communication.
+
 ## Annotations
 ### J
 If I were to do this assignment again, the biggest change would be my __Route__ class. I chose to develop it as a child class of __Graph__. I now see redundancies that could have been eliminated by merging __Route__ and __DeliveryController__. I also think this might make the interface slightly less cumbersome. I also question the use of a separate __Edge__ class. I think the same results could have been achieved with a simpler implementation. Lastly, I would change the __Route__ **order** property to utilize a __Queue__. This would help in alleviating the problem with revisiting a __Vertex__.
