@@ -14,7 +14,7 @@ This produced somewhat satisfactory results. Unfortunately, it was unable to mee
 
 Instead, I proceeded to utilize Nearest Neighbor to generate the cycles. It has the benefits of being straight-forward to implement and a known track record for producing acceptable results. The drawback is that the results are not guaranteed to be the most efficient.
 
-One alternative would have been to use [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). This would have been more likely to produce more efficient results, but the implementiation would have increased in complexity. The two algorithms are similar in the early stages. The principle difference is that Dijkstra's algorithm works towards a known endpoint, finding the shortest path. Nearest Neighbor works away from a starting point with no real consideration for the end point.
+One alternative would have been to use [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). This would have been more likely to produce more efficient results, but the implementiation would have increased in complexity. The two algorithms are similar in their initial stages. The principle difference is that Dijkstra's algorithm works towards a known endpoint, finding the shortest path. Nearest Neighbor works away from a starting point with no real consideration for the end point.
 
 Another alternative would have been to use [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search). Again, this would have been more likely to produce more efficient results, and the implementation would have again increased in complexity. Primarily, BFS differs from Nearest Neighbor in that it reads ahead before offering a solution by use of a queue. Nearest Neighbor simply compares the weight of the remaining unvisited edges and returns the lowest. In theory, BFS could also result in visiting the same vertex multiple times in order to complete the path. In practice, this is easily avoided.
 
@@ -26,7 +26,7 @@ A brief description of Nearest Neighbor:
 ```
   Initialize all vertices as unvisited
     
-  Choose an initial value for current_vertex. (starting_vertex was chosen)
+  Choose an initial value for current_vertex
   
   While unvisited vertices remain
       find the nearest, unvisited neighbor of current_vertex
@@ -66,10 +66,10 @@ This issue is mostly negated when searching for __Packages__, via the use of a _
 I made use of a weighted __Graph__ structure to organize the delivery locations. My implementation of __Graph__ uses __Sets__ as containers for __Vertex__ and __Edge__ members. My initial thought was that each __Vertex__ should be unique and will only appear once in the __Graph__. I assumed the same for the edges. This proved problematic when I later needed to revisit the same __Vertex__. The use of __Set__ may also have the added issue of affecting scalability; many operations performed on __Vertex__ and __Edge__ require a cast to __List__. By itself, this is insignificant. However, at large scales, the cumulative effect of this and the lack of direct access to elements could negatively affect performance.
 
 ### B6
-I attempted to use self-adjusting data structures throughout, most notably when adding and removing __Vertex__, __Location__, and __Edge__ members. As an example, whenever a __Vertex__ is added to a __Graph__, an __Edge__ is generated connecting it to every other __Vertex__. This is an O(n) operation that results in all instances of __Graph__ being complete graphs. This ensures that every __Graph__ has a complete adjacency list to work with. Unfortunately, it does create added overhead and a larger program footprint. 
+I attempted to use self-adjusting data structures throughout, most notably when adding and removing __Vertex__, __Location__, and __Edge__ members. As an example, whenever a __Vertex__ is added to a __Graph__, an __Edge__ is generated connecting it to every other __Vertex__. This is an O(n) operation that results in all instances of __Graph__ being complete graphs. This ensures that every __Graph__ has a complete adjacency list from which to work. Unfortunately, it does create added overhead and a larger program footprint. 
 
 Maintenance is rendered somewhat easier by extracting complex functions and methods to utility_functions.py and to other class files. The interface for the __Route__ class could benefit by being integrated and merged with __DeliveryController__.
 
 ## Annotations
 ### J
-If I were to do this assignment again, the biggest change would be my __Route__ class. I chose to develop it as a child class of __Graph__. I now see redundancies that could have been eliminated by merging __Route__ and __DeliveryController__. I also think this might make the interface slightly less cumbersome. I also question the use of a separate __Edge__ class. I think the same results could have been achieved with a simpler implementation.
+If I were to do this assignment again, the biggest change would be my __Route__ class. I chose to develop it as a child class of __Graph__. I now see redundancies that could have been eliminated by merging __Route__ and __DeliveryController__. I also think this might make the interface slightly less cumbersome. I also question the use of a separate __Edge__ class. I think the same results could have been achieved with a simpler implementation. Lastly, I would change the __Route__ **order** property to utilize a __Queue__. This would help in alleviating the problem with revisiting a __Vertex__.
