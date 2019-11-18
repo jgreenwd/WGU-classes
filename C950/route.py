@@ -9,6 +9,7 @@ from edge import Edge
 
 
 class Route(Graph):
+    # O(1)
     def __init__(self, indices, weights):
         """ Create Route Object. 
         
@@ -24,28 +25,34 @@ class Route(Graph):
         self._finished = False
         self._index = 0
 
+    # O(1)
     def set_rate_of_travel(self, rate):
         """ Set the average speed of delivery vehicle in MPH.
         :param rate: float """
         self.rate_of_travel = rate
 
+    # O(1)
     def set_start_time(self, time):
         """ Set the time when the vehicle will leave the HUB.
         :param time: datetime.time """
         self._start_time = time
 
+    # O(1)
     def get_start_time(self):
         """ Return time when the delivery vehicle leaves the HUB. """
         return self._start_time
 
+    # O(1)
     def get_current_node(self):
         """ Return most recent node visited in Cycle. """
         return self.order[self._index].prev_node
 
+    # O(1)
     def get_next_node(self):
         """ Return next node to be visited in Cycle. """
         return self.order[self._index].next_node
 
+    # O(1)
     def get_next_edge(self):
         """ Move pointer to next edge to be visited in Cycle.
             CAUTION: This method advances the internal index to the next node. Every
@@ -56,14 +63,17 @@ class Route(Graph):
             self._index += 1
         return self.order[self._index]
 
+    # O(1)
     def finish_route(self):
         """ Set route as finished. """
         self._finished = True
 
+    # O(1)
     def finished(self):
         """ Return route completion status. """
         return self._finished
 
+    # O(n)^2
     def create_cycle(self, start):
         """ Place delivery destinations in order to minimize time & distance.
 
@@ -121,17 +131,20 @@ class Route(Graph):
         # It does not increase the runtime complexity of the algorithm, nor the space complexity.
 
         # return to HUB
+        # O(n)
         for edge in edges:
             if current_vertex in edge and self._starting_vertex in edge:
                 self.order.append(edge)
 
         # link corresponding vertex ends to each other (aka A-B, B-C, C-D...)
         current_vertex = self._starting_vertex
+        # O(n)
         for edge in self.order:
             if not edge.prev_node is current_vertex:
                 edge.swap_nodes()
             current_vertex = edge.next_node
 
+    # O(1)
     def alter_course(self, add_vert):
         """ Insert Vertex at end of all other deliveries, but before returning to HUB.
 

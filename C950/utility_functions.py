@@ -10,6 +10,7 @@ from hashtable import HashTable
 from location import Location
 
 
+# O(n)
 def load_file(filename):
     """ Read data from text file and return as list. """
     fin = open(filename)
@@ -23,6 +24,7 @@ def load_file(filename):
     return result
 
 
+# O(1)
 def convert_time(args):
     """ Given a string in "HH:MM" format, return an equivalent time object. """
     # NOTE 1: ignores AM/PM
@@ -35,6 +37,7 @@ def convert_time(args):
         return datetime.strptime(args[:-3], "%H:%M").time()
 
 
+# O(n)
 def parse_delivery_input(source, indices, weights):
     """ Given List() of string input, Return HashTable() of Package()s. """
     graph = Graph(indices, weights)
@@ -74,6 +77,7 @@ def parse_delivery_input(source, indices, weights):
     return graph, table
 
 
+# O(1)
 def mode_query(mode_dict, table):
     # single package or all packages?
     while True:
@@ -115,6 +119,7 @@ def mode_query(mode_dict, table):
     return user_mode_input, user_time_input, package
 
 
+# O(1)
 def print_single_delivery_status(table, package):
     """ Display delivery information for individual package.
 
@@ -134,6 +139,7 @@ def print_single_delivery_status(table, package):
     print()
 
 
+# O(n)
 def print_all_delivery_status(table):
     """ Display Package() info for all packages.
 

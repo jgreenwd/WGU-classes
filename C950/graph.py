@@ -11,6 +11,7 @@ from location import Location
 
 
 class Graph:
+    # O(1)
     def __init__(self, indices, weights):
         """ Create Graph Object. """
         self.vertices = set()
@@ -19,15 +20,19 @@ class Graph:
         self._indices = indices
         self._weights = weights
 
+    # O(1)
     def __contains__(self, vertex):
         return vertex in self.vertices
 
+    # O(1)
     def __len__(self):
         return len(self.vertices)
 
+    # O(1)
     def __iter__(self):
         return self
 
+    # O(1)
     def __next__(self):
         iterable = list(self.vertices)
         if self._index < len(iterable):
@@ -38,6 +43,7 @@ class Graph:
         raise StopIteration
 
 # -------------------- Vertex Manipulation --------------------
+    # O(n)
     def add_vertex(self, vertex):
         """ Add vertex to Set of Vertices.
 
@@ -47,6 +53,7 @@ class Graph:
         for vertex2 in self.vertices:
             self._add_edge(vertex, vertex2)
 
+    # O(n)
     def get_vertex(self, vertex):
         """ Return reference to vertex.
 
@@ -56,6 +63,7 @@ class Graph:
                 return candidate
         return None
 
+    # O(n)
     def del_vertex(self, vertex):
         """ Remove vertex from Set of Vertices.
 
@@ -70,6 +78,7 @@ class Graph:
 
 
 # --------------------  Edge Manipulation  --------------------
+    # O(1)
     def _add_edge(self, vertex1, vertex2):
         """ Add an edge to the Graph between vertexA and vertexB.
 
@@ -90,6 +99,7 @@ class Graph:
         if edge not in self.adjacency_list:
             self.adjacency_list.add(edge)
 
+    # O(n)
     def _get_edge(self, edge):
         """ Return reference to Edge object or None.
 
@@ -99,6 +109,7 @@ class Graph:
                 return candidate
         return None
 
+    # O(1)
     def _del_edge(self, edge):
         """ Remove edge from List of Edges
         
@@ -107,6 +118,7 @@ class Graph:
             self.adjacency_list.remove(edge)
 
 # --------------------  Support Functions  --------------------
+    # O(n)
     def _get_index(self, vertex):
         """ Return index of location in list or -1.
 
@@ -122,6 +134,7 @@ class Graph:
             index += 1
         return -1
 
+    # O(1)
     def _get_weight(self, index1, index2):
         """ Return weight of edge between both indices as float.
 
@@ -130,12 +143,14 @@ class Graph:
         low, high = sorted([index1, index2])
         return self._weights[high][low]
 
+    # O(n)
     def _get_neighbors(self, vertex):
         """ Return Edges connected to vertex.
 
         :param vertex: Vertex """
         return [edge for edge in self.adjacency_list if vertex in edge]
 
+    # O(n)
     def _get_nearest_neighbor(self, vertex):
         """ Return Vertex with least weight respective to vertex.
 
@@ -152,6 +167,7 @@ class Graph:
             else:
                 return neighbors[0].prev_node
 
+    # O(1)
     def _get_other_vertex(self, edge, vertex):
         """ Return the other vertex. """
         if vertex in edge:

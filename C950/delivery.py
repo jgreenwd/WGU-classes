@@ -8,6 +8,7 @@ from package import Status
 
 
 class DeliveryController:
+    # O(1)
     def __init__(self, route, table):
         """ Create Delivery Route Manager.
 
@@ -19,6 +20,7 @@ class DeliveryController:
         self.total_mileage = 0
         self._table = table
 
+    # O(n)^2
     def start_route(self):
         """ Initialize variables & advance next_node reference to Destination(). """
         # set all packages in truck as OUT_FOR_DELIVERY
@@ -30,6 +32,7 @@ class DeliveryController:
         # mark time for first delivery to execute
         self.event_time += timedelta(hours=float(self._current_edge.weight) / self._route.rate_of_travel)
 
+    # O(n)
     def make_delivery(self, current_time):
         """ Mark packages as DELIVERED, set current_node, advance next_node.
 
@@ -53,6 +56,7 @@ class DeliveryController:
             self.total_mileage += float(self._current_edge.weight)
             self._route.finish_route()
 
+    # O(1)
     def alter_delivery(self, package, location, graph):
         """ Edit route.order to remove 1 vertex and add another.
 

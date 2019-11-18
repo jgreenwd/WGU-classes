@@ -5,6 +5,7 @@
 
 
 class Edge:
+    # O(1)
     def __init__(self, vertex1, vertex2, weight):
         """ Create Edge Object.
 
@@ -15,20 +16,25 @@ class Edge:
         self.prev_node = vertex1
         self.next_node = vertex2
 
+    # O(1)
     def __eq__(self, other):
         return (self.weight == other.weight and
                 (self.prev_node == other.prev_node and self.next_node == other.next_node) or
                 (self.prev_node == other.next_node and self.next_node == other.prev_node))
 
+    # O(1)
     def __lt__(self, other):
         return self.prev_node < other.prev_node
 
+    # O(1)
     def __hash__(self):
         return hash(str(self))
 
+    # O(1)
     def __contains__(self, vertex):
         return self.prev_node == vertex or self.next_node == vertex
 
+    # O(1)
     def get_next_start(self):
         """ Return unvisited Vertex() """
         if not self.prev_node.visited:
@@ -37,6 +43,7 @@ class Edge:
             return self.next_node
         return None
 
+    # O(1)
     def swap_nodes(self):
         """ Swap node positions. """
         tmp = self.prev_node

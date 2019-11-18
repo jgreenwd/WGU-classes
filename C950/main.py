@@ -10,11 +10,9 @@ from route import Route
 from package import Status
 from delivery import DeliveryController
 
-# TODO: finish implementing delivery change implementation
-#       move delivery change to delivery controller
-
 
 if __name__ == '__main__':
+    # O(1)
     # --------------- ESTABLISH PARAMETERS -----------------
     # starting location for delivery routes
     HUB = Location("HUB", "Salt Lake City", "UT", "84107")
@@ -28,6 +26,7 @@ if __name__ == '__main__':
     RATE_OF_TRAVEL = 18.0
     # ------------------------------------------------------
 
+    # O(n)
     # -------------------- BUILD CONTAINERS ----------------
     # Retrieve Graph and Table data
     data = utils.load_file("WGUPS Package File.csv")                        # Packages & Locations
@@ -40,6 +39,7 @@ if __name__ == '__main__':
     routes = [Route(indices, weights), Route(indices, weights), Route(indices, weights)]
     # ------------------------------------------------------
 
+    # O(n)^3: create cycle is O(n)^2
     # --------------------- SORT PACKAGES ------------------
     # sort packages to appropriate truck
     # mark packages arriving at 9:05 as DELAYED
@@ -114,6 +114,7 @@ if __name__ == '__main__':
 
     # ------------------------------------------------------
 
+    # O(n)^2 : make_delivery is O(n)
     # -------------------- SIMULATE ROUTE ------------------
     # Gather user input: when to stop the simulation and read delivery Status()
     # single package or all packages

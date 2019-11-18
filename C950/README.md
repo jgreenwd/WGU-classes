@@ -60,7 +60,7 @@ Program output is rendered on-screen at the workstation. In this scenario, it is
 It will be necessary for facility personnel to generate and supply the TXT and TSV files daily. This could be automated before production. However, at present, we lack sufficient information to devise an implementation strategy for such automation.
 
 ### B3
-This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More detailed analysis is available in route.py, starting at line 74.
+This runs with a worst-case time and space complexity of O(n)<sup>2</sup>. More detailed analysis is available in route.py, starting at line 82.
 
 The minimum number of edges would be equal to the number of vertices: O(n) space complexity. However, my graph structure creates complete graphs. A complete graph, by definition, necessitates that there be n(n-1)/2 edges. This increases the space complexity from O(n) to slightly less than O(n)<sup>2</sup>.
 > <br>n(n-1)/2
