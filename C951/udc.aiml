@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <category>
+        <pattern></pattern>
+        <template>test</template>
+    </category>
+    <category>
+        <pattern>*</pattern>
+        <template>
+            <random>
+                <li>I do not understand. What do you mean?</li>
+                <li>I am confused. Can you repeat that?</li>
+                <li>I am afraid I do not know about that.</li>
+            </random>    
+        </template>
+    </category>
+  
+    <category>
+        <pattern>HELLO</pattern>
+        <template>
+            Hello! I will ask you a few questions to help gauge your interest in Computer Science careers.
+            <br/><br/>
+            Which of the following 2 areas is most interesting to you?
+            <br/><br/>
+            Software or Hardware
+        </template>
+    </category>
+  
+    <category>
+        <pattern><set>prompts</set></pattern>
+        <template>
+            <map name="responses"><star/></map>
+        </template>  
+    </category>
+ 
+</aiml>
