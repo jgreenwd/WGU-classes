@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- UDC - catches inputs that don't match elsewhere -->
+    <category>
+        <pattern>*</pattern>
+        <template>
+            <random>
+                <li>I do not understand. What do you mean?</li>
+                <li>I am confused. Can you repeat that?</li>
+                <li>I am afraid I do not know anything about that.</li>
+            </random>    
+        </template>
+    </category>
+
+
+	<!-- Initiate conversation -->
+    <category>
+        <pattern>^ HELLO ^</pattern>
+        <template>
+            Hello! I will ask you a few questions to help guide you in your job search.
+            <br/><br/>
+            Which of the following 2 areas would you like to pursue?
+            <br/><br/>
+            Software or Hardware
+        </template>
+    </category>
+
+<category><pattern>hi ^</pattern><template><srai>HELLO</srai></template></category>
+<category><pattern>hey ^</pattern><template><srai>HELLO</srai></template></category>
+  
+    <!-- Process conversation responses -->
+    <category>
+        <pattern><set>prompts</set></pattern>
+        <template>
+            <map name="responses"><star/></map>
+        </template>  
+    </category>
+    <category>
+        <pattern><set>prompts</set> ^</pattern>
+        <template>
+            <map name="responses"><star/></map>
+        </template>  
+    </category>
+ 
+</aiml>
