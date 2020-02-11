@@ -1,10 +1,7 @@
-[["AREA", "Software or Hardware"], 
-["SOFTWARE", "Systems or Applications"], 
-["HARDWARE", "Network Administrators work to maintain communications networks and data storage."], 
-["SYSTEMS", "Systems Programmers primarily focus on Operating Systems and interacting directly with hardware."], 
-["APPLICATIONS", "Web or Desktop"], 
-["WEB", "Web Developers build applications that provide functionality over the internet."], 
-["DESKTOP", "Software Developers build powerful, stand-alone applications that require local computing resources."], 
-["DATA", "Database or Analytics"], 
-["DATABASE", "Database Administrators manage large repositories of data."], 
-["ANALYTICS", "Data Analysts work to glean meaning and business insights from large stores of data."]]
+[["SOFTWARE", "Systems, Applications, or Data?"], 
+["HARDWARE", "Network Administrators work to build and maintain communications networks and data storage. <br\/> <br\/>You might consider enrolling in CSE 4153 – Data Communications and Computer Networks."], 
+["SYSTEMS", "Systems Programmers focus primarily on Operating Systems and hardware interactivity. <br\/> <br\/>You might consider enrolling in CSE 4743 – Operating Systems II."], 
+["APPLICATIONS", "Software Developers build powerful, stand-alone applications to deliver functionality for the user. <br\/> <br\/>You might consider enrolling in CSE 4253 – Secure Software Engineering."], 
+["DATA", "Architecture or Algorithms?"], 
+["ARCHITECTURE", "Database Administrators manage large repositories of data. <br\/> <br\/>You might consider enrolling in CSE 4633 – Information Architecture."], 
+["ALGORITHMS", "Data Analysts work to glean meaningful, business insights from large stores of data. <br\/> <br\/>You might consider enrolling in CSE 4163 – Designing Parallel Algorithms."]]
