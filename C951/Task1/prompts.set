@@ -1,10 +1,7 @@
-[["AREA"], 
-["SOFTWARE"], 
+[["SOFTWARE"], 
 ["HARDWARE"], 
 ["SYSTEMS"], 
 ["APPLICATIONS"], 
-["WEB"], 
-["DESKTOP"], 
 ["DATA"], 
-["DATABASE"], 
-["ANALYTICS"]]
+["ARCHITECTURE"], 
+["ALGORITHMS"]]
