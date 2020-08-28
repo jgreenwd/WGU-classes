@@ -3,6 +3,8 @@ coursework for my WGU BSCS classes
 
 **C176** - Business of IT - Project Management
 
+**C846** - Business of IT - Applications
+
 **C188** - Software Engineering
 
 **C867** - (C++) Scripting and Programming - Applications
