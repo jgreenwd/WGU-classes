@@ -12,3 +12,7 @@ coursework for my WGU BSCS classes
 **C195** - (Java) Software II
 
 **C950** - (Python) Data Structures and Algorithms II
+
+**C951** - Introduction to Artificial Intelligence
+
+**C964** - (Python) Capstone Project
