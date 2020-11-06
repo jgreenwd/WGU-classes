@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class DBConnection {
-    private static final String DB_NAME = "U05sep";
-    private static final String DB_URL = "jdbc:mysql://52.206.157.109/" + DB_NAME;
+    private static final String DB_NAME = "c195";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/" + DB_NAME + "?serverTimezone=UTC";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     
     static Connection conn = null;
@@ -29,12 +29,20 @@ public class DBConnection {
         
         dataSource.setURL(DB_URL);
         
-        conn = dataSource.getConnection(usr, pwd);
-        System.out.println("Opening Connection: " + DB_NAME);
+        try {
+            conn = dataSource.getConnection(usr, pwd);
+            System.out.println("Opening Connection: " + DB_NAME);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
     }
     
     public static void closeConnection() throws ClassNotFoundException, SQLException {
-        conn.close();
-        System.out.println("Closing Connection: " + DB_NAME);
+        try {
+            conn.close();
+            System.out.println("Closing Connection: " + DB_NAME);
+        } catch (NullPointerException ex) {}
+        
     } 
 }

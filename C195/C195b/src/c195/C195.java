@@ -58,15 +58,7 @@ public class C195 extends Application {
     }
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        /* **************************************************************
-            Hard coding the login details is BAD PRACTICE, but necessary to
-            avoid Querying the DB on failed login attempts and meet rubric 
-            conditions: "You must use “test” as the username and password to
-            log-in."
-         * ************************************************************** */
-        DBConnection.makeConnection("U05sep", "53688595689");
         launch(args);
-        
     }
 
     public static Stage getPrimaryStage() { return primaryStage; }

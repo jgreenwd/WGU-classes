@@ -37,19 +37,22 @@ public class Query {
      * 
      * try-with-resources
      * ========================================================================= */
-    public static boolean login(String usr, String pwd) throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement(
-            "SELECT CASE WHEN EXISTS(SELECT * FROM user WHERE userName=? AND password=?) "
-            + "THEN TRUE "
-            + "ELSE FALSE "
-            +"END AS valid;");) {
-            st.setString(1, usr);
-            st.setString(2, pwd);
+    public static boolean login(String usr, String pwd) throws SQLException, ClassNotFoundException {
+        if (usr != null && pwd != null) {
+            try (PreparedStatement st = conn.prepareStatement(
+                "SELECT CASE WHEN EXISTS(SELECT * FROM user WHERE userName=? AND password=?) "
+                + "THEN TRUE "
+                + "ELSE FALSE "
+                +"END AS valid;");) {
+                st.setString(1, usr);
+                st.setString(2, pwd);
 
-            result = st.executeQuery();
-        
-            return result.next() ? result.getBoolean("valid") : false;
+                result = st.executeQuery();
+            
+                return result.next() ? result.getBoolean("valid") : false;
+            }
         }
+        return false;
     }
     
     public static User getUser(String name) throws SQLException {
