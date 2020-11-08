@@ -21,6 +21,7 @@ import model.*;
 
 
 /* FUTURE TODO:
+    Add ability to insert City/Country values through application, instead of database
     Explore use of Optionals to eliminate null checks.
     Refactor reports to be more functional
     Explore use of a TreeMap with Observable types for LocalDB instead of ObservableList?

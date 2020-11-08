@@ -233,6 +233,7 @@ public class Query {
                 + "createDate, createdBy, lastUpdate, lastUpdateBy) "
                 + "VALUES(?, ?, ?, ?, ?, NOW(), ?, NOW(), ?)");) {
             st.setString(1, addr.getAddress1());
+            System.out.println(addr.getCityObj().getCityId());
             st.setInt(   2, addr.getCityObj().getCityId());
             st.setString(3, addr.getAddress2());
             st.setString(4, addr.getPostalCode());

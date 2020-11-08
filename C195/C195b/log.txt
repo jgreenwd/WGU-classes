@@ -25,3 +25,20 @@
 2020-11-05T21:41:20.760-06:00[America/Chicago]  INVALID
 2020-11-05T21:41:44.782-06:00[America/Chicago]  INVALID
 2020-11-05T21:41:49.215-06:00[America/Chicago] test VALID
+2020-11-06T10:30:53.052-06:00[America/Chicago] test VALID
+2020-11-06T11:35:47.261-06:00[America/Chicago] test VALID
+2020-11-06T11:40:33.481-06:00[America/Chicago] test VALID
+2020-11-06T11:47:03.439-06:00[America/Chicago] test VALID
+2020-11-08T11:42:31.686-06:00[America/Chicago] test VALID
+2020-11-08T11:43:29.295-06:00[America/Chicago] test VALID
+2020-11-08T11:44:58.793-06:00[America/Chicago] test VALID
+2020-11-08T11:48:11.707-06:00[America/Chicago] test VALID
+2020-11-08T11:49:07.620-06:00[America/Chicago] test VALID
+2020-11-08T11:49:50.879-06:00[America/Chicago] test VALID
+2020-11-08T11:53:25.235-06:00[America/Chicago] test VALID
+2020-11-08T12:13:01.845-06:00[America/Chicago] test VALID
+2020-11-08T12:26:54.524-06:00[America/Chicago] test VALID
+2020-11-08T12:41:37.964-06:00[America/Chicago] test VALID
+2020-11-08T14:13:03.467-06:00[America/Chicago] test VALID
+2020-11-08T14:13:34.775-06:00[America/Chicago] test VALID
+2020-11-08T14:50:57.648-06:00[America/Chicago] test VALID

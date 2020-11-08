@@ -191,7 +191,7 @@ public class LocalDB {
 
     public static final void add(Customer customer) throws SQLException {
         Address address = customer.getAddressObj();
-        
+
         // addressId is a FOREIGN KEY for Customer
         // if the address already exists, get addressId
         if (contains(address)) {
@@ -300,7 +300,7 @@ public class LocalDB {
                 return item.getCityId();
             }
         }
-        
+
         return 0;
     }
 }
