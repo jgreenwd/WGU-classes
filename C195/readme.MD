@@ -8,36 +8,6 @@ You are working for a software company that has been contracted to develop a sch
 The organization outlined specific business requirements that must be included as part of the application. From these requirements, a system analyst at your company created solution statements for you to implement in developing the application. These statements are listed in the requirements section.
 
 
-## Final Product Screenshots
-
-#### Login Screen
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Login.png)
-
-
-#### Customer Screen
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Customer%20screen.png)
-
-
-#### Appointment Screen
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Appointment%20screen.png)
-
-
-#### Calendar Menu
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Calendar%20menu.png)
-
-
-#### Calendar Display
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Calendar%20display.png)
-
-
-#### Reports Menu
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Reports%20menu.png)
-
-
-#### Reports Display
-![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Reports%20Display.png)
-
-
 ## Requirements
 
 ##### A. Create a log-in form that can determine the user’s location and translate log-in and error controlmessages (e.g., “The username and password did not match.”) into two languages.
@@ -66,3 +36,33 @@ The organization outlined specific business requirements that must be included a
 - one additional report of your choice
 
 ##### J. Provide the ability to track user activity by recording timestamps for user log-ins in a .txt file. Each new record should be appended to the log file, if the file already exists.
+
+
+## Final Product Screenshots
+
+#### Login Screen
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Login.png)
+
+
+#### Customer Screen
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Customer%20screen.png)
+
+
+#### Appointment Screen
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Appointment%20screen.png)
+
+
+#### Calendar Menu
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Calendar%20menu.png)
+
+
+#### Calendar Display
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Calendar%20display.png)
+
+
+#### Reports Menu
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Reports%20menu.png)
+
+
+#### Reports Display
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C195/Reports%20Display.png)
