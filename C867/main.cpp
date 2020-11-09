@@ -9,19 +9,18 @@
 ///* ---------------- F.x ---------------- */
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <regex>
 #include "roster.h"
 
 /* ----------------- Local functions for parsing input file ----------------- */
 int ishift(std::smatch &sm, std::sregex_iterator iter) {
     sm = *iter;
-    return stoi(sm.str());
+    return std::stoi(sm.str());
 };
 
 Degree dshift(std::smatch &sm, std::sregex_iterator iter) {
     sm = *iter;
-    string smVal = sm.str();
+    std::string smVal = sm.str();
 
     if (smVal == "SECURITY") return SECURITY;
     if (smVal == "NETWORK") return NETWORK;
@@ -29,7 +28,7 @@ Degree dshift(std::smatch &sm, std::sregex_iterator iter) {
     return SOFTWARE;
 };
 
-string sshift(std::smatch &sm, std::sregex_iterator iter) {
+std::string sshift(std::smatch &sm, std::sregex_iterator iter) {
     sm = *iter;
     return sm.str();
 };
@@ -42,19 +41,19 @@ int main() {
     /*   -------- F.2 -------- */
     Roster classRoster;
 
-    std::ifstream filein ("/Users/jgreenwd/Documents/Coding/Cpp.nosync/Temp/Temp/students.txt");
+    std::ifstream filein ("/Users/jgreenwd/Documents/Coding/WGU-classes/C867/student_data.txt");
 
     if (filein.is_open()) {
-        string line;
+        std::string line;
         while ( getline( filein, line )) {
             std::regex entry("[^,]+");
             std::sregex_iterator iter(line.begin(), line.end(), entry), end;
             std::smatch match = *iter++;
             
-            string studentID = match.str();
-            string firstName = sshift(match, iter++);
-            string lastName = sshift(match, iter++);
-            string emailAddress = sshift(match, iter++);
+            std::string studentID = match.str();
+            std::string firstName = sshift(match, iter++);
+            std::string lastName = sshift(match, iter++);
+            std::string emailAddress = sshift(match, iter++);
             int age = ishift(match, iter++);
             int daysInCourse1 = ishift(match, iter++);
             int daysInCourse2 = ishift(match, iter++);
