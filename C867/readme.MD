@@ -11,7 +11,8 @@ You must write a program containing five classes (i.e.,  Student , SecurityStude
 
 ## Requirements
 
-Create a program that converts the array of strings found in the studentData table to an array of student objects by doing the following:
+WITHOUT USING ANY EXTERNAL LIBRARIES -
+Create a program that converts the array of strings found in the StudentData table to an array of student objects by doing the following:
 
 ##### A.  Modify the studentData table to include your personal information as the last item.
 
@@ -97,15 +98,4 @@ __Note: A valid email should include an at sign ('@') and period ('.') and shoul
 | A2	| Suzan	|	Erickson	|	Erickson_1990@gmailcom	|	19	|	50, 30, 40 |	NETWORK |
 | A3	| Jack	|	Napoli	|	The_lawyer99yahoo.com	|	19	|	20, 40, 33 |	SOFTWARE |
 | A4	| Erin	|	Black	|	Erin.black@comcast.net	|	22	|	50, 58, 40 |	SECURITY |
-| A5	| <my name>	| <my name>	| <my email address> |	<my age>	| <Number of days to complete 3 courses>	| SOFTWARE |
-
-The data should be input as follows:
-```
-const string studentData[] =
- {"A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
- "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
- "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
- "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
- "A5,[firstname],[lastname],[emailaddress],[age],
- [numberofdaystocomplete3courses],SOFTWARE"
-``` 
+| A5	| _my name_	| _my name_	| _my email address_ |	_my age_	| _Number of days to complete 3 courses_	| SOFTWARE |
