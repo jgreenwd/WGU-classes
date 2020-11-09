@@ -36,12 +36,12 @@ Create a program that converts the array of strings found in the studentData tab
       * degree types
  
   2.  Create each of the following functions in the Student class:
-      a.  an accessor (i.e., getter) for each  instance variable from part D1
-      b.  a mutator (i.e., setter) for each  instance variable from part D1
-      c.  constructor using all  of the input parameters provided in the table
-      d.  virtual print() to print specific student data 
-      e.  destructor
-      f.  virtual getDegreeProgram()
+      * an accessor (i.e., getter) for each  instance variable from part D1
+      * a mutator (i.e., setter) for each  instance variable from part D1
+      * constructor using all  of the input parameters provided in the table
+      * virtual print() to print specific student data 
+      * destructor
+      * virtual getDegreeProgram()
 
   3.  Create the three following classes as subclasses of Student, using the files created in part B:
       * SecurityStudent
@@ -56,19 +56,19 @@ Create a program that converts the array of strings found in the studentData tab
   1.  Create an array of pointers, classRosterArray, to hold the data provided in the studentData table.
 
   2.  Create a student object for each  student in the data table by using the subclasses NetworkStudent, SecurityStudent, and SoftwareStudent, and populate classRosterArray.
-      a.  Apply pointer operations when parsing each  set of data identified in the studentData table.
-      b.  Add each student object to classRosterArray.
+      *  Apply pointer operations when parsing each  set of data identified in the studentData table.
+      *  Add each student object to classRosterArray.
 
   3.  Define the following functions:
-      a.  public void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, <degree program>) ''' set the instance variables from part D1 and update the roster '''
-      b.  public void remove(string studentID) ''' remove students from the roster by student ID. If the student ID does not exist, print an error message indicating that the student was not found. '''
-      c.  public void printAll() 
+      *  public void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, <degree program>) ''' set the instance variables from part D1 and update the roster '''
+      *  public void remove(string studentID) ''' remove students from the roster by student ID. If the student ID does not exist, print an error message indicating that the student was not found. '''
+      *  public void printAll() 
               ''' Print a complete tab-separated list of student data using accessor functions with the provided format:
               1 [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab]daysInCourse: {35, 40, 55} Degree Program: Security. 
               Loop through all students in classRosterArray and call the print() function for each student. '''
-      d.  public void printDaysInCourse(string studentID) ''' Correctly print a student’s average number of days in the three courses. The student is identified by the studentID parameter. '''
-      e.  public void printInvalidEmails() ''' Verify student email addresses and display all invalid email addresses to the user '''
-      f.  public void printByDegreeProgram(int degreeProgram) ''' Print student information for a degree program specified by an enumerated type '''
+      *  public void printDaysInCourse(string studentID) ''' Correctly print a student’s average number of days in the three courses. The student is identified by the studentID parameter. '''
+      *  public void printInvalidEmails() ''' Verify student email addresses and display all invalid email addresses to the user '''
+      *  public void printByDegreeProgram(int degreeProgram) ''' Print student information for a degree program specified by an enumerated type '''
 
 __Note: A valid email should include an at sign ('@') and period ('.') and should not include a space (' ').__
 
