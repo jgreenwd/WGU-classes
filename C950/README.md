@@ -200,3 +200,21 @@ Bandwidth: The application operates on a single workstation and does not require
 ## Annotations
 ### J
 If I were to do this assignment again, the biggest change would be my __Route__ class. I chose to develop it as a child class of __Graph__. I now see redundancies that could have been eliminated by merging __Route__ and __DeliveryController__. I also think this might make the interface slightly less cumbersome. I also question the use of a separate __Edge__ class. I think the same results could have been achieved with a simpler implementation. Lastly, I would change the __Route__ **order** property to utilize a __Queue__. This would help in alleviating the problem with revisiting a __Vertex__.
+
+
+## Results
+
+##### 9:00am
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C950/9.00am.png)
+
+
+##### 10:00am
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C950/10.00am.png)
+
+
+##### 1:00pm
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C950/13.00pm.png)
+
+
+##### End of Day
+![](https://github.com/jgreenwd/WGU-classes/blob/master/C950/EOD.png)
