@@ -1,4 +1,4 @@
-# CAPSTONE FINAL PROJECT: Throw Like a Pro (TLaP)
+# CAPSTONE Project: Throw Like a Pro (TLaP)
 
 This project was completed as part of my BS in Computer Science. It serves to indicate the application of many of the skills I have developed through the pursuit of this degree: Software Engineering, Software Testing, Algorithmic Analysis, Data Management, User Interface Design, Project Management, and Business Applications.
 
