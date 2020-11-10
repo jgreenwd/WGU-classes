@@ -24,7 +24,7 @@ Assumptions:
 
 ## REQUIREMENTS
 
-###Section 1: Programming/Coding 
+### Section 1: Programming/Coding 
 
 ##### A. Identify the algorithm that will be used to create a program to deliver the packages and meets all requirements specified in the scenario. 
 
@@ -48,23 +48,23 @@ Note: Do NOT use any existing data structures. You must design, write, implement
 
 ##### E. Develop a hash table, without using any additional libraries or classes, with an insertion function that takes the following components as input and inserts the components into the hash table:
 
-• package ID number 
-• delivery address 
-• delivery deadline 
-• delivery city 
-• delivery zip code 
-• package weight 
-• delivery status (e.g., delivered, in route) 
+• package ID number <br>
+• delivery address <br>
+• delivery deadline <br>
+• delivery city <br>
+• delivery zip code <br>
+• package weight <br>
+• delivery status (e.g., delivered, in route) <br>
 
 ##### F. Develop a look-up function that takes the following components as input and returns the corresponding data elements: 
 
-• package ID number 
-• delivery address 
-• delivery deadline 
-• delivery city 
-• delivery zip code 
-• package weight 
-• delivery status (e.g., delivered, in route) 
+• package ID number <br>
+• delivery address <br>
+• delivery deadline <br>
+• delivery city <br>
+• delivery zip code <br>
+• package weight <br>
+• delivery status (e.g., delivered, in route) <br>
 
 ##### G. Provide an interface for the insert and look-up functions to view the status of any package at any time. This function should return all information about each package, including delivery status. 
 
@@ -80,20 +80,20 @@ Note: Do NOT use any existing data structures. You must design, write, implement
 
 1. Describe at least two strengths of the algorithm you chose. 
 2. Verify that the algorithm you chose meets all the criteria and requirements given in the scenario. 
-3. Identify two other algorithms that could be used and would have met the criteria and requirements given in the scenario. 
+3. Identify two other algorithms that could be used and would have met the criteria and requirements given in the scenario. <br>
     a. Describe how each algorithm identified in part I3 is different from the algorithm you chose to use in the solution. 
 
 ##### J. Describe what you would do differently if you did this project again. 
 
 ##### K. Justify your choice of data structure by doing the following: 
 
-1. Verify that the data structure you chose meets all the criteria and requirements given in the scenario. 
-    a. Describe the efficiency of the data structure chosen. 
-    b. Explain the expected overhead when linking to the next data item. 
-    c. Describe the implications of when more package data is added to the system or other changes in scale occur. 
+1. Verify that the data structure you chose meets all the criteria and requirements given in the scenario. <br>
+    a. Describe the efficiency of the data structure chosen. <br>
+    b. Explain the expected overhead when linking to the next data item. <br>
+    c. Describe the implications of when more package data is added to the system or other changes in scale occur. <br>
 
-2. Identify two other data structures that can meet the same criteria and requirements given in the scenario. 
-    a. Describe how each data structure identified in part K2 is different from the data structure you chose to use in the solution. 
+2. Identify two other data structures that can meet the same criteria and requirements given in the scenario. <br>
+    a. Describe how each data structure identified in part K2 is different from the data structure you chose to use in the solution. <br>
 
 
 ## Algorithm Selection
