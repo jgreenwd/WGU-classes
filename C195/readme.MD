@@ -2,13 +2,13 @@
 The goal of this project was to build an appointment scheduling system. It utilizes extended concepts of Object-Oriented Programming, MVC architecture, programming patterns, localization, remote database access, lambda expressions, and advanced exception handling.
 
 
-## Scenario
+## SCENARIO
 
 You are working for a software company that has been contracted to develop a scheduling desktop user interface application. The contract is with a global consulting organization that conducts business in multiple languages and has main offices in Phoenix, Arizona; New York, New York; and London, England. The consulting organization has provided a MySQL database that your application must pull data from. The database is used for other systems and therefore its structure cannot be modified.<br><br>
 The organization outlined specific business requirements that must be included as part of the application. From these requirements, a system analyst at your company created solution statements for you to implement in developing the application. These statements are listed in the requirements section.
 
 
-## Requirements
+## REQUIREMENTS
 
 ##### A. Create a log-in form that can determine the user’s location and translate log-in and error controlmessages (e.g., “The username and password did not match.”) into two languages.
 
