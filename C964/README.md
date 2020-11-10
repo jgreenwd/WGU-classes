@@ -1,8 +1,13 @@
-# Capstone Final Project
+# CAPSTONE FINAL PROJECT
 
-## Descriptive Overview
+This project was completed as part of my BS in Computer Science. It serves to indicate the application of many of the skills I have developed through the pursuit of this degree: Software Engineering, Software Testing, Algorithmic Analysis, Data Management, User Interface Design, Project Management, and Business Applications.
 
-## Dashboard Viewing Instructions
+
+## DESCRIPTION
+TLaP explores the use of machine learning in pitch classification for regular season Major League Baseball.
+
+
+## INSTRUCTIONS TO ACCESS DASHBOARD 
 1 Open link to Google Drive<br>
 ``` https://drive.google.com/drive/folders/1EA-Y5mAAsT40cXNva6BVxNQ1qhuv3NIX? usp=sharing ```<br>
 2 Click 'Shared with me'<br>
