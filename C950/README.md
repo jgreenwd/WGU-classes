@@ -1,4 +1,4 @@
-# Data Structures and Algorithms II Project: "Traveling Salesman"
+# DATA STRUCTURES & ALGORITHMS II Project: "Traveling Salesman"
 
 
 ## SCENARIO
