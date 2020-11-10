@@ -1,4 +1,4 @@
-# Scripting & Programming Applications Project: Platform Migration Tool
+# SCRIPTING & PROGRAMMING - APPLICATIONS Project: Platform Migration Tool
 
 This project served as an introduction to Object-Oriented Programming. It emphasizes correct usage of control structures, arrays, and pointers.
 
