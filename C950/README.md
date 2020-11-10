@@ -1,6 +1,4 @@
-Jeremy Greenwood --- ID#: 000917613
-
-WGU C950 - Data Structures and Algorithms II ---Performance Assessment: NHP1
+# Data Structures and Algorithms II Project: "Traveling Salesman"
 
 
 ## SCENARIO
